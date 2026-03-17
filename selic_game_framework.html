@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teoria dos Jogos — Selic Brasil 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+      --bg: #070b12;
+      --bg2: #0d1420;
+      --card: rgba(16, 24, 40, 0.92);
+      --card2: rgba(20, 31, 52, 0.92);
+      --line: rgba(255,255,255,0.10);
+      --soft: rgba(255,255,255,0.68);
+      --text: #f4f7fb;
+      --blue: #4db6ff;
+      --cyan: #4de2d4;
+      --gold: #ffcc66;
+      --orange: #ff8b5e;
+      --red: #ff5f6d;
+      --green: #61e294;
+      --purple: #a98bff;
+      --shadow: 0 16px 40px rgba(0,0,0,.35);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(77,182,255,.18), transparent 28%),
+        radial-gradient(circle at 85% 10%, rgba(169,139,255,.15), transparent 26%),
+        linear-gradient(180deg, #07101b 0%, #09111a 35%, #06080d 100%);
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    .wrap {
+      width: min(1380px, calc(100vw - 48px));
+      margin: 0 auto;
+      padding: 36px 0 44px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 34px 34px 28px;
+      background: linear-gradient(135deg, rgba(10,18,33,.95), rgba(12,21,37,.84));
+      box-shadow: var(--shadow);
+    }
+
+    .hero:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.05), transparent);
+      transform: translateX(-100%);
+      animation: shine 9s linear infinite;
+    }
+
+    @keyframes shine {
+      to { transform: translateX(100%); }
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      font-weight: 800;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(77,226,212,.10);
+      border: 1px solid rgba(77,226,212,.22);
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 8vw, 92px);
+      line-height: .94;
+      letter-spacing: .02em;
+      max-width: 980px;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      max-width: 980px;
+      font-size: clamp(15px, 2vw, 22px);
+      line-height: 1.45;
+      color: rgba(244,247,251,.84);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr .9fr;
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: 20px 20px 18px;
+      backdrop-filter: blur(10px);
+    }
+
+    .panel h3 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--gold);
+    }
+
+    .big {
+      font-size: clamp(22px, 3vw, 34px);
+      line-height: 1.18;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .small {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--soft);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .chip {
+      padding: 9px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .03em;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: #fff;
+    }
+
+    .chip.blue { background: rgba(77,182,255,.10); border-color: rgba(77,182,255,.25); color: #bfe4ff; }
+    .chip.gold { background: rgba(255,204,102,.10); border-color: rgba(255,204,102,.25); color: #ffe2a4; }
+    .chip.red { background: rgba(255,95,109,.10); border-color: rgba(255,95,109,.24); color: #ffc1c7; }
+    .chip.green { background: rgba(97,226,148,.10); border-color: rgba(97,226,148,.24); color: #c6f9d8; }
+    .chip.purple { background: rgba(169,139,255,.10); border-color: rgba(169,139,255,.24); color: #ddd1ff; }
+
+    .grid-2, .grid-3, .grid-4 {
+      display: grid;
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+
+    .section-title {
+      margin: 28px 0 12px;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #dbe7ff;
+    }
+
+    .agent-card {
+      padding: 18px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(15,25,42,.95), rgba(11,19,33,.92));
+      border: 1px solid var(--line);
+      min-height: 220px;
+      box-shadow: var(--shadow);
+    }
+
+    .agent-card .agent {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .agent-card .goal {
+      font-size: 13px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: .10em;
+      margin-bottom: 12px;
+      font-weight: 800;
+    }
+
+    .agent-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--soft);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 26px;
+    }
+
+    .timeline:before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--cyan), rgba(255,255,255,.10));
+    }
+
+    .step {
+      position: relative;
+      padding: 0 0 18px 18px;
+    }
+
+    .step:last-child { padding-bottom: 0; }
+
+    .step:before {
+      content: "";
+      position: absolute;
+      left: -2px;
+      top: 5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 0 5px rgba(77,226,212,.12);
+    }
+
+    .step .kicker {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--cyan);
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .step .headline {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .step .body {
+      color: var(--soft);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 18px;
+      background: rgba(255,255,255,.02);
+    }
+
+    th, td {
+      padding: 14px 12px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    th {
+      background: rgba(255,255,255,.04);
+      color: #e6efff;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    .signal-up { color: #ffb36d; font-weight: 800; }
+    .signal-down { color: #8fd2ff; font-weight: 800; }
+    .signal-mixed { color: #fff1a8; font-weight: 800; }
+    .signal-risk { color: #ff9ca5; font-weight: 800; }
+    .signal-pos { color: #8df1b4; font-weight: 800; }
+
+    .matrix {
+      display: grid;
+      grid-template-columns: 180px repeat(3, 1fr);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      background: rgba(255,255,255,.02);
+    }
+
+    .cell {
+      padding: 16px;
+      border-right: 1px solid rgba(255,255,255,.08);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      min-height: 112px;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .cell:nth-child(4n) { border-right: none; }
+    .matrix .head {
+      background: rgba(255,255,255,.05);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: #e6efff;
+      font-weight: 800;
+      min-height: auto;
+    }
+
+    .rowhead {
+      background: rgba(255,255,255,.04);
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .footer-note {
+      margin-top: 20px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: rgba(244,247,251,.62);
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 16px;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid, .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .matrix { grid-template-columns: 1fr; }
+      .cell { border-right: none; }
+      .matrix .head { display: none; }
+      .rowhead { background: rgba(255,255,255,.07); }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Framework estratégico • Teoria dos jogos macro</div>
+      <h1>SELIC 2026<br>O JOGO DOS AGENTES</h1>
+      <div class="subtitle">
+        Cenário-base deste framework: <strong>o Copom corta 0,25 p.p. na reunião de 18 de março de 2026</strong>, levando a Selic para <strong>14,75%</strong>.
+        A pergunta central não é só “o BC cortou?”, mas <strong>como cada agente reage a esse corte marginal</strong> — e como isso se propaga para câmbio, juros longos, crédito, Bolsa e expectativas.
+      </div>
+
+      <div class="hero-grid">
+        <div class="panel">
+          <h3>Tese central</h3>
+          <div class="big">O corte de 25 bps não destrava o ciclo. Ele testa a credibilidade do BC.</div>
+          <div class="small">
+            Num ambiente de petróleo elevado, prêmio de risco ainda sensível e expectativas acima da meta, um corte pequeno funciona como <strong>sinal condicional</strong>, não como “pivot limpo”.
+            O equilíbrio do jogo depende menos do primeiro movimento do Copom e mais da reação em cadeia de câmbio, curva longa, empresas, Tesouro e formadores de expectativa.
+          </div>
+          <div class="chips">
+            <div class="chip blue">Choque inicial: -25 bps</div>
+            <div class="chip gold">Teste: credibilidade</div>
+            <div class="chip red">Risco: desancoragem</div>
+            <div class="chip green">Ganho: alívio marginal no custo de capital</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Premissas de partida</h3>
+          <div class="small">
+            • Reunião do Copom em <strong>17 e 18 de março de 2026</strong>.<br>
+            • Focus de 6/mar/2026 mostrava mediana de <strong>Selic em 12,13% no fim de 2026</strong>, câmbio em <strong>R$ 5,41</strong> e IPCA em <strong>3,91%</strong>.<br>
+            • Nas vésperas da decisão, o mercado migrou de corte de 0,50 p.p. para cenário mais conservador, com <strong>0,25 p.p. como hipótese predominante</strong> e aumento da chance de manutenção.
+          </div>
+          <div class="chips">
+            <div class="chip purple">Focus: IPCA 3,91%</div>
+            <div class="chip purple">Focus: câmbio 5,41</div>
+            <div class="chip purple">Focus: Selic fim/26 12,13%</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-title">1. Quem joga e qual é o objetivo de cada agente</div>
+    <section class="grid-4">
+      <article class="agent-card">
+        <div class="agent">Banco Central</div>
+        <div class="goal">Objetivo</div>
+        <ul>
+          <li>Preservar credibilidade sem ignorar desaceleração.</li>
+          <li>Reduzir Selic só se o mercado entender o corte como prudente.</li>
+          <li>Evitar que o primeiro corte afrouxe condições financeiras rápido demais.</li>
+        </ul>
+      </article>
+      <article class="agent-card">
+        <div class="agent">Mercado de juros</div>
+        <div class="goal">Objetivo</div>
+        <ul>
+          <li>Reprecificar o ciclo inteiro, não apenas a reunião atual.</li>
+          <li>Testar se o BC seguirá data-dependent ou ficará preso ao guidance.</li>
+          <li>Transmitir prêmio via DI curto, intermediário e longo.</li>
+        </ul>
+      </article>
+      <article class="agent-card">
+        <div class="agent">Câmbio / estrangeiro</div>
+        <div class="goal">Objetivo</div>
+        <ul>
+          <li>Avaliar diferencial de juros real e risco-país.</li>
+          <li>Reagir rápido se o corte parecer prematuro frente ao cenário externo.</li>
+          <li>Premiar cautela; punir complacência.</li>
+        </ul>
+      </article>
+      <article class="agent-card">
+        <div class="agent">Empresas e crédito</div>
+        <div class="goal">Objetivo</div>
+        <ul>
+          <li>Capturar alívio marginal no custo de captação.</li>
+          <li>Alongar passivos apenas se a curva longa ajudar.</li>
+          <li>Investir mais só com previsibilidade, não com um corte isolado.</li>
+        </ul>
+      </article>
+      <article class="agent-card">
+        <div class="agent">Tesouro / fiscal</div>
+        <div class="goal">Objetivo</div>
+        <ul>
+          <li>Se beneficiar de juros mais baixos, mas sem perder ancoragem.</li>
+          <li>Evitar que a curva longa suba e neutralize o corte curto.</li>
+          <li>Manter rolagem da dívida sem prêmio excessivo.</li>
+        </ul>
+      </article>
+      <article class="agent-card">
+        <div class="agent">Consumidor</div>
+        <div class="goal">Objetivo</div>
+        <ul>
+          <li>Reduzir custo do crédito e recuperar renda disponível.</li>
+          <li>Reagir mais devagar do que os mercados financeiros.</li>
+          <li>Sentir benefício apenas se o spread bancário cair junto.</li>
+        </ul>
+      </article>
+      <article class="agent-card">
+        <div class="agent">Bolsa</div>
+        <div class="goal">Objetivo</div>
+        <ul>
+          <li>Buscar rerating em setores domésticos.</li>
+          <li>Separar corte “benigno” de corte “forçado por desaceleração”.</li>
+          <li>Premiar qualidade se a curva longa continuar pressionada.</li>
+        </ul>
+      </article>
+      <article class="agent-card">
+        <div class="agent">Formadores de expectativa</div>
+        <div class="goal">Objetivo</div>
+        <ul>
+          <li>Atualizar inflação implícita, câmbio e juros terminais.</li>
+          <li>Amplificar ou amortecer o efeito reputacional do Copom.</li>
+          <li>Definir se o jogo entra em equilíbrio cooperativo ou defensivo.</li>
+        </ul>
+      </article>
+    </section>
+
+    <div class="section-title">2. Jogo sequencial após um corte de 0,25 p.p.</div>
+    <section class="grid-2">
+      <div class="panel">
+        <div class="timeline">
+          <div class="step">
+            <div class="kicker">Passo 1</div>
+            <div class="headline">Copom corta 25 bps e endurece a comunicação</div>
+            <div class="body">Se o comunicado vier com ênfase em cautela, dependência de dados e vigilância sobre inflação/câmbio, o BC tenta vender a ideia de “ajuste técnico”, não de ciclo acelerado.</div>
+          </div>
+          <div class="step">
+            <div class="kicker">Passo 2</div>
+            <div class="headline">Mercado testa o BC na curva e no dólar</div>
+            <div class="body">A primeira reação importante não é no CDI de hoje, mas no DI intermediário/longo e no real. Se a curva abre e o câmbio piora, o mercado está dizendo: “o corte foi cedo demais”.</div>
+          </div>
+          <div class="step">
+            <div class="kicker">Passo 3</div>
+            <div class="headline">Empresas reavaliam captação e timing de investimento</div>
+            <div class="body">Setores domésticos podem ter rally inicial, mas o efeito real sobre capex depende do juro longo cair. Sem isso, há alívio tático, não reprecificação estrutural.</div>
+          </div>
+          <div class="step">
+            <div class="kicker">Passo 4</div>
+            <div class="headline">BC observa a resposta e recalibra o próximo lance</div>
+            <div class="body">Se expectativas e câmbio se deteriorarem, o próprio corte de março pode virar “one and done”. Se houver boa recepção, abre-se espaço para continuação lenta do ciclo.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Leitura MacroLab</h3>
+        <div class="big">O equilíbrio mais provável é: corte curto, comunicação dura, mercado seletivo.</div>
+        <div class="small">
+          O resultado mais construtivo para ativos brasileiros não é simplesmente “cortar”. É <strong>cortar sem perder a âncora</strong>.<br><br>
+          Em teoria dos jogos, isso é um problema de <strong>sinalização crível</strong>: o BC quer mostrar flexibilidade, mas precisa impedir que os outros agentes interpretem o corte como tolerância maior à inflação. Quanto mais o comunicado parecer condicional, maior a chance de cooperação do mercado.
+        </div>
+      </div>
+    </section>
+
+    <div class="section-title">3. Matriz de reação dos agentes</div>
+    <section class="panel" style="padding:0; overflow:hidden;">
+      <div class="matrix">
+        <div class="cell head"></div>
+        <div class="cell head">Se o corte é visto como prudente</div>
+        <div class="cell head">Se o corte é visto como prematuro</div>
+        <div class="cell head">Se o BC compensa com comunicação dura</div>
+
+        <div class="cell rowhead">Câmbio</div>
+        <div class="cell">Real estável ou levemente melhor. Mercado aceita que o diferencial real ainda segue alto.</div>
+        <div class="cell">Real enfraquece. Parte do carry perde atratividade relativa e o prêmio de risco aumenta.</div>
+        <div class="cell">Movimento inicial pode ser neutro: o tom duro reduz o dano reputacional do corte.</div>
+
+        <div class="cell rowhead">Juros longos</div>
+        <div class="cell">Parte longa fecha ou fica comportada. Curva pode inclinar menos.</div>
+        <div class="cell">Longa abre. Mercado cobra prêmio para inflação, fiscal e erro de política.</div>
+        <div class="cell">Intermediários reagem melhor que os longos; prêmio terminal continua vivo.</div>
+
+        <div class="cell rowhead">Bolsa</div>
+        <div class="cell">Small caps, varejo, construção e bancos locais ganham tração.</div>
+        <div class="cell">Rally curto vira realização rápida. Exportadoras e qualidade relativa voltam a liderar.</div>
+        <div class="cell">Alta mais técnica e seletiva, concentrada em nomes com balanço forte.</div>
+
+        <div class="cell rowhead">Crédito / empresas</div>
+        <div class="cell">Spreads podem fechar na margem, favorecendo emissões e rolagem.</div>
+        <div class="cell">Spreads não cedem; benefício da Selic menor não chega inteiro à economia real.</div>
+        <div class="cell">Melhora nos vértices curtos, mas captação longa continua cara.</div>
+      </div>
+    </section>
+
+    <div class="section-title">4. O que tende a acontecer com as principais variáveis</div>
+    <section class="panel">
+      <table>
+        <thead>
+          <tr>
+            <th>Variável</th>
+            <th>Direção provável</th>
+            <th>Leitura tática</th>
+            <th>Condição para confirmar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Câmbio (BRL)</strong></td>
+            <td class="signal-risk">Viés de pressão / volatilidade</td>
+            <td>Um corte de 25 bps, isoladamente, não fortalece o real. O efeito dependerá do tom do comunicado e do ambiente externo.</td>
+            <td>Real estabiliza se o BC soar conservador e o choque externo não piorar.</td>
+          </tr>
+          <tr>
+            <td><strong>DI curto</strong></td>
+            <td class="signal-down">Cai</td>
+            <td>Reage diretamente ao corte e à precificação do próximo passo.</td>
+            <td>Queda maior se o mercado enxergar continuidade do ciclo.</td>
+          </tr>
+          <tr>
+            <td><strong>DI longo / NTN-B longa</strong></td>
+            <td class="signal-mixed">Misto a levemente altista</td>
+            <td>Pode não acompanhar o alívio do curto. Se houver ruído em inflação/câmbio/fiscal, a longa abre.</td>
+            <td>Fecha apenas com credibilidade reforçada e expectativas estáveis.</td>
+          </tr>
+          <tr>
+            <td><strong>Bolsa doméstica</strong></td>
+            <td class="signal-pos">Alta tática</td>
+            <td>Setores sensíveis a juros podem subir no impacto, mas precisam de curva longa comportada para sustentar.</td>
+            <td>Confirmação exige follow-through em juros reais e crédito.</td>
+          </tr>
+          <tr>
+            <td><strong>Bancos e crédito</strong></td>
+            <td class="signal-mixed">Melhora lenta</td>
+            <td>O repasse para spreads e concessão é gradual. Corte marginal ajuda percepção, não muda tudo de uma vez.</td>
+            <td>Precisa de inadimplência controlada e funding menos pressionado.</td>
+          </tr>
+          <tr>
+            <td><strong>Expectativas de inflação</strong></td>
+            <td class="signal-risk">Ponto crítico do jogo</td>
+            <td>Se subirem, o corte perde tração e o BC é forçado a frear o ciclo cedo.</td>
+            <td>Ancora se o comunicado for firme e o câmbio não contaminar preços.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="section-title">5. Três equilíbrios possíveis após o corte</div>
+    <section class="grid-3">
+      <div class="panel">
+        <h3>Cenário A • Cooperativo</h3>
+        <div class="big">Melhor equilíbrio</div>
+        <div class="small">
+          O mercado aceita o corte como prudente, o real não desorganiza, a curva longa fica controlada e a Bolsa doméstica sustenta alta. Nesse caso, o BC mantém opcionalidade para seguir cortando devagar.
+        </div>
+        <div class="chips"><div class="chip green">Probabilidade: moderada</div></div>
+      </div>
+      <div class="panel">
+        <h3>Cenário B • Defensivo</h3>
+        <div class="big">Equilíbrio mais provável</div>
+        <div class="small">
+          O corte acontece, mas a comunicação precisa ser hawkish. A ponta curta fecha, enquanto a longa melhora pouco. Bolsa sobe de forma seletiva e o BC compra tempo, não convicção.
+        </div>
+        <div class="chips"><div class="chip gold">Probabilidade: alta</div></div>
+      </div>
+      <div class="panel">
+        <h3>Cenário C • Punitivo</h3>
+        <div class="big">Equilíbrio ruim</div>
+        <div class="small">
+          O mercado lê o corte como prematuro. O real enfraquece, a curva longa abre e o benefício para ativos locais evapora. O BC reduz a própria liberdade para novas quedas da Selic.
+        </div>
+        <div class="chips"><div class="chip red">Probabilidade: não desprezível</div></div>
+      </div>
+    </section>
+
+    <div class="section-title">6. Conclusão operacional</div>
+    <section class="grid-2">
+      <div class="panel">
+        <div class="big">Cortar 0,25 p.p. é um lance de sinalização, não de alívio pleno.</div>
+        <div class="small">
+          O primeiro-order effect é positivo para a ponta curta e para a narrativa de início de afrouxamento. O second-order effect depende da reação dos outros agentes. Em outras palavras: <strong>o jogo real começa depois da decisão</strong>.
+        </div>
+      </div>
+      <div class="panel">
+        <div class="big">Variável decisiva: a curva longa.</div>
+        <div class="small">
+          Se o mercado acreditar no BC, o corte ajuda. Se a curva longa abrir, o corte curto será neutralizado. No Brasil, a vitória do Copom não é “baixar a Selic”; é <strong>convencer o mercado a não subir o prêmio do resto da curva</strong>.
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      Fontes de contexto: calendário de reuniões do Copom para 2026 (Banco Central do Brasil), Focus Relatório de Mercado de 6/3/2026 e cobertura de mercado sobre a migração das apostas para corte de 0,25 p.p. na reunião de 18/3/2026. Este material é um framework analítico e não uma previsão determinística.
+    </div>
+  </div>
+</body>
+</html>
