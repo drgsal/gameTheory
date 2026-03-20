@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Relatório Estratégico | Carry Defensivo & Choque de Commodities</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f4f7fc;
+            color: #1a2c3e;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+        }
+
+        .report-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        /* header */
+        .report-header {
+            background: linear-gradient(135deg, #0b2b3b 0%, #123e52 100%);
+            padding: 2rem 2.5rem;
+            color: white;
+        }
+
+        .report-header h1 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .report-header .sub {
+            font-size: 1rem;
+            opacity: 0.8;
+            font-weight: 400;
+            border-left: 3px solid #f5b042;
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .meta-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            margin-top: 1.2rem;
+            font-size: 0.85rem;
+            opacity: 0.75;
+        }
+
+        /* content */
+        .report-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* tipografia */
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 1.8rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2edf2;
+            color: #0f3b4f;
+            letter-spacing: -0.3px;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.8rem 0;
+            color: #1e4a62;
+        }
+
+        p, li {
+            color: #2c3f4f;
+            font-weight: 400;
+        }
+
+        .lead-text {
+            font-size: 1.05rem;
+            font-weight: 500;
+            background: #f0f6fa;
+            padding: 1rem 1.5rem;
+            border-radius: 20px;
+            margin: 1rem 0;
+            border-left: 4px solid #f5b042;
+        }
+
+        /* cards / grid */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.8rem;
+            margin: 1.5rem 0;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02), 0 2px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e9f0f4;
+            transition: all 0.2s;
+        }
+
+        .card-header {
+            padding: 1rem 1.5rem;
+            background: #fafeff;
+            border-bottom: 1px solid #eaf1f5;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #0b4b65;
+            border-radius: 24px 24px 0 0;
+        }
+
+        .card-body {
+            padding: 1.2rem 1.5rem;
+        }
+
+        /* tabelas elegantes */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 1.2rem 0;
+            border-radius: 20px;
+            border: 1px solid #eef3f7;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background: #f2f8fc;
+            padding: 0.9rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #1a5d7a;
+            border-bottom: 1px solid #dde9ef;
+        }
+
+        td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #ecf3f7;
+            color: #2a4356;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #eef2f5;
+            border-radius: 40px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #1e5f7a;
+        }
+
+        .sector-tag {
+            background: #e9f2f5;
+            border-radius: 16px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #136b8d;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .bullet-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .bullet-list li {
+            padding-left: 1.3rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+        .bullet-list li::before {
+            content: "•";
+            color: #f5b042;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .score-highlight {
+            font-weight: 700;
+            color: #226f8f;
+        }
+
+        footer {
+            background: #f8fbfd;
+            border-top: 1px solid #e2edf2;
+            padding: 1.2rem 2rem;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #6a8ea0;
+        }
+
+        @media (max-width: 680px) {
+            .report-content {
+                padding: 1.5rem;
+            }
+            .report-header {
+                padding: 1.5rem;
+            }
+            th, td {
+                padding: 0.6rem 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="report-container">
+    <div class="report-header">
+        <h1>Relatório Estratégico de Alocação</h1>
+        <div class="sub">Carry defensivo · Choque de commodities · Selic 14,75% e curva reprecificada</div>
+        <div class="meta-info">
+            <span>Análise macro e portfólio recomendado</span>
+            <span>Data base: março 2026 | Focus 13/03</span>
+        </div>
+    </div>
+    <div class="report-content">
+        <!-- 1. Resumo executivo -->
+        <h2>1. Resumo executivo</h2>
+        <p><strong>Regime macro atual:</strong> “Carry defensivo com choque de commodities”. Copom reduziu a Selic para 14,75% de forma cautelosa, IPCA de fevereiro acelerou para 0,70% m/m e 3,81% em 12 meses. Petróleo e risco geopolítico no Oriente Médio pressionam a inflação esperada.</p>
+        <p><strong>Leitura prática:</strong> favorece ativos de carry alto, empresas defensivas/reguladas, energia e negócios com caixa robusto. Prejudica setores sensíveis a juros e renda real: varejo discricionário, construção civil, small caps alavancadas.</p>
+        <div class="lead-text">
+            🎯 Conclusão objetiva: Carteira inclinada para petróleo, bancos/seguros, utilities/saneamento, transmissão e exportadores de qualidade. Camada relevante em CDI/Tesouro Selic e Tesouro IPCA+ para travar juros reais altos. IVVB11 como diversificação externa; GOLD11 com peso reduzido.
+        </div>
+
+        <!-- 2. Cenário macro detalhado -->
+        <h2>2. Cenário macroeconômico detalhado</h2>
+        <p>IPCA de fevereiro veio a 0,70% (acima de janeiro). Focus de 13/03 elevou mediana do IPCA 2026 para 4,10% e mantém Selic terminal 12,25%. PIB 2025 cresceu 2,3%, desemprego em 5,4% (trimestre até jan/26) — limitando velocidade de cortes. Fiscal: RTN com superávit nominal, mas Focus projeta primário de -0,50% do PIB em 2026 e dívida líquida ~70% do PIB.</p>
+        <p>Externamente, choque de energia: Brent tocou US$ 119 antes de recuar, reprecificando juros globais. ECB mantém taxa em 2%, mas mercado discute novas altas. No Brasil, juros reais altos, suporte para exportadoras de commodities e pressão sobre empresas domésticas sensíveis a diesel e custo financeiro.</p>
+
+        <!-- 3. Cenários -->
+        <h2>3. Cenários Base / Bull / Bear</h2>
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header">📌 Base (55%)</div>
+                <div class="card-body">Petróleo elevado, Copom corta lentamente, inflação melhora em 12 meses mas desconfortável na margem. Destaques: petróleo, bancos, seguros, saneamento e transmissão.</div>
+            </div>
+            <div class="card">
+                <div class="card-header">📈 Bull (20%)</div>
+                <div class="card-body">Descompressão geopolítica, queda do petróleo, reancoragem das expectativas e cortes mais acelerados. Beneficia varejo, shoppings, construção e small caps domésticas.</div>
+            </div>
+            <div class="card">
+                <div class="card-header">🐻 Bear (25%)</div>
+                <div class="card-body">Energia pressionada, inflação sobe, BC interrompe cortes. Reforçar caixa, Selic, IPCA+, petróleo, transmissão e saneamento; reduzir cíclicos domésticos.</div>
+            </div>
+        </div>
+
+        <!-- 4. Classificação setorial B3 -->
+        <h2>4. Classificação dos setores e subsetores da B3</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr><th>Classificação</th><th>Setores / subsetores</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="badge" style="background:#dff0f5;">Muito favorecidos</span></td><td>Petróleo e gás; bancos; seguros; transmissão de energia; saneamento</td></tr>
+                    <tr><td><span class="badge">Favorecidos</span></td><td>Elétricas integradas/geração; papel e celulose; exportadoras industriais de qualidade</td></tr>
+                    <tr><td><span class="badge">Neutros</span></td><td>Mineração; bolsa/infra de mercado; saúde defensiva; shoppings dominantes</td></tr>
+                    <tr><td><span class="badge">Prejudicados</span></td><td>Varejo discricionário; construção civil; logística dependente de diesel; consumo alavancado</td></tr>
+                    <tr><td><span class="badge">Muito prejudicados</span></td><td>Aéreas; small caps com dívida alta; nomes dependentes de queda rápida de juros</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 5. Tabela das 20 ações mais interessantes -->
+        <h2>5. Ações selecionadas – Score (Macro/Fund/Valuation)</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr><th>Ticker</th><th>Setor</th><th>Macro</th><th>Fund.</th><th>Valuation</th><th>Risk</th><th>Final</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>PETR4</strong></td><td>Petróleo</td><td>9.5</td><td>8.0</td><td>8.5</td><td>6.5</td><td>8.4</td></tr>
+                    <tr><td><strong>PRIO3</strong></td><td>Petróleo</td><td>9.0</td><td>8.0</td><td>7.0</td><td>6.5</td><td>7.9</td></tr>
+                    <tr><td><strong>BBAS3</strong></td><td>Bancos</td><td>8.5</td><td>8.5</td><td>8.5</td><td>6.5</td><td>8.2</td></tr>
+                    <tr><td><strong>BBSE3</strong></td><td>Seguros</td><td>8.5</td><td>8.5</td><td>7.5</td><td>8.0</td><td>8.2</td></tr>
+                    <tr><td><strong>CXSE3</strong></td><td>Seguros</td><td>8.5</td><td>8.0</td><td>7.5</td><td>8.0</td><td>8.0</td></tr>
+                    <tr><td><strong>SAPR11</strong></td><td>Saneamento</td><td>8.5</td><td>7.5</td><td>7.5</td><td>7.5</td><td>7.9</td></tr>
+                    <tr><td><strong>SBSP3</strong></td><td>Saneamento</td><td>8.0</td><td>8.0</td><td>6.5</td><td>7.0</td><td>7.5</td></tr>
+                    <tr><td><strong>TAEE11</strong></td><td>Transmissão</td><td>8.5</td><td>7.5</td><td>7.0</td><td>8.0</td><td>7.8</td></tr>
+                    <tr><td><strong>ISAE4</strong></td><td>Transmissão</td><td>8.5</td><td>7.5</td><td>7.0</td><td>7.5</td><td>7.7</td></tr>
+                    <tr><td><strong>TRPL4</strong></td><td>Transmissão</td><td>8.5</td><td>7.5</td><td>7.0</td><td>7.5</td><td>7.7</td></tr>
+                    <tr><td><strong>CPLE6</strong></td><td>Elétrica integrada</td><td>8.0</td><td>7.5</td><td>8.0</td><td>7.5</td><td>7.8</td></tr>
+                    <tr><td><strong>SUZB3</strong></td><td>Papel e celulose</td><td>7.5</td><td>8.0</td><td>7.0</td><td>7.0</td><td>7.5</td></tr>
+                    <tr><td><strong>KLBN11</strong></td><td>Papel e celulose</td><td>7.5</td><td>7.5</td><td>7.0</td><td>7.0</td><td>7.3</td></tr>
+                    <tr><td><strong>VALE3</strong></td><td>Mineração</td><td>6.5</td><td>8.0</td><td>7.5</td><td>6.5</td><td>7.0</td></tr>
+                    <tr><td><strong>WEGE3</strong></td><td>Bens de capital</td><td>7.0</td><td>9.0</td><td>4.5</td><td>8.5</td><td>7.2</td></tr>
+                    <tr><td><strong>RADL3</strong></td><td>Varejo defensivo</td><td>7.0</td><td>8.5</td><td>5.0</td><td>8.0</td><td>7.0</td></tr>
+                    <tr><td><strong>IGTI11</strong></td><td>Shopping</td><td>6.0</td><td>8.0</td><td>7.0</td><td>7.0</td><td>6.9</td></tr>
+                    <tr><td><strong>B3SA3</strong></td><td>Infra de mercado</td><td>6.5</td><td>8.0</td><td>6.5</td><td>7.0</td><td>6.9</td></tr>
+                    <tr><td><strong>ORVR3</strong></td><td>Resíduos/utilidade</td><td>7.0</td><td>7.5</td><td>6.5</td><td>7.0</td><td>6.9</td></tr>
+                    <tr><td><strong>SOJA3</strong></td><td>Agroinsumos</td><td>6.5</td><td>7.0</td><td>7.0</td><td>6.5</td><td>6.7</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p><em>Comparativo: dentro de energia regulada, prefere-se saneamento/transmissão; em seguros BBSE3/CXSE3; em petróleo PETR4/PRIO3; WEGE3 mantém qualidade, mas valuation relativo penaliza.</em></p>
+
+        <!-- 6. Top 5 ações -->
+        <h2>6. Top 5 ações – alocação tática</h2>
+        <div class="grid-2">
+            <div class="card"><div class="card-header">1️⃣ PETR4 · 24%</div><div class="card-body">Preço ~R$ 46,78. Alta aderência ao choque de energia, geração de caixa robusta. Risco político e interno monitorado.</div></div>
+            <div class="card"><div class="card-header">2️⃣ BBAS3 · 20%</div><div class="card-body">Preço ~R$ 23,51. Banco estatal com valuation atrativo, benefício de juros elevados.</div></div>
+            <div class="card"><div class="card-header">3️⃣ CXSE3 · 18%</div><div class="card-body">Preço ~R$ 18,10. Seguradora defensiva, caixa e menor sensibilidade cíclica.</div></div>
+            <div class="card"><div class="card-header">4️⃣ SAPR11 · 19%</div><div class="card-body">Preço ~R$ 42,09. Saneamento previsível, ativo real, reajustes regulatórios contra inflação.</div></div>
+            <div class="card"><div class="card-header">5️⃣ CPLE6 · 19%</div><div class="card-body">Preço ~R$ 14,22. Elétrica integrada defensiva, valuation não alongado, complementar ao portfólio.</div></div>
+        </div>
+        <p><strong>Por que estas 5?</strong> Equilibram macro favorável + geração de caixa + preço relativo. WEG fica próxima, mas valuation mais esticado. Transmissoras (TAEE11/ISAE4) ótimas, porém menor upside tático que Petrobras e bancos no atual cenário de petróleo pressionado e carry elevado.</p>
+
+        <!-- 7. Carteira multiativos -->
+        <h2>7. Carteira multiativos sugerida</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead><tr><th>Classe</th><th>Peso</th><th>Veículo sugerido</th><th>Racional</th></tr></thead>
+                <tbody>
+                    <tr><td>Caixa/carry</td><td>20%</td><td>CDI / pós-fixado</td><td>Juros nominais e reais ainda altos</td></tr>
+                    <tr><td>Liquidez defensiva</td><td>10%</td><td>Tesouro Selic</td><td>Reserva tática, baixa volatilidade</td></tr>
+                    <tr><td>Inflação médio prazo</td><td>20%</td><td>Tesouro IPCA+ intermediário</td><td>Travar juro real sem duration extrema</td></tr>
+                    <tr><td>Inflação longo prazo</td><td>10%</td><td>Tesouro IPCA+ longo</td><td>Convexidade se a curva cair</td></tr>
+                    <tr><td>Ações Brasil</td><td>20%</td><td>Top 5 (PETR4, BBAS3, CXSE3, SAPR11, CPLE6)</td><td>Beta seletivo pró-regime</td></tr>
+                    <tr><td>Exterior</td><td>15%</td><td>IVVB11</td><td>Diversificação geográfica e cambial (S&P 500)</td></tr>
+                    <tr><td>Ouro</td><td>5%</td><td>GOLD11</td><td>Hedge geopolítico, peso reduzido (juros reais globais em alta)</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 8. Rebalanceamento -->
+        <h2>8. Regras de rebalanceamento</h2>
+        <ul class="bullet-list">
+            <li><strong>Leve:</strong> ajuste mensal se posição desviar +20% do alvo ou mudança de ranking entre top 5 sem troca de regime.</li>
+            <li><strong>Moderado:</strong> troca de 1–2 nomes por perda de tese, valuation excessivo ou melhora de outro par setorial.</li>
+            <li><strong>Estrutural:</strong> revisão ampla se o regime migrar de “carry defensivo/choque commodities” para “desinflação com queda forte de juros” ou “risk-off inflacionário severo”.</li>
+        </ul>
+
+        <!-- 9. Tracking mensal -->
+        <h2>9. Tracking mensal automático</h2>
+        <p><strong>Macro:</strong> Selic, Focus, IPCA cheio e IPCA-15, petróleo (Brent), câmbio, curva DI, risco geopolítico.<br>
+        <strong>Setores:</strong> se petróleo continuar alto → petróleo/bancos/seguros/utilities líderes; se petróleo recuar → shoppings, varejo e sobem no ranking.<br>
+        <strong>Ações:</strong> Keep em PETR4/BBAS3/CXSE3/SAPR11/CPLE6; WEGE3 em watchlist; varejo discricionário underweight.</p>
+
+        <!-- 10. Riscos -->
+        <h2>10. Riscos e pontos de atenção</h2>
+        <ul class="bullet-list">
+            <li>Persistência do choque de energia e reaceleração inflacionária que interrompa ciclo de cortes.</li>
+            <li>Ruído fiscal/político local e deterioração global que afete bolsa e commodities simultaneamente.</li>
+            <li>Ouro não tem sido hedge perfeito neste episódio devido ao choque de juros reais.</li>
+        </ul>
+
+        <!-- 11. Conclusão objetiva -->
+        <h2>11. Conclusão objetiva</h2>
+        <div class="lead-text">
+            ✅ O que funciona: petróleo, bancos/seguros, saneamento, transmissão e carry em renda fixa real/pós-fixada.<br>
+            ❌ O que tende a pior desempenho: varejo discricionário, construção, aéreas e small caps alavancadas.<br>
+            🔁 Posicionamento coerente: carteira barbell — renda fixa relevante + bolsa seletiva defensiva + diversificação externa (IVVB11) + ouro moderado.
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.9rem; border-top: 1px solid #e0ecf2; padding-top: 1rem;">Análise elaborada sob o regime macro de março/2026. Próxima revisão periódica considerará evolução do petróleo, curvas de juros e perspectivas fiscais.</p>
+    </div>
+    <footer>
+        Relatório profissional de alocação · Estratégia defensiva com foco em carry e choque energético · Dados indicativos sujeitos a alterações de mercado
+    </footer>
+</div>
+</body>
+</html>
