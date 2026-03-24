@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Macro & Portfólio — Março 2026 · V7</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════
+   DESIGN SYSTEM — Institucional / Editorial
+   Paleta: Marfim · Grafite · Âmbar · Verde-sálvia
+   ══════════════════════════════════════════════ */
+:root {
+  --paper:    #f5f1eb;
+  --paper2:   #ede9e1;
+  --paper3:   #e4dfd5;
+  --ink:      #1a1714;
+  --ink2:     #2e2a26;
+  --ink3:     #4a453f;
+  --ink4:     #756e65;
+  --ink5:     #9c948a;
+  --rule:     #d4cec6;
+  --rule2:    #c8c2b8;
+  --gold:     #b8922a;
+  --gold2:    #d4a843;
+  --gold-bg:  rgba(184,146,42,0.10);
+  --green:    #2d6a4f;
+  --green2:   #40916c;
+  --green-bg: rgba(45,106,79,0.09);
+  --red:      #9b2226;
+  --red2:     #c44040;
+  --red-bg:   rgba(155,34,38,0.08);
+  --blue:     #1d3557;
+  --blue2:    #2e6da4;
+  --blue-bg:  rgba(29,53,87,0.08);
+  --amber:    #c77b2a;
+  --amber-bg: rgba(199,123,42,0.09);
+  --ff-display: 'Cormorant Garamond', Georgia, serif;
+  --ff-body:    'Libre Baskerville', Georgia, serif;
+  --ff-mono:    'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  background: var(--paper2);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--ff-body);
+  font-size: 13px;
+  line-height: 1.75;
+  max-width: 1320px;
+  margin: 0 auto;
+  border-left: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Grain texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px;
+  z-index: 9999;
+}
+
+/* ══════ NAVIGATION ══════ */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(245,241,235,0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  overflow-x: auto;
+}
+nav a {
+  font-family: var(--ff-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  text-decoration: none;
+  padding: 14px 14px;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+}
+nav a:hover { color: var(--ink); border-bottom-color: var(--gold); }
+nav .nav-sep { width: 1px; height: 14px; background: var(--rule); margin: 0 4px; }
+
+/* ══════ COVER / HEADER ══════ */
+.cover {
+  padding: 64px 64px 48px;
+  border-bottom: 1px solid var(--rule2);
+  background: linear-gradient(160deg, var(--paper) 60%, var(--paper2) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.cover::after {
+  content: '';
+  position: absolute;
+  right: -40px; top: -80px;
+  width: 420px; height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(184,146,42,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cover-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.cover-tag {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink5);
+  border: 1px solid var(--rule2);
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+.cover-tag.gold { border-color: var(--gold); color: var(--gold); background: var(--gold-bg); }
+.cover-divider { flex: 1; height: 1px; background: var(--rule); }
+.cover-date {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  color: var(--ink5);
+  letter-spacing: 0.08em;
+}
+.cover-title {
+  font-family: var(--ff-display);
+  font-size: 52px;
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.cover-title strong { font-weight: 700; font-style: italic; color: var(--ink2); }
+.cover-subtitle {
+  font-family: var(--ff-display);
+  font-size: 18px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink4);
+  margin-bottom: 32px;
+  letter-spacing: 0.01em;
+}
+.cover-regime-strip {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto;
+  gap: 0;
+  background: var(--paper2);
+  border: 1px solid var(--rule2);
+  border-radius: 4px;
+  overflow: hidden;
+  max-width: 900px;
+}
+.regime-cell {
+  padding: 16px 22px;
+  border-right: 1px solid var(--rule);
+}
+.regime-cell:last-child { border-right: none; }
+.regime-cell-label {
+  font-family: var(--ff-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink5);
+  margin-bottom: 5px;
+}
+.regime-cell-val {
+  font-family: var(--ff-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.25;
+}
+.regime-cell-val.gold { color: var(--gold); }
+.regime-cell-val.green { color: var(--green); }
+.regime-arrow-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 12px;
+  border-right: 1px solid var(--rule);
+  color: var(--ink5);
+  font-size: 16px;
+}
+.cover-kpis {
+  display: flex;
+  gap: 24px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+.kpi-item { display: flex; flex-direction: column; gap: 2px; }
+.kpi-label { font-family: var(--ff-mono); font-size: 8.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink5); }
+.kpi-val { font-family: var(--ff-mono); font-size: 18px; font-weight: 600; color: var(--ink2); }
+.kpi-val.gold { color: var(--gold); }
+.kpi-val.red { color: var(--red2); }
+.kpi-val.green { color: var(--green2); }
+.kpi-sep { width: 1px; background: var(--rule); align-self: stretch; }
+
+/* ══════ ALERT BANNER ══════ */
+.alert-banner {
+  margin: 0;
+  padding: 14px 64px;
+  background: rgba(155,34,38,0.06);
+  border-bottom: 1px solid rgba(155,34,38,0.18);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.alert-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+.alert-text {
+  font-family: var(--ff-body);
+  font-size: 12px;
+  color: var(--ink3);
+  line-height: 1.6;
+}
+.alert-text strong { color: var(--red); font-weight: 700; }
+
+/* ══════ MAIN LAYOUT ══════ */
+.main-content { padding: 0 64px 80px; }
+
+/* ══════ SECTION HEADERS ══════ */
+.section {
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+}
+.section:first-child { margin-top: 40px; }
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.section-num {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  flex-shrink: 0;
+}
+.section-title {
+  font-family: var(--ff-display);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.section-rule { flex: 1; height: 1px; background: var(--rule); }
+.section-desc {
+  font-size: 12px;
+  color: var(--ink4);
+  font-style: italic;
+  margin-bottom: 20px;
+  padding-left: 0;
+  line-height: 1.6;
+}
+
+/* ══════ MACRO GRID ══════ */
+.macro-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.macro-cell {
+  background: var(--paper);
+  padding: 16px 14px;
+  position: relative;
+}
+.macro-cell:hover { background: var(--paper2); }
+.macro-label {
+  font-family: var(--ff-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink5);
+  margin-bottom: 6px;
+}
+.macro-val {
+  font-family: var(--ff-mono);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--ink2);
+  line-height: 1;
+  margin-bottom: 3px;
+}
+.macro-chg {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  line-height: 1.4;
+}
+.chg-up { color: var(--red2); }
+.chg-dn { color: var(--green2); }
+.chg-neu { color: var(--ink5); }
+
+/* ══════ TWO-COL LAYOUT ══════ */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.four-col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.five-col { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+
+/* ══════ CARDS ══════ */
+.card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 22px;
+  position: relative;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 4px 4px 0 0;
+}
+.card.c-gold::before { background: var(--gold); }
+.card.c-green::before { background: var(--green2); }
+.card.c-red::before { background: var(--red); }
+.card.c-blue::before { background: var(--blue); }
+.card.c-amber::before { background: var(--amber); }
+.card.c-grey::before { background: var(--ink5); }
+
+.card-eyebrow {
+  font-family: var(--ff-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink5);
+  margin-bottom: 8px;
+}
+.card-title {
+  font-family: var(--ff-display);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.card-num {
+  font-family: var(--ff-display);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.card-num.gold { color: var(--gold); }
+.card-num.green { color: var(--green2); }
+.card-num.red { color: var(--red2); }
+.card-sub {
+  font-size: 11px;
+  color: var(--ink4);
+  margin-bottom: 12px;
+  font-style: italic;
+}
+.card-body {
+  font-size: 12px;
+  color: var(--ink3);
+  line-height: 1.65;
+}
+.card-body p { margin-bottom: 8px; }
+.card-body p:last-child { margin-bottom: 0; }
+
+/* ══════ SCENARIO CARDS ══════ */
+.scenario-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.scenario-header {
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.scenario-label {
+  font-family: var(--ff-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.scenario-label.base { color: var(--gold); }
+.scenario-label.bull { color: var(--green2); }
+.scenario-label.bear { color: var(--red2); }
+.scenario-name {
+  font-family: var(--ff-display);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.scenario-prob {
+  font-family: var(--ff-mono);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1;
+}
+.scenario-prob.base { color: var(--gold); }
+.scenario-prob.bull { color: var(--green2); }
+.scenario-prob.bear { color: var(--red2); }
+.prob-track {
+  height: 3px;
+  background: var(--rule);
+  position: relative;
+}
+.prob-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  border-radius: 0 2px 2px 0;
+}
+.prob-fill.base { background: var(--gold); width: 55%; }
+.prob-fill.bull { background: var(--green2); width: 20%; }
+.prob-fill.bear { background: var(--red2); width: 25%; }
+.scenario-body { padding: 16px 22px; }
+.scenario-section-label {
+  font-family: var(--ff-mono);
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink5);
+  margin-bottom: 6px;
+  margin-top: 12px;
+}
+.scenario-section-label:first-child { margin-top: 0; }
+.trigger-list, .impact-list { list-style: none; }
+.trigger-list li, .impact-list li {
+  font-size: 11.5px;
+  color: var(--ink3);
+  padding: 3px 0;
+  padding-left: 14px;
+  position: relative;
+  border-bottom: 1px solid var(--rule);
+  line-height: 1.5;
+}
+.trigger-list li:last-child, .impact-list li:last-child { border-bottom: none; }
+.trigger-list li::before { content: '→'; position: absolute; left: 0; color: var(--ink5); font-size: 9px; top: 5px; }
+.impact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.impact-item {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.impact-item:nth-child(even) { border-right: none; }
+.impact-item:nth-last-child(-n+2) { border-bottom: none; }
+.impact-key { font-family: var(--ff-mono); font-size: 9px; color: var(--ink5); text-transform: uppercase; letter-spacing: 0.06em; }
+.impact-val { font-family: var(--ff-mono); font-size: 10px; font-weight: 500; color: var(--ink2); }
+
+/* ══════ TABLES ══════ */
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; }
+table { width: 100%; border-collapse: collapse; }
+thead th {
+  font-family: var(--ff-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink5);
+  text-align: left;
+  padding: 10px 12px;
+  background: var(--paper2);
+  border-bottom: 1px solid var(--rule2);
+  white-space: nowrap;
+}
+tbody td {
+  padding: 9px 12px;
+  font-size: 11.5px;
+  color: var(--ink3);
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+  line-height: 1.45;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--paper2); }
+.td-ticker {
+  font-family: var(--ff-mono);
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.td-mono { font-family: var(--ff-mono); font-size: 11px; }
+.td-pos { color: var(--green2); font-weight: 500; }
+.td-neg { color: var(--red2); font-weight: 500; }
+.td-neu { color: var(--ink4); }
+
+/* SCORE BAR */
+.score-bar-wrap { display: flex; align-items: center; gap: 6px; }
+.score-bar-bg { width: 48px; height: 4px; background: var(--rule2); border-radius: 2px; overflow: hidden; }
+.score-bar-fill { height: 100%; border-radius: 2px; background: var(--gold); }
+.score-fill-green { background: var(--green2); }
+.score-fill-red { background: var(--red2); }
+.score-val { font-family: var(--ff-mono); font-size: 10px; color: var(--ink3); }
+
+/* ══════ PILL BADGES ══════ */
+.pill {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 2px;
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.pill-vf { background: rgba(45,106,79,0.13); color: var(--green); border: 1px solid rgba(45,106,79,0.25); }
+.pill-f { background: rgba(46,109,164,0.10); color: var(--blue2); border: 1px solid rgba(46,109,164,0.22); }
+.pill-n { background: rgba(106,109,133,0.10); color: var(--ink4); border: 1px solid var(--rule2); }
+.pill-p { background: rgba(199,123,42,0.10); color: var(--amber); border: 1px solid rgba(199,123,42,0.22); }
+.pill-vp { background: var(--red-bg); color: var(--red); border: 1px solid rgba(155,34,38,0.22); }
+.pill-new { background: rgba(45,106,79,0.12); color: var(--green); border: 1px solid rgba(45,106,79,0.28); }
+.pill-keep { background: var(--gold-bg); color: var(--gold); border: 1px solid rgba(184,146,42,0.28); }
+.pill-watch { background: rgba(29,53,87,0.10); color: var(--blue); border: 1px solid rgba(29,53,87,0.22); }
+.pill-avoid { background: var(--red-bg); color: var(--red); border: 1px solid rgba(155,34,38,0.22); }
+.pill-alta { background: var(--green-bg); color: var(--green); border: 1px solid rgba(45,106,79,0.25); }
+.pill-media { background: var(--gold-bg); color: var(--gold); border: 1px solid rgba(184,146,42,0.25); }
+.pill-baixa { background: var(--red-bg); color: var(--red2); border: 1px solid rgba(155,34,38,0.2); }
+
+/* ══════ TOP 5 CARDS ══════ */
+.top5-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.top5-card {
+  background: var(--paper);
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transition: background 0.15s;
+  position: relative;
+}
+.top5-card:hover { background: var(--paper2); }
+.top5-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+}
+.top5-card:nth-child(1)::before { background: var(--gold); }
+.top5-card:nth-child(2)::before { background: var(--blue2); }
+.top5-card:nth-child(3)::before { background: var(--green2); }
+.top5-card:nth-child(4)::before { background: var(--amber); }
+.top5-card:nth-child(5)::before { background: var(--ink3); }
+.top5-rank {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  color: var(--ink5);
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+  margin-top: 4px;
+}
+.top5-ticker {
+  font-family: var(--ff-display);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 2px;
+}
+.top5-company {
+  font-size: 10.5px;
+  color: var(--ink4);
+  margin-bottom: 14px;
+  line-height: 1.3;
+}
+.top5-weight-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 8px 0;
+  margin-bottom: 12px;
+}
+.top5-weight { font-family: var(--ff-mono); font-size: 22px; font-weight: 600; color: var(--gold); }
+.top5-weight-label { font-family: var(--ff-mono); font-size: 8px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink5); }
+.top5-metrics { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+.top5-metric { display: flex; justify-content: space-between; }
+.top5-m-name { font-family: var(--ff-mono); font-size: 9px; color: var(--ink5); text-transform: uppercase; letter-spacing: 0.08em; }
+.top5-m-val { font-family: var(--ff-mono); font-size: 10px; font-weight: 500; color: var(--ink2); }
+.top5-thesis {
+  font-size: 11px;
+  color: var(--ink4);
+  line-height: 1.55;
+  border-top: 1px solid var(--rule);
+  padding-top: 10px;
+  font-style: italic;
+  flex: 1;
+}
+
+/* ══════ ALLOCATION SECTION ══════ */
+.alloc-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.donut-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 24px;
+}
+.donut-title {
+  font-family: var(--ff-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink5);
+  margin-bottom: 18px;
+  text-align: center;
+}
+.donut-svg-wrap {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 20px;
+}
+.donut-label-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+.donut-center-num {
+  font-family: var(--ff-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+}
+.donut-center-txt {
+  font-family: var(--ff-mono);
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink5);
+  margin-top: 3px;
+}
+.legend-list { display: flex; flex-direction: column; gap: 8px; }
+.legend-item { display: flex; align-items: center; gap: 10px; }
+.legend-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.legend-name { font-size: 11.5px; color: var(--ink3); flex: 1; }
+.legend-pct { font-family: var(--ff-mono); font-size: 11px; color: var(--ink2); font-weight: 500; }
+
+/* ══════ PERFORMANCE SECTION ══════ */
+.perf-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+.perf-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 20px;
+}
+.perf-card-title {
+  font-family: var(--ff-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink5);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+.perf-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.perf-row:last-child { border-bottom: none; }
+.perf-row-name { font-size: 11.5px; color: var(--ink3); }
+.perf-row-val { font-family: var(--ff-mono); font-size: 11.5px; font-weight: 500; }
+.prog-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.prog-row:last-child { border-bottom: none; }
+.prog-name { font-size: 11px; color: var(--ink3); width: 120px; flex-shrink: 0; }
+.prog-bar-bg { flex: 1; height: 4px; background: var(--rule2); border-radius: 2px; overflow: hidden; }
+.prog-bar-fill { height: 100%; border-radius: 2px; }
+.prog-val { font-family: var(--ff-mono); font-size: 10px; width: 44px; text-align: right; }
+
+/* ══════ RISK SECTION ══════ */
+.risk-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.risk-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 18px;
+}
+.risk-label {
+  font-family: var(--ff-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink5);
+  margin-bottom: 8px;
+}
+.risk-level {
+  font-family: var(--ff-display);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  line-height: 1;
+}
+.risk-detail { font-size: 11px; color: var(--ink4); line-height: 1.55; }
+.risk-high { color: var(--red2); }
+.risk-med { color: var(--amber); }
+.risk-low { color: var(--green2); }
+
+/* ══════ TRANSITION SCORE ══════ */
+.ts-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 24px;
+}
+.ts-big {
+  font-family: var(--ff-display);
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--green);
+  margin-bottom: 4px;
+}
+.ts-label {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink5);
+  margin-bottom: 16px;
+}
+.ts-meter-bg {
+  height: 10px;
+  background: var(--rule2);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 6px;
+  position: relative;
+}
+.ts-meter-fill {
+  height: 100%;
+  border-radius: 5px;
+  background: linear-gradient(90deg, var(--red2) 0%, var(--amber) 40%, var(--green2) 100%);
+  width: 68%;
+}
+.ts-scale {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--ff-mono);
+  font-size: 8.5px;
+  color: var(--ink5);
+  margin-bottom: 16px;
+}
+.ts-interp {
+  font-size: 12px;
+  color: var(--ink3);
+  line-height: 1.6;
+  border-top: 1px solid var(--rule);
+  padding-top: 14px;
+  font-style: italic;
+}
+.signal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.signal-item {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.signal-item:nth-child(even) { border-right: none; }
+.signal-item:nth-last-child(-n+2) { border-bottom: none; }
+.signal-name { font-family: var(--ff-mono); font-size: 8.5px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink5); }
+.signal-val { font-size: 11px; font-weight: 500; color: var(--ink2); line-height: 1.35; }
+.sig-bull { color: var(--green); }
+.sig-bear { color: var(--red2); }
+.sig-neu { color: var(--amber); }
+
+/* ══════ REBALANCE SECTION ══════ */
+.rebal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+.rebal-col { padding: 20px; border-right: 1px solid var(--rule); }
+.rebal-col:last-child { border-right: none; }
+.rebal-type {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule);
+}
+.rebal-green { color: var(--green); }
+.rebal-amber { color: var(--amber); }
+.rebal-red { color: var(--red); }
+.rebal-list { list-style: none; }
+.rebal-list li {
+  font-size: 11.5px;
+  color: var(--ink3);
+  padding: 5px 0;
+  padding-left: 14px;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  line-height: 1.5;
+}
+.rebal-list li:last-child { border-bottom: none; }
+.rebal-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  font-size: 9px;
+  top: 7px;
+  color: var(--ink5);
+}
+
+/* ══════ TRACKING ══════ */
+.track-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+.track-col { padding: 18px; border-right: 1px solid var(--rule); }
+.track-col:last-child { border-right: none; }
+.track-col-title {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink5);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+.track-list { list-style: none; }
+.track-list li {
+  font-size: 11px;
+  color: var(--ink3);
+  padding: 4px 0;
+  padding-left: 14px;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  line-height: 1.45;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding-left: 0;
+}
+.track-list li:last-child { border-bottom: none; }
+.track-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.dot-r { background: var(--red2); }
+.dot-y { background: var(--amber); }
+.dot-g { background: var(--green2); }
+.dot-b { background: var(--blue2); }
+
+/* ══════ BACKTEST ══════ */
+.backtest-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.bt-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 22px;
+}
+.bt-title {
+  font-family: var(--ff-display);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule);
+}
+.bt-body { font-size: 12px; color: var(--ink3); line-height: 1.65; }
+.bt-body p { margin-bottom: 8px; }
+.bt-body p:last-child { margin-bottom: 0; }
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.metric-row:last-child { border-bottom: none; }
+.metric-name { font-size: 11.5px; color: var(--ink3); }
+.metric-val { font-family: var(--ff-mono); font-size: 11px; font-weight: 500; color: var(--gold); }
+
+/* ══════ MODEL WEIGHTS ══════ */
+.weights-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 22px;
+}
+.weight-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.weight-bar-row:last-child { border-bottom: none; }
+.weight-dim { font-family: var(--ff-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink4); width: 90px; flex-shrink: 0; }
+.weight-bar-bg { flex: 1; height: 6px; background: var(--rule2); border-radius: 3px; overflow: hidden; }
+.weight-bar-fill { height: 100%; border-radius: 3px; background: var(--gold); }
+.weight-pct { font-family: var(--ff-mono); font-size: 11px; font-weight: 500; color: var(--ink2); width: 36px; text-align: right; }
+
+/* ══════ STRESS TESTS ══════ */
+.stress-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+.stress-cell { padding: 18px; border-right: 1px solid var(--rule); }
+.stress-cell:last-child { border-right: none; }
+.stress-name { font-family: var(--ff-mono); font-size: 8.5px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink4); margin-bottom: 8px; }
+.stress-impact { font-family: var(--ff-display); font-size: 26px; font-weight: 700; line-height: 1; margin-bottom: 6px; }
+.stress-desc { font-size: 11px; color: var(--ink4); line-height: 1.5; }
+
+/* ══════ SOURCES ══════ */
+.sources-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+.source-chip {
+  background: var(--paper2);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 4px 10px;
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  color: var(--ink4);
+  letter-spacing: 0.04em;
+}
+
+/* ══════ FORWARD VIEW ══════ */
+.forward-card {
+  background: var(--paper2);
+  border: 1px solid var(--rule2);
+  border-radius: 4px;
+  padding: 20px 24px;
+  border-left: 4px solid var(--green2);
+}
+.forward-title { font-family: var(--ff-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--green); margin-bottom: 8px; }
+.forward-body { font-size: 12px; color: var(--ink3); line-height: 1.65; }
+
+/* ══════ FOOTER ══════ */
+footer {
+  background: var(--paper2);
+  border-top: 1px solid var(--rule2);
+  padding: 24px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+}
+.footer-brand { font-family: var(--ff-display); font-size: 14px; font-weight: 600; color: var(--ink3); }
+.footer-meta { font-family: var(--ff-mono); font-size: 9px; color: var(--ink5); margin-top: 4px; }
+.footer-disc { font-size: 10px; color: var(--ink5); max-width: 500px; line-height: 1.55; text-align: right; }
+
+/* ══════ DIVIDER ══════ */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 24px 0;
+}
+.divider-line { flex: 1; height: 1px; background: var(--rule); }
+.divider-label { font-family: var(--ff-mono); font-size: 8.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink5); }
+
+/* ══════ INLINE NOTE ══════ */
+.note {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  color: var(--ink5);
+  font-style: normal;
+  background: var(--paper2);
+  border-left: 3px solid var(--rule2);
+  padding: 8px 12px;
+  border-radius: 0 2px 2px 0;
+  margin: 12px 0;
+}
+.note.green { border-left-color: var(--green2); color: var(--green); }
+.note.amber { border-left-color: var(--gold); color: var(--gold); }
+.note.red { border-left-color: var(--red); color: var(--red); }
+
+/* ══════ UTIL ══════ */
+strong.gold { color: var(--gold); font-style: normal; }
+strong.green { color: var(--green); font-style: normal; }
+strong.red { color: var(--red); font-style: normal; }
+.text-muted { color: var(--ink5); }
+.text-italic { font-style: italic; }
+.mt-4 { margin-top: 4px; }
+.mt-8 { margin-top: 8px; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mt-20 { margin-top: 20px; }
+.mb-8 { margin-bottom: 8px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-20 { margin-bottom: 20px; }
+.gap-16 { gap: 16px; }
+
+/* animate in on load */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.cover, .alert-banner { animation: fadeUp 0.5s ease both; }
+.section { animation: fadeUp 0.4s ease both; }
+
+@media print {
+  nav { display: none; }
+  body { max-width: 100%; }
+  .cover { padding: 40px; }
+  .main-content { padding: 0 40px 60px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#regime">Regime</a><div class="nav-sep"></div>
+  <a href="#cenarios">Cenários</a><div class="nav-sep"></div>
+  <a href="#setores">Setores</a><div class="nav-sep"></div>
+  <a href="#top20">Top 20</a><div class="nav-sep"></div>
+  <a href="#top5">Top 5</a><div class="nav-sep"></div>
+  <a href="#portfolio">Portfólio</a><div class="nav-sep"></div>
+  <a href="#performance">Performance</a><div class="nav-sep"></div>
+  <a href="#risco">Risco</a><div class="nav-sep"></div>
+  <a href="#transicao">Transição V7</a><div class="nav-sep"></div>
+  <a href="#rebalance">Rebalanceamento</a><div class="nav-sep"></div>
+  <a href="#tracking">Tracking</a><div class="nav-sep"></div>
+  <a href="#decisoes">Decisões</a><div class="nav-sep"></div>
+  <a href="#backtest">Backtest</a><div class="nav-sep"></div>
+  <a href="#modelo">Modelo</a><div class="nav-sep"></div>
+  <a href="#fontes">Fontes</a>
+</nav>
+
+<header class="cover">
+  <div class="cover-eyebrow">
+    <span class="cover-tag gold">Sistema V7 · Adaptativo</span>
+    <span class="cover-tag">Com Histórico de 1 Período</span>
+    <div class="cover-divider"></div>
+    <span class="cover-date">Data de Referência: 23 / MAR / 2026</span>
+  </div>
+  <div class="cover-title">Relatório Macro &<br><strong>Portfólio</strong></div>
+  <div class="cover-subtitle">Análise Institucional de Investimentos · Brasil & Global · mesmo padrão editorial do relatório-base</div>
+
+  <div class="cover-regime-strip">
+    <div class="regime-cell">
+      <div class="regime-cell-label">Regime Atual</div>
+      <div class="regime-cell-val gold">Choque de Commodities em Descompressão<br>+ Carry Defensivo</div>
+    </div>
+    <div class="regime-arrow-cell">→</div>
+    <div class="regime-cell">
+      <div class="regime-cell-label">Regime Projetado (1–3 meses)</div>
+      <div class="regime-cell-val green">Transição para<br>Risk-On Seletivo</div>
+    </div>
+    <div class="regime-cell" style="min-width:120px">
+      <div class="regime-cell-label">Macro Score</div>
+      <div class="regime-cell-val" style="font-size:28px; color:var(--green)">52 / 100</div>
+      <div style="font-family:var(--ff-mono); font-size:9px; color:var(--ink5)">Conf. atual: 0,66</div>
+    </div>
+  </div>
+
+  <div class="cover-kpis">
+    <div class="kpi-item"><span class="kpi-label">Selic Atual</span><span class="kpi-val gold">14,75%</span></div>
+    <div class="kpi-sep"></div>
+    <div class="kpi-item"><span class="kpi-label">IPCA 12m</span><span class="kpi-val green">3,81%</span></div>
+    <div class="kpi-sep"></div>
+    <div class="kpi-item"><span class="kpi-label">US10Y</span><span class="kpi-val red">4,39%</span></div>
+    <div class="kpi-sep"></div>
+    <div class="kpi-item"><span class="kpi-label">DXY</span><span class="kpi-val">~99,2</span></div>
+    <div class="kpi-sep"></div>
+    <div class="kpi-item"><span class="kpi-label">USD/BRL</span><span class="kpi-val green">~5,23</span></div>
+    <div class="kpi-sep"></div>
+    <div class="kpi-item"><span class="kpi-label">Histórico</span><span class="kpi-val">1 período</span></div>
+    <div class="kpi-sep"></div>
+    <div class="kpi-item"><span class="kpi-label">Mudança</span><span class="kpi-val green">risk-off → neutro</span></div>
+    <div class="kpi-sep"></div>
+    <div class="kpi-item"><span class="kpi-label">Janela</span><span class="kpi-val">30 dias</span></div>
+  </div>
+</header>
+
+<div class="alert-banner">
+  <span class="alert-icon">⚑</span>
+  <p class="alert-text">
+    <strong>DESCOMPRESSÃO PARCIAL DO CHOQUE:</strong> O mercado saiu do pânico agudo da semana anterior, mas a guerra e o risco energético seguem abertos. A leitura correta não é bull market pleno; é <strong>neutralização parcial com aumento seletivo de risco</strong>. Isso justifica reduzir caixa e ouro, cortar peso marginal de PETR4 e elevar qualidade doméstica, bancos/seguros e IPCA+ médio.
+  </p>
+</div>
+
+<main class="main-content">
+
+<section class="section" id="regime">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Regime Macroeconômico</h2>
+    <div class="section-rule"></div>
+  </div>
+  <p class="section-desc">Mesma arquitetura visual do relatório anterior, agora com atualização V7 e leitura comparativa frente ao período-base anexado.</p>
+
+  <div class="macro-grid">
+    <div class="macro-cell"><div class="macro-label">Selic Atual</div><div class="macro-val">14,75%</div><div class="macro-chg chg-dn">↓ Copom 18/mar</div></div><div class="macro-cell"><div class="macro-label">Focus Selic 2026</div><div class="macro-val">12,50%</div><div class="macro-chg chg-neu">mediana 20/mar</div></div><div class="macro-cell"><div class="macro-label">IPCA 12m</div><div class="macro-val">3,81%</div><div class="macro-chg chg-dn">abaixo de 4%</div></div><div class="macro-cell"><div class="macro-label">IBC-Br jan</div><div class="macro-val">+0,8%</div><div class="macro-chg chg-up">atividade ainda resiliente</div></div><div class="macro-cell"><div class="macro-label">USD / BRL</div><div class="macro-val">~5,23</div><div class="macro-chg chg-dn">real apreciou no dia</div></div><div class="macro-cell"><div class="macro-label">Brent</div><div class="macro-val">queda forte</div><div class="macro-chg chg-dn">descompressão em 23/mar</div></div><div class="macro-cell"><div class="macro-label">US10Y</div><div class="macro-val">4,39%</div><div class="macro-chg chg-up">ainda restritivo</div></div><div class="macro-cell"><div class="macro-label">DXY</div><div class="macro-val">~99,2</div><div class="macro-chg chg-dn">favorável a emergentes</div></div><div class="macro-cell"><div class="macro-label">VIX</div><div class="macro-val">alívio</div><div class="macro-chg chg-dn">abaixo do pico</div></div><div class="macro-cell"><div class="macro-label">Ibovespa</div><div class="macro-val">recuperação</div><div class="macro-chg chg-up">após pânico geopolítico</div></div><div class="macro-cell"><div class="macro-label">S&P 500</div><div class="macro-val">+1%+</div><div class="macro-chg chg-up">reação de alívio</div></div><div class="macro-cell"><div class="macro-label">Janela de Dados</div><div class="macro-val">30 dias</div><div class="macro-chg chg-neu">com foco em 23/mar/2026</div></div>
+  </div>
+
+  <div class="two-col">
+    <div class="card c-gold">
+      <div class="card-eyebrow">Vetores Positivos</div>
+      <ul class="trigger-list" style="margin-top:6px">
+        <li>DXY abaixo de 100 melhora o pano de fundo para emergentes.</li>
+        <li>Real voltou a apreciar com alívio geopolítico e queda do petróleo.</li>
+        <li>IPCA em 12 meses abaixo de 4% mantém espaço para normalização gradual.</li>
+        <li>Focus segue vendo Selic de 12,5% no fim de 2026.</li>
+        <li>Equities globais reagiram com força no dia 23/mar, reduzindo estresse extremo.</li>
+      </ul>
+    </div>
+    <div class="card c-red">
+      <div class="card-eyebrow">Vetores Negativos</div>
+      <ul class="trigger-list" style="margin-top:6px">
+        <li>US10Y a 4,39% ainda impõe custo de capital alto no mundo.</li>
+        <li>Choque energético não foi encerrado; ele apenas descomprimiu.</li>
+        <li>Mercado de trabalho brasileiro permanece apertado, limitando cortes agressivos.</li>
+        <li>Brent ainda elevado em termos absolutos, mesmo após a queda de 23/mar.</li>
+        <li>O bear case continua vivo se houver novo ataque à infraestrutura energética.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="two-col mt-16">
+    <div class="card c-grey">
+      <div class="card-eyebrow">Riscos de Cauda</div>
+      <ul class="trigger-list" style="margin-top:6px">
+        <li>Novo estrangulamento em fluxos energéticos e Brent &gt; 110/120.</li>
+        <li>Fed mais hawkish se o petróleo contaminar inflação e expectativas.</li>
+        <li>Reabertura da curva brasileira por choque fiscal ou cambial.</li>
+        <li>Falsa sensação de risk-on levando a compra precoce de beta ruim.</li>
+      </ul>
+    </div>
+    <div class="card c-blue">
+      <div class="card-eyebrow">Variáveis-Chave a Monitorar</div>
+      <ul class="trigger-list" style="margin-top:6px">
+        <li>Brent · US10Y · DXY · USD/BRL</li>
+        <li>Focus Selic 2026 e IPCA 12m</li>
+        <li>Curva DI longa</li>
+        <li>Persistência do alívio em Wall Street</li>
+        <li>Qualidade do fluxo para Bolsa brasileira</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note amber mt-16">
+    Mudança central do V7: o sistema deixa de tratar o ambiente como risk-off puro e passa a classificá-lo como neutro construtivo, ainda defensivo, porém já permitindo aumento seletivo de risco.
+  </div>
+</section>
+
+<section class="section" id="cenarios">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Cenários Base · Bull · Bear</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="three-col">
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <div><div class="scenario-label base">Cenário Base</div><div class="scenario-name">Descompressão Parcial<br>Risk-On Seletivo</div></div>
+        <div class="scenario-prob base">55%</div>
+      </div>
+      <div class="prob-track"><div class="prob-fill base" style="width:55%"></div></div>
+      <div class="scenario-body">
+        <div class="scenario-section-label">Gatilhos</div>
+        <ul class="trigger-list">
+          <li>Petróleo alivia, mas não colapsa.</li>
+          <li>Sem cessar-fogo definitivo; sem novo choque imediato.</li>
+          <li>Fed/BCE continuam em compasso de espera.</li>
+        </ul>
+        <div class="scenario-section-label">Impactos de Mercado</div>
+        <div class="impact-grid">
+          <div class="impact-item"><span class="impact-key">Juros</span><span class="impact-val">altos, estáveis</span></div>
+          <div class="impact-item"><span class="impact-key">Inflação</span><span class="impact-val">desacelera devagar</span></div>
+          <div class="impact-item"><span class="impact-key">Bolsa BR</span><span class="impact-val">quality doméstico</span></div>
+          <div class="impact-item"><span class="impact-key">BRL/USD</span><span class="impact-val">5,20–5,35</span></div>
+          <div class="impact-item"><span class="impact-key">IVVB11</span><span class="impact-val">positivo moderado</span></div>
+          <div class="impact-item"><span class="impact-key">GOLD11</span><span class="impact-val">proteção menor</span></div>
+          <div class="impact-item"><span class="impact-key">CDI</span><span class="impact-val">segue forte</span></div>
+          <div class="impact-item"><span class="impact-key">IPCA+ médio</span><span class="impact-val">assimetria boa</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <div><div class="scenario-label bull">Cenário Bull</div><div class="scenario-name">De-escalada Real<br>Fechamento de Curvas</div></div>
+        <div class="scenario-prob bull">25%</div>
+      </div>
+      <div class="prob-track"><div class="prob-fill bull" style="width:25%"></div></div>
+      <div class="scenario-body">
+        <div class="scenario-section-label">Gatilhos</div>
+        <ul class="trigger-list">
+          <li>Acordo crível de desescalada.</li>
+          <li>Brent abaixo de 90.</li>
+          <li>DXY cai mais e curva local fecha.</li>
+        </ul>
+        <div class="scenario-section-label">Impactos de Mercado</div>
+        <div class="impact-grid">
+          <div class="impact-item"><span class="impact-key">Juros</span><span class="impact-val">fecham</span></div>
+          <div class="impact-item"><span class="impact-key">Inflação</span><span class="impact-val">melhora rápido</span></div>
+          <div class="impact-item"><span class="impact-key">Bolsa BR</span><span class="impact-val">small/mid lucrativas</span></div>
+          <div class="impact-item"><span class="impact-key">BRL/USD</span><span class="impact-val">&lt; 5,20</span></div>
+          <div class="impact-item"><span class="impact-key">IVVB11</span><span class="impact-val">mantém diversificação</span></div>
+          <div class="impact-item"><span class="impact-key">GOLD11</span><span class="impact-val">perde urgência</span></div>
+          <div class="impact-item"><span class="impact-key">CDI</span><span class="impact-val">menos dominante</span></div>
+          <div class="impact-item"><span class="impact-key">IPCA+ longo</span><span class="impact-val">ganha convexidade</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <div><div class="scenario-label bear">Cenário Bear</div><div class="scenario-name">Novo Choque de Energia<br>Volta do Defensivo</div></div>
+        <div class="scenario-prob bear">20%</div>
+      </div>
+      <div class="prob-track"><div class="prob-fill bear" style="width:20%"></div></div>
+      <div class="scenario-body">
+        <div class="scenario-section-label">Gatilhos</div>
+        <ul class="trigger-list">
+          <li>Novo ataque a ativos energéticos.</li>
+          <li>US10Y rompe 4,5%.</li>
+          <li>USD/BRL volta a abrir.</li>
+        </ul>
+        <div class="scenario-section-label">Impactos de Mercado</div>
+        <div class="impact-grid">
+          <div class="impact-item"><span class="impact-key">Juros</span><span class="impact-val">abrem</span></div>
+          <div class="impact-item"><span class="impact-key">Inflação</span><span class="impact-val">reacelera</span></div>
+          <div class="impact-item"><span class="impact-key">Bolsa BR</span><span class="impact-val">domésticas sofrem</span></div>
+          <div class="impact-item"><span class="impact-key">BRL/USD</span><span class="impact-val">&gt; 5,40</span></div>
+          <div class="impact-item"><span class="impact-key">IVVB11</span><span class="impact-val">hedge relativo</span></div>
+          <div class="impact-item"><span class="impact-key">GOLD11</span><span class="impact-val">volta a subir</span></div>
+          <div class="impact-item"><span class="impact-key">CDI</span><span class="impact-val">protetor</span></div>
+          <div class="impact-item"><span class="impact-key">PETR4</span><span class="impact-val">volta a ganhar relevância</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="setores">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Classificação Setorial da B3</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Setor</th>
+          <th>Subsetor</th>
+          <th>Classificação</th>
+          <th>Convicção</th>
+          <th>Drivers Positivos</th>
+          <th>Drivers Negativos</th>
+          <th>Variação Relativa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Tecnologia / Software</strong></td><td class='td-mono td-neu'>Serviços de TI e ERP</td><td><span class='pill pill-vf'>⬆ Muito Favorecido</span></td><td><span class='pill pill-alta'>Alta</span></td><td style='font-size:11px'>Receita recorrente, baixa sensibilidade a petróleo, qualidade de lucro.</td><td style='font-size:11px'>Valuation premium se o mercado euforizar cedo demais.</td><td style='font-size:11px; font-family:var(--ff-mono); color:var(--green2)'>Subiu no ranking</td></tr><tr><td><strong>Seguros</strong></td><td class='td-mono td-neu'>Seguros e capitalização</td><td><span class='pill pill-f'>⬆ Favorecido</span></td><td><span class='pill pill-alta'>Alta</span></td><td style='font-size:11px'>Resultado financeiro ainda forte, baixa ciclicalidade.</td><td style='font-size:11px'>Float perde fôlego se Selic cair rápido demais.</td><td style='font-size:11px; font-family:var(--ff-mono); color:var(--green2)'>Subiu</td></tr><tr><td><strong>Bancos / Holdings Financeiras</strong></td><td class='td-mono td-neu'>Bancos, holdings</td><td><span class='pill pill-f'>⬆ Favorecido</span></td><td><span class='pill pill-alta'>Alta</span></td><td style='font-size:11px'>Carrego, valuation mais razoável, beta controlado.</td><td style='font-size:11px'>Menor torque que small caps em bull case pleno.</td><td style='font-size:11px; font-family:var(--ff-mono); color:var(--green2)'>Subiu</td></tr><tr><td><strong>Construção Popular</strong></td><td class='td-mono td-neu'>Habitação econômica</td><td><span class='pill pill-f'>⬆ Favorecido</span></td><td><span class='pill pill-alta'>Alta</span></td><td style='font-size:11px'>Alta convexidade a fechamento de curva e funding mais resiliente.</td><td style='font-size:11px'>Insumos e ritmo de crédito.</td><td style='font-size:11px; font-family:var(--ff-mono); color:var(--green2)'>Subiu</td></tr><tr><td><strong>Petróleo &amp; Gás</strong></td><td class='td-mono td-neu'>Exploração e refino</td><td><span class='pill pill-f'>⬆ Favorecido</span></td><td><span class='pill pill-media'>Média</span></td><td style='font-size:11px'>Ainda protege em cenário base/bear.</td><td style='font-size:11px'>Convicção cai com Brent descomprimindo.</td><td style='font-size:11px; font-family:var(--ff-mono); color:var(--red2)'>Caiu levemente</td></tr><tr><td><strong>Papel &amp; Celulose</strong></td><td class='td-mono td-neu'>Celulose / papel</td><td><span class='pill pill-f'>— Neutro/Favorecido</span></td><td><span class='pill pill-media'>Média</span></td><td style='font-size:11px'>Proteção cambial parcial e qualidade de nomes líderes.</td><td style='font-size:11px'>Ciclo global ainda misto.</td><td style='font-size:11px; font-family:var(--ff-mono); color:var(--ink5)'>Estável</td></tr><tr><td><strong>Mineração &amp; Siderurgia</strong></td><td class='td-mono td-neu'>Minério / aço</td><td><span class='pill pill-n'>— Neutro</span></td><td><span class='pill pill-media'>Média</span></td><td style='font-size:11px'>Valuation e caixa ajudam.</td><td style='font-size:11px'>Dependência de China e de minério sem catalisador forte.</td><td style='font-size:11px; font-family:var(--ff-mono); color:var(--ink5)'>Estável</td></tr><tr><td><strong>Varejo Discricionário</strong></td><td class='td-mono td-neu'>Moda, joias, bens duráveis</td><td><span class='pill pill-p'>⬇ Prejudicado</span></td><td><span class='pill pill-baixa'>Baixa</span></td><td style='font-size:11px'>Se bull vier, pode reagir bem.</td><td style='font-size:11px'>Juros reais ainda altos e demanda incerta.</td><td style='font-size:11px; font-family:var(--ff-mono); color:var(--red2)'>Permanece fraco</td></tr><tr><td><strong>Utilities long duration</strong></td><td class='td-mono td-neu'>Energia / saneamento</td><td><span class='pill pill-p'>⬇ Prejudicado</span></td><td><span class='pill pill-baixa'>Baixa</span></td><td style='font-size:11px'>Há valor em alguns nomes.</td><td style='font-size:11px'>US10Y e curva local ainda travam re-rating.</td><td style='font-size:11px; font-family:var(--ff-mono); color:var(--red2)'>Caiu</td></tr><tr><td><strong>Small caps sem lucro</strong></td><td class='td-mono td-neu'>Diversos</td><td><span class='pill pill-vf'>⬇ Muito Prejudicado</span></td><td><span class='pill pill-alta'>Alta</span></td><td style='font-size:11px'>Só melhoram num bull muito claro.</td><td style='font-size:11px'>Risco, financiamento e volatilidade seguem altos.</td><td style='font-size:11px; font-family:var(--ff-mono); color:var(--red2)'>Permanece fraco</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note green mt-16">Mensagem central: o V7 gira o ranking em favor de qualidade doméstica e financeiros defensivos, sem abandonar a proteção residual em energia e dólar.</div>
+</section>
+
+<section class="section" id="top20">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Top 20 Ações Brasileiras</h2>
+    <div class="section-rule"></div>
+  </div>
+  <p class="section-desc">Ranking quantitativo-disciplinado V7. Scores combinam macro, fundamentos, valuation, risco e aderência à transição do regime.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th><th>Ticker</th><th>Empresa</th><th>Setor</th>
+          <th>Macro</th><th>Fund.</th><th>Valuation</th><th>Risco</th><th>Transition</th><th>Final</th><th>Tese</th><th>Riscos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class='td-mono' style='text-align:center;color:var(--ink5)'>1</td><td class='td-ticker'>TOTS3</td><td>TOTVS</td><td style='font-size:10.8px;color:var(--ink4)'>Tecnologia / Software</td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:87%; background:var(--gold)"></div></div><span class="score-val">8.7</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:91%; background:var(--green2)"></div></div><span class="score-val">9.1</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:74%; background:var(--blue2)"></div></div><span class="score-val">7.4</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:87%; background:var(--amber)"></div></div><span class="score-val">8.7</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:90%; background:var(--ink4)"></div></div><span class="score-val">9.0</span></div></td><td><span style='font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--green2)'>8.55</span></td><td style='font-size:11px;color:var(--ink4);max-width:240px'>Quality compounder, receita recorrente e opcionalidade estratégica pós-Linx.</td><td style='font-size:10.6px'><span style="display:block;color:var(--red2);padding:1px 0">▸ Valuation premium</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Execução de integração</span></td></tr><tr><td class='td-mono' style='text-align:center;color:var(--ink5)'>2</td><td class='td-ticker'>CURY3</td><td>Cury</td><td style='font-size:10.8px;color:var(--ink4)'>Construção Popular</td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:89%; background:var(--gold)"></div></div><span class="score-val">8.9</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:88%; background:var(--green2)"></div></div><span class="score-val">8.8</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:82%; background:var(--blue2)"></div></div><span class="score-val">8.2</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:80%; background:var(--amber)"></div></div><span class="score-val">8.0</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:88%; background:var(--ink4)"></div></div><span class="score-val">8.8</span></div></td><td><span style='font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--green2)'>8.52</span></td><td style='font-size:11px;color:var(--ink4);max-width:240px'>Alta convexidade a fechamento parcial de curva com funding mais resiliente.</td><td style='font-size:10.6px'><span style="display:block;color:var(--red2);padding:1px 0">▸ Insumos</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Ritmo de crédito habitacional</span></td></tr><tr><td class='td-mono' style='text-align:center;color:var(--ink5)'>3</td><td class='td-ticker'>ITSA4</td><td>Itaúsa</td><td style='font-size:10.8px;color:var(--ink4)'>Holding Financeira</td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:82%; background:var(--gold)"></div></div><span class="score-val">8.2</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:85%; background:var(--green2)"></div></div><span class="score-val">8.5</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:88%; background:var(--blue2)"></div></div><span class="score-val">8.8</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:88%; background:var(--amber)"></div></div><span class="score-val">8.8</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:83%; background:var(--ink4)"></div></div><span class="score-val">8.3</span></div></td><td><span style='font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--green2)'>8.46</span></td><td style='font-size:11px;color:var(--ink4);max-width:240px'>Carrego forte, desconto patrimonial e beta controlado.</td><td style='font-size:10.6px'><span style="display:block;color:var(--red2);padding:1px 0">▸ Menor torque em bull case pleno</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Dependência de Itaú</span></td></tr><tr><td class='td-mono' style='text-align:center;color:var(--ink5)'>4</td><td class='td-ticker'>PSSA3</td><td>Porto Seguro</td><td style='font-size:10.8px;color:var(--ink4)'>Seguros</td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:84%; background:var(--gold)"></div></div><span class="score-val">8.4</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:87%; background:var(--green2)"></div></div><span class="score-val">8.7</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:80%; background:var(--blue2)"></div></div><span class="score-val">8.0</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:89%; background:var(--amber)"></div></div><span class="score-val">8.9</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:81%; background:var(--ink4)"></div></div><span class="score-val">8.1</span></div></td><td><span style='font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--green2)'>8.42</span></td><td style='font-size:11px;color:var(--ink4);max-width:240px'>Lucro defensivo, float ainda favorável e menor beta que varejo/cíclicas.</td><td style='font-size:10.6px'><span style="display:block;color:var(--red2);padding:1px 0">▸ Concorrência em preços</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Normalização do resultado financeiro</span></td></tr><tr><td class='td-mono' style='text-align:center;color:var(--ink5)'>5</td><td class='td-ticker'>PETR4</td><td>Petrobras PN</td><td style='font-size:10.8px;color:var(--ink4)'>Petróleo &amp; Gás</td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:86%; background:var(--gold)"></div></div><span class="score-val">8.6</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:84%; background:var(--green2)"></div></div><span class="score-val">8.4</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:86%; background:var(--blue2)"></div></div><span class="score-val">8.6</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:66%; background:var(--amber)"></div></div><span class="score-val">6.6</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:68%; background:var(--ink4)"></div></div><span class="score-val">6.8</span></div></td><td><span style='font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--gold)'>8.01</span></td><td style='font-size:11px;color:var(--ink4);max-width:240px'>Segue como hedge de energia, mas com menor urgência tática após recuo do Brent.</td><td style='font-size:10.6px'><span style="display:block;color:var(--red2);padding:1px 0">▸ Intervenção</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Reversão forte do petróleo</span></td></tr><tr><td class='td-mono' style='text-align:center;color:var(--ink5)'>6</td><td class='td-ticker'>BBAS3</td><td>Banco do Brasil</td><td style='font-size:10.8px;color:var(--ink4)'>Bancos</td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:79%; background:var(--gold)"></div></div><span class="score-val">7.9</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:85%; background:var(--green2)"></div></div><span class="score-val">8.5</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:90%; background:var(--blue2)"></div></div><span class="score-val">9.0</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:70%; background:var(--amber)"></div></div><span class="score-val">7.0</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:78%; background:var(--ink4)"></div></div><span class="score-val">7.8</span></div></td><td><span style='font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--gold)'>8.02</span></td><td style='font-size:11px;color:var(--ink4);max-width:240px'>Valuation descontado e carrego alto num ambiente ainda neutro.</td><td style='font-size:10.6px'><span style="display:block;color:var(--red2);padding:1px 0">▸ Risco político</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Crédito agro</span></td></tr><tr><td class='td-mono' style='text-align:center;color:var(--ink5)'>7</td><td class='td-ticker'>B3SA3</td><td>B3</td><td style='font-size:10.8px;color:var(--ink4)'>Infra de Mercado</td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:78%; background:var(--gold)"></div></div><span class="score-val">7.8</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:84%; background:var(--green2)"></div></div><span class="score-val">8.4</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:80%; background:var(--blue2)"></div></div><span class="score-val">8.0</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:80%; background:var(--amber)"></div></div><span class="score-val">8.0</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:83%; background:var(--ink4)"></div></div><span class="score-val">8.3</span></div></td><td><span style='font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--gold)'>8.04</span></td><td style='font-size:11px;color:var(--ink4);max-width:240px'>Alavanca operacional para retomada de risco sem precisar ir para small caps ruins.</td><td style='font-size:10.6px'><span style="display:block;color:var(--red2);padding:1px 0">▸ Volume ainda fraco</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Regulação</span></td></tr><tr><td class='td-mono' style='text-align:center;color:var(--ink5)'>8</td><td class='td-ticker'>VULC3</td><td>Vulcabras</td><td style='font-size:10.8px;color:var(--ink4)'>Consumo / Vestuário</td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:76%; background:var(--gold)"></div></div><span class="score-val">7.6</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:86%; background:var(--green2)"></div></div><span class="score-val">8.6</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:83%; background:var(--blue2)"></div></div><span class="score-val">8.3</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:78%; background:var(--amber)"></div></div><span class="score-val">7.8</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:82%; background:var(--ink4)"></div></div><span class="score-val">8.2</span></div></td><td><span style='font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--gold)'>8.01</span></td><td style='font-size:11px;color:var(--ink4);max-width:240px'>Execução sólida e balanço bom, mas ainda atrás de quality puro no regime atual.</td><td style='font-size:10.6px'><span style="display:block;color:var(--red2);padding:1px 0">▸ Consumo</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Câmbio em insumos</span></td></tr><tr><td class='td-mono' style='text-align:center;color:var(--ink5)'>9</td><td class='td-ticker'>SUZB3</td><td>Suzano</td><td style='font-size:10.8px;color:var(--ink4)'>Papel &amp; Celulose</td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:79%; background:var(--gold)"></div></div><span class="score-val">7.9</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:82%; background:var(--green2)"></div></div><span class="score-val">8.2</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:79%; background:var(--blue2)"></div></div><span class="score-val">7.9</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:79%; background:var(--amber)"></div></div><span class="score-val">7.9</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:74%; background:var(--ink4)"></div></div><span class="score-val">7.4</span></div></td><td><span style='font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--gold)'>7.88</span></td><td style='font-size:11px;color:var(--ink4);max-width:240px'>Exposição dolarizada e qualidade operacional num cenário ainda híbrido.</td><td style='font-size:10.6px'><span style="display:block;color:var(--red2);padding:1px 0">▸ Ciclo da celulose</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Alavancagem</span></td></tr><tr><td class='td-mono' style='text-align:center;color:var(--ink5)'>10</td><td class='td-ticker'>KLBN11</td><td>Klabin</td><td style='font-size:10.8px;color:var(--ink4)'>Papel &amp; Celulose</td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:77%; background:var(--gold)"></div></div><span class="score-val">7.7</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:80%; background:var(--green2)"></div></div><span class="score-val">8.0</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:78%; background:var(--blue2)"></div></div><span class="score-val">7.8</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:78%; background:var(--amber)"></div></div><span class="score-val">7.8</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:73%; background:var(--ink4)"></div></div><span class="score-val">7.3</span></div></td><td><span style='font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--gold)'>7.75</span></td><td style='font-size:11px;color:var(--ink4);max-width:240px'>Diversificação de produtos e proteção parcial via dólar.</td><td style='font-size:10.6px'><span style="display:block;color:var(--red2);padding:1px 0">▸ Preço internacional</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Capex</span></td></tr><tr><td class='td-mono' style='text-align:center;color:var(--ink5)'>11</td><td class='td-ticker'>PRIO3</td><td>Prio</td><td style='font-size:10.8px;color:var(--ink4)'>Petróleo &amp; Gás</td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:80%; background:var(--gold)"></div></div><span class="score-val">8.0</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:83%; background:var(--green2)"></div></div><span class="score-val">8.3</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:76%; background:var(--blue2)"></div></div><span class="score-val">7.6</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:67%; background:var(--amber)"></div></div><span class="score-val">6.7</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:69%; background:var(--ink4)"></div></div><span class="score-val">6.9</span></div></td><td><span style='font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--gold)'>7.71</span></td><td style='font-size:11px;color:var(--ink4);max-width:240px'>Boa alocação de capital, mas hedge via petróleo já não precisa dominar.</td><td style='font-size:10.6px'><span style="display:block;color:var(--red2);padding:1px 0">▸ Petróleo</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Execução operacional</span></td></tr><tr><td class='td-mono' style='text-align:center;color:var(--ink5)'>12</td><td class='td-ticker'>VALE3</td><td>Vale</td><td style='font-size:10.8px;color:var(--ink4)'>Mineração</td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:72%; background:var(--gold)"></div></div><span class="score-val">7.2</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:83%; background:var(--green2)"></div></div><span class="score-val">8.3</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:84%; background:var(--blue2)"></div></div><span class="score-val">8.4</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:72%; background:var(--amber)"></div></div><span class="score-val">7.2</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:71%; background:var(--ink4)"></div></div><span class="score-val">7.1</span></div></td><td><span style='font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--gold)'>7.60</span></td><td style='font-size:11px;color:var(--ink4);max-width:240px'>Barata, porém ainda dependente de China e minério sem catalisador tão claro.</td><td style='font-size:10.6px'><span style="display:block;color:var(--red2);padding:1px 0">▸ China</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Minério</span></td></tr><tr><td class='td-mono' style='text-align:center;color:var(--ink5)'>13</td><td class='td-ticker'>WEGE3</td><td>WEG</td><td style='font-size:10.8px;color:var(--ink4)'>Bens de Capital</td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:73%; background:var(--gold)"></div></div><span class="score-val">7.3</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:92%; background:var(--green2)"></div></div><span class="score-val">9.2</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:64%; background:var(--blue2)"></div></div><span class="score-val">6.4</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:84%; background:var(--amber)"></div></div><span class="score-val">8.4</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:76%; background:var(--ink4)"></div></div><span class="score-val">7.6</span></div></td><td><span style='font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--gold)'>7.74</span></td><td style='font-size:11px;color:var(--ink4);max-width:240px'>Qualidade excepcional, mas ainda cara para o regime atual.</td><td style='font-size:10.6px'><span style="display:block;color:var(--red2);padding:1px 0">▸ Múltiplos</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Menor assimetria de curto prazo</span></td></tr><tr><td class='td-mono' style='text-align:center;color:var(--ink5)'>14</td><td class='td-ticker'>ELET3</td><td>Eletrobras</td><td style='font-size:10.8px;color:var(--ink4)'>Utilities</td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:67%; background:var(--gold)"></div></div><span class="score-val">6.7</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:79%; background:var(--green2)"></div></div><span class="score-val">7.9</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:82%; background:var(--blue2)"></div></div><span class="score-val">8.2</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:70%; background:var(--amber)"></div></div><span class="score-val">7.0</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:68%; background:var(--ink4)"></div></div><span class="score-val">6.8</span></div></td><td><span style='font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--ink4)'>7.22</span></td><td style='font-size:11px;color:var(--ink4);max-width:240px'>Valor existe, mas duration e sensibilidade a juros ainda pesam.</td><td style='font-size:10.6px'><span style="display:block;color:var(--red2);padding:1px 0">▸ Juros longos</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Ruído regulatório</span></td></tr><tr><td class='td-mono' style='text-align:center;color:var(--ink5)'>15</td><td class='td-ticker'>EQTL3</td><td>Equatorial</td><td style='font-size:10.8px;color:var(--ink4)'>Utilities</td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:66%; background:var(--gold)"></div></div><span class="score-val">6.6</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:82%; background:var(--green2)"></div></div><span class="score-val">8.2</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:78%; background:var(--blue2)"></div></div><span class="score-val">7.8</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:74%; background:var(--amber)"></div></div><span class="score-val">7.4</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:67%; background:var(--ink4)"></div></div><span class="score-val">6.7</span></div></td><td><span style='font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--ink4)'>7.19</span></td><td style='font-size:11px;color:var(--ink4);max-width:240px'>Operadora de qualidade, porém menos aderente que bancos/seguros agora.</td><td style='font-size:10.6px'><span style="display:block;color:var(--red2);padding:1px 0">▸ Juros</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Execução de ativos novos</span></td></tr><tr><td class='td-mono' style='text-align:center;color:var(--ink5)'>16</td><td class='td-ticker'>AURE3</td><td>Auren</td><td style='font-size:10.8px;color:var(--ink4)'>Energia</td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:68%; background:var(--gold)"></div></div><span class="score-val">6.8</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:75%; background:var(--green2)"></div></div><span class="score-val">7.5</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:79%; background:var(--blue2)"></div></div><span class="score-val">7.9</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:72%; background:var(--amber)"></div></div><span class="score-val">7.2</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:66%; background:var(--ink4)"></div></div><span class="score-val">6.6</span></div></td><td><span style='font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--ink4)'>7.11</span></td><td style='font-size:11px;color:var(--ink4);max-width:240px'>Boa opcionalidade, mas ainda não é o melhor uso marginal de risco.</td><td style='font-size:10.6px'><span style="display:block;color:var(--red2);padding:1px 0">▸ Energia livre</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Alocação de capital</span></td></tr><tr><td class='td-mono' style='text-align:center;color:var(--ink5)'>17</td><td class='td-ticker'>GMAT3</td><td>Grupo Mateus</td><td style='font-size:10.8px;color:var(--ink4)'>Varejo Alimentar</td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:70%; background:var(--gold)"></div></div><span class="score-val">7.0</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:80%; background:var(--green2)"></div></div><span class="score-val">8.0</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:72%; background:var(--blue2)"></div></div><span class="score-val">7.2</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:71%; background:var(--amber)"></div></div><span class="score-val">7.1</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:68%; background:var(--ink4)"></div></div><span class="score-val">6.8</span></div></td><td><span style='font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--ink4)'>7.23</span></td><td style='font-size:11px;color:var(--ink4);max-width:240px'>Continua bom nome defensivo, porém perdeu espaço para PSSA3.</td><td style='font-size:10.6px'><span style="display:block;color:var(--red2);padding:1px 0">▸ Logística</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Competição</span></td></tr><tr><td class='td-mono' style='text-align:center;color:var(--ink5)'>18</td><td class='td-ticker'>TIMS3</td><td>TIM</td><td style='font-size:10.8px;color:var(--ink4)'>Telecom</td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:69%; background:var(--gold)"></div></div><span class="score-val">6.9</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:78%; background:var(--green2)"></div></div><span class="score-val">7.8</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:74%; background:var(--blue2)"></div></div><span class="score-val">7.4</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:78%; background:var(--amber)"></div></div><span class="score-val">7.8</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:67%; background:var(--ink4)"></div></div><span class="score-val">6.7</span></div></td><td><span style='font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--ink4)'>7.23</span></td><td style='font-size:11px;color:var(--ink4);max-width:240px'>Defensiva e geradora de caixa, mas sem o mesmo upside de financeiros.</td><td style='font-size:10.6px'><span style="display:block;color:var(--red2);padding:1px 0">▸ Concorrência</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Regulação</span></td></tr><tr><td class='td-mono' style='text-align:center;color:var(--ink5)'>19</td><td class='td-ticker'>CPLE6</td><td>Copel</td><td style='font-size:10.8px;color:var(--ink4)'>Utilities</td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:65%; background:var(--gold)"></div></div><span class="score-val">6.5</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:76%; background:var(--green2)"></div></div><span class="score-val">7.6</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:80%; background:var(--blue2)"></div></div><span class="score-val">8.0</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:71%; background:var(--amber)"></div></div><span class="score-val">7.1</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:65%; background:var(--ink4)"></div></div><span class="score-val">6.5</span></div></td><td><span style='font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--ink4)'>7.04</span></td><td style='font-size:11px;color:var(--ink4);max-width:240px'>Desconto ainda existe, mas o vetor macro não é o mais favorável.</td><td style='font-size:10.6px'><span style="display:block;color:var(--red2);padding:1px 0">▸ Juros longos</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Execução</span></td></tr><tr><td class='td-mono' style='text-align:center;color:var(--ink5)'>20</td><td class='td-ticker'>RAIL3</td><td>Rumo</td><td style='font-size:10.8px;color:var(--ink4)'>Logística</td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:66%; background:var(--gold)"></div></div><span class="score-val">6.6</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:77%; background:var(--green2)"></div></div><span class="score-val">7.7</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:72%; background:var(--blue2)"></div></div><span class="score-val">7.2</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:70%; background:var(--amber)"></div></div><span class="score-val">7.0</span></div></td><td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:68%; background:var(--ink4)"></div></div><span class="score-val">6.8</span></div></td><td><span style='font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--ink4)'>7.00</span></td><td style='font-size:11px;color:var(--ink4);max-width:240px'>Melhora se o bull case ganhar corpo; por ora fica em segundo escalão.</td><td style='font-size:10.6px'><span style="display:block;color:var(--red2);padding:1px 0">▸ Capex</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Combustível</span><span style="display:block;color:var(--red2);padding:1px 0">▸ Volume agrícola</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section" id="top5">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Top 5 para o Regime Atual</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="top5-grid">
+    
+        <div class="top5-card">
+          <div class="top5-rank">TOP 1</div>
+          <div class="top5-ticker">TOTS3</div>
+          <div class="top5-company">TOTVS</div>
+          <div class="top5-weight-wrap">
+            <div class="top5-weight">24%</div>
+            <div class="top5-weight-label">peso no bucket</div>
+          </div>
+          <div class="top5-metrics">
+            <div class="top5-metric"><span class="top5-m-name">Decisão</span><span class="top5-m-val">INCREASE</span></div>
+            <div class="top5-metric"><span class="top5-m-name">Peso ant.</span><span class="top5-m-val">22%</span></div>
+            <div class="top5-metric"><span class="top5-m-name">Vetor</span><span class="top5-m-val">Receita recorrente</span></div>
+            <div class="top5-metric"><span class="top5-m-name">Transition</span><span class="top5-m-val">9.0</span></div>
+          </div>
+          <div class="top5-thesis">quality compounder, baixa sensibilidade ao petróleo e boa opcionalidade pós-Linx Risco principal: Valuation premium.</div>
+        </div>
+        
+        <div class="top5-card">
+          <div class="top5-rank">TOP 2</div>
+          <div class="top5-ticker">CURY3</div>
+          <div class="top5-company">Cury</div>
+          <div class="top5-weight-wrap">
+            <div class="top5-weight">22%</div>
+            <div class="top5-weight-label">peso no bucket</div>
+          </div>
+          <div class="top5-metrics">
+            <div class="top5-metric"><span class="top5-m-name">Decisão</span><span class="top5-m-val">INCREASE</span></div>
+            <div class="top5-metric"><span class="top5-m-name">Peso ant.</span><span class="top5-m-val">20%</span></div>
+            <div class="top5-metric"><span class="top5-m-name">Vetor</span><span class="top5-m-val">Torque doméstico</span></div>
+            <div class="top5-metric"><span class="top5-m-name">Transition</span><span class="top5-m-val">8.8</span></div>
+          </div>
+          <div class="top5-thesis">exposição a baixa renda com funding menos sensível que alta renda Risco principal: Insumos / crédito.</div>
+        </div>
+        
+        <div class="top5-card">
+          <div class="top5-rank">TOP 3</div>
+          <div class="top5-ticker">PETR4</div>
+          <div class="top5-company">Petrobras PN</div>
+          <div class="top5-weight-wrap">
+            <div class="top5-weight">18%</div>
+            <div class="top5-weight-label">peso no bucket</div>
+          </div>
+          <div class="top5-metrics">
+            <div class="top5-metric"><span class="top5-m-name">Decisão</span><span class="top5-m-val">REDUCE</span></div>
+            <div class="top5-metric"><span class="top5-m-name">Peso ant.</span><span class="top5-m-val">28%</span></div>
+            <div class="top5-metric"><span class="top5-m-name">Vetor</span><span class="top5-m-val">Hedge energia</span></div>
+            <div class="top5-metric"><span class="top5-m-name">Transition</span><span class="top5-m-val">6.8</span></div>
+          </div>
+          <div class="top5-thesis">continua hedge de energia, mas convicção cai após recuo do Brent Risco principal: Intervenção / Brent.</div>
+        </div>
+        
+        <div class="top5-card">
+          <div class="top5-rank">TOP 4</div>
+          <div class="top5-ticker">ITSA4</div>
+          <div class="top5-company">Itaúsa</div>
+          <div class="top5-weight-wrap">
+            <div class="top5-weight">18%</div>
+            <div class="top5-weight-label">peso no bucket</div>
+          </div>
+          <div class="top5-metrics">
+            <div class="top5-metric"><span class="top5-m-name">Decisão</span><span class="top5-m-val">INCREASE</span></div>
+            <div class="top5-metric"><span class="top5-m-name">Peso ant.</span><span class="top5-m-val">12%</span></div>
+            <div class="top5-metric"><span class="top5-m-name">Vetor</span><span class="top5-m-val">Carrego + desconto</span></div>
+            <div class="top5-metric"><span class="top5-m-name">Transition</span><span class="top5-m-val">8.3</span></div>
+          </div>
+          <div class="top5-thesis">carry e desconto seguem úteis no neutro Risco principal: Menor torque.</div>
+        </div>
+        
+        <div class="top5-card">
+          <div class="top5-rank">TOP 5</div>
+          <div class="top5-ticker">PSSA3</div>
+          <div class="top5-company">Porto Seguro</div>
+          <div class="top5-weight-wrap">
+            <div class="top5-weight">18%</div>
+            <div class="top5-weight-label">peso no bucket</div>
+          </div>
+          <div class="top5-metrics">
+            <div class="top5-metric"><span class="top5-m-name">Decisão</span><span class="top5-m-val">NEW</span></div>
+            <div class="top5-metric"><span class="top5-m-name">Peso ant.</span><span class="top5-m-val">0%</span></div>
+            <div class="top5-metric"><span class="top5-m-name">Vetor</span><span class="top5-m-val">Lucro defensivo</span></div>
+            <div class="top5-metric"><span class="top5-m-name">Transition</span><span class="top5-m-val">8.1</span></div>
+          </div>
+          <div class="top5-thesis">substitui GMAT3 por defensividade de lucro e menor beta Risco principal: Float.</div>
+        </div>
+        
+  </div>
+
+  <div class="divider">
+    <div class="divider-line"></div><div class="divider-label">Mudança vs relatório anterior</div><div class="divider-line"></div>
+  </div>
+
+  <div class="two-col">
+    <div class="card c-green">
+      <div class="card-title">O que permaneceu</div>
+      <div class="card-body">
+        <p><strong>TOTS3</strong>, <strong>CURY3</strong>, <strong>PETR4</strong> e <strong>ITSA4</strong> continuam no núcleo. O V7 não recomeça do zero: ele herda o acerto do regime defensivo anterior e o refina.</p>
+        <p>O principal ajuste foi reduzir a dominância do hedge de petróleo e elevar o peso de qualidade doméstica e financeiros defensivos.</p>
+      </div>
+    </div>
+    <div class="card c-amber">
+      <div class="card-title">O que mudou</div>
+      <div class="card-body">
+        <p><strong>Sai GMAT3</strong> do Top 5 e vai para watchlist.</p>
+        <p><strong>Entra PSSA3</strong>, porque o regime atual favorece lucro defensivo e beta menor, sem abrir mão de resultado robusto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="portfolio">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <h2 class="section-title">Portfólio Multiativos</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="alloc-grid">
+    <div class="donut-card">
+      <div class="donut-title">Alocação-Alvo</div>
+      <div class="donut-svg-wrap">
+        <svg width="180" height="180" viewBox="0 0 180 180" aria-hidden="true">
+          <circle cx="90" cy="90" r="72" fill="none" stroke="var(--rule2)" stroke-width="18"></circle>
+          <circle cx="90" cy="90" r="72" fill="none" stroke="#b8922a" stroke-width="18" stroke-dasharray="158.34 294.05" stroke-dashoffset="-0.00" transform="rotate(-90 90 90)" stroke-linecap="butt"></circle><circle cx="90" cy="90" r="72" fill="none" stroke="#2d6a4f" stroke-width="18" stroke-dasharray="113.10 339.29" stroke-dashoffset="-158.34" transform="rotate(-90 90 90)" stroke-linecap="butt"></circle><circle cx="90" cy="90" r="72" fill="none" stroke="#1d3557" stroke-width="18" stroke-dasharray="45.24 407.15" stroke-dashoffset="-271.43" transform="rotate(-90 90 90)" stroke-linecap="butt"></circle><circle cx="90" cy="90" r="72" fill="none" stroke="#c77b2a" stroke-width="18" stroke-dasharray="67.86 384.53" stroke-dashoffset="-316.67" transform="rotate(-90 90 90)" stroke-linecap="butt"></circle><circle cx="90" cy="90" r="72" fill="none" stroke="#756e65" stroke-width="18" stroke-dasharray="45.24 407.15" stroke-dashoffset="-384.53" transform="rotate(-90 90 90)" stroke-linecap="butt"></circle><circle cx="90" cy="90" r="72" fill="none" stroke="#d4a843" stroke-width="18" stroke-dasharray="22.62 429.77" stroke-dashoffset="-429.77" transform="rotate(-90 90 90)" stroke-linecap="butt"></circle>
+        </svg>
+        <div class="donut-label-center">
+          <div class="donut-center-num">100%</div>
+          <div class="donut-center-txt">capital alocado</div>
+        </div>
+      </div>
+      <div class="legend-list"><div class="legend-item"><span class="legend-dot" style="background:#b8922a"></span><span class="legend-name">Ações BR · Top 5 Brasil</span><span class="legend-pct">35%</span></div><div class="legend-item"><span class="legend-dot" style="background:#2d6a4f"></span><span class="legend-name">Inflação média · Tesouro IPCA+ 2028-2035</span><span class="legend-pct">25%</span></div><div class="legend-item"><span class="legend-dot" style="background:#1d3557"></span><span class="legend-name">Inflação longa · Tesouro IPCA+ 2040+</span><span class="legend-pct">10%</span></div><div class="legend-item"><span class="legend-dot" style="background:#c77b2a"></span><span class="legend-name">Caixa / pós · CDI / Tesouro Selic</span><span class="legend-pct">15%</span></div><div class="legend-item"><span class="legend-dot" style="background:#756e65"></span><span class="legend-name">Internacional · IVVB11</span><span class="legend-pct">10%</span></div><div class="legend-item"><span class="legend-dot" style="background:#d4a843"></span><span class="legend-name">Proteção · GOLD11</span><span class="legend-pct">5%</span></div></div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Classe</th><th>Veículo</th><th>Peso Alvo</th><th>Peso Anterior</th><th>Decisão</th><th>Racional</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Ações BR</strong></td><td>Top 5 Brasil</td><td class='td-mono'>35%</td><td class='td-mono'>30%</td><td><span class='pill pill-new'>INCREASE</span></td><td style='font-size:11px'>macro score saiu do risk-off agudo para neutro construtivo</td></tr><tr><td><strong>Inflação média</strong></td><td>Tesouro IPCA+ 2028-2035</td><td class='td-mono'>25%</td><td class='td-mono'>20%</td><td><span class='pill pill-new'>INCREASE</span></td><td style='font-size:11px'>taxa real ainda alta com menor assimetria que caixa puro</td></tr><tr><td><strong>Inflação longa</strong></td><td>Tesouro IPCA+ 2040+</td><td class='td-mono'>10%</td><td class='td-mono'>10%</td><td><span class='pill pill-keep'>KEEP</span></td><td style='font-size:11px'>convexidade para bull case</td></tr><tr><td><strong>Caixa / pós</strong></td><td>CDI / Tesouro Selic</td><td class='td-mono'>15%</td><td class='td-mono'>30%</td><td><span class='pill pill-p'>REDUCE</span></td><td style='font-size:11px'>carry continua forte, mas parte do caixa migra para risco seletivo</td></tr><tr><td><strong>Internacional</strong></td><td>IVVB11</td><td class='td-mono'>10%</td><td class='td-mono'>10%</td><td><span class='pill pill-keep'>KEEP</span></td><td style='font-size:11px'>diversificação e dólar ainda abaixo de 100</td></tr><tr><td><strong>Proteção</strong></td><td>GOLD11</td><td class='td-mono'>5%</td><td class='td-mono'>10%</td><td><span class='pill pill-p'>REDUCE</span></td><td style='font-size:11px'>alívio geopolítico reduziu urgência do hedge</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="forward-card mt-16">
+    <div class="forward-title">Leitura executiva da alocação</div>
+    <div class="forward-body">
+      A carteira deixa de ser ultra-defensiva e passa a ser <strong>defensiva com viés construtivo</strong>. O capital que sai de ouro e caixa não vai para beta cego: vai para <strong>quality doméstico</strong>, <strong>financeiros defensivos</strong> e <strong>IPCA+ médio</strong>. O hedge internacional é mantido porque o regime global continua imperfeito.
+    </div>
+  </div>
+</section>
+
+<section class="section" id="performance">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <h2 class="section-title">Performance e Diagnóstico</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="perf-wrap">
+    <div class="perf-card">
+      <div class="perf-card-title">Último histórico disponível</div>
+      
+<div class="perf-row"><span class="perf-row-name">Portfólio YTD (relatório anterior)</span><span class="perf-row-val td-pos">+8,5%</span></div>
+<div class="perf-row"><span class="perf-row-name">Ibovespa YTD (relatório anterior)</span><span class="perf-row-val td-pos">+10,3%</span></div>
+<div class="perf-row"><span class="perf-row-name">CDI YTD (relatório anterior)</span><span class="perf-row-val td-pos">+3,5%</span></div>
+<div class="perf-row"><span class="perf-row-name">IVVB11 / S&P YTD (relatório anterior)</span><span class="perf-row-val td-neg">−3,5%</span></div>
+<div class="perf-row"><span class="perf-row-name">vs Ibovespa</span><span class="perf-row-val td-neg">−1,8 p.p.</span></div>
+<div class="perf-row"><span class="perf-row-name">vs CDI</span><span class="perf-row-val td-pos">+5,0 p.p.</span></div>
+<div class="perf-row"><span class="perf-row-name">vs IVVB11</span><span class="perf-row-val td-pos">+12,0 p.p.</span></div>
+
+    </div>
+    <div class="perf-card">
+      <div class="perf-card-title">Attribution qualitativa V7</div>
+      
+<div class="prog-row"><span class="prog-name">Macro / regime</span><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:68%;background:var(--green2)"></div></div><span class="prog-val">68%</span></div>
+<div class="prog-row"><span class="prog-name">Setores</span><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:62%;background:var(--gold)"></div></div><span class="prog-val">62%</span></div>
+<div class="prog-row"><span class="prog-name">Stock picking</span><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:58%;background:var(--blue2)"></div></div><span class="prog-val">58%</span></div>
+<div class="prog-row"><span class="prog-name">Proteção</span><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:74%;background:var(--amber)"></div></div><span class="prog-val">74%</span></div>
+<div class="prog-row"><span class="prog-name">Consistência</span><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:45%;background:var(--ink4)"></div></div><span class="prog-val">45%</span></div>
+
+    </div>
+    <div class="perf-card">
+      <div class="perf-card-title">Diagnóstico de robustez</div>
+      
+<div class="perf-row"><span class="perf-row-name">Leitura do histórico</span><span class="perf-row-val">1 período</span></div>
+<div class="perf-row"><span class="perf-row-name">Volatilidade robusta</span><span class="perf-row-val">N/D</span></div>
+<div class="perf-row"><span class="perf-row-name">Drawdown robusto</span><span class="perf-row-val">N/D</span></div>
+<div class="perf-row"><span class="perf-row-name">Alpha robusto</span><span class="perf-row-val">N/D</span></div>
+<div class="perf-row"><span class="perf-row-name">Diagnóstico</span><span class="perf-row-val">amostra insuficiente</span></div>
+<div class="perf-row"><span class="perf-row-name">Leitura qualitativa</span><span class="perf-row-val">melhora do regime</span></div>
+
+    </div>
+  </div>
+
+  <div class="note red mt-16">Há apenas um relatório histórico anexado. Portanto, volatilidade, drawdown, Sharpe, Sortino e alpha robustos ainda não podem ser inferidos de forma estatisticamente séria. O V7 usa o histórico como referência de transição, não como evidência quantitativa suficiente.</div>
+</section>
+
+<section class="section" id="risco">
+  <div class="section-header">
+    <span class="section-num">08</span>
+    <h2 class="section-title">Camada de Risco</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card"><div class="risk-label">Risco Macro</div><div class="risk-level risk-med">Médio</div><div class="risk-detail">O choque principal perdeu força, mas a cauda geopolítica não desapareceu.</div></div>
+    <div class="risk-card"><div class="risk-label">Risco de Concentração</div><div class="risk-level risk-med">Médio</div><div class="risk-detail">Correlação com petróleo foi reduzida, porém ainda merece vigilância.</div></div>
+    <div class="risk-card"><div class="risk-label">Risco de Duration</div><div class="risk-level risk-med">Médio</div><div class="risk-detail">IPCA+ médio ficou mais atraente; duration longa segue contida.</div></div>
+    <div class="risk-card"><div class="risk-label">Risco Cambial</div><div class="risk-level risk-low">Baixo/Médio</div><div class="risk-detail">IVVB11 permanece como diversificação natural e hedge indireto.</div></div>
+  </div>
+
+  <div class="stress-grid mt-16">
+    <div class="stress-cell">
+      <div class="stress-name">Stress 1</div>
+      <div class="stress-impact risk-high">Brent &gt; 110</div>
+      <div class="stress-desc">Voltar a caixa, ouro e petróleo. Cortar duration e beta doméstico ruim.</div>
+    </div>
+    <div class="stress-cell">
+      <div class="stress-name">Stress 2</div>
+      <div class="stress-impact risk-high">US10Y &gt; 4,5%</div>
+      <div class="stress-desc">Reduzir IPCA+ longo e utilities long duration. Aumentar defensividade.</div>
+    </div>
+    <div class="stress-cell">
+      <div class="stress-name">Stress 3</div>
+      <div class="stress-impact risk-med">USD/BRL &gt; 5,40</div>
+      <div class="stress-desc">Reforçar proteção externa e reduzir o otimismo com domésticas cíclicas.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="transicao">
+  <div class="section-header">
+    <span class="section-num">09</span>
+    <h2 class="section-title">Transição de Regime · V7</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="two-col">
+    <div class="ts-card">
+      <div class="ts-big">0,58</div>
+      <div class="ts-label">Transition Score operacional</div>
+      <div class="ts-meter-bg"><div class="ts-meter-fill" style="width:58%"></div></div>
+      <div class="ts-scale"><span>risk-off</span><span>neutro</span><span>risk-on</span></div>
+      <div class="ts-interp">
+        O sistema identifica <strong>transição real</strong>, mas não completa. A leitura correta é: sair do extremo defensivo e migrar para um posicionamento neutro construtivo, ainda com filtros rígidos de qualidade.
+      </div>
+    </div>
+
+    <div class="signal-grid">
+      <div class="signal-item"><span class="signal-name">DXY</span><span class="signal-val sig-bull">Abaixo de 100 · favorável a emergentes</span></div>
+      <div class="signal-item"><span class="signal-name">US10Y</span><span class="signal-val sig-bear">4,39% · ainda restritivo</span></div>
+      <div class="signal-item"><span class="signal-name">Petróleo</span><span class="signal-val sig-neu">Descompressão parcial · risco ainda aberto</span></div>
+      <div class="signal-item"><span class="signal-name">BRL</span><span class="signal-val sig-bull">Apreciação tática em 23/mar</span></div>
+      <div class="signal-item"><span class="signal-name">Copom / Focus</span><span class="signal-val sig-neu">Ciclo gradual, sem euforia</span></div>
+      <div class="signal-item"><span class="signal-name">Leitura final</span><span class="signal-val sig-bull">Aumento seletivo de risco</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="rebalance">
+  <div class="section-header">
+    <span class="section-num">10</span>
+    <h2 class="section-title">Regras de Rebalanceamento</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="rebal-grid">
+    <div class="rebal-col">
+      <div class="rebal-type rebal-green">Leve</div>
+      <ul class="rebal-list">
+        <li>Brent abaixo de 95 com DXY abaixo de 100.</li>
+        <li>Queda adicional da Selic implícita.</li>
+        <li>Persistência do alívio em equities globais.</li>
+      </ul>
+    </div>
+    <div class="rebal-col">
+      <div class="rebal-type rebal-amber">Moderado</div>
+      <ul class="rebal-list">
+        <li>US10Y acima de 4,5%.</li>
+        <li>Brent acima de 105 por 3 sessões.</li>
+        <li>USD/BRL acima de 5,35.</li>
+      </ul>
+    </div>
+    <div class="rebal-col">
+      <div class="rebal-type rebal-red">Estrutural</div>
+      <ul class="rebal-list">
+        <li>Cessar-fogo verificável com queda duradoura do Brent.</li>
+        <li>Novo choque persistente de energia.</li>
+        <li>Mudança material da Selic 2026 no Focus.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="tracking">
+  <div class="section-header">
+    <span class="section-num">11</span>
+    <h2 class="section-title">Tracking Mensal Automático</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="track-grid">
+    <div class="track-col">
+      <div class="track-col-title">Macro</div>
+      <ul class="track-list">
+        <li><span class="track-dot dot-g"></span><span>Monitorar Brent, DXY e US10Y diariamente.</span></li>
+        <li><span class="track-dot dot-y"></span><span>Checar Focus e curva DI semanalmente.</span></li>
+        <li><span class="track-dot dot-b"></span><span>Validar se o real sustenta a melhora.</span></li>
+      </ul>
+    </div>
+    <div class="track-col">
+      <div class="track-col-title">Setores</div>
+      <ul class="track-list">
+        <li><span class="track-dot dot-g"></span><span>Confirmar força relativa de software, seguros e bancos.</span></li>
+        <li><span class="track-dot dot-y"></span><span>Ver se construção popular mantém liderança.</span></li>
+        <li><span class="track-dot dot-r"></span><span>Evitar retorno prematuro a beta ruim.</span></li>
+      </ul>
+    </div>
+    <div class="track-col">
+      <div class="track-col-title">Ações</div>
+      <ul class="track-list">
+        <li><span class="track-dot dot-g"></span><span>TOTS3 e CURY3 são os termômetros do giro pró-risco seletivo.</span></li>
+        <li><span class="track-dot dot-b"></span><span>PSSA3 mede a qualidade do posicionamento defensivo.</span></li>
+        <li><span class="track-dot dot-y"></span><span>PETR4 virou hedge tático, não mais dominante.</span></li>
+      </ul>
+    </div>
+    <div class="track-col">
+      <div class="track-col-title">Carteira</div>
+      <ul class="track-list">
+        <li><span class="track-dot dot-g"></span><span>Revisão mensal ordinária.</span></li>
+        <li><span class="track-dot dot-y"></span><span>Revisão imediata se trigger macro disparar.</span></li>
+        <li><span class="track-dot dot-r"></span><span>Bear case exige voltar ao defensivo sem hesitação.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="decisoes">
+  <div class="section-header">
+    <span class="section-num">12</span>
+    <h2 class="section-title">Decisões Operacionais do Mês</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Ativo / Bloco</th><th>Decisão</th><th>Racional</th><th>Gatilho de Revisão</th><th>Convicção</th></tr></thead>
+      <tbody>
+        <tr><td>TOTS3</td><td><span class='pill pill-new'>INCREASE</span></td><td>Adicionar qualidade estrutural com beta controlado.</td><td>Revisar se múltiplo esticar demais sem melhora de crescimento.</td><td>Alta</td></tr><tr><td>CURY3</td><td><span class='pill pill-new'>INCREASE</span></td><td>Mais torque ao fechamento parcial da curva doméstica.</td><td>Revisar se funding/imobiliário popular perder tração.</td><td>Alta</td></tr><tr><td>ITSA4</td><td><span class='pill pill-new'>INCREASE</span></td><td>Carrego, desconto e robustez em cenário neutro.</td><td>Revisar se bancos perderem momentum relativo.</td><td>Alta</td></tr><tr><td>PSSA3</td><td><span class='pill pill-new'>NEW</span></td><td>Entrada defensiva substituindo parte do hedge mais bruto.</td><td>Revisar se float encolher rápido ou prêmio geopolítico voltar.</td><td>Média/Alta</td></tr><tr><td>PETR4</td><td><span class='pill pill-p'>REDUCE</span></td><td>Hedge segue útil, mas peso ótimo caiu com descompressão do Brent.</td><td>Revisar se Brent voltar acima de 105/110.</td><td>Média</td></tr><tr><td>IPCA+ 2028-2035</td><td><span class='pill pill-new'>INCREASE</span></td><td>Taxas reais seguem altas com melhor assimetria que caixa puro.</td><td>Revisar se US10Y &gt; 4,5% e curva local abrir.</td><td>Alta</td></tr><tr><td>IPCA+ Longo</td><td><span class='pill pill-keep'>KEEP</span></td><td>Convexidade para bull case, sem exagerar o risco de duration.</td><td>Revisar se bear case energético reacelerar.</td><td>Média</td></tr><tr><td>CDI / Selic</td><td><span class='pill pill-p'>REDUCE</span></td><td>Parte do caixa migra para risco seletivo.</td><td>Revisar se DXY voltar &gt;100 e petróleo reacelerar.</td><td>Alta</td></tr><tr><td>IVVB11</td><td><span class='pill pill-keep'>KEEP</span></td><td>Diversificação global e hedge cambial implícito.</td><td>Revisar se dólar perder tração estrutural demais.</td><td>Média</td></tr><tr><td>GOLD11</td><td><span class='pill pill-p'>REDUCE</span></td><td>Proteção continua, mas urgência marginal diminuiu.</td><td>Revisar se conflito voltar a escalar.</td><td>Média</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section" id="backtest">
+  <div class="section-header">
+    <span class="section-num">13</span>
+    <h2 class="section-title">Backtest Conceitual</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="backtest-wrap">
+    <div class="bt-card">
+      <div class="bt-title">Como esta estratégia tende a funcionar</div>
+      <div class="bt-body">
+        <p>Em regimes de <strong>choque parcialmente reversível</strong>, a melhor combinação costuma ser: carry local, proteção residual e migração gradual para qualidade doméstica.</p>
+        <p>O sistema tende a performar pior quando compra domésticas cedo demais com a curva global ainda muito aberta, ou quando mantém hedge de petróleo pesado demais após a reversão do estresse.</p>
+      </div>
+    </div>
+    <div class="bt-card">
+      <div class="bt-title">Limitação estatística atual</div>
+      <div class="bt-body">
+        <p>Com apenas um relatório histórico anexado, não há base suficiente para calcular drawdown, turnover, hit rate, Sharpe e Sortino de forma minimamente robusta.</p>
+        <p>Metodologia sugerida: consolidar série mensal em JSON, rebalanceamento mensal, benchmarks Ibov / CDI / IVVB11 e attribution por macro, setor, ação e classe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="modelo">
+  <div class="section-header">
+    <span class="section-num">14</span>
+    <h2 class="section-title">Ajustes do Modelo</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="two-col">
+    <div class="weights-card">
+      <div class="card-eyebrow">Pesos efetivos V7</div>
+      <div class="weight-bar-row"><span class="weight-dim">Macro</span><div class="weight-bar-bg"><div class="weight-bar-fill" style="width:38%"></div></div><span class="weight-pct">38%</span></div>
+      <div class="weight-bar-row"><span class="weight-dim">Fundamental</span><div class="weight-bar-bg"><div class="weight-bar-fill" style="width:32%; background:var(--green2)"></div></div><span class="weight-pct">32%</span></div>
+      <div class="weight-bar-row"><span class="weight-dim">Valuation</span><div class="weight-bar-bg"><div class="weight-bar-fill" style="width:18%; background:var(--blue2)"></div></div><span class="weight-pct">18%</span></div>
+      <div class="weight-bar-row"><span class="weight-dim">Risco</span><div class="weight-bar-bg"><div class="weight-bar-fill" style="width:12%; background:var(--amber)"></div></div><span class="weight-pct">12%</span></div>
+    </div>
+
+    <div class="card c-blue">
+      <div class="card-title">Leitura do feedback loop</div>
+      <div class="card-body">
+        <p>O histórico curto ainda não permite aprendizado estatístico, mas já permite <strong>aprendizado direcional</strong>.</p>
+        <p>O sistema manteve o acerto defensivo da semana anterior, porém reduziu a dependência de petróleo/ouro e aumentou o peso de <strong>quality + financeiros defensivos</strong>.</p>
+        <p>Em outras palavras: menos hedge bruto, mais seleção fina.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="fontes">
+  <div class="section-header">
+    <span class="section-num">15</span>
+    <h2 class="section-title">Fontes de Referência</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="sources-wrap">
+    <span class='source-chip'>Reuters · petróleo, mercados e geopolítica</span><span class='source-chip'>Banco Central do Brasil · Copom / IBC-Br / Focus</span><span class='source-chip'>IBGE · IPCA e mercado de trabalho</span><span class='source-chip'>FRED · Treasury 10Y e DXY</span><span class='source-chip'>LSEG / Reuters · métricas corporativas</span>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div>
+    <div class="footer-brand">Relatório Macro & Portfólio · V7</div>
+    <div class="footer-meta">23/03/2026 · Padrão visual preservado a partir do relatório-base</div>
+  </div>
+  <div class="footer-disc">
+    Documento analítico para fins informacionais e de acompanhamento de estratégia. Este relatório reaproveita a mesma máscara editorial do arquivo-base enviado pelo usuário, com conteúdo V7 reestruturado e atualizado.
+  </div>
+</footer>
+
+</body>
+</html>
