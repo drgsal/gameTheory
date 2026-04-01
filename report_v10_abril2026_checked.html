@@ -1,0 +1,2388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Macro-Quantitativo | Abril 2026 | V10</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  :root {
+    --ivory: #F8F5EE;
+    --ivory-deep: #EDE8DC;
+    --graphite: #2A2A2A;
+    --graphite-mid: #4A4A4A;
+    --graphite-light: #7A7A7A;
+    --amber: #C8922A;
+    --amber-light: #E8B84A;
+    --sage: #5C7A5E;
+    --sage-light: #7A9E7C;
+    --crimson: #8B2020;
+    --steel-blue: #1F3A5C;
+    --steel-light: #2E5B8A;
+    --border: #D5CCBA;
+    --shadow: rgba(42,42,42,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    background: var(--ivory);
+    color: var(--graphite);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--graphite);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border-bottom: 2px solid var(--amber);
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  nav .brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--amber);
+    letter-spacing: 2px;
+    padding: 0.9rem 1.5rem 0.9rem 0;
+    border-right: 1px solid #444;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+  }
+  nav a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: #AAA;
+    text-decoration: none;
+    padding: 0.9rem 0.85rem;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--amber); }
+
+  /* COVER */
+  .cover {
+    background: var(--graphite);
+    color: var(--ivory);
+    padding: 5rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--amber) 0%, var(--sage) 50%, var(--steel-light) 100%);
+  }
+  .cover-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: start;
+  }
+  .cover-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--ivory);
+    margin-bottom: 0.75rem;
+  }
+  .cover .subtitle {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.15rem;
+    color: #CCC;
+    font-style: italic;
+    margin-bottom: 2rem;
+  }
+  .cover-regime {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .regime-badge {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px;
+    padding: 0.6rem 1rem;
+  }
+  .regime-badge .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    color: var(--graphite-light);
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .regime-badge .value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--ivory);
+    font-weight: 600;
+  }
+  .regime-badge.amber .value { color: var(--amber-light); }
+  .regime-badge.sage .value { color: #8EC990; }
+  .regime-badge.risk .value { color: #E87070; }
+
+  .cover-kpis {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 260px;
+  }
+  .kpi-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(200,146,42,0.3);
+    border-radius: 4px;
+    padding: 1rem 1.25rem;
+  }
+  .kpi-card .kpi-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--graphite-light);
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+  .kpi-card .kpi-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--amber-light);
+  }
+  .kpi-card .kpi-sub {
+    font-family: 'EB Garamond', serif;
+    font-size: 12px;
+    color: #888;
+    font-style: italic;
+    margin-top: 2px;
+  }
+
+  /* ALERT BANNER */
+  .alert-banner {
+    background: linear-gradient(135deg, #1A1A1A 0%, #2A2010 100%);
+    border-left: 4px solid var(--amber);
+    padding: 1.25rem 4rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .alert-banner .alert-icon {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--amber);
+    flex-shrink: 0;
+    border: 1px solid var(--amber);
+    padding: 3px 8px;
+  }
+  .alert-banner .alert-text {
+    font-family: 'EB Garamond', serif;
+    font-size: 14px;
+    color: #DDD;
+    font-style: italic;
+  }
+  .alert-banner .alert-text strong {
+    color: var(--amber-light);
+    font-style: normal;
+  }
+
+  /* WRAPPER */
+  .wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+  }
+
+  /* SECTION */
+  section {
+    padding: 3.5rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  section:last-of-type { border-bottom: none; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .section-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--amber);
+    border: 1px solid var(--amber);
+    padding: 2px 8px;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--graphite);
+  }
+  .section-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--graphite-light);
+    letter-spacing: 1px;
+    margin-left: auto;
+    text-transform: uppercase;
+  }
+
+  /* GRID LAYOUTS */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.25rem; }
+
+  /* CARDS */
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 4px var(--shadow);
+  }
+  .card.amber-top { border-top: 3px solid var(--amber); }
+  .card.sage-top { border-top: 3px solid var(--sage); }
+  .card.steel-top { border-top: 3px solid var(--steel-blue); }
+  .card.crimson-top { border-top: 3px solid var(--crimson); }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--graphite);
+    margin-bottom: 0.75rem;
+  }
+  .card-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--graphite-light);
+    margin-bottom: 0.5rem;
+  }
+
+  /* MACRO SCORE */
+  .macro-score-display {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .score-circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: conic-gradient(var(--amber) 0% 50%, var(--border) 50% 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .score-circle::after {
+    content: '';
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: white;
+  }
+  .score-inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .score-inner .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--amber);
+  }
+  .score-inner .lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: var(--graphite-light);
+    letter-spacing: 1px;
+  }
+  .score-breakdown {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 1rem;
+  }
+  .score-item .si-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--graphite-light);
+    margin-bottom: 4px;
+  }
+  .score-bar {
+    height: 5px;
+    background: var(--ivory-deep);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+  .score-bar-fill {
+    height: 100%;
+    background: var(--amber);
+    border-radius: 3px;
+  }
+  .score-item .si-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--graphite);
+  }
+
+  /* TABLES */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  thead th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--graphite-light);
+    padding: 0.6rem 0.75rem;
+    border-bottom: 2px solid var(--border);
+    text-align: left;
+    background: var(--ivory);
+  }
+  tbody tr { border-bottom: 1px solid var(--ivory-deep); }
+  tbody tr:hover { background: rgba(200,146,42,0.04); }
+  tbody td {
+    padding: 0.55rem 0.75rem;
+    color: var(--graphite-mid);
+    vertical-align: middle;
+  }
+  .table-wrap {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  /* PILLS / BADGES */
+  .pill {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .pill-green { background: #EAF4EA; color: #3A7A3A; }
+  .pill-amber { background: #FFF3DC; color: #8A6010; }
+  .pill-red { background: #FAEAEA; color: #8B2020; }
+  .pill-blue { background: #E8F0F8; color: #1F3A5C; }
+  .pill-gray { background: #F0EEEA; color: #5A5A5A; }
+
+  /* SCORE BAR INLINE */
+  .inline-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .inline-bar-track {
+    flex: 1;
+    height: 4px;
+    background: var(--ivory-deep);
+    border-radius: 2px;
+    overflow: hidden;
+    min-width: 60px;
+  }
+  .inline-bar-fill { height: 100%; border-radius: 2px; background: var(--amber); }
+
+  /* TOP 5 CARDS */
+  .top5-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .stock-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .stock-card-header {
+    background: var(--graphite);
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .stock-card-header .ticker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--amber-light);
+  }
+  .stock-card-header .company {
+    font-family: 'EB Garamond', serif;
+    font-size: 13px;
+    color: #AAA;
+    font-style: italic;
+  }
+  .stock-card-header .final-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+  }
+  .stock-card-header .final-score span {
+    font-size: 9px;
+    color: #888;
+    letter-spacing: 1px;
+  }
+  .stock-card-body { padding: 1.25rem; }
+  .stock-mini-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .smg-item .smg-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 1px;
+    color: var(--graphite-light);
+    margin-bottom: 2px;
+  }
+  .smg-item .smg-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--graphite);
+  }
+  .stock-tese {
+    font-family: 'EB Garamond', serif;
+    font-size: 13.5px;
+    color: var(--graphite-mid);
+    line-height: 1.6;
+    border-top: 1px solid var(--border);
+    padding-top: 0.75rem;
+    margin-top: 0.75rem;
+  }
+  .stock-decision {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+  }
+  .decision-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
+  .dec-new { background: var(--steel-blue); color: white; }
+  .dec-keep { background: var(--sage); color: white; }
+  .dec-increase { background: var(--amber); color: white; }
+  .dec-reduce { background: var(--crimson); color: white; }
+  .dec-exit { background: #3A3A3A; color: white; }
+
+  /* PORTFOLIO ALLOCATION */
+  .allocation-visual {
+    display: flex;
+    height: 40px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+  .alloc-seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    color: white;
+    transition: filter 0.2s;
+  }
+  .alloc-seg:hover { filter: brightness(1.1); }
+  .a-equities { background: var(--steel-blue); }
+  .a-ipca-short { background: var(--sage); }
+  .a-ipca-long { background: #3A7A6A; }
+  .a-cdi { background: var(--graphite-light); }
+  .a-ivvb { background: var(--amber); }
+  .a-gold { background: #B8962A; }
+
+  .alloc-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--graphite-mid);
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* TRANSITION SCORE */
+  .transition-block {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1.75rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+  .ts-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: conic-gradient(var(--amber-light) 0% 58%, var(--border) 58% 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .ts-circle::after {
+    content: '';
+    position: absolute;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: white;
+  }
+  .ts-inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .ts-inner .tsn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--amber);
+  }
+  .ts-inner .tsl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: var(--graphite-light);
+    letter-spacing: 1px;
+  }
+  .ts-info h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  .ts-info p {
+    font-family: 'EB Garamond', serif;
+    font-size: 14px;
+    color: var(--graphite-mid);
+    line-height: 1.6;
+  }
+
+  /* KILL SWITCH */
+  .kill-switch {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-radius: 3px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+  }
+  .kill-switch.inactive {
+    background: #EAF4EA;
+    border: 1px solid #7AC07A;
+    color: #3A7A3A;
+  }
+  .kill-switch.active {
+    background: #FAEAEA;
+    border: 1px solid #E07A7A;
+    color: #8B2020;
+  }
+  .kill-switch .ks-icon { font-size: 1.2rem; }
+
+  /* RISK TABLE */
+  .risk-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+  .risk-item {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 1rem;
+    border-radius: 3px;
+  }
+  .risk-item .ri-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    color: var(--graphite-light);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .risk-item .ri-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--graphite);
+  }
+  .risk-item .ri-sub {
+    font-family: 'EB Garamond', serif;
+    font-size: 12px;
+    color: var(--graphite-light);
+    font-style: italic;
+    margin-top: 2px;
+  }
+
+  /* FOCUS SCORE */
+  .focus-block {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: center;
+    background: white;
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    border-radius: 3px;
+    margin-bottom: 1.5rem;
+  }
+  .focus-score-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--amber);
+    border-right: 2px solid var(--border);
+    padding-right: 1.5rem;
+    line-height: 1;
+  }
+  .focus-score-num .fsl {
+    font-size: 10px;
+    color: var(--graphite-light);
+    letter-spacing: 2px;
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* TRIGGERS */
+  .trigger-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .trigger-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+  }
+  .trigger-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .td-active { background: #3A7A3A; }
+  .td-inactive { background: var(--border); }
+  .td-warning { background: var(--amber); }
+  .trigger-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    color: var(--graphite-mid);
+  }
+  .trigger-status {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .ts-on { color: #3A7A3A; }
+  .ts-off { color: var(--graphite-light); }
+  .ts-warn { color: var(--amber); }
+
+  /* CENARIOS */
+  .scenario-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1.5rem;
+  }
+  .scenario-card.base { border-top: 3px solid var(--sage); }
+  .scenario-card.bull { border-top: 3px solid var(--steel-blue); }
+  .scenario-card.bear { border-top: 3px solid var(--crimson); }
+  .scenario-prob {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+  .scenario-prob.base { color: var(--sage); }
+  .scenario-prob.bull { color: var(--steel-blue); }
+  .scenario-prob.bear { color: var(--crimson); }
+  .scenario-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+  .scenario-body {
+    font-family: 'EB Garamond', serif;
+    font-size: 13.5px;
+    color: var(--graphite-mid);
+    line-height: 1.65;
+  }
+  .scenario-impacts {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+  }
+  .impact-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.5px;
+  }
+  .impact-row .ir-asset { color: var(--graphite-light); }
+  .impact-row .ir-impact { font-weight: 700; }
+  .ir-pos { color: var(--sage); }
+  .ir-neg { color: var(--crimson); }
+  .ir-neu { color: var(--graphite-light); }
+
+  /* SETOR TABLE */
+  .setor-category {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 0.5rem 0.75rem;
+    background: var(--ivory-deep);
+    color: var(--graphite-light);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-style: italic;
+  }
+
+  /* LEADING BLOCK */
+  .leading-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
+  .leading-item {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 1rem;
+    border-radius: 3px;
+  }
+  .leading-item .li-signal {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .leading-item .li-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--graphite);
+  }
+  .leading-item .li-interp {
+    font-family: 'EB Garamond', serif;
+    font-size: 11.5px;
+    color: var(--graphite-light);
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--graphite);
+    color: #888;
+    padding: 2.5rem 4rem;
+    margin-top: 3rem;
+    border-top: 2px solid var(--amber);
+  }
+  footer .footer-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  footer .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--amber);
+    margin-bottom: 0.5rem;
+  }
+  footer .footer-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    color: #555;
+  }
+  footer .disclaimer {
+    font-family: 'EB Garamond', serif;
+    font-size: 12px;
+    color: #555;
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  /* UTILITIES */
+  p.body-text {
+    font-family: 'EB Garamond', serif;
+    font-size: 14.5px;
+    color: var(--graphite-mid);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .text-amber { color: var(--amber); }
+  .text-sage { color: var(--sage); }
+  .text-steel { color: var(--steel-blue); }
+  .text-crimson { color: var(--crimson); }
+  .bold { font-weight: 700; }
+  .italic { font-style: italic; }
+  .mt-sm { margin-top: 0.75rem; }
+  .mt-md { margin-top: 1.5rem; }
+  .mb-sm { margin-bottom: 0.75rem; }
+  .mb-md { margin-bottom: 1.5rem; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+
+  @media print {
+    nav, .alert-banner { display: none; }
+    section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="brand">MACRO·QUANT V10</div>
+  <a href="#macro">Macro</a>
+  <a href="#cenarios">Cenários</a>
+  <a href="#setores">Setores</a>
+  <a href="#top20">Top 20</a>
+  <a href="#top5">Top 5</a>
+  <a href="#portfolio">Portfólio</a>
+  <a href="#transicao">Transição</a>
+  <a href="#risco">Risco</a>
+  <a href="#rebalanceamento">Rebalanceamento</a>
+  <a href="#decisoes">Decisões</a>
+  <a href="#backtest">Backtest</a>
+  <a href="#fontes">Fontes</a>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-grid">
+    <div>
+      <div class="cover-meta">SISTEMA MACRO-QUANTITATIVO · VERSÃO 10 · ABRIL 2026</div>
+      <h1>Relatório de<br>Estratégia Macro</h1>
+      <div class="subtitle">Choque Geopolítico Global, Petróleo em Crise e o Paradoxo Brasileiro</div>
+      <div class="cover-regime">
+        <div class="regime-badge risk">
+          <span class="label">Regime Atual</span>
+          <span class="value">Choque de Commodities em Descompressão · Carry Defensivo</span>
+        </div>
+        <div class="regime-badge amber">
+          <span class="label">Regime Anterior</span>
+          <span class="value">Carry Defensivo</span>
+        </div>
+        <div class="regime-badge sage">
+          <span class="label">Regime Projetado (3–6m)</span>
+          <span class="value">Desinflação Gradual com Risco Residual de Estagflação</span>
+        </div>
+      </div>
+      <div class="cover-regime">
+        <div class="regime-badge">
+          <span class="label">Selic Atual</span>
+          <span class="value" style="color:#E0D0A0;">14,75% a.a.</span>
+        </div>
+        <div class="regime-badge">
+          <span class="label">Brent (01/abr)</span>
+          <span class="value" style="color:#E0D0A0;">US$ 101,5 / barril</span>
+        </div>
+        <div class="regime-badge">
+          <span class="label">Ibovespa</span>
+          <span class="value" style="color:#E0D0A0;">~187.000 pts</span>
+        </div>
+        <div class="regime-badge">
+          <span class="label">USD/BRL</span>
+          <span class="value" style="color:#E0D0A0;">R$ 5,18–5,25</span>
+        </div>
+      </div>
+    </div>
+    <div class="cover-kpis">
+      <div class="kpi-card">
+        <div class="kpi-label">MACRO SCORE</div>
+        <div class="kpi-value">50/100</div>
+        <div class="kpi-sub">Neutro · viés cauteloso</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">TRANSITION SCORE</div>
+        <div class="kpi-value">0.58</div>
+        <div class="kpi-sub">Neutro · Alta Incerteza Direcional</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">KILL SWITCH</div>
+        <div class="kpi-value" style="color:#E8B84A;">DEFENSIVO LEVE</div>
+        <div class="kpi-sub">Sem gatilho técnico de VIX/CDS/US10Y</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">FOCUS SCORE</div>
+        <div class="kpi-value">38/100</div>
+        <div class="kpi-sub">Inflação desancorando · Queda de juros limitada</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ALERT BANNER -->
+<div class="alert-banner">
+  <div class="alert-icon">⚡ ALERTA</div>
+  <div class="alert-text">
+    <strong>Principal mudança do mês:</strong> Conflito EUA–Israel–Irã levou ao fechamento parcial do Estreito de Ormuz (28/fev), disparando o Brent +64% em março. Focus eleva IPCA 2026 a 4,31%, aproximando-se do teto da meta. COPOM iniciou o ciclo com corte de 0,25pp em março, mas com cautela explícita. O mercado passou a precificar um afrouxamento bem mais lento. Brasil, exportador de petróleo, possui <strong>vantagem relativa nos termos de troca</strong> — mas enfrenta pressão inflacionária e risco político em ano eleitoral.
+  </div>
+</div>
+
+<div class="wrapper">
+
+<!-- ============================================================ -->
+<!-- SECTION 1 — MACRO -->
+<!-- ============================================================ -->
+<section id="macro">
+  <div class="section-header">
+    <div class="section-number">01</div>
+    <h2 class="section-title">Leitura Macroeconômica</h2>
+    <div class="section-sub">ETAPA 1 · WEB DATA · 01/04/2026</div>
+  </div>
+
+  <!-- MACRO SCORE -->
+  <div class="macro-score-display">
+    <div class="score-circle">
+      <div class="score-inner">
+        <div class="num">50</div>
+        <div class="lbl">SCORE</div>
+      </div>
+    </div>
+    <div class="score-breakdown">
+      <div class="score-item">
+        <div class="si-label">INFLAÇÃO</div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:40%;background:var(--crimson)"></div></div>
+        <div class="si-val">40<span style="font-size:9px;color:#888">/100</span></div>
+      </div>
+      <div class="score-item">
+        <div class="si-label">JUROS</div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:50%"></div></div>
+        <div class="si-val">50</div>
+      </div>
+      <div class="score-item">
+        <div class="si-label">LIQUIDEZ</div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:50%"></div></div>
+        <div class="si-val">50</div>
+      </div>
+      <div class="score-item">
+        <div class="si-label">RISCO GLOBAL</div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:40%;background:var(--crimson)"></div></div>
+        <div class="si-val">40</div>
+      </div>
+      <div class="score-item">
+        <div class="si-label">COMMODITIES</div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:75%;background:var(--sage)"></div></div>
+        <div class="si-val">75</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOCUS BLOCK -->
+  <div class="focus-block">
+    <div>
+      <div class="focus-score-num">38<span class="fsl">FOCUS SCORE</span></div>
+    </div>
+    <div>
+      <div class="card-title mb-sm">Boletim Focus — 27/03/2026 (BCB)</div>
+      <div class="grid-4">
+        <div>
+          <div class="card-label">IPCA 2026</div>
+          <div class="mono bold" style="font-size:1.1rem;color:var(--crimson)">4,31%</div>
+          <div style="font-family:'EB Garamond',serif;font-size:11px;color:#888;font-style:italic">3ª alta seguida · Teto meta: 4,5%</div>
+        </div>
+        <div>
+          <div class="card-label">SELIC FIM 2026</div>
+          <div class="mono bold" style="font-size:1.1rem">12,50%</div>
+          <div style="font-family:'EB Garamond',serif;font-size:11px;color:#888;font-style:italic">Estável. Atual: 14,75%</div>
+        </div>
+        <div>
+          <div class="card-label">PIB 2026</div>
+          <div class="mono bold" style="font-size:1.1rem">1,85%</div>
+          <div style="font-family:'EB Garamond',serif;font-size:11px;color:#888;font-style:italic">Citi vê risco de revisão ↓</div>
+        </div>
+        <div>
+          <div class="card-label">USD/BRL FIM 2026</div>
+          <div class="mono bold" style="font-size:1.1rem">R$ 5,40</div>
+          <div style="font-family:'EB Garamond',serif;font-size:11px;color:#888;font-style:italic">Estável. Atual: R$ 5,18</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KILL SWITCH -->
+  <div class="kill-switch inactive">
+    <div class="ks-icon">🔴</div>
+    <div><strong>KILL SWITCH TÉCNICO DESATIVADO</strong> — com VIX em ~24,5–25,2, US10Y em ~4,28–4,30% e CDS Brasil em ~143 bps, os gatilhos quantitativos imediatos perderam força. Mantém-se apenas postura defensiva leve por conta do choque geopolítico ainda não resolvido.</div>
+  </div>
+
+  <!-- GRID BRASIL + GLOBAL -->
+  <div class="grid-2">
+    <div class="card amber-top">
+      <div class="card-title">Brasil — Indicadores Principais</div>
+      <table>
+        <thead><tr><th>Variável</th><th>Valor</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Selic (atual)</td><td class="mono">14,75% a.a.</td><td><span class="pill pill-amber">RESTRITIVO</span></td></tr>
+          <tr><td>Copom Abril (expectativa)</td><td class="mono">−0,25pp → 14,50%</td><td><span class="pill pill-amber">CAUTELOSO</span></td></tr>
+          <tr><td>IPCA acumulado 12m</td><td class="mono">3,81%–3,90%</td><td><span class="pill pill-amber">SOB RISCO, MAS ABAIXO DO TETO</span></td></tr>
+          <tr><td>Câmbio BRL/USD</td><td class="mono">R$ 5,18 – 5,25</td><td><span class="pill pill-green">RELATIVAMENTE ESTÁVEL</span></td></tr>
+          <tr><td>CDS Brasil 5Y</td><td class="mono">~143 bps</td><td><span class="pill pill-amber">MODERADO</span></td></tr>
+          <tr><td>Ibovespa (31/mar)</td><td class="mono">~187.000 pts</td><td><span class="pill pill-green">+13,7% no ano</span></td></tr>
+          <tr><td>Juros reais (NTN-B longo)</td><td class="mono">~7,2–7,5%</td><td><span class="pill pill-green">ATRATIVOS</span></td></tr>
+          <tr><td>PIB 2025 (realizado)</td><td class="mono">2,3%</td><td><span class="pill pill-green">DESACELEROU, MAS PERMANECEU POSITIVO</span></td></tr>
+          <tr><td>DI longo (Jan/27)</td><td class="mono">~13,5%</td><td><span class="pill pill-amber">ABRINDO</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card steel-top">
+      <div class="card-title">Global — Indicadores de Mercado</div>
+      <table>
+        <thead><tr><th>Variável</th><th>Valor</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Brent (01/abr)</td><td class="mono">US$ 101,5 /bbl</td><td><span class="pill pill-red">+64% em março</span></td></tr>
+          <tr><td>WTI (01/abr)</td><td class="mono">US$ 99,2 /bbl</td><td><span class="pill pill-red">CHOQUE HISTÓRICO</span></td></tr>
+          <tr><td>VIX</td><td class="mono">~24,5–25,2</td><td><span class="pill pill-amber">VOL. AINDA ACIMA DA MÉDIA</span></td></tr>
+          <tr><td>Ouro spot (01/abr)</td><td class="mono">~US$ 4.774 /oz</td><td><span class="pill pill-red">refúgio ainda forte</span></td></tr>
+          <tr><td>DXY (dólar index)</td><td class="mono">~99,35</td><td><span class="pill pill-amber">ABAIXO DE 100</span></td></tr>
+          <tr><td>US10Y Treasury</td><td class="mono">~4,28–4,30%</td><td><span class="pill pill-red">ABAIXO DO TRIGGER 4,5%</span></td></tr>
+          <tr><td>S&P 500</td><td class="mono">Pior trim. desde 2022</td><td><span class="pill pill-red">CORREÇÃO</span></td></tr>
+          <tr><td>Fed — cortes 2026</td><td class="mono">sem ciclo claro de cortes</td><td><span class="pill pill-red">CAUTELA</span></td></tr>
+          <tr><td>OPEP produção mar</td><td class="mono">21,57 mbpd (−7,3 mbpd)</td><td><span class="pill pill-red">MÍNIMO DESDE 2020</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="mt-md"></div>
+  <!-- VETORES E RISCOS -->
+  <div class="grid-3">
+    <div class="card sage-top">
+      <div class="card-title">Vetores Positivos</div>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:6px 0;border-bottom:1px solid var(--border);font-family:'EB Garamond',serif;font-size:13.5px;">🟢 Brasil exportador de petróleo — termos de troca melhoram</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--border);font-family:'EB Garamond',serif;font-size:13.5px;">🟢 Ibovespa +13,7% no ano — fluxo estrangeiro forte em janeiro</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--border);font-family:'EB Garamond',serif;font-size:13.5px;">🟢 Selic em queda (ciclo de corte iniciado)</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--border);font-family:'EB Garamond',serif;font-size:13.5px;">🟢 Juros reais longos IPCA+ atrativos (~7,3% a.a.)</li>
+        <li style="padding:6px 0;font-family:'EB Garamond',serif;font-size:13.5px;">🟢 PIB 2025 cresceu 2,3% mesmo com juros altos</li>
+      </ul>
+    </div>
+    <div class="card crimson-top">
+      <div class="card-title">Vetores Negativos</div>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:6px 0;border-bottom:1px solid var(--border);font-family:'EB Garamond',serif;font-size:13.5px;">🔴 Petróleo ainda acima de US$100 mantém pressão inflacionária</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--border);font-family:'EB Garamond',serif;font-size:13.5px;">🔴 VIX perto de 25 ainda exige cautela global</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--border);font-family:'EB Garamond',serif;font-size:13.5px;">🔴 Fed segue cauteloso — liquidez global ainda não virou</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--border);font-family:'EB Garamond',serif;font-size:13.5px;">🔴 IPCA Focus 4,31% — limiar do teto da meta</li>
+        <li style="padding:6px 0;font-family:'EB Garamond',serif;font-size:13.5px;">🔴 Ano eleitoral 2026 — risco fiscal e volatilidade Petrobras</li>
+      </ul>
+    </div>
+    <div class="card amber-top">
+      <div class="card-title">Riscos de Cauda</div>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:6px 0;border-bottom:1px solid var(--border);font-family:'EB Garamond',serif;font-size:13.5px;">⚠️ Brent a US$180 se Ormuz fechar completamente até fim de abril</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--border);font-family:'EB Garamond',serif;font-size:13.5px;">⚠️ Escalada Houthi no Mar Vermelho — nova rota interrompida</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--border);font-family:'EB Garamond',serif;font-size:13.5px;">⚠️ Fed sobe juros para conter inflação de energia nos EUA</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--border);font-family:'EB Garamond',serif;font-size:13.5px;">⚠️ Desancoragem das expectativas de inflação no Brasil</li>
+        <li style="padding:6px 0;font-family:'EB Garamond',serif;font-size:13.5px;">⚠️ Intervenção populista na Petrobras em ano eleitoral</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mt-md"></div>
+  <!-- TRIGGERS -->
+  <div class="card-title mb-sm">Triggers Macro Ativos</div>
+  <div class="trigger-grid">
+    <div class="trigger-item"><div class="trigger-dot td-inactive"></div><span class="trigger-text">US10Y &gt; 4,5% → Reduzir duration</span><span class="trigger-status ts-off">INATIVO</span></div>
+    <div class="trigger-item"><div class="trigger-dot td-active"></div><span class="trigger-text">VIX &gt; 22 → Reduzir equities</span><span class="trigger-status ts-on">ATIVO</span></div>
+    <div class="trigger-item"><div class="trigger-dot td-active"></div><span class="trigger-text">Petróleo/minério em alta → Favorecer exportadoras</span><span class="trigger-status ts-on">ATIVO</span></div>
+    <div class="trigger-item"><div class="trigger-dot td-active"></div><span class="trigger-text">DXY &lt; 100 → alívio para EM</span><span class="trigger-status ts-on">ATIVO</span></div>
+    <div class="trigger-item"><div class="trigger-dot td-inactive"></div><span class="trigger-text">VIX &lt; 15 → Aumentar equities</span><span class="trigger-status ts-off">INATIVO</span></div>
+    <div class="trigger-item"><div class="trigger-dot td-inactive"></div><span class="trigger-text">DI fechando → Favorecer equities</span><span class="trigger-status ts-off">INATIVO</span></div>
+    <div class="trigger-item"><div class="trigger-dot td-warn"></div><span class="trigger-text">CDS Brasil ~143 bps (abaixo de 300)</span><span class="trigger-status ts-warn">MONITORAR</span></div>
+    <div class="trigger-item"><div class="trigger-dot td-inactive"></div><span class="trigger-text">US10Y &lt; 4,0% → Aumentar duration</span><span class="trigger-status ts-off">INATIVO</span></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 2 — CENÁRIOS -->
+<!-- ============================================================ -->
+<section id="cenarios">
+  <div class="section-header">
+    <div class="section-number">02</div>
+    <h2 class="section-title">Cenários Base · Bull · Bear</h2>
+    <div class="section-sub">PROBABILIDADES ESTIMADAS · ABRIL 2026</div>
+  </div>
+
+  <div class="grid-3">
+    <div class="scenario-card base">
+      <div class="scenario-prob base">60%</div>
+      <div class="scenario-title">BASE — Desescalada Negociada</div>
+      <div class="scenario-body">
+        EUA e Irã chegam a cessar-fogo parcial antes de 6/abr (prazo de Trump). Estreito de Ormuz reabre gradualmente. Brent recua para US$80–90 e a compressão de risco ganha tração. Copom corta apenas 0,25pp em abril e pausa. Ibovespa lateral com viés positivo. Real se valoriza para R$5,00–5,20. IPCA converge para 4,0–4,2%.
+      </div>
+      <div class="scenario-impacts">
+        <div class="impact-row"><span class="ir-asset">Petróleo (Brent)</span><span class="ir-impact ir-neg">US$80–90</span></div>
+        <div class="impact-row"><span class="ir-asset">Ibovespa</span><span class="ir-impact ir-pos">185–195k pts</span></div>
+        <div class="impact-row"><span class="ir-asset">Câmbio</span><span class="ir-impact ir-pos">R$5,00–5,20</span></div>
+        <div class="impact-row"><span class="ir-asset">IPCA+ Longo</span><span class="ir-impact ir-pos">MUITO FAVORÁVEL</span></div>
+        <div class="impact-row"><span class="ir-asset">CDI</span><span class="ir-impact ir-pos">Sólido mas Menor</span></div>
+        <div class="impact-row"><span class="ir-asset">Exportadoras (PRIO/PETR)</span><span class="ir-impact ir-neu">Neutro/Leve Queda</span></div>
+      </div>
+    </div>
+    <div class="scenario-card bull">
+      <div class="scenario-prob bull">20%</div>
+      <div class="scenario-title">BULL — Paz Rápida + Reflação</div>
+      <div class="scenario-body">
+        Acordo de paz em 2 semanas. Ormuz 100% reaberto. Petróleo volta a US$65–70. Inflação global cai rapidamente. Fed retoma cortes no 2S26. Liquidez global expande. Ibovespa dispara para 200k+. Emergentes em alta, BRL valoriza para ~R$4,90.
+      </div>
+      <div class="scenario-impacts">
+        <div class="impact-row"><span class="ir-asset">Petróleo (Brent)</span><span class="ir-impact ir-neg">US$65–70</span></div>
+        <div class="impact-row"><span class="ir-asset">Ibovespa</span><span class="ir-impact ir-pos">200k+ pts</span></div>
+        <div class="impact-row"><span class="ir-asset">Câmbio</span><span class="ir-impact ir-pos">R$4,80–4,90</span></div>
+        <div class="impact-row"><span class="ir-asset">IPCA+ Longo</span><span class="ir-impact ir-pos">FORTE MARCAÇÃO</span></div>
+        <div class="impact-row"><span class="ir-asset">IVVB11</span><span class="ir-impact ir-pos">FORTE ALTA</span></div>
+        <div class="impact-row"><span class="ir-asset">Exportadoras (PRIO/PETR)</span><span class="ir-impact ir-neg">QUEDA</span></div>
+      </div>
+    </div>
+    <div class="scenario-card bear">
+      <div class="scenario-prob bear">20%</div>
+      <div class="scenario-title">BEAR — Escalada Prolongada</div>
+      <div class="scenario-body">
+        Ormuz fechado por mais de 60 dias. Brent sobe a US$150–180. Inflação global dispara. Fed sobe juros. Recessão nos EUA e Europa. Ibovespa corrige para 160–170k pts. Real desvaloriza para R$5,50+. COPOM pausaria ciclo de corte. Risco de estagflação global.
+      </div>
+      <div class="scenario-impacts">
+        <div class="impact-row"><span class="ir-asset">Petróleo (Brent)</span><span class="ir-impact ir-pos">US$150–180</span></div>
+        <div class="impact-row"><span class="ir-asset">Ibovespa</span><span class="ir-impact ir-neg">160–170k pts</span></div>
+        <div class="impact-row"><span class="ir-asset">Câmbio</span><span class="ir-impact ir-neg">R$5,50–6,00</span></div>
+        <div class="impact-row"><span class="ir-asset">CDI/Pós-fixado</span><span class="ir-impact ir-pos">ÂNCORA DEFENSIVA</span></div>
+        <div class="impact-row"><span class="ir-asset">Exportadoras (PRIO/PETR)</span><span class="ir-impact ir-pos">FORTE ALTA</span></div>
+        <div class="impact-row"><span class="ir-asset">Consumo Doméstico</span><span class="ir-impact ir-neg">SEVERO IMPACTO</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 3 — SETORES -->
+<!-- ============================================================ -->
+<section id="setores">
+  <div class="section-header">
+    <div class="section-number">03</div>
+    <h2 class="section-title">Classificação Setorial da B3</h2>
+    <div class="section-sub">REGIME: CHOQUE DE COMMODITIES · SELIC ELEVADA</div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Setor / Subsetor</th>
+          <th>Classificação</th>
+          <th>Racional</th>
+          <th>Exemplos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="4" class="setor-category">Muito Favorecidos</td></tr>
+        <tr>
+          <td><strong>Petróleo, Gás e Biocombustíveis</strong></td>
+          <td><span class="pill pill-green">MUITO FAVORECIDO</span></td>
+          <td>Brent &gt; US$100; receita em USD; oferta restrita globalmente</td>
+          <td class="mono">PETR4, PRIO3, BRAV3</td>
+        </tr>
+        <tr>
+          <td><strong>Papel e Celulose</strong></td>
+          <td><span class="pill pill-green">MUITO FAVORECIDO</span></td>
+          <td>Exportadora; hedge natural cambial; celulose global em alta; USD forte beneficia receita</td>
+          <td class="mono">SUZB3, KLBN11</td>
+        </tr>
+        <tr><td colspan="4" class="setor-category">Favorecidos</td></tr>
+        <tr>
+          <td><strong>Seguros e Resseguros</strong></td>
+          <td><span class="pill pill-green">FAVORECIDO</span></td>
+          <td>Alta da Selic = resultado financeiro robusto; inflação favorece prêmios; resiliência em ciclos de juros altos</td>
+          <td class="mono">BBSE3, PSSA3, WIZC3</td>
+        </tr>
+        <tr>
+          <td><strong>Bancos / Intermediação Financeira</strong></td>
+          <td><span class="pill pill-green">FAVORECIDO</span></td>
+          <td>NIM elevado com Selic alta; spreads atrativos; bancos privados com custo de risco controlado</td>
+          <td class="mono">ITUB4, BPAC11, BBDC4</td>
+        </tr>
+        <tr>
+          <td><strong>Saneamento e Utilities de Infraestrutura</strong></td>
+          <td><span class="pill pill-green">FAVORECIDO</span></td>
+          <td>Tarifas indexadas à inflação; receita previsível; defensivo em volatilidade</td>
+          <td class="mono">SBSP3, CSMG3, SAPR3</td>
+        </tr>
+        <tr>
+          <td><strong>Transmissão e Distribuição Elétrica</strong></td>
+          <td><span class="pill pill-green">FAVORECIDO</span></td>
+          <td>Contratos regulados; índices inflacionários embutidos; DY atrativo</td>
+          <td class="mono">TAEE11, CMIG4, ENGI11, CPLE3</td>
+        </tr>
+        <tr>
+          <td><strong>Tecnologia / Software</strong></td>
+          <td><span class="pill pill-green">FAVORECIDO</span></td>
+          <td>Crescimento sustentado; margens elevadas; pouco sensível a petróleo; digital é defensivo</td>
+          <td class="mono">TOTS3</td>
+        </tr>
+        <tr><td colspan="4" class="setor-category">Neutros</td></tr>
+        <tr>
+          <td><strong>Mineração</strong></td>
+          <td><span class="pill pill-gray">NEUTRO</span></td>
+          <td>Minério de ferro dependente da China; China com atividade moderada em março; benefício limitado do petróleo</td>
+          <td class="mono">VALE3, GGBR4</td>
+        </tr>
+        <tr>
+          <td><strong>Agronegócio / Frigoríficos</strong></td>
+          <td><span class="pill pill-gray">NEUTRO</span></td>
+          <td>Exportação de proteína sustenta receita, mas custos logísticos sobem; dinâmica mista</td>
+          <td class="mono">MBRF3, SMFT3</td>
+        </tr>
+        <tr>
+          <td><strong>Saúde (Hospitais)</strong></td>
+          <td><span class="pill pill-gray">NEUTRO</span></td>
+          <td>Defensivo, mas altamente alavancado; RDOR3 com perfil melhor que pares; custo de capital elevado pressiona</td>
+          <td class="mono">RDOR3</td>
+        </tr>
+        <tr>
+          <td><strong>Logística / Concessões</strong></td>
+          <td><span class="pill pill-gray">NEUTRO</span></td>
+          <td>Custos de combustível sobem, mas tarifas indexadas amenizam; volume dependente do ciclo</td>
+          <td class="mono">RAIL3, EMBJ3</td>
+        </tr>
+        <tr><td colspan="4" class="setor-category">Prejudicados</td></tr>
+        <tr>
+          <td><strong>Construção Civil / Incorporação</strong></td>
+          <td><span class="pill pill-red">PREJUDICADO</span></td>
+          <td>Juros elevados encarecem crédito imobiliário; custo de insumos sobe; demanda potencialmente comprimida</td>
+          <td class="mono">CYRE3, CURY3, DIRR3</td>
+        </tr>
+        <tr>
+          <td><strong>Varejo / Consumo Discricionário</strong></td>
+          <td><span class="pill pill-red">PREJUDICADO</span></td>
+          <td>Renda comprimida por inflação de energia; juros altos matam crédito ao consumidor</td>
+          <td class="mono">LREN3, MGLU3</td>
+        </tr>
+        <tr>
+          <td><strong>Geração de Energia Termoelétrica (gás)</strong></td>
+          <td><span class="pill pill-red">PREJUDICADO</span></td>
+          <td>Custo de gás dispara com Ormuz fechado; pressão de margem severa</td>
+          <td class="mono">ENEV3</td>
+        </tr>
+        <tr><td colspan="4" class="setor-category">Muito Prejudicados</td></tr>
+        <tr>
+          <td><strong>Aviação / Turismo</strong></td>
+          <td><span class="pill pill-red">MUITO PREJUDICADO</span></td>
+          <td>Combustível de aviação (Jet A) explode; demanda fragilizada; não há no universo selecionado</td>
+          <td class="mono">N/A no universo</td>
+        </tr>
+        <tr>
+          <td><strong>Transporte Rodoviário</strong></td>
+          <td><span class="pill pill-red">MUITO PREJUDICADO</span></td>
+          <td>Custo de diesel sobe; margens comprimidas; governo pode subsidiar (risco fiscal adicional)</td>
+          <td class="mono">N/A no universo</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 4 — TOP 20 -->
+<!-- ============================================================ -->
+<section id="top20">
+  <div class="section-header">
+    <div class="section-number">04</div>
+    <h2 class="section-title">Top 20 — Ranking Quantitativo</h2>
+    <div class="section-sub">PESOS: MACRO 35% · FUND. 30% · VAL. 20% · RISCO 15%</div>
+  </div>
+
+  <p class="body-text">Universo proveniente do arquivo de tickers fornecido (dados Fundamentei/SI). Complementado com cotações atuais, dados de 4T25 e análise de regime. Pesos adaptativos V5.1 mantidos sem ajuste histórico (sem relatório anterior). Transition Score moderado (0,58) melhora a leitura forward, mas ainda sem alterar o ranking central.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Ticker</th>
+          <th>Empresa</th>
+          <th>Setor</th>
+          <th>Macro Score</th>
+          <th>Fund. Score</th>
+          <th>Val. Score</th>
+          <th>Risco Score</th>
+          <th>FINAL</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono bold">1</td>
+          <td class="mono bold text-amber">PETR4</td>
+          <td>Petrobras PN</td>
+          <td><span class="pill pill-green">PETRÓLEO</span></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:92%"></div></div><span class="mono">92</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:75%"></div></div><span class="mono">75</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:85%"></div></div><span class="mono">85</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:62%;background:var(--sage)"></div></div><span class="mono">62</span></div></td>
+          <td class="mono bold text-amber" data-score="81">81</td>
+          <td><span class="pill pill-green">TOP 5</span></td>
+        </tr>
+        <tr>
+          <td class="mono bold">2</td>
+          <td class="mono bold text-amber">PRIO3</td>
+          <td>Prio S.A.</td>
+          <td><span class="pill pill-green">PETRÓLEO</span></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:90%"></div></div><span class="mono">90</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:80%"></div></div><span class="mono">80</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:42%"></div></div><span class="mono">42</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:72%;background:var(--sage)"></div></div><span class="mono">72</span></div></td>
+          <td class="mono bold text-amber" data-score="77">77</td>
+          <td><span class="pill pill-green">TOP 5</span></td>
+        </tr>
+        <tr>
+          <td class="mono bold">3</td>
+          <td class="mono bold text-amber">ITUB4</td>
+          <td>Itaú Unibanco PN</td>
+          <td><span class="pill pill-green">BANCO</span></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:72%"></div></div><span class="mono">72</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:88%"></div></div><span class="mono">88</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:75%"></div></div><span class="mono">75</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:85%;background:var(--sage)"></div></div><span class="mono">85</span></div></td>
+          <td class="mono bold text-amber" data-score="78">78</td>
+          <td><span class="pill pill-green">TOP 5</span></td>
+        </tr>
+        <tr>
+          <td class="mono bold">4</td>
+          <td class="mono bold text-amber">BBSE3</td>
+          <td>BB Seguridade</td>
+          <td><span class="pill pill-green">SEGUROS</span></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:75%"></div></div><span class="mono">75</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:85%"></div></div><span class="mono">85</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:80%"></div></div><span class="mono">80</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:90%;background:var(--sage)"></div></div><span class="mono">90</span></div></td>
+          <td class="mono bold text-amber" data-score="81">81</td>
+          <td><span class="pill pill-green">TOP 5</span></td>
+        </tr>
+        <tr>
+          <td class="mono bold">5</td>
+          <td class="mono bold text-amber">SUZB3</td>
+          <td>Suzano S.A.</td>
+          <td><span class="pill pill-green">PAP. CELULOSE</span></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:82%"></div></div><span class="mono">82</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:78%"></div></div><span class="mono">78</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:72%"></div></div><span class="mono">72</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:65%;background:var(--sage)"></div></div><span class="mono">65</span></div></td>
+          <td class="mono bold text-amber" data-score="76">76</td>
+          <td><span class="pill pill-green">TOP 5</span></td>
+        </tr>
+        <tr>
+          <td class="mono">6</td>
+          <td class="mono">SBSP3</td>
+          <td>Sabesp</td>
+          <td><span class="pill pill-blue">SANEAMENTO</span></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:68%"></div></div><span class="mono">68</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:80%"></div></div><span class="mono">80</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:65%"></div></div><span class="mono">65</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:80%;background:var(--sage)"></div></div><span class="mono">80</span></div></td>
+          <td class="mono bold" data-score="73">73</td>
+          <td><span class="pill pill-amber">CANDIDATO</span></td>
+        </tr>
+        <tr>
+          <td class="mono">7</td>
+          <td class="mono">WEGE3</td>
+          <td>WEG S.A.</td>
+          <td><span class="pill pill-blue">MÁQUINAS</span></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:55%"></div></div><span class="mono">55</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:92%"></div></div><span class="mono">92</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:35%"></div></div><span class="mono">35</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:90%;background:var(--sage)"></div></div><span class="mono">90</span></div></td>
+          <td class="mono bold" data-score="67">67</td>
+          <td><span class="pill pill-amber">CANDIDATO</span></td>
+        </tr>
+        <tr>
+          <td class="mono">8</td>
+          <td class="mono">TAEE11</td>
+          <td>Taesa</td>
+          <td><span class="pill pill-blue">ENERGIA ELÉTRICA</span></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:65%"></div></div><span class="mono">65</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:72%"></div></div><span class="mono">72</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:70%"></div></div><span class="mono">70</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:88%;background:var(--sage)"></div></div><span class="mono">88</span></div></td>
+          <td class="mono bold" data-score="72">72</td>
+          <td><span class="pill pill-amber">CANDIDATO</span></td>
+        </tr>
+        <tr>
+          <td class="mono">9</td>
+          <td class="mono">TOTS3</td>
+          <td>Totvs</td>
+          <td><span class="pill pill-blue">TECNOLOGIA</span></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:60%"></div></div><span class="mono">60</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:82%"></div></div><span class="mono">82</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:60%"></div></div><span class="mono">60</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:82%;background:var(--sage)"></div></div><span class="mono">82</span></div></td>
+          <td class="mono bold" data-score="70">70</td>
+          <td><span class="pill pill-amber">CANDIDATO</span></td>
+        </tr>
+        <tr>
+          <td class="mono">10</td>
+          <td class="mono">BPAC11</td>
+          <td>BTG Pactual</td>
+          <td><span class="pill pill-blue">BANCO</span></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:70%"></div></div><span class="mono">70</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:82%"></div></div><span class="mono">82</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:62%"></div></div><span class="mono">62</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:78%;background:var(--sage)"></div></div><span class="mono">78</span></div></td>
+          <td class="mono bold" data-score="73">73</td>
+          <td><span class="pill pill-gray">MONITORAR</span></td>
+        </tr>
+        <tr>
+          <td class="mono">11</td>
+          <td class="mono">RDOR3</td>
+          <td>Rede D'Or</td>
+          <td><span class="pill pill-gray">SAÚDE</span></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:48%"></div></div><span class="mono">48</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:72%"></div></div><span class="mono">72</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:55%"></div></div><span class="mono">55</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:65%;background:var(--sage)"></div></div><span class="mono">65</span></div></td>
+          <td class="mono bold" data-score="59">59</td>
+          <td><span class="pill pill-gray">MONITORAR</span></td>
+        </tr>
+        <tr>
+          <td class="mono">12</td>
+          <td class="mono">CMIG4</td>
+          <td>Cemig PN</td>
+          <td><span class="pill pill-blue">ENERGIA ELÉTRICA</span></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:62%"></div></div><span class="mono">62</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:68%"></div></div><span class="mono">68</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:72%"></div></div><span class="mono">72</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:72%;background:var(--sage)"></div></div><span class="mono">72</span></div></td>
+          <td class="mono bold" data-score="68">68</td>
+          <td><span class="pill pill-gray">MONITORAR</span></td>
+        </tr>
+        <tr>
+          <td class="mono">13</td>
+          <td class="mono">EQTL3</td>
+          <td>Equatorial Energia</td>
+          <td><span class="pill pill-blue">ENERGIA ELÉTRICA</span></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:65%"></div></div><span class="mono">65</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:70%"></div></div><span class="mono">70</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:62%"></div></div><span class="mono">62</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:75%;background:var(--sage)"></div></div><span class="mono">75</span></div></td>
+          <td class="mono bold" data-score="67">67</td>
+          <td><span class="pill pill-gray">MONITORAR</span></td>
+        </tr>
+        <tr>
+          <td class="mono">14</td>
+          <td class="mono">ABEV3</td>
+          <td>Ambev</td>
+          <td><span class="pill pill-gray">BEBIDAS</span></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:48%"></div></div><span class="mono">48</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:75%"></div></div><span class="mono">75</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:65%"></div></div><span class="mono">65</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:80%;background:var(--sage)"></div></div><span class="mono">80</span></div></td>
+          <td class="mono bold" data-score="62">62</td>
+          <td><span class="pill pill-gray">MONITORAR</span></td>
+        </tr>
+        <tr>
+          <td class="mono">15</td>
+          <td class="mono">BBDC4</td>
+          <td>Bradesco PN</td>
+          <td><span class="pill pill-blue">BANCO</span></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:60%"></div></div><span class="mono">60</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:65%"></div></div><span class="mono">65</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:70%"></div></div><span class="mono">70</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:72%;background:var(--sage)"></div></div><span class="mono">72</span></div></td>
+          <td class="mono bold" data-score="65">65</td>
+          <td><span class="pill pill-gray">MONITORAR</span></td>
+        </tr>
+        <tr>
+          <td class="mono">16</td>
+          <td class="mono">VALE3</td>
+          <td>Vale</td>
+          <td><span class="pill pill-gray">MINERAÇÃO</span></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:50%"></div></div><span class="mono">50</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:68%"></div></div><span class="mono">68</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:58%"></div></div><span class="mono">58</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:65%;background:var(--sage)"></div></div><span class="mono">65</span></div></td>
+          <td class="mono bold" data-score="59">59</td>
+          <td><span class="pill pill-gray">MONITORAR</span></td>
+        </tr>
+        <tr>
+          <td class="mono">17</td>
+          <td class="mono">VIVA3</td>
+          <td>Vivara</td>
+          <td><span class="pill pill-gray">VAREJO PREMIUM</span></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:42%"></div></div><span class="mono">42</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:70%"></div></div><span class="mono">70</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:68%"></div></div><span class="mono">68</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:78%;background:var(--sage)"></div></div><span class="mono">78</span></div></td>
+          <td class="mono bold" data-score="61">61</td>
+          <td><span class="pill pill-gray">MONITORAR</span></td>
+        </tr>
+        <tr>
+          <td class="mono">18</td>
+          <td class="mono">CSMG3</td>
+          <td>Copasa MG</td>
+          <td><span class="pill pill-blue">SANEAMENTO</span></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:62%"></div></div><span class="mono">62</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:70%"></div></div><span class="mono">70</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:65%"></div></div><span class="mono">65</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:76%;background:var(--sage)"></div></div><span class="mono">76</span></div></td>
+          <td class="mono bold" data-score="67">67</td>
+          <td><span class="pill pill-gray">MONITORAR</span></td>
+        </tr>
+        <tr>
+          <td class="mono">19</td>
+          <td class="mono">KLBN11</td>
+          <td>Klabin</td>
+          <td><span class="pill pill-green">PAP. CELULOSE</span></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:70%"></div></div><span class="mono">70</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:65%"></div></div><span class="mono">65</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:60%"></div></div><span class="mono">60</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:58%;background:var(--sage)"></div></div><span class="mono">58</span></div></td>
+          <td class="mono bold" data-score="65">65</td>
+          <td><span class="pill pill-gray">MONITORAR</span></td>
+        </tr>
+        <tr>
+          <td class="mono">20</td>
+          <td class="mono">BBAS3</td>
+          <td>Banco do Brasil</td>
+          <td><span class="pill pill-blue">BANCO</span></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:58%"></div></div><span class="mono">58</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:62%"></div></div><span class="mono">62</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:68%"></div></div><span class="mono">68</span></div></td>
+          <td><div class="inline-bar"><div class="inline-bar-track"><div class="inline-bar-fill" style="width:58%;background:var(--sage)"></div></div><span class="mono">58</span></div></td>
+          <td class="mono bold" data-score="61">61</td>
+          <td><span class="pill pill-gray">WATCH</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 5 — TOP 5 -->
+<!-- ============================================================ -->
+<section id="top5">
+  <div class="section-header">
+    <div class="section-number">05</div>
+    <h2 class="section-title">Top 5 — Convicção Máxima</h2>
+    <div class="section-sub">DIFERENÇA TOP1 vs TOP5 &gt; 10pts → CONCENTRAÇÃO APLICADA</div>
+  </div>
+
+  <div class="top5-grid">
+    <!-- BBSE3 e ITUB4 empatam no top junto com PETR4 -->
+    <div class="stock-card" data-score="81" data-risk="low">
+      <div class="stock-card-header">
+        <div>
+          <div class="ticker">PETR4</div>
+          <div class="company">Petrobras PN · Petróleo &amp; Gás</div>
+        </div>
+        <div class="final-score">81<span>/100</span></div>
+      </div>
+      <div class="stock-card-body">
+        <div class="stock-mini-grid">
+          <div class="smg-item"><div class="smg-label">P/L</div><div class="smg-val">5,81x</div></div>
+          <div class="smg-item"><div class="smg-label">EV/EBITDA</div><div class="smg-val">3,46x</div></div>
+          <div class="smg-item"><div class="smg-label">DY 12m</div><div class="smg-val text-sage">6,67%</div></div>
+          <div class="smg-item"><div class="smg-label">ROE</div><div class="smg-val">26,49%</div></div>
+          <div class="smg-item"><div class="smg-label">Mrg. EBIT</div><div class="smg-val">39,64%</div></div>
+          <div class="smg-item"><div class="smg-label">Cotação</div><div class="smg-val">R$49,67</div></div>
+        </div>
+        <div class="stock-tese">
+          <strong>Tese Macro:</strong> Principal beneficiária do Brent elevado. Produção crescente (+18% no 4T25). Receita em USD com exposição direta ao choque de Ormuz. Cada US$10 de alta no Brent adiciona ~R$8–12 bi em EBITDA anualizado. <strong>Tese Fundamental:</strong> Múltiplos historicamente baratos (5x P/L). Dividendos pagos em 22/abr e 22/jun (~R$0,63/ação do 4T25). ROE de 26,5%. Geração de caixa robusta. <strong>Risco:</strong> Intervenção política (ano eleitoral); capex elevado (US$19,5bi); Foz do Amazonas incerto. <strong>Convexidade:</strong> Alta — exponencial ao petróleo no curto prazo.
+        </div>
+        <div class="stock-decision">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#888;letter-spacing:1px;">PESO SUGERIDO</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;">30–35%</div>
+          </div>
+          <span class="decision-badge dec-keep">KEEP / AUMENTAR</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stock-card" data-score="81" data-risk="medium-low">
+      <div class="stock-card-header">
+        <div>
+          <div class="ticker">BBSE3</div>
+          <div class="company">BB Seguridade · Seguros</div>
+        </div>
+        <div class="final-score">81<span>/100</span></div>
+      </div>
+      <div class="stock-card-body">
+        <div class="stock-mini-grid">
+          <div class="smg-item"><div class="smg-label">P/L</div><div class="smg-val">7,38x</div></div>
+          <div class="smg-item"><div class="smg-label">DY 12m</div><div class="smg-val text-sage">13,26%</div></div>
+          <div class="smg-item"><div class="smg-label">ROE</div><div class="smg-val">86,84%</div></div>
+          <div class="smg-item"><div class="smg-label">P/VP</div><div class="smg-val">6,41x</div></div>
+          <div class="smg-item"><div class="smg-label">Div.Brt.</div><div class="smg-val text-sage">R$2,61</div></div>
+          <div class="smg-item"><div class="smg-label">Cotação</div><div class="smg-val">R$34,30</div></div>
+        </div>
+        <div class="stock-tese">
+          <strong>Tese Macro:</strong> Seguradora beneficiária direta de Selic elevada — resultado financeiro cresce com CDI alto. Cada 1pp a mais na Selic adiciona ~R$250–350M em resultado financeiro anual. <strong>Tese Fundamental:</strong> ROE excepcional (86,84%), Payout de ~97%, DY de 13,26% é o mais alto do universo entre ações de qualidade. Líquida, baixa necessidade de capital. <strong>Risco:</strong> Resultado operacional pressionado (seguros agrícola e crédito vida com sinistralidade alta); queda de juros penalizaria resultado financeiro. <strong>Convexidade:</strong> Alta defensiva — ganha com o regime atual.
+        </div>
+        <div class="stock-decision">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#888;letter-spacing:1px;">PESO SUGERIDO</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;">20–25%</div>
+          </div>
+          <span class="decision-badge dec-keep">KEEP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stock-card" data-score="78" data-risk="low">
+      <div class="stock-card-header">
+        <div>
+          <div class="ticker">ITUB4</div>
+          <div class="company">Itaú Unibanco · Banco</div>
+        </div>
+        <div class="final-score">78<span>/100</span></div>
+      </div>
+      <div class="stock-card-body">
+        <div class="stock-mini-grid">
+          <div class="smg-item"><div class="smg-label">P/L</div><div class="smg-val">10,05x</div></div>
+          <div class="smg-item"><div class="smg-label">DY 12m</div><div class="smg-val text-sage">8,20%</div></div>
+          <div class="smg-item"><div class="smg-label">ROE</div><div class="smg-val">23,30%</div></div>
+          <div class="smg-item"><div class="smg-label">P/VP</div><div class="smg-val">2,34x</div></div>
+          <div class="smg-item"><div class="smg-label">Liq. 2m</div><div class="smg-val">R$1,51bi</div></div>
+          <div class="smg-item"><div class="smg-label">Cotação</div><div class="smg-val">R$41,60</div></div>
+        </div>
+        <div class="stock-tese">
+          <strong>Tese Macro:</strong> Beneficiário de Selic alta — spread bancário elevado, NIM robusto. Melhor banco privado em qualidade de carteira e custo de risco. <strong>Tese Fundamental:</strong> ROE de 23,3% é o mais alto entre grandes bancos, consistente há anos. Dividendos recorrentes (DY 8,2%). Carteira de crédito bem gerida. <strong>Risco:</strong> Desaceleração econômica comprime crédito; spread pode ceder com queda da Selic no futuro. <strong>Convexidade:</strong> Média-alta — beneficia do regime atual e resiliente na transição.
+        </div>
+        <div class="stock-decision">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#888;letter-spacing:1px;">PESO SUGERIDO</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;">20–25%</div>
+          </div>
+          <span class="decision-badge dec-keep">KEEP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stock-card" data-score="77" data-risk="medium">
+      <div class="stock-card-header">
+        <div>
+          <div class="ticker">PRIO3</div>
+          <div class="company">Prio S.A. · Petróleo</div>
+        </div>
+        <div class="final-score">77<span>/100</span></div>
+      </div>
+      <div class="stock-card-body">
+        <div class="stock-mini-grid">
+          <div class="smg-item"><div class="smg-label">P/L</div><div class="smg-val">27,94x</div></div>
+          <div class="smg-item"><div class="smg-label">EV/EBITDA</div><div class="smg-val">10,78x</div></div>
+          <div class="smg-item"><div class="smg-label">ROIC</div><div class="smg-val">3,94%</div></div>
+          <div class="smg-item"><div class="smg-label">Prod./dia</div><div class="smg-val">149k bbl</div></div>
+          <div class="smg-item"><div class="smg-label">Meta 2026</div><div class="smg-val">200k bbl</div></div>
+          <div class="smg-item"><div class="smg-label">Cotação</div><div class="smg-val">R$72,10</div></div>
+        </div>
+        <div class="stock-tese">
+          <strong>Tese Macro:</strong> Pure play em Brent elevado. Produção em forte crescimento (+46% no 4T25 com Peregrino). Meta de 200k bbl/dia ao fim de 2026, 270k até 2029. FCF yield estimado em 20%+ para 2026. <strong>Tese Fundamental:</strong> Melhor execução operacional entre as junior oils (lifting cost US$9–11/bbl). Histórico de gestão impecável. <strong>Risco:</strong> Valuation esticado (10x EV/EBITDA vs setor ~6x); dívida líquida US$4,3bi (2,3x EBITDA); curva de petróleo de longo prazo. <strong>Convexidade:</strong> Muito alta — a mais convexidade ao cenário Bear (petróleo persistente).
+        </div>
+        <div class="stock-decision">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#888;letter-spacing:1px;">PESO SUGERIDO</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;">10–15%</div>
+          </div>
+          <span class="decision-badge dec-keep">KEEP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stock-card" data-score="76" data-risk="medium" style="grid-column: 1/-1">
+      <div class="stock-card-header">
+        <div>
+          <div class="ticker">SUZB3</div>
+          <div class="company">Suzano S.A. · Papel &amp; Celulose</div>
+        </div>
+        <div class="final-score">76<span>/100</span></div>
+      </div>
+      <div class="stock-card-body">
+        <div class="stock-mini-grid">
+          <div class="smg-item"><div class="smg-label">P/L</div><div class="smg-val">4,77x</div></div>
+          <div class="smg-item"><div class="smg-label">EV/EBIT</div><div class="smg-val">13,20x</div></div>
+          <div class="smg-item"><div class="smg-label">EV/EBITDA</div><div class="smg-val">6,24x</div></div>
+          <div class="smg-item"><div class="smg-label">Mrg. Liq.</div><div class="smg-val">26,81%</div></div>
+          <div class="smg-item"><div class="smg-label">ROE</div><div class="smg-val">30,60%</div></div>
+          <div class="smg-item"><div class="smg-label">Cresc. Rec. 5a</div><div class="smg-val text-sage">3,6%</div></div>
+          <div class="smg-item"><div class="smg-label">P/VP</div><div class="smg-val">1,46x</div></div>
+          <div class="smg-item"><div class="smg-label">Div. Bruta/PL</div><div class="smg-val text-amber">2,16x</div></div>
+          <div class="smg-item"><div class="smg-label">Cotação</div><div class="smg-val">R$50,56</div></div>
+        </div>
+        <div class="stock-tese">
+          <strong>Tese Macro:</strong> Exportadora pura em USD. Dollar strength e dólar a R$5,18 favorecem receita em BRL. Celulose de mercado (BHKP) com demanda asiática firme. Hedge cambial natural para o portfólio — ganha com BRL fraco ou petróleo alto (que pressiona câmbio). <strong>Tese Fundamental:</strong> P/L de 4,77x é o mais barato do Top 5, ROE de 30,6%, margens sólidas (Mrg.Liq. 26,8%). Custo de caixa entre os menores do setor florestal global. <strong>Risco:</strong> Dívida bruta/PL elevada (2,16x) é relevante; alavancagem histórica da empresa. Queda de celulose com recessão chinesa. Hedge de câmbio pode criar perdas pontuais. <strong>Convexidade:</strong> Média-alta — proteção natural contra depreciação do real; ganha em cenários de stress cambial.
+        </div>
+        <div class="stock-decision">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#888;letter-spacing:1px;">PESO SUGERIDO</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;">10–15%</div>
+          </div>
+          <span class="decision-badge dec-new">NEW ENTRY</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 6 — PORTFÓLIO -->
+<!-- ============================================================ -->
+<section id="portfolio">
+  <div class="section-header">
+    <div class="section-number">06</div>
+    <h2 class="section-title">Portfólio Multiativos</h2>
+    <div class="section-sub">MACRO SCORE 50 → ALOCAÇÃO NEUTRA · DEFENSIVO LEVE</div>
+  </div>
+
+  <p class="body-text">Macro Score de 50 enquadra-se na faixa Neutra. O VIX recuou para ~24,5–25,2 e retirou o gatilho técnico de stress agudo. Transition Score 0,58 melhora a leitura forward, sem justificar virada plena. IVVB11 deixa de ser posição meramente residual. Ouro segue como hedge, agora mais por resiliência do que por desconto.</p>
+
+  <!-- VISUAL BAR -->
+  <div class="allocation-visual">
+    <div class="alloc-seg a-equities" style="width:28%">28%<br><span style="font-size:8px">AÇÕES</span></div>
+    <div class="alloc-seg a-ipca-short" style="width:18%">18%<br><span style="font-size:8px">IPCA+CT</span></div>
+    <div class="alloc-seg a-ipca-long" style="width:12%">12%<br><span style="font-size:8px">IPCA+LG</span></div>
+    <div class="alloc-seg a-cdi" style="width:25%">25%<br><span style="font-size:8px">CDI/SELIC</span></div>
+    <div class="alloc-seg a-ivvb" style="width:10%">10%<br><span style="font-size:8px">IVVB11</span></div>
+    <div class="alloc-seg a-gold" style="width:7%">7%<br><span style="font-size:8px">OURO</span></div>
+  </div>
+
+  <div class="alloc-legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--steel-blue)"></div>Ações Brasileiras 28%</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--sage)"></div>IPCA+ Curto Prazo 18%</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#3A7A6A"></div>IPCA+ Longo Prazo 12%</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--graphite-light)"></div>CDI/Selic 25%</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div>IVVB11 10%</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#B8962A"></div>Ouro (GOLD11) 7%</div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Ativo / Classe</th>
+          <th>Instrumento</th>
+          <th>Peso</th>
+          <th>Racional</th>
+          <th>Regime Atual</th>
+          <th>Regime Futuro</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Ações BR — Petróleo</strong></td>
+          <td class="mono">PETR4 + PRIO3</td>
+          <td class="mono bold text-amber">~14%</td>
+          <td>Beneficiárias diretas do choque de Brent; hedge real</td>
+          <td><span class="pill pill-green">FAVORECIDO</span></td>
+          <td><span class="pill pill-amber">REDUZIR SE PAZ</span></td>
+        </tr>
+        <tr>
+          <td><strong>Ações BR — Seguros/Bancos</strong></td>
+          <td class="mono">BBSE3 + ITUB4</td>
+          <td class="mono bold text-amber">~11%</td>
+          <td>Beneficiárias da Selic elevada; defensivo de qualidade</td>
+          <td><span class="pill pill-green">FAVORECIDO</span></td>
+          <td><span class="pill pill-green">MANTER IPCA-LONGO</span></td>
+        </tr>
+        <tr>
+          <td><strong>Ações BR — Celulose</strong></td>
+          <td class="mono">SUZB3</td>
+          <td class="mono bold text-amber">~3%</td>
+          <td>Hedge cambial natural; exportadora pura em USD</td>
+          <td><span class="pill pill-green">FAVORECIDO</span></td>
+          <td><span class="pill pill-amber">MANTER</span></td>
+        </tr>
+        <tr>
+          <td><strong>IPCA+ Curto Prazo</strong></td>
+          <td class="mono">NTN-B 2028–2030</td>
+          <td class="mono bold text-amber">18%</td>
+          <td>Proteção inflacionária real; juro real ~7,2%; duration gerenciável</td>
+          <td><span class="pill pill-green">MUITO FAVORECIDO</span></td>
+          <td><span class="pill pill-green">MANTER</span></td>
+        </tr>
+        <tr>
+          <td><strong>IPCA+ Longo Prazo</strong></td>
+          <td class="mono">NTN-B 2035+</td>
+          <td class="mono bold text-amber">12%</td>
+          <td>Juro real excepcional; proteção inflacionária longa; convexidade ao cenário bull</td>
+          <td><span class="pill pill-green">FAVORECIDO</span></td>
+          <td><span class="pill pill-green">AUMENTAR SE PAZ</span></td>
+        </tr>
+        <tr>
+          <td><strong>CDI / Pós-fixado</strong></td>
+          <td class="mono">Tesouro Selic / LFT / CDB CDI</td>
+          <td class="mono bold text-amber">25%</td>
+          <td>Âncora defensiva; Selic 14,75%; liquidez para rebalanceamento</td>
+          <td><span class="pill pill-green">FAVORECIDO</span></td>
+          <td><span class="pill pill-amber">REDUZIR SE SELIC CAIR</span></td>
+        </tr>
+        <tr>
+          <td><strong>Exterior (EUA)</strong></td>
+          <td class="mono">IVVB11</td>
+          <td class="mono bold text-amber">10%</td>
+          <td>S&P 500 em correção; hedge cambial parcial; manter posição mínima; não usar BDRs agora</td>
+          <td><span class="pill pill-red">PENALIZADO</span></td>
+          <td><span class="pill pill-green">AUMENTAR SE RESOLUÇÃO</span></td>
+        </tr>
+        <tr>
+          <td><strong>Ouro</strong></td>
+          <td class="mono">GOLD11</td>
+          <td class="mono bold text-amber">7%</td>
+          <td>Proteção geopolítica; hedge de cauda; refúgio ainda forte mas tecnicamente atrativo</td>
+          <td><span class="pill pill-amber">NEUTRO</span></td>
+          <td><span class="pill pill-amber">MANTER</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-md"></div>
+  <div class="grid-3">
+    <div class="card sage-top">
+      <div class="card-title">Camada Estratégica</div>
+      <p class="body-text" style="font-size:13px;">Pesos-alvo de longo prazo: Ações 35–45%; IPCA+ 25–30%; CDI 10–15%; Exterior 15–20%; Ouro 5%.</p>
+    </div>
+    <div class="card amber-top">
+      <div class="card-title">Camada Tática (Regime Atual)</div>
+      <p class="body-text" style="font-size:13px;">Ações em 28% (subpeso por VIX&gt;30). CDI em 25% (sobrepeso defensivo). IPCA+ total 30% (sobrepeso). IVVB11 10% (subpeso por S&P em correção).</p>
+    </div>
+    <div class="card steel-top">
+      <div class="card-title">Camada de Risco</div>
+      <p class="body-text" style="font-size:13px;">Máx por ativo: 20%. Máx por setor: 35%. Min liquidez: 25% CDI. Duration ponderada: 3–5 anos. Petróleo: máx 15% em ações.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 7 — TRANSIÇÃO / REGIME FUTURO -->
+<!-- ============================================================ -->
+<section id="transicao">
+  <div class="section-header">
+    <div class="section-number">07</div>
+    <h2 class="section-title">Transição de Regime &amp; Análise Forward</h2>
+    <div class="section-sub">V6 UPGRADE · PREDICTIVE LAYER</div>
+  </div>
+
+  <div class="transition-block">
+    <div class="ts-circle">
+      <div class="ts-inner">
+        <div class="tsn">0.58</div>
+        <div class="tsl">T.SCORE</div>
+      </div>
+    </div>
+    <div class="ts-info">
+      <h4>Transition Score: 0,58 — Neutro construtivo / Estresse menor</h4>
+      <p>O conflito no Oriente Médio continua binário, mas a fotografia de 1º de abril ficou menos estressada: VIX caiu para a faixa de ~24,5–25,2, os yields recuaram e o DXY voltou para baixo de 100. O score de 0,58 reflete melhora parcial dos sinais leading, ainda sem confirmação plena de virada. <strong>Regime atual:</strong> Choque de Commodities em Descompressão · Carry Defensivo. <strong>Regime futuro provável (3–6m):</strong> Desinflação Gradual com Risco Residual de Estagflação. <strong>Probabilidade de transição:</strong> ~60%. <strong>Horizonte:</strong> 1–3 meses.</p>
+    </div>
+  </div>
+
+  <div class="mt-md"></div>
+  <div class="card-title mb-sm">Indicadores Leading — Análise V6</div>
+  <div class="leading-grid">
+    <div class="leading-item">
+      <div class="li-signal" style="color:var(--amber)">🟡 CURVA DE JUROS</div>
+      <div class="li-val">Steepening</div>
+      <div class="li-interp">US10Y recuou para ~4,28–4,30%, aliviando o stress da ponta longa. A curva segue pedindo cautela, mas saiu do pior ponto de pressão.</div>
+    </div>
+    <div class="leading-item">
+      <div class="li-signal" style="color:var(--amber)">🟡 LIQUIDEZ GLOBAL</div>
+      <div class="li-val">Menos restritiva</div>
+      <div class="li-interp">O Fed segue cauteloso, mas a queda recente de yields e do dólar reduziu o aperto marginal. Sinal ainda neutro-negativo para risco.</div>
+    </div>
+    <div class="leading-item">
+      <div class="li-signal" style="color:var(--amber)">🟡 DXY</div>
+      <div class="li-val">~99,35 em queda</div>
+      <div class="li-interp">Dólar abaixo de 100 reduz a penalização típica sobre emergentes. BRL segue resiliente. Sinal marginalmente positivo para Brasil.</div>
+    </div>
+    <div class="leading-item">
+      <div class="li-signal" style="color:var(--sage)">🟢 COMMODITIES</div>
+      <div class="li-val">Petróleo ~US$101</div>
+      <div class="li-interp">Alta por disrupção de oferta, não por demanda. Sinal misto — favorece exportadoras, penaliza consumo global.</div>
+    </div>
+  </div>
+
+  <div class="mt-md"></div>
+  <div class="grid-2">
+    <div class="card amber-top">
+      <div class="card-title">Matriz de Transição</div>
+      <table>
+        <thead><tr><th>Regime Atual</th><th>→ Próximo Regime</th><th>Trigger</th></tr></thead>
+        <tbody>
+          <tr><td>Choque Commodities</td><td class="text-sage">Desinflação Forçada</td><td>Paz + Ormuz reaberto</td></tr>
+          <tr><td>Choque Commodities</td><td class="text-crimson">Estagflação</td><td>Ormuz fechado &gt;60 dias</td></tr>
+          <tr><td>Choque Commodities</td><td class="text-steel">Risk-On moderado</td><td>Queda Brent + Fed dovish</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card steel-top">
+      <div class="card-title">Posicionamento Forward (50% já antecipado)</div>
+      <p class="body-text" style="font-size:13px;margin-bottom:0.5rem;">Com Transition Score 0,58 (neutro construtivo), mantemos o núcleo defensivo, mas já com viés mais favorável ao regime futuro via IPCA+ longo e IVVB11. O portfólio ainda não vira plenamente, porém deixa de operar no extremo defensivo.</p>
+      <p class="body-text" style="font-size:13px;margin-bottom:0;">Se Transition Score subir para &gt;0,65 (confirmação de paz): migrar 20% do CDI para IPCA+ longo e IVVB11. Se &lt;0,35 (escalada): reduzir IVVB11 a zero, elevar CDI a 35%.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 8 — RISCO -->
+<!-- ============================================================ -->
+<section id="risco">
+  <div class="section-header">
+    <div class="section-number">08</div>
+    <h2 class="section-title">Avaliação de Risco &amp; Stress Tests</h2>
+    <div class="section-sub">VOL MODERADA-ALTA · VIX ~25 · DEFENSIVO LEVE</div>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-item">
+      <div class="ri-label">VOL. ESPERADA CARTEIRA</div>
+      <div class="ri-val">~12–15%</div>
+      <div class="ri-sub">Anualizada. Ainda elevada pelo VIX acima da média e pelo peso de petróleo</div>
+    </div>
+    <div class="risk-item">
+      <div class="ri-label">DRAWDOWN MÁXIMO ESPERADO</div>
+      <div class="ri-val">−12 a −18%</div>
+      <div class="ri-sub">Cenário Bear: Ormuz fechado 90 dias</div>
+    </div>
+    <div class="risk-item">
+      <div class="ri-label">CONCENTRAÇÃO MÁXIMA</div>
+      <div class="ri-val">20% / ativo</div>
+      <div class="ri-sub">PETR4 em 14%; BBSE3 em 9%</div>
+    </div>
+    <div class="risk-item">
+      <div class="ri-label">DURATION PONDERADA</div>
+      <div class="ri-val">~3,5 anos</div>
+      <div class="ri-sub">IPCA+ curto reduz sensibilidade a juros</div>
+    </div>
+    <div class="risk-item">
+      <div class="ri-label">LIQUIDEZ MÍNIMA</div>
+      <div class="ri-val">25% CDI</div>
+      <div class="ri-sub">Resgate imediato. Acima do mínimo regulamentar</div>
+    </div>
+    <div class="risk-item">
+      <div class="ri-label">EXPOSIÇÃO CAMBIAL (USD)</div>
+      <div class="ri-val">~30%</div>
+      <div class="ri-sub">PETR4+PRIO3+SUZB3+IVVB11+GOLD11</div>
+    </div>
+  </div>
+
+  <div class="mt-md"></div>
+  <div class="card amber-top">
+    <div class="card-title">Stress Tests Conceituais</div>
+    <table>
+      <thead><tr><th>Cenário de Stress</th><th>Impacto Estimado</th><th>Mitigação</th></tr></thead>
+      <tbody>
+        <tr><td>Brent → US$180 (Ormuz 90d)</td><td class="mono text-sage">+8 a +12% na carteira</td><td>PETR4/PRIO3/SUZB3 compensam IVVB11</td></tr>
+        <tr><td>Paz Imediata / Brent → US$65</td><td class="mono text-crimson">−5 a −8% em ações petróleo</td><td>IPCA+ longo e CDI como âncora</td></tr>
+        <tr><td>VIX → 45+ (crise sistêmica)</td><td class="mono text-crimson">−15 a −20% na carteira</td><td>CDI 25% protege; ouro pode subir</td></tr>
+        <tr><td>BRL → R$6,00 (choque cambial)</td><td class="mono text-sage">+5 a +8% (exportadoras + IVVB11)</td><td>Hedge cambial natural embutido</td></tr>
+        <tr><td>Selic sobe para 16%</td><td class="mono text-amber">Neutro: CDI sobe, IPCA+ cai</td><td>Duration curta no IPCA+ limita perda</td></tr>
+        <tr><td>Intervenção PETR4 (eleições)</td><td class="mono text-crimson">−3 a −5% na carteira</td><td>PRIO3 é alternativa sem risco estatal</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 9 — REBALANCEAMENTO -->
+<!-- ============================================================ -->
+<section id="rebalanceamento">
+  <div class="section-header">
+    <div class="section-number">09</div>
+    <h2 class="section-title">Regras de Rebalanceamento</h2>
+    <div class="section-sub">GATILHOS OBJETIVOS · ANTECIPAÇÃO DE REGIME V6</div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card crimson-top">
+      <div class="card-title">Gatilhos de Redução de Risco</div>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:8px 0;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:10px;">🔴 VIX &gt; 35 → Ações ≤ 20%, CDI ≥ 40%</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:10px;">🔴 CDS Brasil &gt; 250 bps → Reduzir duration 50%</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:10px;">🔴 US10Y &gt; 5,5% → IVVB11 → 0%</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:10px;">🔴 Brent &gt; US$150 → Reduzir petróleo (lucro parcial)</li>
+        <li style="padding:8px 0;font-family:'JetBrains Mono',monospace;font-size:10px;">🔴 Transition Score cair &lt; 0,3 → Posição conservadora total</li>
+      </ul>
+    </div>
+    <div class="card sage-top">
+      <div class="card-title">Gatilhos de Aumento de Risco</div>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:8px 0;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:10px;">🟢 Ormuz reaberto oficialmente → +10% IVVB11, +5% IPCA+ Longo</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:10px;">🟢 VIX &lt; 20 → Ações ≤ 40%, CDI ≤ 15%</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:10px;">🟢 Selic &lt; 13% → IPCA+ Longo +10%, CDI −10%</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:10px;">🟢 DI longo fechando 50bps → Rotação para cíclicas domésticas</li>
+        <li style="padding:8px 0;font-family:'JetBrains Mono',monospace;font-size:10px;">🟢 Transition Score &gt; 0,65 → 50% para regime futuro</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mt-md"></div>
+  <div class="card amber-top">
+    <div class="card-title">Plano de Migração — Regime Atual → Futuro (Base: Paz + Desinflação)</div>
+    <table>
+      <thead><tr><th>Ativo</th><th>Peso Atual</th><th>Peso Alvo (Pós-Paz)</th><th>Ação</th><th>Timing</th></tr></thead>
+      <tbody>
+        <tr><td>PETR4 + PRIO3</td><td class="mono">14%</td><td class="mono">8%</td><td><span class="pill pill-red">REDUZIR</span></td><td>Após confirmação de cessar-fogo</td></tr>
+        <tr><td>SUZB3</td><td class="mono">3%</td><td class="mono">5%</td><td><span class="pill pill-green">AUMENTAR</span></td><td>Manter — beneficiária em ambos</td></tr>
+        <tr><td>CDI / Selic</td><td class="mono">25%</td><td class="mono">12%</td><td><span class="pill pill-red">REDUZIR FORTE</span></td><td>Após Copom sinalizar aceleração</td></tr>
+        <tr><td>IPCA+ Longo (NTN-B 2035+)</td><td class="mono">12%</td><td class="mono">22%</td><td><span class="pill pill-green">AUMENTAR FORTE</span></td><td>Antecipado parcialmente já</td></tr>
+        <tr><td>IVVB11</td><td class="mono">10%</td><td class="mono">20%</td><td><span class="pill pill-green">AUMENTAR</span></td><td>Após VIX &lt;25</td></tr>
+        <tr><td>BBSE3 + ITUB4</td><td class="mono">11%</td><td class="mono">8%</td><td><span class="pill pill-amber">NEUTRO</span></td><td>Manter — ainda beneficiárias</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 10 — TRACKING MENSAL -->
+<!-- ============================================================ -->
+<section id="tracking">
+  <div class="section-header">
+    <div class="section-number">10</div>
+    <h2 class="section-title">Tracking Mensal — Módulo Automático</h2>
+    <div class="section-sub">CHECK SEMANAL / MENSAL</div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card steel-top">
+      <div class="card-title">Variáveis a Monitorar Semanalmente</div>
+      <table>
+        <thead><tr><th>Variável</th><th>Limiar de Ação</th></tr></thead>
+        <tbody>
+          <tr><td>Brent (USD/bbl)</td><td class="mono">&gt;130 reduzir ; &lt;80 aumentar</td></tr>
+          <tr><td>VIX</td><td class="mono">&gt;35 defensivo ; &lt;20 risco</td></tr>
+          <tr><td>USD/BRL</td><td class="mono">&gt;5,50 aumentar hedge ; &lt;5,00 reduzir</td></tr>
+          <tr><td>Selic (Copom)</td><td class="mono">Ritmo &lt;0,50pp → reavaliar CDI</td></tr>
+          <tr><td>CDS Brasil 5Y</td><td class="mono">&gt;250 bps → modo defensivo</td></tr>
+          <tr><td>Status Ormuz</td><td class="mono">Reabertura → rebalancear</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card sage-top">
+      <div class="card-title">Verificações Mensais</div>
+      <table>
+        <thead><tr><th>Check</th><th>Fonte</th></tr></thead>
+        <tbody>
+          <tr><td>Regime macro mudou?</td><td class="mono">Focus + macro web</td></tr>
+          <tr><td>Scores das ações atualizados?</td><td class="mono">Fundamentos RI/4Ts</td></tr>
+          <tr><td>Transition Score recalculado?</td><td class="mono">Leading indicators</td></tr>
+          <tr><td>Pesos dentro dos limites?</td><td class="mono">Regra 20%/ativo</td></tr>
+          <tr><td>Resultado das ações do portfólio?</td><td class="mono">RI, resultados</td></tr>
+          <tr><td>Focus revisado (Inflação/Selic)?</td><td class="mono">BCB segunda-feira</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 11 — BACKTEST -->
+<!-- ============================================================ -->
+<section id="backtest">
+  <div class="section-header">
+    <div class="section-number">11</div>
+    <h2 class="section-title">Backtest Conceitual &amp; Framework Histórico</h2>
+    <div class="section-sub">SEM HISTÓRICO ANTERIOR · FRAMEWORK DE REFERÊNCIA</div>
+  </div>
+
+  <p class="body-text">Este é o primeiro relatório do sistema. Sem histórico de carteiras anteriores para attribution. O framework a seguir estabelece a referência para avaliação futura.</p>
+
+  <div class="grid-3">
+    <div class="card amber-top">
+      <div class="card-title">Benchmark Definido</div>
+      <ul style="list-style:none;padding:0;font-family:'EB Garamond',serif;font-size:13.5px;">
+        <li style="padding:5px 0;border-bottom:1px solid var(--border);">50% CDI</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--border);">30% Ibovespa</li>
+        <li style="padding:5px 0;">20% IPCA+5%</li>
+      </ul>
+    </div>
+    <div class="card sage-top">
+      <div class="card-title">Análise Histórica Análoga</div>
+      <p class="body-text" style="font-size:13px;">Choques de petróleo análogos (1973, 1979, 1990, 2022): exportadoras outperformam em 12–24 meses. CDI supera Ibovespa nos primeiros 6 meses. IPCA+ longo gera alpha na normalização.</p>
+    </div>
+    <div class="card steel-top">
+      <div class="card-title">Custo de Antecipação (V6)</div>
+      <p class="body-text" style="font-size:13px;">Antecipar paz antes do mercado: alpha potencial de 5–15% no IPCA+ longo. Custo de carregar posição antecipada: perda de carrego CDI por ~30 dias (~1,2%). Relação risco/retorno favorável se timing correto.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 12 — DECISÕES OPERACIONAIS -->
+<!-- ============================================================ -->
+<section id="decisoes">
+  <div class="section-header">
+    <div class="section-number">12</div>
+    <h2 class="section-title">Decisões Operacionais — Abril 2026</h2>
+    <div class="section-sub">PLANO DE AÇÃO MENSAL</div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Ativo</th>
+          <th>Decisão</th>
+          <th>Motivação</th>
+          <th>Baseada em</th>
+          <th>Urgência</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono bold">PETR4</td>
+          <td><span class="decision-badge dec-keep" style="font-size:10px;padding:2px 8px;">MANTER / LEVE AUMENTO</span></td>
+          <td>Brent elevado; dividendos em 22/abr e 22/jun; múltiplos baratos</td>
+          <td>Regime Atual</td>
+          <td><span class="pill pill-amber">MÉDIA</span></td>
+        </tr>
+        <tr>
+          <td class="mono bold">PRIO3</td>
+          <td><span class="decision-badge dec-keep" style="font-size:10px;padding:2px 8px;">MANTER</span></td>
+          <td>Produção crescendo; FCF yield alto; valuation já esticado — não aumentar</td>
+          <td>Regime Atual</td>
+          <td><span class="pill pill-gray">BAIXA</span></td>
+        </tr>
+        <tr>
+          <td class="mono bold">BBSE3</td>
+          <td><span class="decision-badge dec-keep" style="font-size:10px;padding:2px 8px;">MANTER</span></td>
+          <td>DY &gt;13%; Selic elevada sustenta resultado financeiro; defensivo</td>
+          <td>Regime Atual</td>
+          <td><span class="pill pill-gray">BAIXA</span></td>
+        </tr>
+        <tr>
+          <td class="mono bold">ITUB4</td>
+          <td><span class="decision-badge dec-keep" style="font-size:10px;padding:2px 8px;">MANTER</span></td>
+          <td>Melhor ROE entre bancões; spread alto com Selic 14,75%</td>
+          <td>Regime Atual</td>
+          <td><span class="pill pill-gray">BAIXA</span></td>
+        </tr>
+        <tr>
+          <td class="mono bold">SUZB3</td>
+          <td><span class="decision-badge dec-new" style="font-size:10px;padding:2px 8px;">NOVA ENTRADA</span></td>
+          <td>P/L 4,77x; hedge cambial; exportadora; P/L mais barato do Top 5</td>
+          <td>Valuation + Macro</td>
+          <td><span class="pill pill-green">ALTA</span></td>
+        </tr>
+        <tr>
+          <td class="mono bold">NTN-B 2028–2030</td>
+          <td><span class="decision-badge dec-keep" style="font-size:10px;padding:2px 8px;">MANTER / AUMENTAR</span></td>
+          <td>Juro real ~7,2%; inflação pressionando; proteção real sólida</td>
+          <td>Regime Atual + Futuro</td>
+          <td><span class="pill pill-green">ALTA</span></td>
+        </tr>
+        <tr>
+          <td class="mono bold">NTN-B 2035+</td>
+          <td><span class="decision-badge dec-keep" style="font-size:10px;padding:2px 8px;">MANTER (ANTECIPADO)</span></td>
+          <td>50% do peso ideal já antecipado para regime futuro. Convexidade ao cenário paz.</td>
+          <td>Regime Futuro (V6)</td>
+          <td><span class="pill pill-amber">MÉDIA</span></td>
+        </tr>
+        <tr>
+          <td class="mono bold">CDI / LFT</td>
+          <td><span class="decision-badge dec-reduce" style="font-size:10px;padding:2px 8px;">NÃO REDUZIR AGORA</span></td>
+          <td>Manter 25% como âncora e liquidez para rebalanceamento oportuno</td>
+          <td>Regime Atual · Defensivo</td>
+          <td><span class="pill pill-gray">BAIXA</span></td>
+        </tr>
+        <tr>
+          <td class="mono bold">IVVB11</td>
+          <td><span class="decision-badge dec-keep" style="font-size:10px;padding:2px 8px;">MANTER</span></td>
+          <td>S&P 500 reagiu e o VIX recuou para ~25. Mantém função de call para paz, sem exigir aumento agressivo imediato.</td>
+          <td>Regime Atual</td>
+          <td><span class="pill pill-gray">BAIXA</span></td>
+        </tr>
+        <tr>
+          <td class="mono bold">GOLD11</td>
+          <td><span class="decision-badge dec-keep" style="font-size:10px;padding:2px 8px;">MANTER</span></td>
+          <td>refúgio ainda forte cria assimetria. Seguro geopolítico barato no nível atual.</td>
+          <td>Risco de Cauda</td>
+          <td><span class="pill pill-amber">MÉDIA</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 13 — AJUSTES DO MODELO -->
+<!-- ============================================================ -->
+<section id="ajustes">
+  <div class="section-header">
+    <div class="section-number">13</div>
+    <h2 class="section-title">Ajustes do Modelo &amp; Diagnóstico</h2>
+    <div class="section-sub">V5.1 → V10 · SEM HISTÓRICO ANTERIOR</div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card amber-top">
+      <div class="card-title">Pesos Adaptativos (Sem Histórico)</div>
+      <p class="body-text" style="font-size:13px;">Sem relatório anterior disponível, mantemos os pesos-base do V5.1 sem ajuste histórico:</p>
+      <table style="margin-top:0.75rem;">
+        <thead><tr><th>Dimensão</th><th>Peso Base</th><th>Justificativa</th></tr></thead>
+        <tbody>
+          <tr><td>Macro</td><td class="mono">35%</td><td>Choque geopolítico domina</td></tr>
+          <tr><td>Fundamental</td><td class="mono">30%</td><td>Padrão — qualidade sempre importa</td></tr>
+          <tr><td>Valuation</td><td class="mono">20%</td><td>Padrão — múltiplos relevantes</td></tr>
+          <tr><td>Risk</td><td class="mono">15%</td><td>Padrão — VIX ainda acima da média mantém importância</td></tr>
+          <tr><td>Transition</td><td class="mono">0%</td><td>Score 0,58 (neutro construtivo) — começa a ganhar relevância</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card sage-top">
+      <div class="card-title">Qualidade dos Dados</div>
+      <table style="margin-top:0;">
+        <thead><tr><th>Dado</th><th>Fonte</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Selic / COPOM</td><td class="mono">BCB (Oficial)</td><td><span class="pill pill-green">OK</span></td></tr>
+          <tr><td>IPCA / Focus</td><td class="mono">BCB (Oficial)</td><td><span class="pill pill-green">OK</span></td></tr>
+          <tr><td>Brent / Petróleo</td><td class="mono">Reuters/Bloomberg</td><td><span class="pill pill-green">OK</span></td></tr>
+          <tr><td>VIX / US Markets</td><td class="mono">CBOE / NYSE</td><td><span class="pill pill-green">OK</span></td></tr>
+          <tr><td>Fundamentos (tickers)</td><td class="mono">Usuário (Fundamentei)</td><td><span class="pill pill-amber">USER INPUT ▲</span></td></tr>
+          <tr><td>DY BBSE3 (13,26%)</td><td class="mono">SI (12m histórico)</td><td><span class="pill pill-green">OK</span></td></tr>
+          <tr><td>CDS Brasil exato</td><td class="mono">Inferido ~175bps</td><td><span class="pill pill-amber">ESTIMADO</span></td></tr>
+          <tr><td>DXY exato</td><td class="mono">~104 (Investing.com)</td><td><span class="pill pill-green">OK</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 14 — FONTES -->
+<!-- ============================================================ -->
+<section id="fontes">
+  <div class="section-header">
+    <div class="section-number">14</div>
+    <h2 class="section-title">Fontes &amp; Referências</h2>
+  </div>
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-title">Fontes Oficiais</div>
+      <ul style="font-family:'EB Garamond',serif;font-size:13px;padding-left:1rem;line-height:2;">
+        <li>BCB — Boletim Focus (30/03/2026)</li>
+        <li>BCB — Nota Copom (18/03/2026)</li>
+        <li>B3 — Dados de mercado</li>
+        <li>IBGE — IPCA</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Fontes de Mercado</div>
+      <ul style="font-family:'EB Garamond',serif;font-size:13px;padding-left:1rem;line-height:2;">
+        <li>Reuters — Petróleo, Ibovespa, câmbio</li>
+        <li>Investing.com — VIX, DXY, Brent, Gold</li>
+        <li>Trading Economics — Brent histórico</li>
+        <li>Status Invest — Cotações PETR4, BBSE3</li>
+        <li>Usuário — Fundamentei (tickers fornecidos)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Fontes de Mídia/Research</div>
+      <ul style="font-family:'EB Garamond',serif;font-size:13px;padding-left:1rem;line-height:2;">
+        <li>CNN Brasil — Conflito Irã, Wall Street</li>
+        <li>Nord Investimentos — PRIO3, PETR4 4T25</li>
+        <li>Monitor Mercantil — Análises setoriais</li>
+        <li>Times Brasil/CNBC — Citi Brasil 2026</li>
+        <li>Wikipedia — Guerra Irã 2026, Ormuz</li>
+        <li>Suno Research — Focus análise</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</div><!-- /wrapper -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Macro-Quant V10</div>
+      <div class="footer-meta">SISTEMA INSTITUCIONAL DE ANÁLISE</div>
+      <div class="footer-meta" style="margin-top:4px;">DATA DE REFERÊNCIA: 01/04/2026</div>
+      <div class="footer-meta" style="margin-top:4px;">GERADO POR: CLAUDE SONNET (ANTHROPIC)</div>
+    </div>
+    <div class="disclaimer">
+      Este relatório é produzido por um sistema de inteligência artificial com base em dados públicos disponíveis na data de referência. Não constitui recomendação de investimento personalizada, consultoria financeira ou oferta de compra e venda de ativos. As análises e projeções são de natureza informativa e educacional. Decisões de investimento devem ser tomadas com base em análise própria, objetivos individuais e consultoria profissional qualificada. Dados de mercado podem apresentar defasagem. Rentabilidade passada não garante resultados futuros. Investimentos em renda variável envolvem risco de perda do capital investido.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
