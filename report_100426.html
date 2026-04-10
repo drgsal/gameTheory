@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Macro-Quantitativo | 10 Abril 2026 | Fusão Final</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap');
+:root {
+  --ivory:#F8F5EE; --graphite:#2A2A2A; --graphite-mid:#4A4A4A; --graphite-light:#7A7A7A;
+  --amber:#C8922A; --amber-light:#E8B84A; --sage:#5C7A5E; --sage-light:#7A9E7C;
+  --crimson:#8B2020; --steel-blue:#1F3A5C; --warn-orange:#C85820; --border:#D5CCBA;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { background:var(--ivory); color:var(--graphite); font-family:'EB Garamond', Georgia, serif; font-size:15px; line-height:1.7; }
+nav { position:sticky; top:0; z-index:100; background:var(--graphite); padding:0 2rem; display:flex; align-items:center; gap:0; border-bottom:2px solid var(--amber); overflow-x:auto; white-space:nowrap; }
+nav .brand { font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--amber); letter-spacing:2px; padding:0.9rem 1.5rem 0.9rem 0; border-right:1px solid #444; margin-right:0.5rem; flex-shrink:0; }
+nav a { font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:1px; color:#AAA; text-decoration:none; padding:0.9rem 0.85rem; }
+.cover { background:var(--graphite); color:var(--ivory); padding:5rem 4rem 4rem; position:relative; }
+.cover::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--warn-orange) 0%, var(--amber) 40%, var(--sage) 80%, var(--steel-blue) 100%); }
+.cover-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr auto; gap:3rem; align-items:start; }
+.cover-meta, .section-label, .mc-label, .cs-label, .score-title, .sc-label, thead th { font-family:'JetBrains Mono', monospace; }
+.cover-meta { font-size:10px; letter-spacing:2px; color:var(--amber); text-transform:uppercase; margin-bottom:1.5rem; }
+.cover h1 { font-family:'Playfair Display', serif; font-size:3.2rem; font-weight:700; line-height:1.1; margin-bottom:0.75rem; }
+.cover .subtitle { font-size:1.1rem; color:#AAA; margin-bottom:2rem; font-style:italic; max-width:640px; }
+.regime-strip { display:flex; gap:1px; margin-bottom:2.5rem; background:#444; border-radius:4px; overflow:hidden; max-width:760px; }
+.regime-block { flex:1; padding:0.8rem 1.2rem; background:#333; }
+.regime-block .rbl { font-family:'JetBrains Mono', monospace; font-size:9px; letter-spacing:1.5px; color:#777; text-transform:uppercase; margin-bottom:0.3rem; }
+.regime-block .rbv { font-family:'Playfair Display', serif; font-size:1rem; color:var(--ivory); font-weight:600; }
+.regime-block.current .rbv { color:var(--warn-orange); }
+.regime-block.projected .rbv { color:var(--sage-light); }
+.regime-block.arrow { flex:0 0 40px; display:flex; align-items:center; justify-content:center; color:var(--amber); font-size:1.2rem; background:#2A2A2A; }
+.kpi-row { display:grid; grid-template-columns:repeat(4, 1fr); gap:1px; background:#3A3A3A; border-radius:4px; overflow:hidden; }
+.kpi-cell { background:#333; padding:0.8rem 1rem; }
+.kl { font-family:'JetBrains Mono', monospace; font-size:9px; color:#777; letter-spacing:1px; text-transform:uppercase; margin-bottom:0.25rem; }
+.kv { font-family:'JetBrains Mono', monospace; font-size:1.1rem; font-weight:700; color:var(--amber-light); }
+.kd { font-size:11px; color:#888; font-family:'JetBrains Mono', monospace; }
+.cover-sidebar { background:rgba(255,255,255,0.04); border:1px solid #3A3A3A; border-radius:4px; padding:1.5rem; min-width:280px; }
+.cs-item { margin-bottom:1rem; padding-bottom:1rem; border-bottom:1px solid #3A3A3A; }
+.cs-item:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
+.cs-label { font-size:9px; color:#666; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:0.3rem; }
+.cs-value { font-family:'JetBrains Mono', monospace; font-size:1.2rem; font-weight:700; }
+.positive { color:var(--sage-light); } .warning { color:var(--amber-light); } .danger { color:var(--warn-orange); }
+.alert-banner { background:linear-gradient(135deg,#3D1A0A 0%, #2A1505 100%); border-left:4px solid var(--warn-orange); padding:1.2rem 2rem; }
+.alert-text { font-family:'JetBrains Mono', monospace; font-size:11px; color:#FFC080; letter-spacing:0.5px; line-height:1.6; max-width:1200px; margin:0 auto; }
+section { padding:4rem 4rem; border-bottom:1px solid var(--border); }
+.section-inner { max-width:1200px; margin:0 auto; }
+.section-label { font-size:10px; letter-spacing:3px; color:var(--amber); text-transform:uppercase; margin-bottom:0.5rem; }
+h2 { font-family:'Playfair Display', serif; font-size:2rem; font-weight:700; margin-bottom:0.5rem; color:var(--graphite); }
+h3 { font-family:'Playfair Display', serif; font-size:1.3rem; font-weight:600; margin-bottom:0.75rem; color:var(--graphite); margin-top:2rem; }
+.section-lead { font-size:1.05rem; color:var(--graphite-mid); font-style:italic; margin-bottom:2.5rem; border-bottom:1px solid var(--border); padding-bottom:1.5rem; max-width:880px; }
+.macro-grid, .two-col, .scenario-grid { display:grid; gap:1.5rem; }
+.macro-grid { grid-template-columns:repeat(3,1fr); margin-bottom:2rem; }
+.two-col { grid-template-columns:repeat(2,1fr); }
+.macro-card, .list-block, .note-card { background:white; border:1px solid var(--border); border-radius:3px; padding:1.25rem; border-top:3px solid var(--amber); }
+.macro-card.bullish { border-top-color:var(--sage); } .macro-card.warning { border-top-color:var(--warn-orange); } .macro-card.bearish { border-top-color:var(--crimson); }
+.mc-label { font-size:9px; letter-spacing:1.5px; color:var(--graphite-light); text-transform:uppercase; margin-bottom:0.4rem; }
+.mc-value { font-family:'JetBrains Mono', monospace; font-size:1.4rem; font-weight:700; color:var(--graphite); margin-bottom:0.3rem; }
+.mc-sub { font-size:12px; color:var(--graphite-light); }
+.score-section { background:var(--graphite); color:var(--ivory); border-radius:4px; padding:2rem; margin-bottom:2rem; }
+.score-title { font-size:10px; letter-spacing:2px; color:var(--amber); margin-bottom:1.5rem; text-transform:uppercase; }
+.score-components { display:grid; grid-template-columns:repeat(5,1fr); gap:1rem; margin-bottom:1.5rem; }
+.sc-item { text-align:center; } .sc-label { font-size:9px; color:#888; letter-spacing:1px; margin-bottom:0.5rem; text-transform:uppercase; }
+.sc-score { font-family:'JetBrains Mono', monospace; font-size:1.6rem; font-weight:700; color:var(--amber-light); }
+.sc-weight { font-size:10px; color:#666; font-family:'JetBrains Mono', monospace; }
+.score-bar-wrap { background:#444; border-radius:2px; height:6px; margin:0.4rem 0; } .score-bar { height:6px; border-radius:2px; background:var(--amber); }
+.score-total { display:flex; align-items:center; gap:2rem; border-top:1px solid #444; padding-top:1.5rem; }
+.st-big { font-family:'JetBrains Mono', monospace; font-size:3rem; font-weight:700; color:var(--amber-light); line-height:1; }
+.st-label { font-family:'Playfair Display', serif; font-size:1.4rem; color:var(--warn-orange); font-weight:600; }
+.st-desc { font-size:13px; color:#888; max-width:460px; }
+table { width:100%; border-collapse:collapse; font-size:13px; background:white; }
+thead th { background:var(--graphite); color:var(--ivory); font-size:10px; letter-spacing:1px; text-transform:uppercase; padding:0.75rem 1rem; text-align:left; }
+tbody tr:nth-child(even) { background:#FAFAF7; } tbody tr:hover { background:#F3F0E8; }
+td { padding:0.65rem 1rem; border-bottom:1px solid #EEEAE0; vertical-align:middle; }
+td.mono { font-family:'JetBrains Mono', monospace; font-size:12px; }
+.table-wrap { border:1px solid var(--border); border-radius:3px; overflow:hidden; margin-bottom:2rem; }
+.badge { display:inline-block; padding:0.2rem 0.6rem; border-radius:2px; font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.5px; font-weight:700; text-transform:uppercase; }
+.badge.muito-fav { background:#1A3A1C; color:#6FBF73; } .badge.fav { background:#1A2E1C; color:var(--sage-light); }
+.badge.neutro { background:#2A2A1A; color:#CCC; } .badge.prej { background:#3A1A1A; color:#E07070; }
+.badge.keep { background:#1C2E3C; color:#70B4E0; } .badge.increase { background:#1A3A1C; color:#6FBF73; }
+.badge.reduce { background:#3A2A1A; color:#E0A040; } .badge.exit { background:#3A1A1A; color:#E07070; }
+.badge.new { background:#2A1A3A; color:#B070E0; }
+.top5-grid { display:grid; grid-template-columns:repeat(5, 1fr); gap:1rem; margin-bottom:2rem; }
+.stock-card { background:white; border:1px solid var(--border); border-radius:3px; overflow:hidden; }
+.stock-card .sc-top { background:var(--graphite); color:var(--ivory); padding:0.9rem 1rem; }
+.sc-ticker { font-family:'JetBrains Mono', monospace; font-size:1.1rem; font-weight:700; color:var(--amber-light); margin-bottom:0.15rem; }
+.sc-company { font-size:12px; color:#AAA; font-style:italic; }
+.sc-body-inner { padding:0.9rem; }
+.metric-row { display:flex; justify-content:space-between; padding:0.2rem 0; font-family:'JetBrains Mono', monospace; font-size:10px; border-bottom:1px solid #F0EDE5; gap:10px; }
+.metric-row:last-child { border-bottom:none; } .ml { color:var(--graphite-light); } .mv { color:var(--graphite); font-weight:700; text-align:right; }
+.list-block .lb-title { font-family:'JetBrains Mono', monospace; font-size:10px; color:var(--amber); text-transform:uppercase; letter-spacing:1px; margin-bottom:0.7rem; }
+.lb-item { font-size:14px; margin-bottom:0.5rem; } .lb-bullet { color:var(--amber); margin-right:0.4rem; }
+.footer-inner { max-width:1200px; margin:0 auto; padding:2rem 4rem 4rem; color:var(--graphite-light); font-size:12px; }
+.footer-brand { font-family:'JetBrains Mono', monospace; letter-spacing:1px; color:var(--graphite); margin-bottom:0.5rem; }
+@media (max-width: 1100px) {
+  .cover-grid,.two-col,.macro-grid,.top5-grid,.score-components { grid-template-columns:1fr 1fr; }
+}
+@media (max-width: 800px) {
+  section,.cover { padding:2rem 1.25rem; }
+  .cover-grid,.two-col,.macro-grid,.top5-grid,.score-components,.kpi-row { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="brand">MACRO·QUANT EXECUTION · FUSÃO FINAL</div>
+  <a href="#macro">Macro</a>
+  <a href="#focus">Focus</a>
+  <a href="#dados">Dados</a>
+  <a href="#setores">Setores</a>
+  <a href="#top20">Top 20</a>
+  <a href="#top5">Top 5</a>
+  <a href="#portfolio">Portfólio</a>
+  <a href="#historico">Histórico</a>
+  <a href="#decisoes">Decisões</a>
+  <a href="#tracking">Tracking</a>
+  <a href="#fontes">Fontes</a>
+</nav>
+
+<section class="cover">
+  <div class="cover-grid">
+    <div>
+      <div class="cover-meta">Brasil · 10 de Abril de 2026 · Arbitragem Técnica entre Relatórios</div>
+      <h1>Transição seletiva <em>com defesa ainda relevante</em></h1>
+      <div class="subtitle">O cessar-fogo retirou o pico do prêmio de risco, mas não normalizou o sistema. Brent saiu do extremo, VIX voltou abaixo de 20 e o real se fortaleceu, porém Ormuz segue muito aquém da normalidade. O cenário mais coerente já não é petróleo concentrado nem risk-on pleno: é rotação para qualidade doméstica, carry ainda alto, duration real intermediária e proteção residual.</div>
+
+      <div class="regime-strip">
+        <div class="regime-block">
+          <div class="rbl">Regime Anterior</div>
+          <div class="rbv">Choque de commodities inflacionário</div>
+        </div>
+        <div class="regime-block arrow">→</div>
+        <div class="regime-block current">
+          <div class="rbl">Regime Atual</div>
+          <div class="rbv">Risk-on seletivo em transição pós-choque</div>
+        </div>
+        <div class="regime-block arrow">→</div>
+        <div class="regime-block projected">
+          <div class="rbl">Regime Projetado</div>
+          <div class="rbv">Desinflação com crescimento moderado</div>
+        </div>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi-cell"><div class="kl">Macro Score</div><div class="kv">55,4/100</div><div class="kd">Neutro positivo</div></div>
+        <div class="kpi-cell"><div class="kl">Focus Score</div><div class="kv">53/100</div><div class="kd">Misto, mas melhorando</div></div>
+        <div class="kpi-cell"><div class="kl">Confiança</div><div class="kv">0,70</div><div class="kd">Média/Alta</div></div>
+        <div class="kpi-cell"><div class="kl">Portfolio Score</div><div class="kv">74/100</div><div class="kd">Adequado</div></div>
+      </div>
+    </div>
+
+    <div class="cover-sidebar">
+      <div class="cs-item"><div class="cs-label">Selic-alvo oficial</div><div class="cs-value warning">14,75%</div></div>
+      <div class="cs-item"><div class="cs-label">Selic efetiva input</div><div class="cs-value">14,37%</div></div>
+      <div class="cs-item"><div class="cs-label">Brent input</div><div class="cs-value warning">US$ 95,7</div></div>
+      <div class="cs-item"><div class="cs-label">VIX input</div><div class="cs-value positive">19,98</div></div>
+      <div class="cs-item"><div class="cs-label">USD/BRL input</div><div class="cs-value positive">5,069</div></div>
+      <div class="cs-item"><div class="cs-label">Ibovespa input</div><div class="cs-value positive">194.977</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="alert-banner"><div class="alert-text"><strong>ALERTA TÁTICO:</strong> o modo defensivo extremo foi desativado, mas a proteção de cauda não pode ser zerada. VIX abaixo de 20, DXY abaixo de 100 e Brent em correção validam a transição; Ormuz ainda muito abaixo da operação normal e a fragilidade do cessar-fogo impedem migração agressiva para beta alto.</div></div>
+
+<section id="macro">
+  <div class="section-inner">
+    <div class="section-label">Etapa 1/2 · Macro e Regime</div>
+    <h2>Leitura macroeconômica consolidada</h2>
+    <div class="section-lead">A arbitragem final privilegia os dados de mercado e a coerência entre diagnóstico e alocação. O cenário-base deixa de ser “petróleo puro” e também rejeita o salto prematuro para risk-on pleno. O ponto correto é um regime de transição: juros domésticos ainda altos, prêmio geopolítico menor, mas não encerrado.</div>
+
+    <div class="macro-grid">
+      <div class="macro-card bullish"><div class="mc-label">Brasil</div><div class="mc-value">Carry ainda muito alto</div><div class="mc-sub">Selic-alvo em 14,75%, curva curta já abaixo da Selic e Focus ainda apontando 12,50% no fim de 2026.</div></div>
+      <div class="macro-card warning"><div class="mc-label">Geopolítica</div><div class="mc-value">Risco caiu, não sumiu</div><div class="mc-sub">Ceasefire existe, mas Ormuz segue severamente restrito e o prêmio de risco residual continua relevante.</div></div>
+      <div class="macro-card bullish"><div class="mc-label">Mercados</div><div class="mc-value">Descompressão clara</div><div class="mc-sub">VIX em 19,98, Brent em US$95,7, DXY em 98,78 e Ibovespa em máxima histórica formam um conjunto melhor que o da semana anterior.</div></div>
+      <div class="macro-card warning"><div class="mc-label">Inflação</div><div class="mc-value">Desconforto moderado</div><div class="mc-sub">IPCA 12m em 3,81%, mas Focus 2026 em 4,36% e pressão curta ainda impedem alongamento agressivo em prefixados longos.</div></div>
+      <div class="macro-card bullish"><div class="mc-label">Atividade</div><div class="mc-value">Doméstico resiliente</div><div class="mc-sub">Sem sinais de colapso de crescimento; o pano de fundo favorece nomes domésticos de alta qualidade.</div></div>
+      <div class="macro-card warning"><div class="mc-label">Global</div><div class="mc-value">Liquidez melhorou</div><div class="mc-sub">HY spread comprimido, S&amp;P reagindo e dólar mais fraco favorecem emergentes, embora o MOVE ainda peça prudência.</div></div>
+    </div>
+
+    <div class="score-section">
+      <div class="score-title">Macro Score Quantitativo</div>
+      <div class="score-components">
+        <div class="sc-item"><div class="sc-label">Inflação</div><div class="sc-score">55</div><div class="score-bar-wrap"><div class="score-bar" style="width:55%"></div></div><div class="sc-weight">20%</div></div>
+        <div class="sc-item"><div class="sc-label">Juros</div><div class="sc-score">62</div><div class="score-bar-wrap"><div class="score-bar" style="width:62%"></div></div><div class="sc-weight">20%</div></div>
+        <div class="sc-item"><div class="sc-label">Liquidez Global</div><div class="sc-score">60</div><div class="score-bar-wrap"><div class="score-bar" style="width:60%"></div></div><div class="sc-weight">20%</div></div>
+        <div class="sc-item"><div class="sc-label">Risco Global</div><div class="sc-score">48</div><div class="score-bar-wrap"><div class="score-bar" style="width:48%"></div></div><div class="sc-weight">20%</div></div>
+        <div class="sc-item"><div class="sc-label">Commodities/Câmbio</div><div class="sc-score">52</div><div class="score-bar-wrap"><div class="score-bar" style="width:52%"></div></div><div class="sc-weight">20%</div></div>
+      </div>
+      <div class="score-total">
+        <div class="st-big">55,4</div>
+        <div>
+          <div class="st-label">Risk-on seletivo</div>
+          <div class="st-desc">A leitura correta não é de euforia, mas de melhora objetiva do ambiente financeiro. O portfólio precisa refletir transição, não complacência.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="list-block">
+        <div class="lb-title">Principais confirmadores</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>DXY abaixo de 100 favorece emergentes e ajuda o real.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>DI 5 anos em 13,95% abaixo da Selic-alvo confirma expectativa de cortes.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>VIX em 19,98 e HY spread em 2,94% indicam melhora do apetite global por risco.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Ibovespa em 194.977 pontos mostra que o mercado local já precifica menos estresse.</div>
+      </div>
+      <div class="list-block">
+        <div class="lb-title">Travões do cenário</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Brent em US$95,7 ainda está longe de normalidade plena para petróleo.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>MOVE em 91,17 sugere que a calma ainda não é homogênea nos mercados de taxa.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Focus de IPCA segue piorando, o que limita prefixados longos e beta cíclico excessivo.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Ormuz muito abaixo do fluxo normal mantém proteção geopolítica parcialmente necessária.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="focus">
+  <div class="section-inner">
+    <div class="section-label">Bloco obrigatório · Boletim Focus</div>
+    <h2>Focus mais recente incorporado ao modelo</h2>
+    <div class="section-lead">O Focus não autoriza agressividade cega. O vetor dominante é: inflação esperada pior no curto prazo, Selic ainda em queda no horizonte de 2026 e câmbio spot bem mais apreciado do que a projeção de fim de ano.</div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Variável</th><th>2026</th><th>2027</th><th>Leitura</th></tr></thead>
+      <tbody>
+        <tr><td>IPCA</td><td class="mono">4,36%</td><td class="mono">3,85%</td><td>Negativo no curto prazo: expectativa de inflação subiu nas últimas semanas, embora ainda dentro do intervalo de tolerância.</td></tr>
+        <tr><td>Selic</td><td class="mono">12,50%</td><td class="mono">10,50%</td><td>Positivo: o mercado continua enxergando ciclo de queda, o que sustenta duration real intermediária e domestically oriented equities.</td></tr>
+        <tr><td>PIB</td><td class="mono">1,85%</td><td class="mono">1,80%</td><td>Neutro/positivo: crescimento modesto, porém suficientemente resiliente para sustentar bancos, seguros e serviços regulados.</td></tr>
+        <tr><td>Câmbio</td><td class="mono">R$ 5,40</td><td class="mono">R$ 5,45</td><td>Neutro/positivo: o spot em 5,069 está melhor que o consenso; isso favorece domésticas e penaliza exportadoras na margem.</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="two-col">
+      <div class="list-block">
+        <div class="lb-title">Arbitragem final do Focus</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>O Focus ainda subestima a melhora já ocorrida no câmbio e no prêmio de risco.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Ao mesmo tempo, ele continua útil para impedir leitura exageradamente otimista da inflação.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Resultado prático: domésticos de qualidade sobem na hierarquia; petróleo, mineração e prefixados longos ficam para trás.</div>
+      </div>
+      <div class="list-block">
+        <div class="lb-title">Focus Score</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span><strong>53/100:</strong> melhora suficiente para sair do modo defensivo extremo, insuficiente para abandonar hedge de cauda.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Melhor pilar: juros em queda.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Pior pilar: inflação esperada ainda subindo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="dados">
+  <div class="section-inner">
+    <div class="section-label">Data QA · Inputs do usuário</div>
+    <h2>Qualidade dos dados e priorização de fontes</h2>
+    <div class="two-col">
+      <div class="list-block">
+        <div class="lb-title">Inputs usados como prioridade</div>
+        <div class="table-wrap"><table><thead><tr><th>Input</th><th>Valor</th><th>Uso no modelo</th></tr></thead><tbody>
+          <tr><td>Universo vinculante de ações</td><td>AcoesFundaEnri.json (82 tickers)</td><td>Usado como universo obrigatório para Top 20 e Top 5.</td></tr>
+          <tr><td>Macro market snapshot</td><td>macro_data_v3_20260409_152523.json</td><td>Usado como input prioritário para VIX, DXY, Brent, DI, USD/BRL, S&amp;P, Ibov e demais séries.</td></tr>
+          <tr><td>Relatórios comparados</td><td>Relatório A (ChatGPT) + Relatório B (Claude)</td><td>Usados para arbitragem de regime, alocação e diagnóstico histórico.</td></tr>
+        </tbody></table></div>
+      </div>
+      <div class="list-block">
+        <div class="lb-title">Inconsistências e lacunas</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Selic do CSV (14,37%) foi tratada como taxa efetiva; Selic-alvo oficial mantida em 14,75%.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>CPI_YOY_US veio inconsistente em parte do material; não foi usado para conduzir a análise final.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>IPCA 12m disponível no input está defasado em relação ao dado de março; tratado como ponto de partida, não como evidência final de desinflação.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>IBC-Br, núcleos, serviços e difusão inflacionária BR não vieram estruturados. Mantidos como parcial/missing, sem inferência artificial.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="setores">
+  <div class="section-inner">
+    <div class="section-label">Etapas 3/7 · Setores e seleção</div>
+    <h2>Setores e subsetores da B3 mais favorecidos</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Setor/Subsetor</th><th>Classificação</th><th>Convicção</th><th>Mudança</th><th>Racional</th></tr></thead>
+      <tbody>
+        <tr><td>Previdência e Seguros</td><td><span class='badge muito-fav'>Muito favorecido</span></td><td>Alta</td><td>↑</td><td>float remunerado, baixa intensidade de capital, resiliência de lucro e payout elevado.</td></tr>
+        <tr><td>Intermediários Financeiros (qualidade)</td><td><span class='badge muito-fav'>Muito favorecido</span></td><td>Alta</td><td>↑</td><td>carry ainda alto, inadimplência menos pressionada e melhor resposta ao fechamento de DI do que exportadoras.</td></tr>
+        <tr><td>Água e Saneamento</td><td><span class='badge fav'>Favorecido</span></td><td>Alta</td><td>↑</td><td>defensividade regulada, opcionalidade operacional e menor sensibilidade ao petróleo.</td></tr>
+        <tr><td>Transmissão / Elétricas de qualidade</td><td><span class='badge fav'>Favorecido</span></td><td>Alta</td><td>↑</td><td>carrego, previsibilidade e convexidade ao ciclo de queda de juros, com proteção parcial à inflação.</td></tr>
+        <tr><td>Telecomunicações</td><td><span class='badge fav'>Favorecido</span></td><td>Média</td><td>→</td><td>caixa estável, menor beta macro e papel complementar em cenário ainda incerto.</td></tr>
+        <tr><td>Saúde defensiva</td><td><span class='badge fav'>Neutro/Favorecido</span></td><td>Média</td><td>↑</td><td>qualidade de receita e menor sensibilidade a commodities, útil como watchlist.</td></tr>
+        <tr><td>Programas e Serviços</td><td><span class='badge fav'>Neutro/Favorecido</span></td><td>Média</td><td>↑</td><td>opcionalidade para a fase seguinte da queda de juros, mas ainda melhor como segunda derivada do cenário.</td></tr>
+        <tr><td>Construção Civil (qualidade)</td><td><span class='badge fav'>Neutro/Favorecido</span></td><td>Média</td><td>↑</td><td>call de transição para regime futuro, ainda não ideal como núcleo enquanto a inflação esperada não estabiliza.</td></tr>
+        <tr><td>Petróleo &amp; Gás / Exportadoras de commodities</td><td><span class='badge prej'>Prejudicado</span></td><td>Alta</td><td>↓</td><td>Brent corrigindo e BRL forte comprimem a assimetria em BRL; permanece apenas como hedge de reescalada.</td></tr>
+        <tr><td>Viagens e lazer / cíclicos alavancados</td><td><span class='badge prej'>Prejudicado</span></td><td>Média/Alta</td><td>↓</td><td>beta alto, dependência de renda e maior fragilidade em caso de reversão do cessar-fogo.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section id="top20">
+  <div class="section-inner">
+    <div class="section-label">Etapa 7/8 · Universo vinculante</div>
+    <h2>Top 20 ações brasileiras do universo enviado</h2>
+    <div class="section-lead">A prioridade do universo vinculante foi mantida. A seleção final privilegia qualidade doméstica, rentabilidade, previsibilidade de caixa e melhor aderência ao regime de transição. Exportadoras ligadas a petróleo perderam prioridade na arbitragem final.</div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Ticker</th><th>Empresa</th><th>Setor</th><th>Score</th><th>P/L</th><th>DY</th><th>ROE</th><th>Liq. 2m</th></tr></thead>
+      <tbody>
+        <tr><td class='mono'><strong>ITUB4</strong></td><td>Itaú Unibanco</td><td>Intermediários Financeiros</td><td class='mono'>84</td><td class='mono'>10,9x</td><td class='mono'>7,6%</td><td class='mono'>23,3%</td><td class='mono'>1.403.160.000</td></tr>
+        <tr><td class='mono'><strong>BBSE3</strong></td><td>BB Seguridade</td><td>Previdência e Seguros</td><td class='mono'>82</td><td class='mono'>7,7x</td><td class='mono'>13,0%</td><td class='mono'>86,8%</td><td class='mono'>253.683.000</td></tr>
+        <tr><td class='mono'><strong>SBSP3</strong></td><td>Sabesp</td><td>Água e Saneamento</td><td class='mono'>81</td><td class='mono'>13,4x</td><td class='mono'>4,3%</td><td class='mono'>20,0%</td><td class='mono'>462.032.000</td></tr>
+        <tr><td class='mono'><strong>PSSA3</strong></td><td>Porto Seguro</td><td>Previdência e Seguros</td><td class='mono'>79</td><td class='mono'>9,9x</td><td class='mono'>5,8%</td><td class='mono'>21,5%</td><td class='mono'>94.146.700</td></tr>
+        <tr><td class='mono'><strong>BPAC11</strong></td><td>BTG Pactual</td><td>Intermediários Financeiros</td><td class='mono'>76</td><td class='mono'>15,2x</td><td class='mono'>2,0%</td><td class='mono'>22,8%</td><td class='mono'>601.523.000</td></tr>
+        <tr><td class='mono'><strong>TAEE11</strong></td><td>Taesa</td><td>Energia Elétrica / Transmissão</td><td class='mono'>75</td><td class='mono'>11,0x</td><td class='mono'>9,0%</td><td class='mono'>23,0%</td><td class='mono'>missing</td></tr>
+        <tr><td class='mono'><strong>NEOE3</strong></td><td>Neoenergia</td><td>Energia Elétrica</td><td class='mono'>74</td><td class='mono'>8,1x</td><td class='mono'>4,4%</td><td class='mono'>13,8%</td><td class='mono'>82.670.800</td></tr>
+        <tr><td class='mono'><strong>CPFE3</strong></td><td>CPFL Energia</td><td>Energia Elétrica</td><td class='mono'>73</td><td class='mono'>10,8x</td><td class='mono'>5,5%</td><td class='mono'>24,4%</td><td class='mono'>89.975.600</td></tr>
+        <tr><td class='mono'><strong>BBDC4</strong></td><td>Bradesco</td><td>Intermediários Financeiros</td><td class='mono'>72</td><td class='mono'>8,7x</td><td class='mono'>7,5%</td><td class='mono'>14,2%</td><td class='mono'>763.341.000</td></tr>
+        <tr><td class='mono'><strong>ALUP11</strong></td><td>Alupar</td><td>Energia Elétrica</td><td class='mono'>71</td><td class='mono'>9,8x</td><td class='mono'>3,5%</td><td class='mono'>13,3%</td><td class='mono'>34.228.900</td></tr>
+        <tr><td class='mono'><strong>CSMG3</strong></td><td>Copasa</td><td>Água e Saneamento</td><td class='mono'>70</td><td class='mono'>15,6x</td><td class='mono'>3,9%</td><td class='mono'>16,5%</td><td class='mono'>170.503.000</td></tr>
+        <tr><td class='mono'><strong>CMIG4</strong></td><td>Cemig</td><td>Energia Elétrica</td><td class='mono'>69</td><td class='mono'>7,8x</td><td class='mono'>7,8%</td><td class='mono'>17,1%</td><td class='mono'>156.895.000</td></tr>
+        <tr><td class='mono'><strong>TIMS3</strong></td><td>TIM</td><td>Telecomunicações</td><td class='mono'>68</td><td class='mono'>0,0x</td><td class='mono'>5,7%</td><td class='mono'>0,0%</td><td class='mono'>154.966.000</td></tr>
+        <tr><td class='mono'><strong>VIVT3</strong></td><td>Telefônica Brasil</td><td>Telecomunicações</td><td class='mono'>67</td><td class='mono'>22,1x</td><td class='mono'>2,6%</td><td class='mono'>9,0%</td><td class='mono'>215.276.000</td></tr>
+        <tr><td class='mono'><strong>ODPV3</strong></td><td>Odontoprev</td><td>Serv.Méd.Hospit., Análises e Diagnósticos</td><td class='mono'>66</td><td class='mono'>13,6x</td><td class='mono'>6,4%</td><td class='mono'>45,5%</td><td class='mono'>79.481.300</td></tr>
+        <tr><td class='mono'><strong>FLRY3</strong></td><td>Fleury</td><td>Serv.Méd.Hospit., Análises e Diagnósticos</td><td class='mono'>65</td><td class='mono'>14,4x</td><td class='mono'>6,7%</td><td class='mono'>12,2%</td><td class='mono'>53.257.500</td></tr>
+        <tr><td class='mono'><strong>TOTS3</strong></td><td>Totvs</td><td>Programas e Serviços</td><td class='mono'>64</td><td class='mono'>23,9x</td><td class='mono'>1,8%</td><td class='mono'>17,5%</td><td class='mono'>181.476.000</td></tr>
+        <tr><td class='mono'><strong>CURY3</strong></td><td>Cury</td><td>Construção Civil</td><td class='mono'>63</td><td class='mono'>11,3x</td><td class='mono'>11,0%</td><td class='mono'>70,6%</td><td class='mono'>125.415.000</td></tr>
+        <tr><td class='mono'><strong>DIRR3</strong></td><td>Direcional</td><td>Construção Civil</td><td class='mono'>62</td><td class='mono'>9,1x</td><td class='mono'>16,0%</td><td class='mono'>41,2%</td><td class='mono'>111.383.000</td></tr>
+        <tr><td class='mono'><strong>CYRE3</strong></td><td>Cyrela</td><td>Construção Civil</td><td class='mono'>61</td><td class='mono'>6,2x</td><td class='mono'>11,7%</td><td class='mono'>19,6%</td><td class='mono'>178.265.000</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section id="top5">
+  <div class="section-inner">
+    <div class="section-label">Etapa 8 · Convicção</div>
+    <h2>Top 5 para o regime vigente</h2>
+    <div class="section-lead">A diferença de score entre Top 1 e Top 5 ficou próxima de 9 pontos. A convicção segue concentrada, mas agora melhor diversificada entre bancos, seguros, saneamento e transmissão. O sleeve de ações foi desenhado para capturar a transição sem depender de uma única tese macro.</div>
+    <div class="top5-grid">
+      <div class="stock-card">
+        <div class="sc-top">
+          <div class="sc-ticker">ITUB4</div>
+          <div class="sc-company">Itaú Unibanco</div>
+        </div>
+        <div class="sc-body-inner">
+          <div class="metric-row"><span class="ml">SETOR</span><span class="mv">Intermediários Financeiros</span></div>
+          <div class="metric-row"><span class="ml">SCORE</span><span class="mv">84</span></div>
+          <div class="metric-row"><span class="ml">PESO AÇÕES</span><span class="mv">23%</span></div>
+          <div class="metric-row"><span class="ml">PESO TOTAL</span><span class="mv">5,75%</span></div>
+          <div class="metric-row"><span class="ml">DECISÃO</span><span class="mv">KEEP</span></div>
+          <div class="metric-row"><span class="ml">STATUS</span><span class="mv">JÁ ESTAVA</span></div>
+        </div>
+      </div>
+
+      <div class="stock-card">
+        <div class="sc-top">
+          <div class="sc-ticker">BBSE3</div>
+          <div class="sc-company">BB Seguridade</div>
+        </div>
+        <div class="sc-body-inner">
+          <div class="metric-row"><span class="ml">SETOR</span><span class="mv">Previdência e Seguros</span></div>
+          <div class="metric-row"><span class="ml">SCORE</span><span class="mv">82</span></div>
+          <div class="metric-row"><span class="ml">PESO AÇÕES</span><span class="mv">22%</span></div>
+          <div class="metric-row"><span class="ml">PESO TOTAL</span><span class="mv">5,50%</span></div>
+          <div class="metric-row"><span class="ml">DECISÃO</span><span class="mv">KEEP</span></div>
+          <div class="metric-row"><span class="ml">STATUS</span><span class="mv">JÁ ESTAVA</span></div>
+        </div>
+      </div>
+
+      <div class="stock-card">
+        <div class="sc-top">
+          <div class="sc-ticker">SBSP3</div>
+          <div class="sc-company">Sabesp</div>
+        </div>
+        <div class="sc-body-inner">
+          <div class="metric-row"><span class="ml">SETOR</span><span class="mv">Água e Saneamento</span></div>
+          <div class="metric-row"><span class="ml">SCORE</span><span class="mv">81</span></div>
+          <div class="metric-row"><span class="ml">PESO AÇÕES</span><span class="mv">20%</span></div>
+          <div class="metric-row"><span class="ml">PESO TOTAL</span><span class="mv">5,00%</span></div>
+          <div class="metric-row"><span class="ml">DECISÃO</span><span class="mv">KEEP</span></div>
+          <div class="metric-row"><span class="ml">STATUS</span><span class="mv">MANTIDA</span></div>
+        </div>
+      </div>
+
+      <div class="stock-card">
+        <div class="sc-top">
+          <div class="sc-ticker">PSSA3</div>
+          <div class="sc-company">Porto Seguro</div>
+        </div>
+        <div class="sc-body-inner">
+          <div class="metric-row"><span class="ml">SETOR</span><span class="mv">Previdência e Seguros</span></div>
+          <div class="metric-row"><span class="ml">SCORE</span><span class="mv">79</span></div>
+          <div class="metric-row"><span class="ml">PESO AÇÕES</span><span class="mv">18%</span></div>
+          <div class="metric-row"><span class="ml">PESO TOTAL</span><span class="mv">4,50%</span></div>
+          <div class="metric-row"><span class="ml">DECISÃO</span><span class="mv">KEEP</span></div>
+          <div class="metric-row"><span class="ml">STATUS</span><span class="mv">JÁ ESTAVA</span></div>
+        </div>
+      </div>
+
+      <div class="stock-card">
+        <div class="sc-top">
+          <div class="sc-ticker">TAEE11</div>
+          <div class="sc-company">Taesa</div>
+        </div>
+        <div class="sc-body-inner">
+          <div class="metric-row"><span class="ml">SETOR</span><span class="mv">Transmissão Elétrica</span></div>
+          <div class="metric-row"><span class="ml">SCORE</span><span class="mv">75</span></div>
+          <div class="metric-row"><span class="ml">PESO AÇÕES</span><span class="mv">17%</span></div>
+          <div class="metric-row"><span class="ml">PESO TOTAL</span><span class="mv">4,25%</span></div>
+          <div class="metric-row"><span class="ml">DECISÃO</span><span class="mv">NEW</span></div>
+          <div class="metric-row"><span class="ml">STATUS</span><span class="mv">NOVA</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>Ticker</th><th>Empresa</th><th>Peso atual</th><th>Peso anterior</th><th>Decisão</th><th>Racional resumido</th><th>Riscos</th></tr></thead>
+      <tbody>
+        <tr><td class='mono'><strong>ITUB4</strong></td><td>Itaú Unibanco</td><td class='mono'>23%</td><td class='mono'>15%</td><td><span class='badge keep'>KEEP</span></td><td>melhor combinação entre liquidez, qualidade, ROE e sensibilidade positiva ao fechamento de DI.</td><td>compressão de margem financeira, piora de inadimplência e reversão do fluxo estrangeiro.</td></tr>
+        <tr><td class='mono'><strong>BBSE3</strong></td><td>BB Seguridade</td><td class='mono'>22%</td><td class='mono'>30%</td><td><span class='badge keep'>KEEP</span></td><td>core defensivo de carry; mantém payout alto e excelente rentabilidade mesmo num cenário menos extremo.</td><td>guidance mais cauteloso, ruído de governança e desaceleração operacional.</td></tr>
+        <tr><td class='mono'><strong>SBSP3</strong></td><td>Sabesp</td><td class='mono'>20%</td><td class='mono'>—</td><td><span class='badge new'>NEW</span></td><td>substitui parte da assimetria antes atribuída ao petróleo por um defensivo com opcionalidade operacional e menor risco macro.</td><td>execução de investimentos, regulação e ruído político estadual.</td></tr>
+        <tr><td class='mono'><strong>PSSA3</strong></td><td>Porto Seguro</td><td class='mono'>18%</td><td class='mono'>10%</td><td><span class='badge keep'>KEEP</span></td><td>equilibra a exposição a seguros com menor risco estatal e boa capacidade de capturar carrego e serviços.</td><td>sinistralidade, crédito ao consumidor mais fraco e competição em seguros.</td></tr>
+        <tr><td class='mono'><strong>TAEE11</strong></td><td>Taesa</td><td class='mono'>17%</td><td class='mono'>—</td><td><span class='badge new'>NEW</span></td><td>melhor convexidade ao ciclo de queda de juros dentro do universo, com fluxo de caixa previsível e proteção parcial à inflação.</td><td>risco regulatório, execução de capex e eventual surpresa hawkish no ciclo de juros.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Teses resumidas</h3>
+    <div class="two-col">
+      <div class='list-block'>
+        <div class='lb-title'>ITUB4 — tese</div>
+        <div class='lb-item'><span class='lb-bullet'>▸</span><strong>Macro:</strong> combina bem com o regime de transição: ainda captura carry, mas também melhora se a curva continuar fechando.</div>
+        <div class='lb-item'><span class='lb-bullet'>▸</span><strong>Fundamental:</strong> ROE elevado, liquidez líder e execução consistente permanecem acima da média do setor.</div>
+        <div class='lb-item'><span class='lb-bullet'>▸</span><strong>Valuation:</strong> P/L 10,9x; DY 7,6%; ROE 23,3%.</div>
+        <div class='lb-item'><span class='lb-bullet'>▸</span><strong>Gatilhos:</strong> DI longa abaixo de 13,7%, manutenção de ROE acima de 20% e fluxo estrangeiro contínuo.</div>
+      </div>
+      <div class='list-block'>
+        <div class='lb-title'>BBSE3 — tese</div>
+        <div class='lb-item'><span class='lb-bullet'>▸</span><strong>Macro:</strong> segue sendo a melhor expressão de carry defensivo dentro da bolsa local.</div>
+        <div class='lb-item'><span class='lb-bullet'>▸</span><strong>Fundamental:</strong> rentabilidade extraordinária e distribuição de caixa robusta continuam sustentando a tese mesmo após a descompressão do choque.</div>
+        <div class='lb-item'><span class='lb-bullet'>▸</span><strong>Valuation:</strong> P/L 7,7x; DY 13,0%; ROE 86,8%.</div>
+        <div class='lb-item'><span class='lb-bullet'>▸</span><strong>Gatilhos:</strong> Selic ainda alta, payout preservado e ausência de deterioração relevante em guidance.</div>
+      </div>
+      <div class='list-block'>
+        <div class='lb-title'>SBSP3 — tese</div>
+        <div class='lb-item'><span class='lb-bullet'>▸</span><strong>Macro:</strong> saneamento reúne defensividade, regulação e menor dependência do petróleo.</div>
+        <div class='lb-item'><span class='lb-bullet'>▸</span><strong>Fundamental:</strong> entrega operacional sólida e opcionalidade de eficiência mantêm a tese viva no regime atual e no futuro.</div>
+        <div class='lb-item'><span class='lb-bullet'>▸</span><strong>Valuation:</strong> P/L 13,4x; FCF yield 8,6%; liquidez alta.</div>
+        <div class='lb-item'><span class='lb-bullet'>▸</span><strong>Gatilhos:</strong> aceleração de eficiência, melhora de volume e continuidade do fluxo doméstico/estrangeiro para utilities reguladas.</div>
+      </div>
+      <div class='list-block'>
+        <div class='lb-title'>PSSA3 — tese</div>
+        <div class='lb-item'><span class='lb-bullet'>▸</span><strong>Macro:</strong> seguradora privada complementa BBSE3 com menor risco político e boa exposição a serviços.</div>
+        <div class='lb-item'><span class='lb-bullet'>▸</span><strong>Fundamental:</strong> histórico recente de lucro recorde e diversificação real dentro do setor de seguros.</div>
+        <div class='lb-item'><span class='lb-bullet'>▸</span><strong>Valuation:</strong> P/L 9,9x; DY 5,8%; ROE 21,5%.</div>
+        <div class='lb-item'><span class='lb-bullet'>▸</span><strong>Gatilhos:</strong> resultado financeiro forte, cross-sell e expansão de serviços.</div>
+      </div>
+    </div>
+    <div class="list-block" style="margin-top:1.5rem;">
+      <div class="lb-title">TAEE11 — tese</div>
+      <div class="lb-item"><span class="lb-bullet">▸</span><strong>Macro:</strong> é a melhor ponte entre regime atual e regime futuro, capturando queda de juros sem depender de euforia econômica.</div>
+      <div class="lb-item"><span class="lb-bullet">▸</span><strong>Fundamental:</strong> RAP regulada e fluxo previsível reduzem a necessidade de convicção macro extrema.</div>
+      <div class="lb-item"><span class="lb-bullet">▸</span><strong>Valuation:</strong> P/L 11,0x; DY 9,0%; ROE 23,0%.</div>
+      <div class="lb-item"><span class="lb-bullet">▸</span><strong>Gatilhos:</strong> continuidade do fechamento da curva real, estabilidade regulatória e manutenção do carrego atrativo.</div>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="section-inner">
+    <div class="section-label">Etapa 9 · Multiativos</div>
+    <h2>Portfólio multiativos coerente com o regime</h2>
+    <div class="macro-grid">
+      <div class="macro-card bullish"><div class="mc-label">Tesouro Selic / CDI</div><div class="mc-value">28%</div><div class="mc-sub">Colchão ainda relevante, mas não dominante, porque o pico do estresse já passou.</div></div>
+      <div class="macro-card warning"><div class="mc-label">Tesouro IPCA+ médio prazo</div><div class="mc-value">30%</div><div class="mc-sub">Proteção inflacionária e captura do fechamento de curva real sem alongamento excessivo.</div></div>
+      <div class="macro-card bullish"><div class="mc-label">Ações BR</div><div class="mc-value">25%</div><div class="mc-sub">Sleeve doméstico de qualidade, coerente com transição pós-choque e juros em queda.</div></div>
+      <div class="macro-card warning"><div class="mc-label">GOLD11</div><div class="mc-value">7%</div><div class="mc-sub">Hedge geopolítico residual; menor que antes, mas ainda necessário.</div></div>
+      <div class="macro-card bullish"><div class="mc-label">IVVB11</div><div class="mc-value">10%</div><div class="mc-sub">Diversificação estratégica global sem repetir o erro de peso estrutural excessivo.</div></div>
+      <div class="macro-card bearish"><div class="mc-label">Prefixados longos</div><div class="mc-value">0%</div><div class="mc-sub">Sem assimetria suficiente enquanto a inflação esperada não estabiliza de forma mais convincente.</div></div>
+    </div>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>Classe / Ativo</th><th>Decisão</th><th>Peso anterior</th><th>Peso atual</th><th>Motivo</th><th>Gatilho de revisão</th></tr></thead>
+      <tbody>
+        <tr><td>Ações BR</td><td><span class='badge reduce'>REDUCE</span></td><td class='mono'>32%</td><td class='mono'>25%</td><td>a carteira deixa de ser petróleo concentrado, mas ainda preserva exposição relevante a domésticos de qualidade.</td><td>VIX &lt; 18 e Brent &lt; US$90 por 2 semanas; aí o bucket pode subir para 28–30%.</td></tr>
+        <tr><td>CDI / Tesouro Selic</td><td><span class='badge increase'>INCREASE</span></td><td class='mono'>18%</td><td class='mono'>28%</td><td>carrego segue alto e serve de amortecedor caso a transição falhe.</td><td>Macro score acima de 60 e melhora adicional em Ormuz; parte pode migrar para ações ou IVVB11.</td></tr>
+        <tr><td>Tesouro IPCA+ médio</td><td><span class='badge increase'>INCREASE</span></td><td class='mono'>25%</td><td class='mono'>30%</td><td>melhor relação risco-retorno do que prefixado longo no cenário final arbitrado.</td><td>DI1F10 abaixo de 13,5% com Focus IPCA estabilizando; aí pode-se avaliar alongamento gradual.</td></tr>
+        <tr><td>IVVB11</td><td><span class='badge reduce'>REDUCE</span></td><td class='mono'>15%</td><td class='mono'>10%</td><td>mantido como diversificação estratégica, mas BRL forte reduz o apelo tático de curto prazo.</td><td>reversão do BRL ou piora forte local elevam o papel defensivo do ativo.</td></tr>
+        <tr><td>GOLD11</td><td><span class='badge reduce'>REDUCE</span></td><td class='mono'>10%</td><td class='mono'>7%</td><td>o hedge continua válido, porém o prêmio geopolítico caiu o suficiente para reduzir excesso de proteção.</td><td>Ormuz normalizado e VIX abaixo de 15 autorizam nova redução; reescalada autoriza recomposição para 10%.</td></tr>
+        <tr><td>PETR4</td><td><span class='badge exit'>EXIT</span></td><td class='mono'>8,0%</td><td class='mono'>0%</td><td>o choque de petróleo perdeu centralidade e o universo atual privilegia teses domésticas mais coerentes com o novo regime.</td><td>retorno ao universo + nova piora estrutural em petróleo.</td></tr>
+        <tr><td>PRIO3</td><td><span class='badge exit'>EXIT</span></td><td class='mono'>6,4%</td><td class='mono'>0%</td><td>Brent corrigindo e BRL apreciado reduziram a assimetria de curto prazo em BRL.</td><td>Brent acima de US$105 de forma sustentada ou colapso do ceasefire.</td></tr>
+        <tr><td>SBSP3</td><td><span class='badge new'>NEW</span></td><td class='mono'>0%</td><td class='mono'>5,00%</td><td>substitui parte do beta de petróleo por um defensivo com opcionalidade operacional.</td><td>decepção operacional relevante ou ruído regulatório persistente.</td></tr>
+        <tr><td>TAEE11</td><td><span class='badge new'>NEW</span></td><td class='mono'>0%</td><td class='mono'>4,25%</td><td>melhor veículo de transição para a queda de juros dentro do universo vinculante.</td><td>deterioração regulatória ou surpresa hawkish consistente no Copom.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section id="historico">
+  <div class="section-inner">
+    <div class="section-label">Etapa 0/0.1 · Memória e feedback loop</div>
+    <h2>Análise histórica da estratégia e diagnóstico</h2>
+    <div class="two-col">
+      <div class="list-block">
+        <div class="lb-title">O que havia no histórico disponível</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span><strong>Períodos analisáveis:</strong> 3 ciclos recentes.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span><strong>Retorno YTD estimado da carteira anterior:</strong> +22%.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span><strong>Ibovespa YTD estimado:</strong> +43%.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span><strong>CDI YTD estimado:</strong> +5,5%.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span><strong>IVVB11 YTD estimado:</strong> -3%.</div>
+      </div>
+      <div class="list-block">
+        <div class="lb-title">Attribution histórica resumida</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span><strong>Gerou alpha:</strong> petróleo na fase aguda, seguros, CDI e ouro.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span><strong>Protegeu:</strong> CDI e ouro, especialmente durante o pico geopolítico.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span><strong>Prejudicou:</strong> IVVB11 quando tratado como peso fixo elevado e concentração excessiva em um único driver macro.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span><strong>Erro estrutural:</strong> dependência demais de petróleo e pouca diversificação entre as teses domésticas de qualidade.</div>
+      </div>
+    </div>
+
+    <h3>Principais acertos</h3>
+    <div class="two-col">
+      <div class="list-block">
+        <div class="lb-title">Acertos preservados</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>BBSE3 permaneceu como posição core defensiva ao longo da transição.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>CDI alto funcionou como colchão correto no auge do choque geopolítico.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>A leitura precoce de que petróleo e ouro capturariam a fase aguda do choque foi correta.</div>
+      </div>
+      <div class="list-block">
+        <div class="lb-title">Erros corrigidos agora</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>IVVB11 deixa de ser residual demais e também deixa de ser excesso estrutural: volta ao papel correto de diversificação moderada.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>A dependência de petróleo para gerar alpha foi abandonada na arbitragem final.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>O modelo passa a dar mais espaço à transição de regime sem negligenciar o risco residual.</div>
+      </div>
+    </div>
+
+    <h3>Ajustes realizados no modelo</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Bloco</th><th>Peso anterior</th><th>Peso novo</th><th>Justificativa</th></tr></thead>
+      <tbody>
+        <tr><td>Macro</td><td class="mono">25%</td><td class="mono">22%</td><td>Continua central, mas não deve monopolizar a carteira quando a transição já é visível.</td></tr>
+        <tr><td>Fundamental</td><td class="mono">25%</td><td class="mono">25%</td><td>Qualidade permanece determinante na escolha dos vencedores domésticos.</td></tr>
+        <tr><td>Valuation</td><td class="mono">20%</td><td class="mono">20%</td><td>Mantido; o cenário melhorou, mas ainda exige disciplina de preço.</td></tr>
+        <tr><td>Risk</td><td class="mono">15%</td><td class="mono">13%</td><td>O pico do estresse caiu; o bloco de risco segue relevante, porém menos dominante.</td></tr>
+        <tr><td>Transition</td><td class="mono">15%</td><td class="mono">20%</td><td>A transição já ficou importante demais para continuar subponderada.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section id="decisoes">
+  <div class="section-inner">
+    <div class="section-label">Etapa 16 · Plano operacional</div>
+    <h2>Plano prático do mês</h2>
+    <div class="two-col">
+      <div class="list-block">
+        <div class="lb-title">Ações objetivas</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span><strong>Manter:</strong> ITUB4, BBSE3, PSSA3, IPCA+ intermediário e CDI relevante.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span><strong>Incluir/Reforçar:</strong> SBSP3 e TAEE11 como peças centrais da transição doméstica de qualidade.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span><strong>Reduzir:</strong> excesso de ouro, excesso de caixa e qualquer dependência remanescente de petróleo.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span><strong>Sair:</strong> PETR4 e PRIO3 na carteira-modelo enquanto o cenário-base for de normalização parcial, não de choque renovado.</div>
+      </div>
+      <div class="list-block">
+        <div class="lb-title">Quando rebalancear de verdade</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Se VIX cair abaixo de 18 e Brent abaixo de US$90 por duas semanas, migrar 3–5 p.p. de CDI para ações/IVVB11.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Se VIX voltar acima de 25, Brent acima de US$105 ou CDS Brasil acima de 180 bps, reduzir ações para a faixa de 15–18% e recompor hedge.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Se DI1F10 cair abaixo de 13,7% e Focus IPCA parar de piorar, ampliar a parte de transição em software/construção de qualidade.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tracking">
+  <div class="section-inner">
+    <div class="section-label">Tracking mensal</div>
+    <h2>O que monitorar e o que muda o jogo</h2>
+    <div class="two-col">
+      <div class="list-block">
+        <div class="lb-title">Checklist mensal obrigatório</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>VIX, MOVE e HY spread.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Brent e ritmo de normalização de Ormuz.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Focus: IPCA 2026/2027, Selic 2026/2027 e câmbio.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>DI1F5 e DI1F10.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Fluxo estrangeiro para B3.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Selic-alvo vs Selic efetiva.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>USD/BRL, DXY e resultados do Top 5.</div>
+      </div>
+      <div class="list-block">
+        <div class="lb-title">Mudança de regime</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span><strong>Risk-on mais limpo:</strong> VIX &lt; 18, Brent &lt; US$90, DXY &lt; 99, DI1F10 &lt; 13,7% e normalização operacional mais clara de Ormuz.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span><strong>Volta do risk-off:</strong> VIX &gt; 25, Brent &gt; US$105, CDS Brasil &gt; 180 bps, DI1F10 &gt; 14,5% ou nova deterioração do cessar-fogo.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span><strong>Stress test:</strong> vol esperada de 9–12%; drawdown base de -7% a -11%; bear case de -12% a -17%.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="fontes">
+  <div class="section-inner">
+    <div class="section-label">Fontes e rastreabilidade</div>
+    <h2>Fontes consultadas</h2>
+    <div class="two-col">
+      <div class="list-block">
+        <div class="lb-title">Oficiais e estruturais</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Banco Central do Brasil — Focus, Copom e séries monetárias.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>IBGE — IPCA/IPCA-15, PNAD e produção industrial.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Dados de mercado presentes nos relatórios-base: VIX, DXY, Brent, DI, USD/BRL, S&amp;P e Ibovespa.</div>
+      </div>
+      <div class="list-block">
+        <div class="lb-title">Mercado e arbitragem</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Resultados e relações com investidores das companhias citadas nos relatórios originais.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Inputs do usuário prevaleceram quando eram mais completos ou mais recentes do que a narrativa auxiliar.</div>
+        <div class="lb-item"><span class="lb-bullet">▸</span>Relatórios A e B foram arbitrados seção por seção, com prevalência da versão mais coerente com o conjunto de dados e com a alocação final.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">MACRO·QUANT EXECUTION · RELATÓRIO FINAL</div>
+    Versão consolidada em HTML, mantendo a arquitetura original e corrigindo apenas conteúdo analítico e numérico.
+  </div>
+</footer>
+</body>
+</html>
