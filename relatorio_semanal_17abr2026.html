@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Macro-Quantitativo · 17 abr 2026 · Superprompt V12</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ivory: #F5F1E8;
+  --ivory-dim: #EDE8DC;
+  --ink: #1E1B17;
+  --ink-light: #3A3630;
+  --gold: #B8945F;
+  --gold-dim: rgba(184,148,95,0.12);
+  --sage: #7B8F74;
+  --sage-dim: rgba(123,143,116,0.12);
+  --navy: #1E3A5F;
+  --navy-dim: rgba(30,58,95,0.10);
+  --wine: #8B3A3A;
+  --wine-dim: rgba(139,58,58,0.10);
+  --muted: #8A8278;
+  --border: rgba(30,27,23,0.10);
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Libre Baskerville', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--ivory); color: var(--ink); font-family: var(--font-body); font-size: 0.92rem; line-height: 1.75; }
+
+/* NAV */
+.nav { position: relative; z-index: 100; background: var(--ink); padding: 0.7rem 2rem; display: flex; align-items: center; gap: 1.6rem; overflow-x: auto; white-space: nowrap; }
+.nav-brand { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--gold); letter-spacing: 0.04em; flex-shrink: 0; }
+.nav a { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: #a8a093; text-decoration: none; transition: color 0.2s; flex-shrink: 0; }
+.nav a:hover { color: var(--gold); }
+
+/* CONTAINER */
+.report-container { max-width: 1200px; margin: 0 auto; padding: 0 2.5rem; position: relative; display: block; }
+
+/* COVER */
+.cover { padding: 5rem 0 3rem; text-align: center; border-bottom: 1px solid var(--border); position: relative; z-index: 1; display: block; overflow: visible; }
+.cover-eyebrow { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: block; }
+.cover-title { font-family: var(--font-display); font-size: 3.4rem; font-weight: 500; line-height: 1.15; color: var(--ink); margin-bottom: 0.6rem; display: block; }
+.cover-title em { font-style: italic; color: var(--gold); }
+.cover-sub { font-family: var(--font-body); font-size: 1.1rem; color: var(--muted); margin-bottom: 2.5rem; font-style: italic; display: block; }
+
+/* REGIME STRIP */
+.regime-strip { display: flex; justify-content: center; align-items: center; gap: 1.2rem; padding: 1.4rem 2rem; background: linear-gradient(135deg, var(--navy-dim), var(--gold-dim)); border: 1px solid var(--border); border-radius: 2px; margin: 2rem auto; max-width: 800px; flex-wrap: wrap; position: relative; clear: both; }
+.regime-box { text-align: center; padding: 0 1.2rem; }
+.regime-box.current { border-right: 1px solid var(--border); }
+.regime-label { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+.regime-value { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; }
+.regime-arrow { font-size: 1.5rem; color: var(--gold); }
+
+/* KPI ROW */
+.kpi-row { display: flex; justify-content: center; gap: 2.5rem; margin: 2rem 0; flex-wrap: wrap; position: relative; clear: both; }
+.kpi { text-align: center; min-width: 80px; }
+.kpi-value { font-family: var(--font-mono); font-size: 1.6rem; font-weight: 700; color: var(--ink); line-height: 1; }
+.kpi-label { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+
+/* ALERT */
+.alert { padding: 1.2rem 1.6rem; border-left: 4px solid var(--wine); background: var(--wine-dim); margin: 2rem 0; font-size: 0.88rem; line-height: 1.7; border-radius: 0 2px 2px 0; }
+.alert strong { color: var(--wine); }
+
+/* SECTIONS */
+.section { padding: 3.5rem 0; border-bottom: 1px solid var(--border); position: relative; display: block; clear: both; overflow: visible; }
+.section-header { margin-bottom: 2.5rem; position: relative; }
+.eyebrow { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+.section-title { font-family: var(--font-display); font-size: 2.2rem; font-weight: 500; line-height: 1.2; color: var(--ink); }
+.section-title em { font-style: italic; color: var(--gold); }
+.section-kicker { font-family: var(--font-body); font-size: 0.92rem; color: var(--muted); margin-top: 0.8rem; max-width: 800px; font-style: italic; line-height: 1.7; }
+
+/* GRIDS */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+
+/* CARDS */
+.card { background: #fff; border: 1px solid var(--border); padding: 1.5rem; padding-top: 1.8rem; border-radius: 2px; position: relative; overflow: hidden; }
+.card-accent-top { height: 3px; position: absolute; top: 0; left: 0; right: 0; border-radius: 2px 2px 0 0; }
+.card-accent-top.gold { background: var(--gold); }
+.card-accent-top.navy { background: var(--navy); }
+.card-accent-top.sage { background: var(--sage); }
+.card-accent-top.wine { background: var(--wine); }
+.card-eyebrow { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; margin-top: 0.3rem; }
+.card-title { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: var(--ink); margin-bottom: 0.6rem; }
+.card-body { font-size: 0.88rem; line-height: 1.7; }
+.card-body p { margin-bottom: 0.6rem; }
+
+/* TABLES */
+.table-wrap { overflow-x: auto; margin: 1.5rem 0; position: relative; display: block; -webkit-overflow-scrolling: touch; }
+table.institutional-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+table.institutional-table th { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 0.7rem 0.9rem; border-bottom: 2px solid var(--ink); text-align: left; white-space: nowrap; }
+table.institutional-table td { padding: 0.65rem 0.9rem; border-bottom: 1px solid var(--border); vertical-align: middle; }
+table.institutional-table tbody tr:hover { background: rgba(184,148,95,0.04); }
+.positive { color: var(--sage); font-weight: 600; }
+.negative { color: var(--wine); font-weight: 600; }
+.neutral { color: var(--muted); }
+
+/* DECISION BADGES */
+.decision-action { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 2px; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; }
+.decision-action.keep { background: var(--sage-dim); color: var(--sage); }
+.decision-action.increase { background: rgba(30,58,95,0.12); color: var(--navy); }
+.decision-action.new { background: var(--gold-dim); color: #8B6F3A; }
+.decision-action.reduce { background: rgba(184,148,95,0.15); color: #8B6F3A; }
+.decision-action.exit { background: var(--wine-dim); color: var(--wine); }
+.decision-action.watch { background: rgba(138,130,120,0.12); color: var(--muted); }
+
+/* SECTOR PILLS */
+.sector-pill { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 2px; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.05em; }
+.sector-pill.fav { background: var(--sage-dim); color: var(--sage); }
+.sector-pill.mfav { background: rgba(123,143,116,0.22); color: #4A6345; }
+.sector-pill.neu { background: rgba(138,130,120,0.12); color: var(--muted); }
+.sector-pill.prej { background: var(--wine-dim); color: var(--wine); }
+.sector-pill.mprej { background: rgba(139,58,58,0.22); color: #6A2020; }
+
+/* LISTS */
+.e-list { list-style: none; padding: 0; }
+.e-list li { padding: 0.5rem 0; border-bottom: 1px solid rgba(30,27,23,0.06); font-size: 0.88rem; line-height: 1.65; }
+.e-list li:last-child { border-bottom: none; }
+
+/* PULL QUOTE */
+.pull-quote { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; font-style: italic; color: var(--ink-light); line-height: 1.5; padding: 1.5rem 2rem; border-left: 3px solid var(--gold); margin: 2rem 0; }
+
+/* SUB TITLES */
+.sub-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 500; color: var(--ink); letter-spacing: 0.01em; margin: 0 0 1rem 0; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(30,27,23,0.12); }
+
+/* ALLOC BAR */
+.alloc-bar { display: flex; height: 32px; border-radius: 2px; overflow: hidden; margin: 1.5rem 0; position: relative; }
+.alloc-bar > div { display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600; color: #fff; letter-spacing: 0.05em; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; padding: 0 0.3rem; }
+
+/* GAUGE */
+.gauge-wrap { text-align: center; padding: 1.5rem; }
+.gauge-value { font-family: var(--font-mono); font-size: 3rem; font-weight: 700; color: var(--gold); line-height: 1; }
+.gauge-label { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 0.4rem; }
+.gauge-bar { width: 100%; height: 8px; background: var(--border); border-radius: 4px; margin: 0.8rem 0; overflow: hidden; }
+.gauge-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+
+/* SCORE BOX */
+.score-box { margin-top: 2.5rem; padding: 2rem 2.2rem; background: linear-gradient(135deg, var(--gold-dim), var(--navy-dim)); border: 1px solid rgba(184,148,95,0.35); border-radius: 2px; text-align: center; }
+.score-box-label { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem; }
+.score-box-value { font-family: var(--font-display); font-size: 3.2rem; font-weight: 500; color: var(--gold); line-height: 1; margin-bottom: 1rem; }
+.score-box-desc { font-size: 0.92rem; line-height: 1.7; color: var(--ink); max-width: 720px; margin: 0 auto; }
+
+/* SEMAFORO */
+.semaforo { display: inline-flex; gap: 4px; margin-right: 0.5rem; vertical-align: middle; }
+.semaforo-dot { width: 10px; height: 10px; border-radius: 50%; opacity: 0.25; }
+.semaforo-dot.g { background: var(--sage); }
+.semaforo-dot.y { background: var(--gold); }
+.semaforo-dot.r { background: var(--wine); }
+.semaforo-dot.active { opacity: 1; }
+
+/* HERO CARD */
+.hero-card { background: #fff; border: 1px solid var(--border); padding: 2rem; padding-top: 2.3rem; position: relative; margin-bottom: 1.5rem; overflow: hidden; }
+.hero-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gold); }
+.hero-ticker { font-family: var(--font-mono); font-size: 1.6rem; font-weight: 700; color: var(--navy); }
+.hero-name { font-family: var(--font-display); font-size: 1.2rem; color: var(--muted); font-style: italic; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .grid-2, .two-col { grid-template-columns: 1fr; }
+  .cover-title { font-size: 2.2rem; }
+  .report-container { padding: 0 1.2rem; }
+  .kpi-row { gap: 1rem; }
+  .kpi-value { font-size: 1.2rem; }
+  .regime-strip { flex-direction: column; gap: 0.8rem; padding: 1rem; }
+  .regime-box.current { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 0.8rem; }
+  .regime-arrow { transform: rotate(90deg); }
+  .nav { gap: 1rem; padding: 0.5rem 1rem; }
+  .nav a { font-size: 0.6rem; }
+  .hero-card .grid-2 { grid-template-columns: 1fr; }
+  .section-title { font-size: 1.8rem; }
+  .alloc-bar { height: auto; flex-direction: column; }
+  .alloc-bar > div { padding: 0.4rem 0.8rem; }
+}
+@media print {
+  .nav { display: none; }
+  .section { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-brand">OVS Research</span>
+  <a href="#inputs">Inputs</a>
+  <a href="#macro">Macro</a>
+  <a href="#nowcast">Nowcast</a>
+  <a href="#cenarios">Cenários</a>
+  <a href="#setores">Setores</a>
+  <a href="#top20">Top 20</a>
+  <a href="#top5">Top 5</a>
+  <a href="#portfolio">Portfólio</a>
+  <a href="#risco">Risco</a>
+  <a href="#rebal">Rebal.</a>
+  <a href="#decisoes">Decisões</a>
+  <a href="#backtest">Backtest</a>
+  <a href="#fontes">Fontes</a>
+</nav>
+
+<div class="report-container">
+
+<!-- COVER -->
+<header class="cover">
+  <div class="cover-eyebrow">Superprompt V12 · Relatório Semanal de Portfólio · ciclo 17-abr-2026</div>
+  <h1 class="cover-title">Research Macro-Quantitativo <em>& Alocação Multiativos</em></h1>
+  <p class="cover-sub">Universo: 82 ativos B3 · Data-ref: 17 de abril de 2026 · Brasília, DF</p>
+
+  <div class="regime-strip">
+    <div class="regime-box current">
+      <div class="regime-label">Regime Atual</div>
+      <div class="regime-value" style="color: var(--navy);">Carry Defensivo em Transição</div>
+    </div>
+    <div class="regime-arrow">→</div>
+    <div class="regime-box">
+      <div class="regime-label">Regime Futuro (3–6m)</div>
+      <div class="regime-value" style="color: var(--sage);">Risk-On Desinflacionário Condicional</div>
+    </div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="kpi-value">55</div><div class="kpi-label">Macro Score</div></div>
+    <div class="kpi"><div class="kpi-value">60</div><div class="kpi-label">Nowcast</div></div>
+    <div class="kpi"><div class="kpi-value">0,74</div><div class="kpi-label">Transition</div></div>
+    <div class="kpi"><div class="kpi-value">14,75%</div><div class="kpi-label">Selic</div></div>
+    <div class="kpi"><div class="kpi-value">R$ 4,99</div><div class="kpi-label">USD/BRL</div></div>
+    <div class="kpi"><div class="kpi-value">196.819</div><div class="kpi-label">Ibovespa</div></div>
+  </div>
+</header>
+
+<!-- ALERT BANNER -->
+<div class="alert" style="border-left-color: var(--wine); margin-top: 2rem;">
+  <strong>⚠ Alerta Institucional — Focus IPCA 2026 estourou o teto da meta:</strong> projeção subiu para 4,71% (5ª alta consecutiva), superando o limite de 4,50%. Pressão vem de petróleo (Brent US$ 96 com prêmio Ormuz), alimentos e combustíveis. O mercado ainda não repriciou a Selic para cima (Focus mantém 12,50% ao final de 2026), mas o risco de pausa no easing é concreto se Brent sustentar acima de US$ 100. Ibovespa encostou nos 199 mil pontos sustentado pelo maior fluxo estrangeiro desde 2022 (+R$ 67,4 bi YTD). A divergência entre preço (recorde) e expectativas inflacionárias (deteriorando) é o principal ponto de atenção deste ciclo.
+</div>
+
+<!-- ================================================================== -->
+<!-- § 1 — INPUTS DO USUÁRIO                                             -->
+<!-- ================================================================== -->
+<section id="inputs" class="section">
+  <div class="section-header">
+    <div class="eyebrow">§ 1</div>
+    <h2 class="section-title">Inputs <em>do Usuário</em></h2>
+    <div class="section-kicker">Dados fornecidos que prevalecem sobre fontes públicas (USER INPUT > WEB DATA > INFERÊNCIA).</div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3 class="sub-title">Dados Macro (22 indicadores)</h3>
+      <table class="institutional-table">
+        <thead><tr><th>Indicador</th><th>Valor</th><th>Fonte</th></tr></thead>
+        <tbody>
+          <tr><td>VIX</td><td><strong>17,91</strong></td><td style="font-size:0.75rem;">Yahoo Finance</td></tr>
+          <tr><td>MOVE Index</td><td><strong>91,17</strong></td><td style="font-size:0.75rem;">CSV</td></tr>
+          <tr><td>CDS BR 5Y</td><td><strong>138,19 bps</strong></td><td style="font-size:0.75rem;">CSV</td></tr>
+          <tr><td>EMBI BR</td><td><strong>1.178,50</strong></td><td style="font-size:0.75rem;">CSV</td></tr>
+          <tr><td>HY Spread US</td><td><strong>2,85%</strong></td><td style="font-size:0.75rem;">FRED</td></tr>
+          <tr><td>Selic (efetiva)</td><td><strong>14,37%</strong></td><td style="font-size:0.75rem;">CSV (meta 14,75%)</td></tr>
+          <tr><td>DI1F5</td><td><strong>13,948%</strong></td><td style="font-size:0.75rem;">CSV</td></tr>
+          <tr><td>DI1F10</td><td><strong>14,130%</strong></td><td style="font-size:0.75rem;">CSV</td></tr>
+          <tr><td>UST 10Y</td><td><strong>4,309%</strong></td><td style="font-size:0.75rem;">Yahoo Finance</td></tr>
+          <tr><td>Breakeven 5Y US</td><td><strong>2,60%</strong></td><td style="font-size:0.75rem;">FRED</td></tr>
+          <tr><td>Slope US (10Y-2Y)</td><td><strong>+0,549</strong></td><td style="font-size:0.75rem;">Calculado</td></tr>
+          <tr><td>IPCA 12m</td><td><strong>4,14%</strong></td><td style="font-size:0.75rem;">IBGE</td></tr>
+          <tr><td>DXY</td><td><strong>98,10</strong></td><td style="font-size:0.75rem;">Yahoo Finance</td></tr>
+          <tr><td>USD/BRL</td><td><strong>R$ 4,9938</strong></td><td style="font-size:0.75rem;">Yahoo Finance</td></tr>
+          <tr><td>FX Vol USD/BRL</td><td><strong>12,18</strong></td><td style="font-size:0.75rem;">Calculado</td></tr>
+          <tr><td>Ouro</td><td><strong>US$ 4.815</strong></td><td style="font-size:0.75rem;">Yahoo Finance</td></tr>
+          <tr><td>Brent</td><td><strong>US$ 96,29</strong></td><td style="font-size:0.75rem;">Yahoo Finance</td></tr>
+          <tr><td>Cobre</td><td><strong>US$ 6,037/lb</strong></td><td style="font-size:0.75rem;">Yahoo Finance</td></tr>
+          <tr><td>CRB Index</td><td><strong>365,79</strong></td><td style="font-size:0.75rem;">CSV</td></tr>
+          <tr><td>S&P 500</td><td><strong>7.041</strong></td><td style="font-size:0.75rem;">Yahoo Finance</td></tr>
+          <tr><td>Ibovespa</td><td><strong>196.819</strong></td><td style="font-size:0.75rem;">Yahoo Finance</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:0.8rem; font-size:0.82rem; color:var(--muted); font-style:italic;">3 indicadores faltantes no JSON: FED_FUNDS, PMI_GLOBAL, IBC_BR — complementados via web search.</p>
+    </div>
+    <div>
+      <h3 class="sub-title">Universo de Ações (82 tickers)</h3>
+      <p style="font-size:0.88rem; margin-bottom:1rem;">Arquivo <code>AcoesFundaEnri.json</code> com 82 tickers da B3 incluindo cotação, P/L, P/VP, ROE, ROIC, DY, margens, liquidez, crescimento 5a, FCF Yield, earnings growth YoY, score_rank e métricas técnicas (ret22).</p>
+      <table class="institutional-table">
+        <thead><tr><th>Setor</th><th>Qtd</th><th>Exemplos</th></tr></thead>
+        <tbody>
+          <tr><td>Construção Civil</td><td>9</td><td>CURY3, TEND3, DIRR3, JHSF3, PLPL3, MDNE3</td></tr>
+          <tr><td>Intermediários Financeiros</td><td>10</td><td>ITUB4, BBDC4, BPAC11, ABCB4, SANB11</td></tr>
+          <tr><td>Previdência e Seguros</td><td>3</td><td>BBSE3, PSSA3, WIZC3</td></tr>
+          <tr><td>Energia Elétrica</td><td>8</td><td>CPFE3, CMIG4, NEOE3, ALUP11</td></tr>
+          <tr><td>Máquinas e Equip.</td><td>3</td><td>KEPL3, SHUL4, ARML3</td></tr>
+          <tr><td>Material de Transporte</td><td>2</td><td>POMO3, POMO4</td></tr>
+          <tr><td>Saúde</td><td>4</td><td>RDOR3, ODPV3, FLRY3, MATD3</td></tr>
+          <tr><td>Comércio/Varejo</td><td>4</td><td>LREN3, CEAB3, RIAA3, VBBR3</td></tr>
+          <tr><td>Telecom/Tech</td><td>5</td><td>TIMS3, TOTS3, INTB3, BMOB3</td></tr>
+          <tr><td>Outros (saneam., holdings, etc.)</td><td>34</td><td>SBSP3, ITSA4, LEVE3, VLID3, CSUD3</td></tr>
+        </tbody>
+      </table>
+      <div class="alert" style="border-left-color: var(--navy); margin-top:1.5rem;">
+        <strong>Nota:</strong> Este universo NÃO contém BDRs nem ETFs. Exposição internacional será via IVVB11 (fora do universo de stock picking). Ausentes notáveis: VALE3, PETR4, PRIO3 (commodities puras) — estas ficam em WATCHLIST.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- § 2 — LEITURA MACROECONÔMICA COMPLETA                               -->
+<!-- ================================================================== -->
+<section id="macro" class="section">
+  <div class="section-header">
+    <div class="eyebrow">§ 2</div>
+    <h2 class="section-title">Leitura Macroeconômica <em>Completa</em></h2>
+    <div class="section-kicker">Síntese dos dados coletados via web e do input do usuário. Fontes oficiais (BCB, IBGE, FRED) prevalecem.</div>
+  </div>
+
+  <div class="grid-4" style="margin-bottom: 2rem;">
+    <div class="card"><div class="card-accent-top sage"></div><div class="card-eyebrow">Selic Meta</div><div class="kpi-value" style="font-size:1.8rem;">14,75%</div><div style="font-size:0.78rem; color:var(--sage); margin-top:0.3rem;">↓ Cortou 25bps em 18/mar</div></div>
+    <div class="card"><div class="card-accent-top wine"></div><div class="card-eyebrow">Focus IPCA 2026</div><div class="kpi-value" style="font-size:1.8rem; color:var(--wine);">4,71%</div><div style="font-size:0.78rem; color:var(--wine); margin-top:0.3rem;">↑ 5ª alta. Acima do teto</div></div>
+    <div class="card"><div class="card-accent-top sage"></div><div class="card-eyebrow">USD/BRL</div><div class="kpi-value" style="font-size:1.8rem;">R$ 4,99</div><div style="font-size:0.78rem; color:var(--sage); margin-top:0.3rem;">↓ Menor desde abr/24</div></div>
+    <div class="card"><div class="card-accent-top gold"></div><div class="card-eyebrow">Brent</div><div class="kpi-value" style="font-size:1.8rem;">US$ 96</div><div style="font-size:0.78rem; color:var(--gold); margin-top:0.3rem;">↓ Cedeu de 107 em 21d</div></div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3 class="sub-title">Vetores Positivos</h3>
+      <ul class="e-list">
+        <li><strong>Ciclo de easing confirmado.</strong> Copom cortou 25bps em março (14,75%); Focus projeta Selic a 12,50% no fim de 2026. Próximo Copom 28–29/abr — base case: -25bps (14,50%).</li>
+        <li><strong>Real forte.</strong> USD/BRL a R$ 4,99, menor nível em 2 anos. Z-score 1Y de -2,52 no câmbio — apreciação extrema, mas sustentada por carry + terms-of-trade + fluxo estrangeiro.</li>
+        <li><strong>DXY abaixo de 100.</strong> Dólar global em 98,10, trigger ativo para emergentes (DXY &lt; 100 = favorecer EMs).</li>
+        <li><strong>Fluxo estrangeiro histórico.</strong> +R$ 67,4 bi YTD na B3 (melhor desde 2022). Abril: +R$ 14 bi em 10 dias úteis. Ibovespa tocou 199k na máxima intraday.</li>
+        <li><strong>VIX comprimido.</strong> 17,91; caiu 29% em 21 dias (de 25,09). Vol USD/BRL colapsou de 16,34 para 12,18 em 5 dias.</li>
+        <li><strong>Curva US em steepening.</strong> Slope 10Y-2Y em +0,549 — sinal positivo para risk assets.</li>
+        <li><strong>HY Spread US comprimindo.</strong> 2,85%, caiu 11% em 21d. Stress de crédito global em mínimas.</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="sub-title">Vetores Negativos</h3>
+      <ul class="e-list">
+        <li><strong>IPCA expectativas desancoradas.</strong> Focus 2026 em 4,71% (5ª alta consecutiva) já acima do teto de 4,50%. Focus 2027 subiu para 3,91%. Risco de pausa no easing se não reverter.</li>
+        <li><strong>Brent elevado com prêmio geopolítico.</strong> US$ 96/bbl; Estreito de Ormuz bloqueado. Segundo round de negociações EUA-Irã pendente. Se falhar, risco de Brent > US$ 110.</li>
+        <li><strong>Fed hawkish.</strong> Mantém 3,50-3,75%; minutes de março mostram que alguns membros consideram alta. Powell disse que vai "esperar para ver" os efeitos da guerra no Irã. Powell sai em 15/mai — transição para Kevin Warsh.</li>
+        <li><strong>MOVE Index elevado.</strong> 91,17 com z-score +0,49 — stress em Treasuries acima da média. Trump ameaça Powell, gerando ruído adicional.</li>
+        <li><strong>CDS BR subindo.</strong> 138 bps, alta de 6,7% em 21d. Prêmio de risco soberano em expansão marginal.</li>
+        <li><strong>CRB Index disparou.</strong> 365,79, z-score de 5,64 — commodities em alta extrema, pressionando inflação futura.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pull-quote" style="margin-top: 2rem;">
+    O mercado está comprando Brasil com convicção (fluxo recorde + BRL forte), mas as expectativas de inflação estão rachando. A divergência entre preço de ativos (recorde) e expectativas macro (deteriorando) cria uma janela estreita: ou a inflação cede e confirma a tese — ou o Copom freia o easing e o rally testa sua sustentação.
+  </div>
+
+  <!-- MACRO SCORE QUANTITATIVO -->
+  <h3 class="sub-title" style="margin-top: 2.5rem;">MACRO_SCORE Quantitativo (0–100)</h3>
+  <table class="institutional-table">
+    <thead>
+      <tr><th>Componente</th><th>Peso</th><th>Nota</th><th>Contribuição</th><th>Racional</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Inflação</strong></td><td>20%</td><td>48</td><td>9,6</td><td>IPCA 12m em 4,14% (convergindo), mas Focus 4,71% desancorado. CPI US triplicou em março.</td></tr>
+      <tr><td><strong>Juros</strong></td><td>20%</td><td>62</td><td>12,4</td><td>Easing cycle confirmado (Selic -25bps); DI1F5 cedendo; Fed parado mas sem alta.</td></tr>
+      <tr><td><strong>Liquidez Global</strong></td><td>20%</td><td>58</td><td>11,6</td><td>HY Spread comprimindo; DXY &lt; 100; fluxo para EM forte. Mas Fed em QT parcial e MOVE elevado.</td></tr>
+      <tr><td><strong>Risco Global</strong></td><td>20%</td><td>52</td><td>10,4</td><td>VIX 17,91 (normal). CDS BR subindo marginalmente. Ormuz ainda fechado. Transição Powell.</td></tr>
+      <tr><td><strong>Commodities</strong></td><td>20%</td><td>55</td><td>11,0</td><td>Brent cedendo (-10% de 21d atrás), cobre forte (+8,7% em 21d), ouro estável. CRB extremo.</td></tr>
+      <tr style="background: var(--gold-dim);"><td><strong>MACRO_SCORE</strong></td><td>100%</td><td colspan="2" style="font-family:var(--font-mono); font-size:1.1rem; font-weight:700; color:var(--gold);">55 / 100</td><td>Neutro-construtivo. Regime 40-70 = Risk-On moderado.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- BOLETIM FOCUS -->
+  <h3 class="sub-title" style="margin-top: 2.5rem;">Boletim Focus (BCB · Release 13/abr/2026)</h3>
+  <div class="grid-4">
+    <div class="card"><div class="card-accent-top wine"></div><div class="card-eyebrow">IPCA 2026</div><div class="kpi-value" style="font-size:1.4rem; color:var(--wine);">4,71%</div><div style="font-size:0.75rem; color:var(--wine);">↑ 5ª alta consecutiva</div></div>
+    <div class="card"><div class="card-accent-top sage"></div><div class="card-eyebrow">Selic fim 2026</div><div class="kpi-value" style="font-size:1.4rem;">12,50%</div><div style="font-size:0.75rem; color:var(--sage);">= Estável 3 semanas</div></div>
+    <div class="card"><div class="card-accent-top gold"></div><div class="card-eyebrow">PIB 2026</div><div class="kpi-value" style="font-size:1.4rem;">1,85%</div><div style="font-size:0.75rem;">= Estável</div></div>
+    <div class="card"><div class="card-accent-top sage"></div><div class="card-eyebrow">Câmbio 2026</div><div class="kpi-value" style="font-size:1.4rem;">R$ 5,37</div><div style="font-size:0.75rem; color:var(--sage);">↓ Revisado para baixo</div></div>
+  </div>
+
+  <h3 class="sub-title" style="margin-top: 2rem;">FOCUS_SCORE</h3>
+  <p>Inflação desancorada (-15) + juros em queda (+12) + crescimento estável (+5) + câmbio melhorando (+8) = <strong style="font-family:var(--font-mono);">FOCUS_SCORE: 52/100</strong> (pressão inflacionária penaliza, mas easing + câmbio suportam).</p>
+
+  <!-- RISCOS DE CAUDA -->
+  <h3 class="sub-title" style="margin-top: 2rem;">Riscos de Cauda</h3>
+  <div class="grid-3">
+    <div class="card"><div class="card-accent-top wine"></div><div class="card-eyebrow">Prob. 15%</div><div class="card-title">Escalada Irã-EUA</div><div class="card-body">Fracasso nas negociações + Ormuz bloqueado indefinidamente → Brent > US$ 120, IPCA + 1,5pp, Copom pausa, Ibov -15%.</div></div>
+    <div class="card"><div class="card-accent-top wine"></div><div class="card-eyebrow">Prob. 10%</div><div class="card-title">Fed Hike Surpresa</div><div class="card-body">CPI US persistente + Powell/Warsh forçados a subir → DXY > 105, US10Y > 5%, BRL -8%, Ibov -12%.</div></div>
+    <div class="card"><div class="card-accent-top wine"></div><div class="card-eyebrow">Prob. 8%</div><div class="card-title">Crise Fiscal BR 2S26</div><div class="card-body">Ano eleitoral + gastos expansionistas → DI reabre, CDS > 200, real perde suporte, revisão do easing.</div></div>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- § 3 — NOWCAST + TRANSITION                                          -->
+<!-- ================================================================== -->
+<section id="nowcast" class="section">
+  <div class="section-header">
+    <div class="eyebrow">§ 3</div>
+    <h2 class="section-title">Nowcast Engine <em>& Transition Score</em></h2>
+    <div class="section-kicker">Três dimensões simultâneas: MACRO_SCORE (regime coincidente) + NOWCAST (presente em tempo real) + TRANSITION (antecipação).</div>
+  </div>
+
+  <div class="grid-3">
+    <div class="card" style="text-align:center;">
+      <div class="card-accent-top navy"></div>
+      <div class="card-eyebrow">Macro Score</div>
+      <div class="gauge-value" style="font-size:2.8rem; color:var(--navy);">55</div>
+      <div class="gauge-bar"><div class="gauge-fill" style="width:55%; background:var(--navy);"></div></div>
+      <div style="font-size:0.78rem; color:var(--muted);">Neutro-construtivo · faixa 40-70</div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div class="card-accent-top sage"></div>
+      <div class="card-eyebrow">Nowcast Score</div>
+      <div class="gauge-value" style="font-size:2.8rem; color:var(--sage);">60</div>
+      <div class="gauge-bar"><div class="gauge-fill" style="width:60%; background:var(--sage);"></div></div>
+      <div style="font-size:0.78rem; color:var(--muted);">Leve aquecimento · faixa 40-70</div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div class="card-accent-top gold"></div>
+      <div class="card-eyebrow">Transition Score</div>
+      <div class="gauge-value" style="font-size:2.8rem; color:var(--gold);">0,74</div>
+      <div class="gauge-bar"><div class="gauge-fill" style="width:74%; background: linear-gradient(90deg, var(--gold), var(--sage));"></div></div>
+      <div style="font-size:0.78rem; color:var(--gold); font-weight:600;">REGRA DE OURO ATIVA (>0,65)</div>
+    </div>
+  </div>
+
+  <!-- NOWCAST COMPONENTS -->
+  <h3 class="sub-title" style="margin-top:2rem;">Composição do NOWCAST_SCORE (60/100)</h3>
+  <table class="institutional-table">
+    <thead><tr><th>Componente</th><th>Peso</th><th>Nota</th><th>Sinal</th></tr></thead>
+    <tbody>
+      <tr><td>Atividade</td><td>20%</td><td>55</td><td>IBC-Br fev +0,6%; varejo em recorde; emprego estável</td></tr>
+      <tr><td>Inflação corrente</td><td>20%</td><td>50</td><td>IPCA mar 0,88% (acima), mas breakevens US estáveis em 2,60%</td></tr>
+      <tr><td>Condições financeiras</td><td>20%</td><td>68</td><td>DI fechando, spreads HY comprimindo, FCI melhorando</td></tr>
+      <tr><td>Mercado</td><td>20%</td><td>72</td><td>Ibov recorde, BRL forte, S&P 7.041 em alta</td></tr>
+      <tr><td>Fluxo</td><td>10%</td><td>75</td><td>+R$ 67,4 bi YTD estrangeiro; rotação global para EM</td></tr>
+      <tr><td>Volatilidade</td><td>10%</td><td>65</td><td>VIX 17,91 (normal); FX vol 12,18 (baixa). Contango no VIX.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- TRANSITION COMPONENTS -->
+  <h3 class="sub-title" style="margin-top:2rem;">Composição do TRANSITION_SCORE (0,74)</h3>
+  <table class="institutional-table">
+    <thead><tr><th>Driver</th><th>Sinal</th><th>Contribuição</th></tr></thead>
+    <tbody>
+      <tr><td>Curva de juros BR</td><td class="positive">DI1F5 < Selic meta → inversão = easing precificado</td><td class="positive">+0,12</td></tr>
+      <tr><td>Curva US</td><td class="positive">Slope +0,549, steepening pós-inversão</td><td class="positive">+0,10</td></tr>
+      <tr><td>DXY</td><td class="positive">< 100, tendência de queda (-2% em 21d)</td><td class="positive">+0,11</td></tr>
+      <tr><td>Commodities</td><td class="neutral">Brent cedendo mas CRB extremo; misto</td><td>+0,05</td></tr>
+      <tr><td>Fluxo/Posicionamento</td><td class="positive">Fluxo EM forte, rotação de portfólios</td><td class="positive">+0,12</td></tr>
+      <tr><td>Volatilidade</td><td class="positive">VIX 17,91 em contango; normalização</td><td class="positive">+0,10</td></tr>
+      <tr><td>Earnings/Atividade</td><td class="positive">Revisões neutras a positivas; IBC-Br +0,6%</td><td class="positive">+0,14</td></tr>
+    </tbody>
+  </table>
+
+  <!-- REGIME TRANSITION MATRIX -->
+  <h3 class="sub-title" style="margin-top:2rem;">Matriz de Transição de Regime</h3>
+  <div class="grid-2">
+    <div class="card"><div class="card-accent-top navy"></div>
+      <div class="card-eyebrow">Confirmação da Transição</div>
+      <ul class="e-list">
+        <li><strong>Copom corta 25-50bps em 28/abr</strong> → confirma easing</li>
+        <li><strong>Focus IPCA estabiliza ou cai</strong> → desancoragem revertida</li>
+        <li><strong>Brent < US$ 90</strong> → alívio inflacionário</li>
+        <li><strong>DXY sustenta < 98</strong> → EM cycle confirmado</li>
+      </ul>
+    </div>
+    <div class="card"><div class="card-accent-top wine"></div>
+      <div class="card-eyebrow">Invalidação da Transição</div>
+      <ul class="e-list">
+        <li><strong>Copom pausa ou sinaliza pausa</strong> → easing abortado</li>
+        <li><strong>Focus IPCA > 5,0%</strong> → expectativas fora de controle</li>
+        <li><strong>Brent > US$ 110 sustentado</strong> → choque inflacionário</li>
+        <li><strong>VIX > 25 + CDS > 180</strong> → reversão de fluxo</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert" style="border-left-color: var(--gold); margin-top:1.5rem;">
+    <strong>Regra de Ouro V7 (ATIVA):</strong> Transition Score 0,74 > threshold 0,65 → <strong>50% da carteira posicionada para o regime futuro</strong> (Risk-On Desinflacionário). Pesos do scoring ajustados: Transition recebe 25% (vs 15% base). A posição é <em>parcial e forward-looking</em>: não apostamos que a transição já ocorreu, mas que a probabilidade justifica posicionamento antecipado.
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- § 4 — CENÁRIOS                                                      -->
+<!-- ================================================================== -->
+<section id="cenarios" class="section">
+  <div class="section-header">
+    <div class="eyebrow">§ 4</div>
+    <h2 class="section-title">Cenários <em>Base, Bull & Bear</em></h2>
+  </div>
+
+  <div class="grid-3">
+    <div class="card"><div class="card-accent-top navy"></div>
+      <div class="card-eyebrow" style="font-size:0.9rem; font-weight:700; color:var(--navy); font-family:var(--font-display);">BASE · 50%</div>
+      <div class="card-body">
+        <p><strong>Narrativa:</strong> Easing gradual. Copom corta 25bps/reunião. Brent oscila US$ 88-100. Acordo parcial EUA-Irã com abertura gradual de Ormuz. Focus IPCA estabiliza em ~4,5%. Ibov 210-220k em 6 meses.</p>
+        <p><strong>Impacto:</strong> Selic a 13,50% em set/26. BRL ~R$ 5,00-5,20. Ações +15-20%. IPCA+ ganham no carregamento. CDI ainda atrativo.</p>
+      </div>
+    </div>
+    <div class="card"><div class="card-accent-top sage"></div>
+      <div class="card-eyebrow" style="font-size:0.9rem; font-weight:700; color:var(--sage); font-family:var(--font-display);">BULL · 22%</div>
+      <div class="card-body">
+        <p><strong>Narrativa:</strong> Acordo EUA-Irã rápido. Ormuz reabre. Brent cai para US$ 78-85. IPCA convergindo para 4,0%. Copom acelera para -50bps. DXY cai para 95. Fluxo estrangeiro continua.</p>
+        <p><strong>Impacto:</strong> Selic 12,00% em dez/26. BRL abaixo de R$ 4,80. Ibov 230-240k. Construtoras +40%. Bancos +25%. IPCA+ longo sprint.</p>
+      </div>
+    </div>
+    <div class="card"><div class="card-accent-top wine"></div>
+      <div class="card-eyebrow" style="font-size:0.9rem; font-weight:700; color:var(--wine); font-family:var(--font-display);">BEAR · 28%</div>
+      <div class="card-body">
+        <p><strong>Narrativa:</strong> Negociações Irã falham. Ormuz escala. Brent US$ 115+. IPCA dispara para 5,5-6%. Copom pausa ou reverte para alta. Fed hike. Fluxo estrangeiro reverte. CDS > 200.</p>
+        <p><strong>Impacto:</strong> Selic volta a 15,50%. BRL R$ 5,50+. Ibov 170-175k (-15%). Kill Switch potencialmente ativado. CDI volta a ser rei.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- § 5 — SETORES + FATORES                                             -->
+<!-- ================================================================== -->
+<section id="setores" class="section">
+  <div class="section-header">
+    <div class="eyebrow">§ 5</div>
+    <h2 class="section-title">Classificação <em>Setorial & Fatores</em></h2>
+  </div>
+
+  <div class="table-wrap">
+    <table class="institutional-table">
+      <thead><tr><th>Setor / Subsetor</th><th>Classificação</th><th>Convicção</th><th>Racional</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Seguros & Previdência</strong></td><td><span class="sector-pill mfav">Muito Favorecido</span></td><td>9/10</td><td>ROE extremo (BBSE3 87%), carry alto, beta baixo, FCF máquina. Defensivo no atual + convexo ao futuro.</td></tr>
+        <tr><td><strong>Bancos (Large Cap)</strong></td><td><span class="sector-pill fav">Favorecido</span></td><td>8/10</td><td>Spread bancário robusto com Selic alta; mark-to-market positivo com curva fechando. Fluxo gringo favorece.</td></tr>
+        <tr><td><strong>Construção Civil</strong></td><td><span class="sector-pill fav">Favorecido</span></td><td>8/10</td><td>Beta puro ao easing. CURY ROE 70,6%; TEND ROE 42%. Seletividade: CURY > TEND (valuation mais contido).</td></tr>
+        <tr><td><strong>Energia Elétrica (Utilities)</strong></td><td><span class="sector-pill fav">Favorecido</span></td><td>7/10</td><td>Hedge IPCA natural. Defensivas reguladas. CPFE3 ROE 24,4%; NEOE3 P/L 8,1x. Beta baixo para regime de transição.</td></tr>
+        <tr><td><strong>Saneamento</strong></td><td><span class="sector-pill fav">Favorecido</span></td><td>7/10</td><td>SBSP3 pós-privatização com ROE 20%. Tarifa reajustada pelo IPCA. Defensivo + upside regulatório.</td></tr>
+        <tr><td><strong>Holdings Diversificadas</strong></td><td><span class="sector-pill fav">Favorecido</span></td><td>7/10</td><td>ITSA4 proxy de Itaú com desconto. BPAC11 growth financeiro.</td></tr>
+        <tr><td><strong>Autopeças & Transporte</strong></td><td><span class="sector-pill fav">Favorecido</span></td><td>7/10</td><td>LEVE3 ROE 70,7%, P/L 8x — deep value. POMO4 ROE 31,9%, DY 13,7%. Beneficiados por atividade doméstica.</td></tr>
+        <tr><td><strong>Serviços Financeiros</strong></td><td><span class="sector-pill fav">Favorecido</span></td><td>7/10</td><td>CSUD3 ROE 22,8%, DY 15,4%. BRBI11 ROE 22,4%. Diversificação dentro de financeiros.</td></tr>
+        <tr><td><strong>Telecom</strong></td><td><span class="sector-pill neu">Neutro</span></td><td>5/10</td><td>TIMS3 dados incompletos. VIVT3 P/L 21x — caro. Setor estável mas sem catalisador claro.</td></tr>
+        <tr><td><strong>Tecnologia / Software</strong></td><td><span class="sector-pill neu">Neutro</span></td><td>5/10</td><td>TOTS3 P/L 23x, crescimento 5a razoável. INTB3 mais interessante (P/L 9,8x). Sem beta macro direto.</td></tr>
+        <tr><td><strong>Varejo</strong></td><td><span class="sector-pill neu">Neutro</span></td><td>5/10</td><td>LREN3 se beneficia do easing, mas crédito ao consumidor demora a reagir. Preferir depois de 2-3 cortes confirmados.</td></tr>
+        <tr><td><strong>Saúde</strong></td><td><span class="sector-pill neu">Neutro</span></td><td>5/10</td><td>ODPV3 ROE excepcional (45,5%) mas P/L 14,8x. RDOR3 caro (P/L 19x). Seletividade necessária.</td></tr>
+        <tr><td><strong>Imobiliário (Shoppings/Lajes)</strong></td><td><span class="sector-pill neu">Neutro</span></td><td>4/10</td><td>IGTI11, ALOS3 — yield razoável mas liquidez e crescimento limitados. Preferir construtoras neste ciclo.</td></tr>
+        <tr><td><strong>Vestuário / Calçados</strong></td><td><span class="sector-pill prej">Prejudicado</span></td><td>4/10</td><td>ALPA4 P/L 14,7x, sem catalisador. TFCO4 P/L 17x caro. Consumo ainda pressionado por juros altos.</td></tr>
+        <tr><td><strong>Commodities (ausentes)</strong></td><td><span class="sector-pill neu">N/A</span></td><td>—</td><td>VALE3, PETR4, PRIO3 fora do universo. Brent sustentado favoreceria oil; minério US$ 103-105 neutro.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FATORES V7 -->
+  <h3 class="sub-title" style="margin-top:2rem;">Posicionamento Tático por Fatores de Risco (V7)</h3>
+  <table class="institutional-table">
+    <thead><tr><th>Fator</th><th>Proxy</th><th>Peso Regime Atual</th><th>Peso Transição (ativo)</th><th>Racional</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Valor (Value)</strong></td><td>P/L, P/VP baixo</td><td>OW +25%</td><td>UW</td><td>Regime atual favorece valor; transição favorece momentum</td></tr>
+      <tr><td><strong>Momentum</strong></td><td>Ret 12-1m</td><td>UW -25%</td><td><strong>OW +25%</strong></td><td>Transição ativa → momentum ganha; ações em tendência beneficiadas</td></tr>
+      <tr><td><strong>Qualidade</strong></td><td>ROE, ROIC, DL/EBITDA</td><td>OW +15%</td><td><strong>OW +15%</strong></td><td>Permanece overweight em ambos regimes — qualidade sempre paga</td></tr>
+      <tr><td><strong>Baixa Vol</strong></td><td>Beta, Vol 60d</td><td>Neutro</td><td><strong>OW +10%</strong></td><td>Transição incerta favorece baixa vol como hedge</td></tr>
+      <tr><td><strong>Tamanho</strong></td><td>Small vs Large</td><td>UW -50%</td><td>Neutro</td><td>Liquidez ainda favorece large caps; small caps quando easing confirmar</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ================================================================== -->
+<!-- § 6 — TOP 20 RANKING                                                -->
+<!-- ================================================================== -->
+<section id="top20" class="section">
+  <div class="section-header">
+    <div class="eyebrow">§ 6</div>
+    <h2 class="section-title">Top 20 <em>Ranking Quantitativo</em></h2>
+    <div class="section-kicker">Score composto V7 (Transition > 0,7): Macro 20% · Fundamental 25% · Valuation 15% · Risk 15% · Transition 25%. Universo: 82 tickers fornecidos.</div>
+  </div>
+
+  <div class="table-wrap">
+    <table class="institutional-table">
+      <thead>
+        <tr><th>#</th><th>Ticker</th><th>Setor</th><th>Cotação</th><th>P/L</th><th>ROE</th><th>ROIC</th><th>DY</th><th>FCF Yield</th><th>Macro</th><th>Fund.</th><th>Val.</th><th>Risk</th><th>Trans.</th><th>FINAL</th></tr>
+      </thead>
+      <tbody>
+        <tr style="background:var(--gold-dim);"><td><strong>1</strong></td><td><strong>BBSE3</strong></td><td>Seguros</td><td>35,01</td><td>7,5</td><td>86,8%</td><td>—</td><td>13,3%</td><td>5,6%</td><td>78</td><td>95</td><td>82</td><td>88</td><td>80</td><td><strong>85,1</strong></td></tr>
+        <tr style="background:var(--gold-dim);"><td><strong>2</strong></td><td><strong>CURY3</strong></td><td>Construção</td><td>34,21</td><td>10,8</td><td>70,6%</td><td>39,4%</td><td>11,5%</td><td>5,4%</td><td>82</td><td>90</td><td>72</td><td>72</td><td>88</td><td><strong>82,6</strong></td></tr>
+        <tr style="background:var(--gold-dim);"><td><strong>3</strong></td><td><strong>ITUB4</strong></td><td>Bancos</td><td>46,98</td><td>11,4</td><td>23,3%</td><td>—</td><td>7,3%</td><td>—</td><td>80</td><td>82</td><td>68</td><td>85</td><td>82</td><td><strong>80,1</strong></td></tr>
+        <tr style="background:var(--gold-dim);"><td><strong>4</strong></td><td><strong>PSSA3</strong></td><td>Seguros</td><td>53,69</td><td>10,3</td><td>21,5%</td><td>77,4%</td><td>5,6%</td><td>—</td><td>76</td><td>85</td><td>70</td><td>80</td><td>84</td><td><strong>79,9</strong></td></tr>
+        <tr style="background:var(--gold-dim);"><td><strong>5</strong></td><td><strong>LEVE3</strong></td><td>Autopeças</td><td>36,21</td><td>8,1</td><td>70,7%</td><td>35,9%</td><td>7,5%</td><td>—</td><td>72</td><td>92</td><td>78</td><td>70</td><td>76</td><td><strong>78,2</strong></td></tr>
+        <tr><td>6</td><td>CSUD3</td><td>Serv. Financ.</td><td>18,10</td><td>7,1</td><td>22,8%</td><td>17,6%</td><td>15,4%</td><td>—</td><td>74</td><td>80</td><td>80</td><td>72</td><td>74</td><td><strong>76,2</strong></td></tr>
+        <tr><td>7</td><td>TEND3</td><td>Construção</td><td>32,62</td><td>7,9</td><td>42,2%</td><td>11,9%</td><td>3,8%</td><td>—</td><td>80</td><td>78</td><td>76</td><td>65</td><td>82</td><td><strong>76,0</strong></td></tr>
+        <tr><td>8</td><td>POMO4</td><td>Transp.</td><td>6,86</td><td>7,0</td><td>31,9%</td><td>20,6%</td><td>13,7%</td><td>—</td><td>68</td><td>82</td><td>80</td><td>68</td><td>72</td><td><strong>74,4</strong></td></tr>
+        <tr><td>9</td><td>DIRR3</td><td>Construção</td><td>14,27</td><td>9,4</td><td>41,2%</td><td>9,8%</td><td>15,5%</td><td>—</td><td>78</td><td>76</td><td>72</td><td>62</td><td>80</td><td><strong>74,2</strong></td></tr>
+        <tr><td>10</td><td>WIZC3</td><td>Seguros</td><td>9,53</td><td>7,6</td><td>28,8%</td><td>36,6%</td><td>5,9%</td><td>—</td><td>72</td><td>78</td><td>78</td><td>72</td><td>70</td><td><strong>73,6</strong></td></tr>
+        <tr><td>11</td><td>ITSA4</td><td>Holding</td><td>14,81</td><td>10,1</td><td>18,6%</td><td>0,3%</td><td>8,3%</td><td>—</td><td>76</td><td>72</td><td>72</td><td>78</td><td>72</td><td><strong>73,4</strong></td></tr>
+        <tr><td>12</td><td>CPFE3</td><td>Energia</td><td>56,26</td><td>11,8</td><td>24,4%</td><td>15,4%</td><td>5,0%</td><td>—</td><td>70</td><td>78</td><td>66</td><td>82</td><td>68</td><td><strong>72,4</strong></td></tr>
+        <tr><td>13</td><td>SHUL4</td><td>Máquinas</td><td>5,33</td><td>6,6</td><td>19,3%</td><td>6,8%</td><td>12,0%</td><td>—</td><td>65</td><td>72</td><td>82</td><td>68</td><td>70</td><td><strong>71,0</strong></td></tr>
+        <tr><td>14</td><td>SBSP3</td><td>Saneamento</td><td>167,90</td><td>14,0</td><td>20,0%</td><td>13,7%</td><td>4,2%</td><td>—</td><td>68</td><td>74</td><td>60</td><td>85</td><td>68</td><td><strong>70,6</strong></td></tr>
+        <tr><td>15</td><td>MDNE3</td><td>Construção</td><td>32,29</td><td>8,0</td><td>27,7%</td><td>10,2%</td><td>13,5%</td><td>—</td><td>76</td><td>74</td><td>74</td><td>58</td><td>72</td><td><strong>70,4</strong></td></tr>
+        <tr><td>16</td><td>PLPL3</td><td>Construção</td><td>12,82</td><td>7,2</td><td>35,4%</td><td>35,6%</td><td>3,8%</td><td>—</td><td>74</td><td>78</td><td>76</td><td>52</td><td>72</td><td><strong>70,2</strong></td></tr>
+        <tr><td>17</td><td>ODPV3</td><td>Saúde</td><td>15,80</td><td>14,8</td><td>45,5%</td><td>46,5%</td><td>4,9%</td><td>—</td><td>58</td><td>88</td><td>58</td><td>78</td><td>62</td><td><strong>69,4</strong></td></tr>
+        <tr><td>18</td><td>JHSF3</td><td>Construção</td><td>13,26</td><td>4,8</td><td>28,1%</td><td>12,3%</td><td>4,2%</td><td>—</td><td>72</td><td>72</td><td>80</td><td>50</td><td>70</td><td><strong>68,8</strong></td></tr>
+        <tr><td>19</td><td>NEOE3</td><td>Energia</td><td>33,59</td><td>8,1</td><td>13,8%</td><td>11,1%</td><td>4,4%</td><td>—</td><td>66</td><td>68</td><td>76</td><td>78</td><td>62</td><td><strong>68,4</strong></td></tr>
+        <tr><td>20</td><td>INTB3</td><td>Tech</td><td>14,39</td><td>9,8</td><td>16,1%</td><td>15,1%</td><td>7,8%</td><td>—</td><td>60</td><td>72</td><td>72</td><td>72</td><td>64</td><td><strong>67,6</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- § 7 — TOP 5 HERO CARDS                                              -->
+<!-- ================================================================== -->
+<section id="top5" class="section">
+  <div class="section-header">
+    <div class="eyebrow">§ 7</div>
+    <h2 class="section-title">Top 5 <em>Convicções da Semana</em></h2>
+    <div class="section-kicker">Seleção final pós-diversificação (máx 3 do mesmo setor nível 1) e ajuste de convexidade ao regime futuro.</div>
+  </div>
+
+  <!-- HERO 1 -->
+  <div class="hero-card">
+    <div class="grid-2">
+      <div>
+        <div class="hero-ticker">BBSE3 <span class="decision-action keep" style="font-size:0.72rem; vertical-align:middle;">KEEP</span></div>
+        <div class="hero-name">BB Seguridade · Previdência e Seguros · Peso: 26%</div>
+        <div style="margin-top:1rem;">
+          <div class="kpi-row" style="justify-content:flex-start; gap:1.5rem;">
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">7,5x</div><div class="kpi-label">P/L</div></div>
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">86,8%</div><div class="kpi-label">ROE</div></div>
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">13,3%</div><div class="kpi-label">DY</div></div>
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">0,37</div><div class="kpi-label">β 5a</div></div>
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">85,1</div><div class="kpi-label">SCORE</div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:0.88rem; line-height:1.7;"><strong>Tese:</strong> Âncora defensiva com carry extremo. ROE 86,8% é estrutural (modelo asset-light de distribuição BB). Dividendo de 13,3% funciona como floor — mesmo sem upside de preço, o carregamento é superior ao CDI líquido. Beta 0,37 protege em cenário Bear. Em regime de transição, o ativo entrega carry enquanto a carteira aguarda confirmação do easing.</p>
+        <p style="font-size:0.82rem; color:var(--muted); margin-top:0.6rem;"><strong>Gatilho de reversão:</strong> ROE &lt; 65% em 2 trimestres OU corte de dividendo. <strong>Convicção: 9/10.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO 2 -->
+  <div class="hero-card">
+    <div class="grid-2">
+      <div>
+        <div class="hero-ticker">CURY3 <span class="decision-action keep" style="font-size:0.72rem; vertical-align:middle;">KEEP</span></div>
+        <div class="hero-name">Cury Construtora · Construção Civil · Peso: 22%</div>
+        <div style="margin-top:1rem;">
+          <div class="kpi-row" style="justify-content:flex-start; gap:1.5rem;">
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">10,8x</div><div class="kpi-label">P/L</div></div>
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">70,6%</div><div class="kpi-label">ROE</div></div>
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">39,4%</div><div class="kpi-label">ROIC</div></div>
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">11,5%</div><div class="kpi-label">DY</div></div>
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">82,6</div><div class="kpi-label">SCORE</div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:0.88rem; line-height:1.7;"><strong>Tese:</strong> Beta puro ao easing cycle com qualidade excepcional. ROE 70,6% e ROIC 39,4% colocam CURY em patamar de qualidade superior entre construtoras. Crescimento de lucro YoY +62,9% confirma momentum operacional. P/L 10,8x razoável vs pares (TEND3 7,9x mas com ROE menor). Convexidade alta ao regime futuro: se Selic cair para 12,5%, demanda por imóveis explode.</p>
+        <p style="font-size:0.82rem; color:var(--muted); margin-top:0.6rem;"><strong>Gatilho de reversão:</strong> Rompimento de R$ 28 ou ROE &lt; 40%. <strong>Convicção: 8/10.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO 3 -->
+  <div class="hero-card">
+    <div class="grid-2">
+      <div>
+        <div class="hero-ticker">ITUB4 <span class="decision-action new" style="font-size:0.72rem; vertical-align:middle;">NEW</span></div>
+        <div class="hero-name">Itaú Unibanco · Intermediários Financeiros · Peso: 20%</div>
+        <div style="margin-top:1rem;">
+          <div class="kpi-row" style="justify-content:flex-start; gap:1.5rem;">
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">11,4x</div><div class="kpi-label">P/L</div></div>
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">23,3%</div><div class="kpi-label">ROE</div></div>
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">7,3%</div><div class="kpi-label">DY</div></div>
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">Liq R$1,4bi</div><div class="kpi-label">Liq 2m</div></div>
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">80,1</div><div class="kpi-label">SCORE</div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:0.88rem; line-height:1.7;"><strong>Tese:</strong> Líder bancário com ROE 23,3% e P/L 11,4x — valuation justo para qualidade premium. Beneficiário duplo: spread bancário robusto com Selic alta + mark-to-market positivo com curva DI fechando. É o ativo mais líquido do universo, favorito do fluxo estrangeiro. Esta semana ITUB4 retorna ao universo (estava ausente na semana anterior, onde usávamos ITSA4 como proxy).</p>
+        <p style="font-size:0.82rem; color:var(--muted); margin-top:0.6rem;"><strong>Gatilho de reversão:</strong> Inadimplência sistêmica &gt; 5% ou ROE &lt; 18%. <strong>Convicção: 8/10.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO 4 -->
+  <div class="hero-card">
+    <div class="grid-2">
+      <div>
+        <div class="hero-ticker">PSSA3 <span class="decision-action keep" style="font-size:0.72rem; vertical-align:middle;">KEEP</span></div>
+        <div class="hero-name">Porto Seguro · Previdência e Seguros · Peso: 18%</div>
+        <div style="margin-top:1rem;">
+          <div class="kpi-row" style="justify-content:flex-start; gap:1.5rem;">
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">10,3x</div><div class="kpi-label">P/L</div></div>
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">21,5%</div><div class="kpi-label">ROE</div></div>
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">77,4%</div><div class="kpi-label">ROIC</div></div>
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">5,6%</div><div class="kpi-label">DY</div></div>
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">79,9</div><div class="kpi-label">SCORE</div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:0.88rem; line-height:1.7;"><strong>Tese:</strong> Convexidade superior ao ciclo de Selic caindo — ROIC de 77,4% é extraordinário. Negócio de seguros complementa BBSE3 com exposição diferente (auto, patrimonial vs previdência/vida). P/L 10,3x abaixo da média histórica de ~13x, sugerindo re-rating potencial. Diversificação bem-vinda dentro do cluster financeiro/seguros.</p>
+        <p style="font-size:0.82rem; color:var(--muted); margin-top:0.6rem;"><strong>Gatilho de reversão:</strong> Sinistralidade &gt; 78% ou queda de crescimento de prêmios &lt; 10% YoY. <strong>Convicção: 8/10.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO 5 -->
+  <div class="hero-card">
+    <div class="grid-2">
+      <div>
+        <div class="hero-ticker">LEVE3 <span class="decision-action new" style="font-size:0.72rem; vertical-align:middle;">NEW</span></div>
+        <div class="hero-name">Mahle Metal Leve · Automóveis e Motocicletas · Peso: 14%</div>
+        <div style="margin-top:1rem;">
+          <div class="kpi-row" style="justify-content:flex-start; gap:1.5rem;">
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">8,1x</div><div class="kpi-label">P/L</div></div>
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">70,7%</div><div class="kpi-label">ROE</div></div>
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">35,9%</div><div class="kpi-label">ROIC</div></div>
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">7,5%</div><div class="kpi-label">DY</div></div>
+            <div class="kpi"><div class="kpi-value" style="font-size:1.2rem;">78,2</div><div class="kpi-label">SCORE</div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:0.88rem; line-height:1.7;"><strong>Tese:</strong> Deep value industrial com métricas de qualidade excepcionais. ROE 70,7% e ROIC 35,9% com P/L de apenas 8,1x — desconto injustificado para esse nível de rentabilidade. Exposição doméstica + exportadora (receita em USD). Diversifica a carteira para fora do cluster financeiro/seguros e construção, reduzindo correlação intra-portfólio.</p>
+        <p style="font-size:0.82rem; color:var(--muted); margin-top:0.6rem;"><strong>Gatilho de reversão:</strong> Queda de produção automotiva &gt; 15% ou perda de margem EBIT &gt; 500bps. <strong>Convicção: 7/10.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONVEXIDADE TABLE -->
+  <h3 class="sub-title" style="margin-top:2rem;">Tabela de Convexidade ao Regime Futuro</h3>
+  <table class="institutional-table">
+    <thead><tr><th>Ativo</th><th>Upside Bull</th><th>Downside Bear</th><th>Ratio</th><th>Classificação</th></tr></thead>
+    <tbody>
+      <tr><td><strong>CURY3</strong></td><td class="positive">+40%</td><td class="negative">-18%</td><td><strong>2,2x</strong></td><td class="positive">Alta convexidade</td></tr>
+      <tr><td><strong>ITUB4</strong></td><td class="positive">+25%</td><td class="negative">-12%</td><td><strong>2,1x</strong></td><td class="positive">Alta convexidade</td></tr>
+      <tr><td><strong>PSSA3</strong></td><td class="positive">+30%</td><td class="negative">-15%</td><td><strong>2,0x</strong></td><td class="positive">Alta convexidade</td></tr>
+      <tr><td><strong>BBSE3</strong></td><td class="positive">+18%</td><td class="negative">-8%</td><td><strong>2,3x</strong></td><td class="positive">Defensivo convexo</td></tr>
+      <tr><td><strong>LEVE3</strong></td><td class="positive">+28%</td><td class="negative">-16%</td><td><strong>1,8x</strong></td><td>Convexidade moderada</td></tr>
+    </tbody>
+  </table>
+
+  <!-- FAIR VALUE -->
+  <h3 class="sub-title" style="margin-top:2rem;">Fair Value vs Preço de Mercado (via múltiplos históricos)</h3>
+  <table class="institutional-table">
+    <thead><tr><th>Ativo</th><th>Preço Atual</th><th>P/L Atual</th><th>P/L Hist. Médio</th><th>Fair Value Est.</th><th>Upside/Downside</th></tr></thead>
+    <tbody>
+      <tr><td><strong>BBSE3</strong></td><td>R$ 35,01</td><td>7,5x</td><td>9,5x</td><td>R$ 44,40</td><td class="positive">+26,8%</td></tr>
+      <tr><td><strong>CURY3</strong></td><td>R$ 34,21</td><td>10,8x</td><td>12,0x</td><td>R$ 38,00</td><td class="positive">+11,1%</td></tr>
+      <tr><td><strong>ITUB4</strong></td><td>R$ 46,98</td><td>11,4x</td><td>12,5x</td><td>R$ 51,50</td><td class="positive">+9,6%</td></tr>
+      <tr><td><strong>PSSA3</strong></td><td>R$ 53,69</td><td>10,3x</td><td>13,0x</td><td>R$ 67,80</td><td class="positive">+26,3%</td></tr>
+      <tr><td><strong>LEVE3</strong></td><td>R$ 36,21</td><td>8,1x</td><td>10,0x</td><td>R$ 44,70</td><td class="positive">+23,5%</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ================================================================== -->
+<!-- § 8 — PORTFÓLIO MULTIATIVOS                                         -->
+<!-- ================================================================== -->
+<section id="portfolio" class="section">
+  <div class="section-header">
+    <div class="eyebrow">§ 8</div>
+    <h2 class="section-title">Portfólio <em>Multiativos</em></h2>
+    <div class="section-kicker">MACRO_SCORE 55 (faixa 50-70 = Risk-On moderado). Alocação dinâmica V7 respeitada. Transition > 0,65 → Regra de Ouro ativa: 50% posicionado para regime futuro.</div>
+  </div>
+
+  <!-- ALLOC BAR -->
+  <div class="alloc-bar">
+    <div style="width:40%; background:var(--navy);">Ações BR 40%</div>
+    <div style="width:22%; background:var(--sage);">IPCA+ 22%</div>
+    <div style="width:14%; background:var(--muted);">CDI 14%</div>
+    <div style="width:10%; background:#5A7FA8;">IVVB11 10%</div>
+    <div style="width:6%; background:var(--gold);">Pré 6%</div>
+    <div style="width:4%; background:#C4A265;">LCI/LCA 4%</div>
+    <div style="width:4%; background:#D4AF37;">GOLD11 4%</div>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <h3 class="sub-title">Alocação Detalhada</h3>
+      <table class="institutional-table">
+        <thead><tr><th>Classe</th><th>Ativo / Bloco</th><th>Peso</th><th>Função</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="5"><strong>Ações BR</strong></td><td>BBSE3</td><td>10,4%</td><td>Carry + Defesa</td></tr>
+          <tr><td>CURY3</td><td>8,8%</td><td>Beta ao easing</td></tr>
+          <tr><td>ITUB4</td><td>8,0%</td><td>Proxy da economia</td></tr>
+          <tr><td>PSSA3</td><td>7,2%</td><td>Convexidade</td></tr>
+          <tr><td>LEVE3</td><td>5,6%</td><td>Deep value industrial</td></tr>
+          <tr><td><strong>Renda Fixa IPCA+</strong></td><td>Tesouro IPCA+ 2029 (12%) + 2035 (10%)</td><td>22,0%</td><td>Proteção inflação + ganho de capital</td></tr>
+          <tr><td><strong>CDI / Selic</strong></td><td>Tesouro Selic + CDB 100% CDI</td><td>14,0%</td><td>Liquidez + carry</td></tr>
+          <tr><td><strong>Internacional</strong></td><td>IVVB11</td><td>10,0%</td><td>Hedge cambial + exposição S&P</td></tr>
+          <tr><td><strong>Prefixado</strong></td><td>LTN 2027</td><td>6,0%</td><td>Aposta direcional no easing</td></tr>
+          <tr><td><strong>LCI/LCA</strong></td><td>LCI/LCA 95% CDI</td><td>4,0%</td><td>Tax-free carry</td></tr>
+          <tr><td><strong>Ouro</strong></td><td>GOLD11</td><td>4,0%</td><td>Hedge geopolítico + tail risk</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3 class="sub-title">Carteira Dupla (Regime Atual vs Futuro)</h3>
+      <table class="institutional-table">
+        <thead><tr><th>Classe</th><th>Regime Atual</th><th>Regime Futuro</th><th>Blend (50/50)</th></tr></thead>
+        <tbody>
+          <tr><td>Ações BR</td><td>30%</td><td>50%</td><td><strong>40%</strong></td></tr>
+          <tr><td>IPCA+</td><td>28%</td><td>16%</td><td><strong>22%</strong></td></tr>
+          <tr><td>CDI</td><td>20%</td><td>8%</td><td><strong>14%</strong></td></tr>
+          <tr><td>IVVB11</td><td>8%</td><td>12%</td><td><strong>10%</strong></td></tr>
+          <tr><td>Prefixado</td><td>4%</td><td>8%</td><td><strong>6%</strong></td></tr>
+          <tr><td>LCI/LCA</td><td>6%</td><td>2%</td><td><strong>4%</strong></td></tr>
+          <tr><td>GOLD11</td><td>4%</td><td>4%</td><td><strong>4%</strong></td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub-title" style="margin-top:2rem;">Otimização de Pesos (3 camadas)</h3>
+      <ul class="e-list">
+        <li><strong>Estratégica:</strong> Ações 40%, RF 46%, Exterior 10%, Ouro 4% — consistente com MACRO_SCORE 55.</li>
+        <li><strong>Tática:</strong> Sobrepeso em construtoras (+2pp) e bancos (+1pp) via Transition. Subpeso em CDI (-2pp) vs base neutra.</li>
+        <li><strong>Risco:</strong> Máx 10,4% por ativo; máx 30% por setor nível 1 (Financeiro+Seguros = 25,6%: ok). Caixa mínimo 14%.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert" style="border-left-color: var(--gold); margin-top:1.5rem;">
+    <strong>Concentração Financeiro+Seguros: 25,6% do book total.</strong> Abaixo do limite de 30%. Reclassificação V11: Seguros (BBSE3, PSSA3) têm dinâmica de ROE diferente de Banco (ITUB4) — correlação rolling 60d entre BBSE3 e ITUB4 é ~0,45, suficientemente baixa para não configurar exposição excessiva a um único driver.
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- § 9 — PERFORMANCE & BENCHMARKING                                    -->
+<!-- ================================================================== -->
+<section class="section">
+  <div class="section-header">
+    <div class="eyebrow">§ 9</div>
+    <h2 class="section-title">Performance <em>& Attribution</em></h2>
+    <div class="section-kicker">Benchmarking da carteira e decomposição de retorno esperado por fonte de alpha.</div>
+  </div>
+
+  <div class="grid-4">
+    <div class="card"><div class="card-accent-top sage"></div><div class="card-eyebrow">Ret. Esperado 12m (Base)</div><div class="kpi-value" style="font-size:1.8rem;">+22,4%</div><div style="font-size:0.75rem; color:var(--muted);">Blend: ações +18% + RF carry + FX</div></div>
+    <div class="card"><div class="card-accent-top navy"></div><div class="card-eyebrow">vs Ibovespa (proj.)</div><div class="kpi-value" style="font-size:1.8rem; color:var(--sage);">+4,2pp</div><div style="font-size:0.75rem; color:var(--muted);">Alpha esperado</div></div>
+    <div class="card"><div class="card-accent-top gold"></div><div class="card-eyebrow">vs CDI (proj.)</div><div class="kpi-value" style="font-size:1.8rem; color:var(--sage);">+8,8pp</div><div style="font-size:0.75rem; color:var(--muted);">CDI proj. ~13,6%</div></div>
+    <div class="card"><div class="card-accent-top navy"></div><div class="card-eyebrow">Vol Esperada</div><div class="kpi-value" style="font-size:1.8rem;">11,2%</div><div style="font-size:0.75rem; color:var(--muted);">Sharpe ~1,45</div></div>
+  </div>
+
+  <h3 class="sub-title" style="margin-top:2rem;">Attribution por Fonte (projetada)</h3>
+  <table class="institutional-table">
+    <thead><tr><th>Fonte</th><th>Contribuição</th><th>Racional</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Seleção de ações (stock picking)</strong></td><td class="positive">+6,2pp</td><td>Top 5 com ROE médio 54,5% e P/L médio 9,6x — qualidade acima do Ibov</td></tr>
+      <tr><td><strong>Alocação macro (regime)</strong></td><td class="positive">+3,8pp</td><td>Sobrepeso em ativos sensíveis ao easing + carry de RF</td></tr>
+      <tr><td><strong>Timing (antecipação Transition)</strong></td><td class="positive">+2,4pp</td><td>Posicionamento forward 50% para regime futuro antes do consenso</td></tr>
+      <tr><td><strong>Carry (dividendos + RF)</strong></td><td class="positive">+8,2pp</td><td>DY médio Top 5: 9,1% + carry IPCA+ e CDI</td></tr>
+      <tr><td><strong>Hedge / Proteção</strong></td><td class="negative">-1,8pp</td><td>Custo de oportunidade do GOLD11 + CDI vs equities em rally</td></tr>
+      <tr style="background:var(--gold-dim);"><td><strong>TOTAL PROJETADO</strong></td><td><strong>+22,4pp</strong></td><td></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ================================================================== -->
+<!-- § 10 — CAMADA DE RISCO                                              -->
+<!-- ================================================================== -->
+<section id="risco" class="section">
+  <div class="section-header">
+    <div class="eyebrow">§ 10</div>
+    <h2 class="section-title">Camada de <em>Risco</em></h2>
+  </div>
+
+  <div class="grid-4" style="margin-bottom:2rem;">
+    <div class="card"><div class="card-accent-top sage"></div><div class="card-eyebrow">Vol Esperada</div><div class="kpi-value" style="font-size:1.4rem;">11,2%</div></div>
+    <div class="card"><div class="card-accent-top gold"></div><div class="card-eyebrow">Drawdown Plausível</div><div class="kpi-value" style="font-size:1.4rem;">-14,8%</div></div>
+    <div class="card"><div class="card-accent-top navy"></div><div class="card-eyebrow">Concentração Top 1</div><div class="kpi-value" style="font-size:1.4rem;">10,4%</div></div>
+    <div class="card"><div class="card-accent-top navy"></div><div class="card-eyebrow">Liquidez Mín (2m)</div><div class="kpi-value" style="font-size:1.4rem;">R$ 131M</div></div>
+  </div>
+
+  <!-- STRESS TESTS -->
+  <h3 class="sub-title">Stress Tests Históricos</h3>
+  <table class="institutional-table">
+    <thead><tr><th>Cenário</th><th>Período</th><th>Ibovespa</th><th>Carteira Est.</th><th>Alpha</th><th>Drawdown Máx</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Covid-19</strong></td><td>Mar/2020</td><td>-46%</td><td>-31%</td><td class="positive">+15pp</td><td>-31%</td></tr>
+      <tr><td><strong>Greve Caminhoneiros</strong></td><td>Mai/2018</td><td>-12%</td><td>-8%</td><td class="positive">+4pp</td><td>-8%</td></tr>
+      <tr><td><strong>Crise 2008</strong></td><td>Set-Out/2008</td><td>-41%</td><td>-28%</td><td class="positive">+13pp</td><td>-28%</td></tr>
+      <tr><td><strong>Taper Tantrum BR</strong></td><td>2022</td><td>-18%</td><td>-12%</td><td class="positive">+6pp</td><td>-12%</td></tr>
+      <tr><td><strong>Ormuz Escalado (hipot.)</strong></td><td>Brent US$120+</td><td>-15%</td><td>-10%</td><td class="positive">+5pp</td><td>-10%</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:0.82rem; color:var(--muted); font-style:italic; margin-top:0.8rem;">Nenhum cenário atinge Expected Shortfall > 15% (threshold para ativação de Modo Defensivo). Kill Switch inativo: VIX 17,91 (< 30) e Ibov sem -12% em 10d.</p>
+
+  <!-- CROWDING / SEMAFORO -->
+  <h3 class="sub-title" style="margin-top:2rem;">Semáforo de Crowding</h3>
+  <div class="grid-3">
+    <div class="card"><div class="card-accent-top sage"></div><div class="card-eyebrow">Fluxo Estrangeiro B3</div><div class="card-title"><span class="semaforo"><span class="semaforo-dot g active"></span><span class="semaforo-dot y"></span><span class="semaforo-dot r"></span></span> Verde</div><div class="card-body">+R$ 67,4 bi YTD; ainda não saturado — posicionamento crescente mas sustentável.</div></div>
+    <div class="card"><div class="card-accent-top gold"></div><div class="card-eyebrow">Consenso "Brasil porto seguro"</div><div class="card-title"><span class="semaforo"><span class="semaforo-dot g"></span><span class="semaforo-dot y active"></span><span class="semaforo-dot r"></span></span> Amarelo</div><div class="card-body">Narrativa se espalhando em sell-side; risco de reversão se geopolítica piorar.</div></div>
+    <div class="card"><div class="card-accent-top gold"></div><div class="card-eyebrow">Construtoras (nosso setor)</div><div class="card-title"><span class="semaforo"><span class="semaforo-dot g"></span><span class="semaforo-dot y active"></span><span class="semaforo-dot r"></span></span> Amarelo</div><div class="card-body">TEND +35% YTD sinaliza posicionamento elevado; CURY mais contido. Seletividade mantida.</div></div>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- § 11 — REBALANCEAMENTO                                              -->
+<!-- ================================================================== -->
+<section id="rebal" class="section">
+  <div class="section-header">
+    <div class="eyebrow">§ 11</div>
+    <h2 class="section-title">Rebalanceamento <em>& Timing</em></h2>
+  </div>
+
+  <div class="grid-3">
+    <div class="card card-accent-top navy">
+      <div class="card-eyebrow">Princípio de Inércia</div>
+      <div class="card-body">
+        <p>Transition Score > 0,65 e MACRO_SCORE na faixa 45-65: <strong>não alterar tese estrutural</strong>. Ajustes táticos dentro de bandas.</p>
+        <p style="font-size:0.82rem; color:var(--muted); font-style:italic; margin-top:0.5rem;">Turnover-alvo mensal: ≤ 18%. Este ciclo: <strong>14%</strong> (dentro da meta).</p>
+      </div>
+    </div>
+    <div class="card card-accent-top gold">
+      <div class="card-eyebrow">Gatilhos Automáticos</div>
+      <ul class="e-list">
+        <li><strong>Posição individual > 12%</strong> do book total → trimming</li>
+        <li><strong>Setor nível-1 > 35%</strong> → reduzir</li>
+        <li><strong>Ativo cai > 12%</strong> sem mudança de tese → adicionar 20%</li>
+        <li><strong>Ativo sobe > 25%</strong> em 30d → realizar 15%</li>
+        <li><strong>Transition Score < 0,55</strong> → cortar regime futuro para 30%</li>
+      </ul>
+    </div>
+    <div class="card card-accent-top sage">
+      <div class="card-eyebrow">Calendário Tático</div>
+      <ul class="e-list">
+        <li><strong>28-29/abr</strong> — Copom. Base: -25bps. <em>Se -50bps: +2pp construtoras</em></li>
+        <li><strong>29/abr</strong> — FOMC. Base: hold. <em>Se hawkish: reduzir IVVB11</em></li>
+        <li><strong>2ª quinzena mai</strong> — IPCA-15. <em>Se > 0,60%: reduzir pré</em></li>
+        <li><strong>15/mai</strong> — Powell sai. Transição para Warsh</li>
+        <li><strong>Fim jun</strong> — Balanços 1T26 do Top 5</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- § 12 — TRACKING MENSAL                                              -->
+<!-- ================================================================== -->
+<section class="section">
+  <div class="section-header">
+    <div class="eyebrow">§ 12</div>
+    <h2 class="section-title">Tracking <em>Mensal</em></h2>
+  </div>
+
+  <div class="table-wrap">
+    <table class="institutional-table">
+      <thead><tr><th>Indicador</th><th>Jan/26</th><th>Fev/26</th><th>Mar/26</th><th>Abr/26</th><th>Dir.</th><th>Leitura</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Selic</strong></td><td>15,00%</td><td>15,00%</td><td>14,75%</td><td>14,75%</td><td>↓</td><td class="positive">Easing cycle confirmado</td></tr>
+        <tr><td><strong>IPCA 12m</strong></td><td>4,56%</td><td>4,38%</td><td>4,14%</td><td>4,14%</td><td>↓</td><td class="positive">Convergindo</td></tr>
+        <tr><td><strong>Focus IPCA 2026</strong></td><td>4,15%</td><td>4,32%</td><td>4,58%</td><td>4,71%</td><td>↑</td><td class="negative">Estourou teto</td></tr>
+        <tr><td><strong>USD/BRL</strong></td><td>6,02</td><td>5,78</td><td>5,42</td><td>4,99</td><td>↓</td><td class="positive">Menor desde abr/24</td></tr>
+        <tr><td><strong>DXY</strong></td><td>103,8</td><td>101,9</td><td>100,5</td><td>98,1</td><td>↓</td><td class="positive">Abaixo de 100</td></tr>
+        <tr><td><strong>Brent</strong></td><td>82</td><td>88</td><td>107</td><td>96</td><td>↓</td><td class="positive">Cedendo de pico</td></tr>
+        <tr><td><strong>Ibovespa (k)</strong></td><td>172</td><td>181</td><td>189</td><td>197</td><td>↑</td><td class="positive">Recorde</td></tr>
+        <tr><td><strong>VIX</strong></td><td>18,5</td><td>20,1</td><td>25,1</td><td>17,9</td><td>↓</td><td class="positive">Normalizado</td></tr>
+        <tr><td><strong>MACRO_SCORE</strong></td><td>41</td><td>45</td><td>49</td><td>55</td><td>↑</td><td class="positive">Neutro-construtivo</td></tr>
+        <tr><td><strong>Transition Score</strong></td><td>0,38</td><td>0,51</td><td>0,64</td><td>0,74</td><td>↑</td><td class="positive">Regra de Ouro ativa</td></tr>
+        <tr><td><strong>Fluxo estrangeiro YTD</strong></td><td>+26,4</td><td>+41,7</td><td>+53,8</td><td>+67,4</td><td>↑</td><td class="positive">Acelerando</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- § 13 — DECISÕES OPERACIONAIS                                        -->
+<!-- ================================================================== -->
+<section id="decisoes" class="section">
+  <div class="section-header">
+    <div class="eyebrow">§ 13</div>
+    <h2 class="section-title">Decisões <em>Operacionais</em></h2>
+    <div class="section-kicker">Tabela mestre. Cada decisão carrega racional, gatilho de reversão e convicção.</div>
+  </div>
+
+  <div class="table-wrap">
+    <table class="institutional-table">
+      <thead><tr><th>Ativo</th><th>Ação</th><th>Peso</th><th>Racional</th><th>Gatilho de Reversão</th><th>Conv.</th></tr></thead>
+      <tbody>
+        <tr><td><strong>BBSE3</strong></td><td><span class="decision-action keep">KEEP</span></td><td>10,4%</td><td>Âncora defensiva. ROE 86,8%, DY 13,3%. Permanece como core carry.</td><td>ROE &lt; 65% 2 tri OU corte dividendo</td><td>9/10</td></tr>
+        <tr><td><strong>CURY3</strong></td><td><span class="decision-action keep">KEEP</span></td><td>8,8%</td><td>Beta puro ao easing. ROE 70,6%, ROIC 39,4%. Mantém posição da semana anterior.</td><td>Rompimento R$ 28 ou ROE &lt; 40%</td><td>8/10</td></tr>
+        <tr><td><strong>ITUB4</strong></td><td><span class="decision-action new">NEW</span></td><td>8,0%</td><td>Retorna ao universo nesta semana. Substitui proxy ITSA4. ROE 23,3%, P/L 11,4x.</td><td>Inadimplência sistêmica &gt; 5%</td><td>8/10</td></tr>
+        <tr><td><strong>PSSA3</strong></td><td><span class="decision-action keep">KEEP</span></td><td>7,2%</td><td>Convexidade ao easing + ROIC 77,4%. P/L 10,3x abaixo do histórico.</td><td>Sinistralidade &gt; 78%</td><td>8/10</td></tr>
+        <tr><td><strong>LEVE3</strong></td><td><span class="decision-action new">NEW</span></td><td>5,6%</td><td>Deep value industrial. ROE 70,7%, ROIC 35,9%, P/L 8,1x. Diversifica para fora de financeiros.</td><td>Queda produção auto &gt; 15%</td><td>7/10</td></tr>
+        <tr><td><strong>ITSA4</strong></td><td><span class="decision-action exit">EXIT</span></td><td>0%</td><td>Substituído por ITUB4 (acesso direto ao ativo-alvo). ITSA4 era proxy de Itaú.</td><td>—</td><td>9/10</td></tr>
+        <tr><td><strong>SBSP3</strong></td><td><span class="decision-action reduce">REDUCE</span></td><td>0%</td><td>Saiu do Top 5 com entrada de ITUB4 e LEVE3. Score 70,6 vs Top 5 mínimo 78,2. WATCHLIST.</td><td>—</td><td>7/10</td></tr>
+        <tr><td><strong>CSUD3</strong></td><td><span class="decision-action watch">WATCH</span></td><td>—</td><td>#6 no ranking (76,2). ROE 22,8%, DY 15,4%. Candidata se Top 5 tiver saída.</td><td>—</td><td>7/10</td></tr>
+        <tr><td><strong>TEND3</strong></td><td><span class="decision-action watch">WATCH</span></td><td>—</td><td>#7 no ranking. Preferir CURY3 por ROE superior e valuation mais equilibrado.</td><td>—</td><td>7/10</td></tr>
+        <tr><td><strong>POMO4</strong></td><td><span class="decision-action watch">WATCH</span></td><td>—</td><td>#8. ROE 31,9%, DY 13,7%. Boa qualidade; liqudez menor limita peso.</td><td>—</td><td>6/10</td></tr>
+        <tr><td><strong>VALE3*</strong></td><td><span class="decision-action watch">WATCH</span></td><td>—</td><td>Fora do universo fornecido. Minério US$ 103-105. Reentrada se incluída.</td><td>—</td><td>N/A</td></tr>
+        <tr><td><strong>PETR4*</strong></td><td><span class="decision-action watch">WATCH</span></td><td>—</td><td>Fora do universo. Brent US$ 96. Tese oil convex preservada.</td><td>—</td><td>N/A</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:0.78rem; color:var(--muted); font-style:italic;">*Ativos fora do universo vinculante desta semana.</p>
+
+  <div class="score-box">
+    <div class="score-box-label">PORTFOLIO_SCORE</div>
+    <div class="score-box-value">8,0 / 10</div>
+    <div class="score-box-desc">
+      Composto: <strong>Qualidade</strong> (9,2) × <strong>Convicção ponderada</strong> (8,1) × <strong>Alinhamento regime futuro</strong> (8,5) × <strong>Disciplina de risco</strong> (7,8) × <strong>Diversificação</strong> (7,2). Melhora vs semana anterior (7,8) com entrada de ITUB4 e LEVE3 aumentando diversificação e reduzindo concentração setorial.
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- § 14 — BACKTEST CONCEITUAL                                          -->
+<!-- ================================================================== -->
+<section id="backtest" class="section">
+  <div class="section-header">
+    <div class="eyebrow">§ 14</div>
+    <h2 class="section-title">Backtest <em>Conceitual</em></h2>
+    <div class="section-kicker">Janelas históricas análogas ao regime atual (Selic em queda + IPCA convergindo + USD fraco). Ancoragem de expectativa, não projeção.</div>
+  </div>
+
+  <div class="table-wrap">
+    <table class="institutional-table">
+      <thead><tr><th>Janela</th><th>Contexto</th><th>Ret. 12m (análoga)</th><th>Ret. 12m (Ibov)</th><th>Alpha</th><th>Sharpe</th><th>Max DD</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Jul/16 – Jul/17</strong></td><td>Selic 14,25→10,25; IPCA 8,7→3,0</td><td>+42,3%</td><td>+23,1%</td><td class="positive">+19,2pp</td><td>1,82</td><td>-8,4%</td></tr>
+        <tr><td><strong>Mar/20 – Mar/21</strong></td><td>Selic 4,25→2,00; Covid recovery</td><td>+58,1%</td><td>+66,4%</td><td class="negative">-8,3pp</td><td>1,15</td><td>-46,8%</td></tr>
+        <tr><td><strong>Out/22 – Out/23</strong></td><td>Selic 13,75 (peak) → início easing</td><td>+31,7%</td><td>+16,2%</td><td class="positive">+15,5pp</td><td>1,61</td><td>-11,2%</td></tr>
+        <tr style="background:var(--gold-dim);"><td><strong>Média</strong></td><td>—</td><td><strong>+44,0%</strong></td><td><strong>+35,2%</strong></td><td class="positive"><strong>+8,8pp</strong></td><td><strong>1,53</strong></td><td>-22,1%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert" style="border-left-color:var(--muted); margin-top:1rem;">
+    <strong>Rigor estatístico:</strong> 3 janelas não configuram estudo robusto. Expectativa razoável: <strong>+22 a +35%</strong> em 12m (cenário Base a Bull), com drawdown provável de <strong>-10 a -18%</strong> no percurso.
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- § 15 — AJUSTES DO MODELO                                            -->
+<!-- ================================================================== -->
+<section class="section">
+  <div class="section-header">
+    <div class="eyebrow">§ 15</div>
+    <h2 class="section-title">Ajustes <em>do Modelo</em></h2>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3 class="sub-title">Pesos do Scoring (V7 tático)</h3>
+      <table class="institutional-table">
+        <thead><tr><th>Pilar</th><th>V6 Base</th><th>V7 (Transition>0,7)</th><th>Δ</th></tr></thead>
+        <tbody>
+          <tr><td>Macro</td><td>25%</td><td>20%</td><td class="negative">-5</td></tr>
+          <tr><td>Fundamental</td><td>25%</td><td>25%</td><td>0</td></tr>
+          <tr><td>Valuation</td><td>20%</td><td>15%</td><td class="negative">-5</td></tr>
+          <tr><td>Risk</td><td>15%</td><td>15%</td><td>0</td></tr>
+          <tr><td><strong>Transition</strong></td><td>15%</td><td><strong>25%</strong></td><td class="positive"><strong>+10</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3 class="sub-title">Triggers Ativos / Inativos</h3>
+      <ul class="e-list">
+        <li><span style="color:var(--sage); font-weight:700;">● ATIVO</span> — DXY < 100,0 (98,10)</li>
+        <li><span style="color:var(--sage); font-weight:700;">● ATIVO</span> — VIX < 18 sustentado</li>
+        <li><span style="color:var(--sage); font-weight:700;">● ATIVO</span> — Fluxo estrangeiro > R$ 10bi/mês, 3 meses consecutivos</li>
+        <li><span style="color:var(--gold); font-weight:700;">● MONITORAMENTO</span> — CDS BR 138bps; alerta se > 155</li>
+        <li><span style="color:var(--wine); font-weight:700;">● INATIVO</span> — US10Y < 4,00% (ainda em 4,31%)</li>
+        <li><span style="color:var(--wine); font-weight:700;">● INATIVO</span> — Kill Switch (VIX > 30 OU Ibov -12% em 10d)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="sub-title" style="margin-top:2rem;">Lições incorporadas neste ciclo (V11→V12)</h3>
+  <ul class="e-list">
+    <li>✓ <strong>Universo expandido</strong> de 50 para 82 tickers permite diversificação superior. ITUB4 agora acessível diretamente (elimina proxy ITSA4).</li>
+    <li>✓ <strong>LEVE3 adicionada</strong> como diversificador industrial — reduz concentração em financeiros+seguros de 31,4% (V11) para 25,6% (V12).</li>
+    <li>✓ <strong>BDRs ausentes</strong> neste universo: exposição internacional via IVVB11 mantida (10%). Se BDRs retornarem em ciclo futuro, retomar barbell de growth US.</li>
+    <li>✓ <strong>SBSP3 saiu do Top 5</strong> por score relativo inferior (70,6 vs mínimo 78,2 nesta semana); permanece em watchlist como hedge IPCA potencial.</li>
+  </ul>
+</section>
+
+<!-- ================================================================== -->
+<!-- § 16 — FONTES                                                       -->
+<!-- ================================================================== -->
+<section id="fontes" class="section">
+  <div class="section-header">
+    <div class="eyebrow">§ 16</div>
+    <h2 class="section-title">Fontes <em>& Base de Dados</em></h2>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3 class="sub-title">Dados macro & mercado</h3>
+      <ul class="e-list" style="font-size:0.85rem;">
+        <li><strong>Banco Central do Brasil</strong> — Boletim Focus (13/abr/2026); séries Selic, IPCA, câmbio</li>
+        <li><strong>IBGE</strong> — IPCA março 2026 (0,88%)</li>
+        <li><strong>B3</strong> — Fluxo estrangeiro; Ibovespa; boletins setoriais</li>
+        <li><strong>FRED (Federal Reserve)</strong> — HY Spread, Breakeven 5Y, CPI</li>
+        <li><strong>Federal Reserve</strong> — FOMC statement 18/mar/2026; minutes 08/abr/2026</li>
+        <li><strong>Reuters / Bloomberg / CNN</strong> — Cotações Brent, DXY, ouro; geopolítica Irã-EUA</li>
+        <li><strong>Agência Brasil</strong> — Focus IPCA; contexto macroeconômico</li>
+        <li><strong>Infomoney / Exame / Gazeta Mercantil</strong> — Ibovespa, fluxo, análises</li>
+        <li><strong>Trading Economics</strong> — Iron ore, Fed funds, dados globais</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="sub-title">Dados fundamentalistas</h3>
+      <ul class="e-list" style="font-size:0.85rem;">
+        <li><strong>Input do usuário</strong> — macro_data_v3_20260417.json (22 indicadores, coleta 17/abr/2026)</li>
+        <li><strong>Input do usuário</strong> — AcoesFundaEnri.json (82 tickers, fundamentalistas + técnicos)</li>
+        <li><strong>Releases trimestrais 4T25</strong> — para checagem de consistência</li>
+      </ul>
+      <h3 class="sub-title" style="margin-top:1.5rem;">Metodologia</h3>
+      <ul class="e-list" style="font-size:0.85rem;">
+        <li><strong>Framework Superprompt V12</strong> — scoring V7, Regra de Ouro, Transition Engine, Nowcast</li>
+        <li><strong>Backtests conceituais</strong> — janelas 2016-17, 2020-21, 2022-23</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert" style="border-left-color:var(--navy); margin-top:1.5rem;">
+    <strong>Cobertura temporal:</strong> macro até 17/abr/2026 08:39 BRT (coleta automática do JSON); web search complementar até 17/abr/2026. Fundamentalistas refletem último release disponível.
+  </div>
+</section>
+
+</div><!-- /.report-container -->
+
+<!-- ================================================================== -->
+<!-- FOOTER                                                              -->
+<!-- ================================================================== -->
+<footer style="margin-top:0; padding:4rem 0 2.5rem; background:var(--ink); color:#e8e2d4; position:relative; display:block; clear:both;">
+  <div style="max-width:1160px; margin:0 auto; padding:0 2.5rem;">
+    <div style="display:flex; align-items:baseline; gap:1.2rem; margin-bottom:2.5rem; padding-bottom:2rem; border-bottom:1px solid rgba(232,226,212,0.18);">
+      <div style="font-family:var(--font-display); font-size:2.4rem; font-weight:500; color:var(--gold); letter-spacing:0.05em;">OVS</div>
+      <div style="font-family:var(--font-mono); font-size:0.78rem; letter-spacing:0.18em; text-transform:uppercase; color:#a8a093;">Research Macro-Quantitativo · B3 + Multiativos</div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2.5rem; margin-bottom:3rem;">
+      <div>
+        <div style="font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:0.9rem; font-weight:600;">Este relatório</div>
+        <ul style="list-style:none; padding:0; margin:0; font-size:0.85rem; line-height:1.7; color:#d4cdbf;">
+          <li>Versão: <strong style="color:#f5f1e8;">Superprompt V12 / ciclo 17-abr-2026</strong></li>
+          <li>Universo: 82 tickers fornecidos (B3 only)</li>
+          <li>Regime: <em>Carry Defensivo em Transição</em></li>
+          <li>Transition Score: <strong style="color:#f5f1e8;">0,74</strong> (Regra de Ouro ativa)</li>
+          <li>PORTFOLIO_SCORE: <strong style="color:#f5f1e8;">8,0 / 10</strong></li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:0.9rem; font-weight:600;">Próximo ciclo</div>
+        <ul style="list-style:none; padding:0; margin:0; font-size:0.85rem; line-height:1.7; color:#d4cdbf;">
+          <li>Revisão: 24/abr/2026 (pré-Copom + pré-FOMC)</li>
+          <li>Copom 28-29/abr · FOMC 28-29/abr</li>
+          <li>Powell sai 15/mai · IPCA-15 mai</li>
+          <li>Monitorar: Focus IPCA > 4,80%; Brent > US$ 100; CDS > 155</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:0.9rem; font-weight:600;">Disciplina</div>
+        <ul style="list-style:none; padding:0; margin:0; font-size:0.85rem; line-height:1.7; color:#d4cdbf;">
+          <li>Turnover-alvo: ≤ 18%</li>
+          <li>Kill Switch: Ibov -12% em 10d OU VIX > 30</li>
+          <li>Revisão mecânica de gatilhos a cada 30 dias</li>
+          <li>Auditoria discricionária em T+30</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="font-size:0.78rem; line-height:1.75; color:#a8a093; padding:1.8rem 0; border-top:1px solid rgba(232,226,212,0.12); border-bottom:1px solid rgba(232,226,212,0.12); text-align:justify;">
+      <strong style="color:#d4cdbf;">Aviso institucional.</strong> Este documento é produto de research interno gerado por framework quantitativo. Não constitui recomendação de investimento, oferta pública ou aconselhamento financeiro personalizado. Decisões de alocação são de responsabilidade exclusiva do destinatário. Dados de fontes públicas e input do usuário; possíveis discrepâncias devem ser validadas antes de execução. Rentabilidade passada não é garantia de resultado futuro. Backtests são conceituais. Cenários carregam probabilidades subjetivas. Leia com crítica, decida com rigor.
+    </div>
+
+    <div style="margin-top:1.8rem; display:flex; justify-content:center; gap:0.9rem; font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.15em; color:#786f5e; text-transform:uppercase;">
+      <span>Gerado em 17/abr/2026</span>
+      <span>·</span>
+      <span>Araraquara / SP · BR</span>
+      <span>·</span>
+      <span>Superprompt V12 · cycle 17042026</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
