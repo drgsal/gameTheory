@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Semanal Multiativos — 22 de July de 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ivory: #F7F3E9;
+    --ivory-soft: #FDFBF5;
+    --graphite: #2C2C2C;
+    --graphite-60: #5A5A5A;
+    --graphite-30: rgba(44, 44, 44, 0.12);
+    --amber: #C69749;
+    --amber-soft: #E8D5A8;
+    --sage: #8A9A8B;
+    --deep-blue: #1F3A5F;
+    --rust-red: #9B3F2A;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--ivory);
+    color: var(--graphite);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+  /* NAV STICKY */
+  nav.sticky {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(247, 243, 233, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--graphite-30);
+    padding: 14px 32px;
+  }
+  nav.sticky ul { list-style: none; padding: 0; margin: 0; display: flex; gap: 28px; flex-wrap: wrap; }
+  nav.sticky a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    color: var(--graphite-60);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  nav.sticky a:hover { color: var(--amber); }
+
+  /* TYPOGRAPHY */
+  h1, h2, h3, h4 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; letter-spacing: -0.01em; }
+  h1 { font-size: 2.75rem; line-height: 1.1; margin: 0 0 8px; }
+  h2 { font-size: 2rem; margin: 0 0 24px; padding-bottom: 16px; border-bottom: 1px solid var(--graphite-30); }
+  h3 { font-size: 1.375rem; margin: 0 0 16px; }
+  h4 { font-size: 1.125rem; margin: 0 0 12px; color: var(--graphite-60); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  .num, .mono { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; }
+  em.editorial { color: var(--graphite-60); font-style: italic; }
+
+  /* SECTIONS */
+  section { padding: 64px 0; }
+  section + section { border-top: 1px solid var(--graphite-30); }
+
+  /* COVER */
+  .cover { padding: 80px 0 48px; }
+  .cover .meta-strip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--graphite-60);
+    margin-bottom: 24px;
+  }
+  .cover .subtitle { color: var(--graphite-60); font-size: 1.125rem; font-style: italic; margin-bottom: 48px; }
+
+  .regime-strip {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 20px;
+    align-items: center;
+    background: var(--ivory-soft);
+    border: 1px solid var(--graphite-30);
+    border-top: 2px solid var(--amber);
+    padding: 32px;
+    margin: 48px 0;
+  }
+  .regime-strip .step { text-align: center; }
+  .regime-strip .step .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--graphite-60); margin-bottom: 8px; }
+  .regime-strip .step .value { font-family: 'Cormorant Garamond', serif; font-size: 1.375rem; font-weight: 500; }
+  .regime-strip .arrow { color: var(--amber); font-size: 1.5rem; }
+
+  /* KPI ROW */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin: 48px 0 24px;
+  }
+  .kpi-card {
+    background: var(--ivory-soft);
+    border: 1px solid var(--graphite-30);
+    padding: 24px;
+    text-align: left;
+  }
+  .kpi-card .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--graphite-60); margin-bottom: 12px; }
+  .kpi-card .value { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 500; color: var(--graphite); margin-bottom: 4px; }
+  .kpi-card .footnote { font-size: 0.8125rem; color: var(--graphite-60); }
+
+  /* SCORE BAR */
+  .score-bar { background: rgba(44,44,44,0.08); height: 6px; border-radius: 3px; overflow: hidden; margin-top: 8px; }
+  .score-bar .fill { height: 100%; background: var(--amber); transition: width 0.3s ease; }
+
+  /* ALERT BANNER */
+  .alert-banner {
+    background: var(--rust-red);
+    color: var(--ivory);
+    padding: 20px 32px;
+    margin: 32px 0;
+    border-left: 4px solid var(--graphite);
+    font-weight: 700;
+    font-family: 'Libre Baskerville', serif;
+  }
+  .alert-banner.amber { background: var(--amber); color: var(--graphite); }
+
+  /* CARDS */
+  .card {
+    background: var(--ivory-soft);
+    border: 1px solid var(--graphite-30);
+    border-top: 2px solid var(--amber);
+    padding: 32px;
+  }
+  .card.sage { border-top-color: var(--sage); }
+  .card.blue { border-top-color: var(--deep-blue); }
+  .card.red { border-top-color: var(--rust-red); }
+
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+
+  /* TABELAS */
+  table.institucional {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    background: var(--ivory-soft);
+    border: 1px solid var(--graphite-30);
+  }
+  table.institucional thead th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--graphite-60);
+    padding: 16px 12px;
+    border-bottom: 1px solid var(--graphite-30);
+    text-align: left;
+    background: rgba(247, 243, 233, 0.4);
+  }
+  table.institucional tbody td {
+    padding: 14px 12px;
+    border-bottom: 1px solid rgba(44,44,44,0.06);
+    font-size: 0.9375rem;
+  }
+  table.institucional tbody tr:hover { background: rgba(198, 151, 73, 0.04); }
+  table.institucional td.num, table.institucional th.num { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; text-align: right; }
+
+  /* BADGES */
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    background: var(--amber-soft);
+    color: var(--graphite);
+  }
+  .badge.sage { background: rgba(138, 154, 139, 0.25); }
+  .badge.red { background: rgba(155, 63, 42, 0.18); color: var(--rust-red); }
+  .badge.neutral { background: rgba(44,44,44,0.06); }
+
+  /* ALOCAÇÃO STACKED BAR */
+  .stacked-bar {
+    display: flex;
+    height: 56px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 24px 0;
+    border: 1px solid var(--graphite-30);
+  }
+  .stacked-bar .seg {
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+  .seg-acoes { background: var(--amber); }
+  .seg-ipca { background: var(--sage); }
+  .seg-cdi { background: #6B7280; }
+  .seg-exterior { background: var(--deep-blue); }
+  .seg-ouro { background: #B8860B; }
+
+  /* FOOTER */
+  footer.executivo {
+    background: var(--graphite);
+    color: var(--ivory);
+    padding: 48px 32px;
+    margin-top: 64px;
+    font-size: 0.875rem;
+  }
+  footer.executivo .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; }
+  footer.executivo h4 { color: var(--amber); margin-bottom: 16px; }
+  footer.executivo .disclaimer { color: rgba(247, 243, 233, 0.6); font-size: 0.8125rem; line-height: 1.6; }
+
+  /* PRINT */
+  @media print {
+    body { background: white; }
+    nav.sticky { display: none; }
+    section { break-inside: avoid; padding: 32px 0; }
+    @page { margin: 1.5cm; }
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .container { padding: 0 20px; }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+    .kpi-row { grid-template-columns: 1fr 1fr; }
+    .grid-3, .grid-2 { grid-template-columns: 1fr; }
+    .regime-strip { grid-template-columns: 1fr; }
+    .regime-strip .arrow { display: none; }
+    nav.sticky ul { gap: 16px; font-size: 0.7rem; }
+    footer.executivo .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="sticky">
+  <div class="container">
+    <ul>
+      <li><a href="#capa">Capa</a></li>
+      <li><a href="#regime">Regime</a></li>
+      <li><a href="#cenarios">Cenários</a></li>
+      <li><a href="#transition-detalhe">Transition</a></li>
+      <li><a href="#ciclo-macro">Ciclo</a></li>
+      <li><a href="#setores">Setores</a></li>
+      <li><a href="#top20">Top 20</a></li>
+      <li><a href="#top5">Top 5</a></li>
+      <li><a href="#portfolio">Portfólio</a></li>
+      <li><a href="#risco">Risco</a></li>
+      <li><a href="#decisoes">Decisões</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- =============================================== CAPA -->
+<section id="capa" class="cover">
+  <div class="meta-strip">
+    Relatório Semanal · Multiativos Brasil · Híbrido v4.0 Multi-Agente
+  </div>
+  <h1>Carta de Alocação</h1>
+  <div class="subtitle">Regime · Cenários · Carteira · Decisões — 22 de July de 2026</div>
+
+  
+
+  <div class="regime-strip">
+    <div class="step">
+      <div class="label">Regime Anterior</div>
+      <div class="value">Goldilocks Vigiado</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="step">
+      <div class="label">Regime Atual</div>
+      <div class="value">Reflação Nascente com Freio de Tendência</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="step">
+      <div class="label">Regime Projetado</div>
+      <div class="value">Reflação (crescimento + inflação subindo juntos)</div>
+    </div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <div class="label">Macro Score</div>
+      <div class="value">53.6</div>
+      <div class="score-bar"><div class="fill" style="width: 53.6%"></div></div>
+      <div class="footnote">Classe: risk on moderado</div>
+    </div>
+    <div class="kpi-card">
+      <div class="label">Nowcast</div>
+      <div class="value">56.3</div>
+      <div class="score-bar"><div class="fill" style="width: 56.3%"></div></div>
+      <div class="footnote">neutro</div>
+    </div>
+    <div class="kpi-card">
+      <div class="label">Transition</div>
+      <div class="value">0.38</div>
+      <div class="score-bar"><div class="fill" style="width: 38.0%; background: var(--sage);"></div></div>
+      <div class="footnote">baixa · abertura</div>
+    </div>
+    <div class="kpi-card">
+      <div class="label">Confiança</div>
+      <div class="value">Média-alta no ciclo (reflação 55%, confiança acima do limiar forte), porém BAIXA na confirmação de curto prazo (AGUARDANDO, 2/4 sinais) — o freio de tendência domina o dimensionamento.</div>
+      <div class="footnote">Avaliação qualitativa do diagnóstico</div>
+    </div>
+  </div>
+
+  
+  <div class="alert-banner amber">
+    MACRO 53,6 (risk-on moderado) · NOWCAST 56,3 (neutro, esfriou de 72) · TRANSITION 0,38 (abertura) · Ciclo REFLAÇÃO 55% (era Goldilocks) · Governador MA150: exposição de ações em 37% (Ibov −2,4% sob a média) · Kill Switch 0/5
+  </div>
+  
+</section>
+
+<!-- =============================================== REGIME MACRO -->
+<section id="regime">
+  <h2>Diagnóstico Macroeconômico</h2>
+
+  <div style="margin-bottom: 32px;">
+    Duas forças puxam em direções opostas nesta rodada, e o sistema as separa deliberadamente. Primeiro, o ciclo mudou: o modelo saiu de Goldilocks para REFLAÇÃO com 55% de probabilidade (crescimento 59,8 / inflação 62,9), empurrado por dois drivers simultâneos — crescimento drift +1 e inflação drift +1. O Brent subiu 9,3% em 21 dias, o breakeven de 5Y ancorou em 2,28% e a curva US re-inclinou (+0,42pp). Isso favorece commodities: PETR4, VALE3 e EUCA4 recebem tilt de ciclo de 1,09. Segundo, e em sentido contrário, o Ibovespa fechou 2,4% ABAIXO da MA150 — mais fundo que os −0,7% de 13/jul — e o governador de tendência aprofundou o corte de exposição para 37% da política, levando ações de 49% para apenas 18% (o excedente foi para CDI, agora em 37,5%). A leitura: o ciclo diz O QUÊ comprar (beneficiários de reflação), mas o preço diz QUANTO arriscar (pouco, enquanto o índice não reconquistar a média). O NOWCAST esfriou de 72 para 56 e a confirmação está AGUARDANDO (2/4) — o sinal de reflação é real mas ainda não confirmado, então a postura correta é montar o book reflacionário com beta reduzido e aguardar validação antes de liberar exposição.
+  </div>
+
+  <div class="grid-2">
+    <div class="card sage">
+      <h4>Vetores Positivos</h4>
+      <ul>
+      
+        <li>Ciclo em REFLAÇÃO (55%): Brent +9,3%/21d, curva US re-inclinando, breakeven ancorado — favorece commodities</li>
+      
+        <li>TRANSITION 0,38 em direção de ABERTURA (3 sinais positivos: curva, Brent, breakeven)</li>
+      
+        <li>Kill Switch inativo (0/5); crédito HY e MOVE sem stress sistêmico</li>
+      
+        <li>Book com valuation atraente e liquidez: PETR4 (P/L 5x, FCF 15%), VALE3 (earnings +155% a/a)</li>
+      
+      </ul>
+    </div>
+    <div class="card red">
+      <h4>Vetores Negativos</h4>
+      <ul>
+      
+        <li>Ibov −2,4% sob a MA150 → governador aprofunda corte de ações para 18% (freio de tendência mais forte que em jul/13)</li>
+      
+        <li>Confirmação AGUARDANDO (2/4): Brent e Nowcast NÃO bateram vs rodada anterior — reflação não confirmada</li>
+      
+        <li>NOWCAST esfriou de 72 para 56 (neutro) — atividade perdendo momentum</li>
+      
+        <li>MOVE +14,2%/21d — volatilidade de treasuries subindo (voto neutro, mas vigiar)</li>
+      
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 48px;">Componentes do Macro Score</h3>
+  <table class="institucional">
+    <thead>
+      <tr><th>Componente</th><th>Peso</th><th>Score</th><th>Referência</th></tr>
+    </thead>
+    <tbody>
+    
+      <tr>
+        <td>Inflacao</td>
+        <td class="num">20%</td>
+        <td class="num">52.4</td>
+        <td>IPCA YoY: 4.64%</td>
+      </tr>
+    
+      <tr>
+        <td>Juros</td>
+        <td class="num">20%</td>
+        <td class="num">16.9</td>
+        <td>Selic: 13.82%</td>
+      </tr>
+    
+      <tr>
+        <td>Liquidez global</td>
+        <td class="num">20%</td>
+        <td class="num">58.9</td>
+        <td>DXY: 101.16</td>
+      </tr>
+    
+      <tr>
+        <td>Risco global</td>
+        <td class="num">20%</td>
+        <td class="num">89.9</td>
+        <td>VIX: 17.47 | HY: 2.69bps | MOVE: 74.67</td>
+      </tr>
+    
+      <tr>
+        <td>Commodities</td>
+        <td class="num">20%</td>
+        <td class="num">50.0</td>
+        <td>Brent 21d: 9.294%</td>
+      </tr>
+    
+    </tbody>
+  </table>
+
+  <h3 style="margin-top: 48px;">Variáveis-Chave a Monitorar</h3>
+  <table class="institucional">
+    <thead><tr><th>Variável</th><th>O que observar</th><th>Implicação</th></tr></thead>
+    <tbody>
+    
+      
+      <tr>
+        <td><strong>Ibov vs MA150 (hoje −2,4%)</strong></td>
+        <td>Fechamento do índice acima da MA150</td>
+        <td>Acima da média → governador religa exposição de ações de 18% para ~49%; abaixo, mantém o freio</td>
+      </tr>
+      
+    
+      
+      <tr>
+        <td><strong>Ciclo (Reflação 55%)</strong></td>
+        <td>Persistência do quadrante reflacionário vs virada para estagflação</td>
+        <td>Reflação favorece commodities (PETR4/VALE3/EUCA4); estagflação (27% no Bear) rotaciona para defensivos e ouro</td>
+      </tr>
+      
+    
+      
+      <tr>
+        <td><strong>Brent 21d (+9,3%)</strong></td>
+        <td>Sustentação do petróleo acima de US$ 80</td>
+        <td>Motor da reflação e das teses PETR4/VALE3; queda aborta a rotação e enfraquece o book</td>
+      </tr>
+      
+    
+      
+      <tr>
+        <td><strong>NOWCAST (56,3)</strong></td>
+        <td>Se a atividade continua esfriando (era 72)</td>
+        <td>Queda adicional aproxima do cenário Bear e confirma o freio do governador</td>
+      </tr>
+      
+    
+      
+      <tr>
+        <td><strong>Confirmação dupla (2/4)</strong></td>
+        <td>Brent e Nowcast alinharem vs rodada anterior</td>
+        <td>Ao subir para 3-4/4, libera turnover do book e valida a reflação para forward bet</td>
+      </tr>
+      
+    
+    </tbody>
+  </table>
+</section>
+
+<!-- =============================================== TRANSITION SCORE — sinais leading detalhados -->
+
+<section id="transition-detalhe">
+  <h2>Transition Score · Sinais Leading Detalhados</h2>
+  <p>
+    Score: <strong class="num">0.38</strong>
+    · Intensidade: <strong>baixa</strong>
+    · Direção: <strong>abertura</strong>
+    · Sinais positivos: <strong class="num">3</strong>
+    / negativos: <strong class="num">0</strong>
+    / neutros: <strong class="num">5</strong>
+    de 8.
+  </p>
+  <p><em class="editorial">Sem transição clara — manter regime vigente</em></p>
+
+  <table class="institucional">
+    <thead>
+      <tr>
+        <th>Sinal Leading</th>
+        <th class="num">Valor</th>
+        <th>Voto</th>
+        <th>Magnitude</th>
+        <th>Interpretação</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+      
+        
+        
+      
+      <tr>
+        <td><strong>Curva US 10Y-2Y</strong></td>
+        <td class="num">+0.42pp</td>
+        <td><span class="badge sage">✓ Positivo</span></td>
+        <td>fraca</td>
+        <td style="font-size: 0.875rem;">Re-steepening = Fed perto do fim do ciclo restritivo</td>
+      </tr>
+    
+      
+        
+        
+      
+      <tr>
+        <td><strong>HY Spread US (Δ21d)</strong></td>
+        <td class="num">+1.1%</td>
+        <td><span class="badge amber">— Neutro</span></td>
+        <td>neutra</td>
+        <td style="font-size: 0.875rem;">Neutro</td>
+      </tr>
+    
+      
+        
+        
+      
+      <tr>
+        <td><strong>DXY (Δ21d)</strong></td>
+        <td class="num">+0.14%</td>
+        <td><span class="badge amber">— Neutro</span></td>
+        <td>neutra</td>
+        <td style="font-size: 0.875rem;">Neutro</td>
+      </tr>
+    
+      
+        
+        
+      
+      <tr>
+        <td><strong>MOVE Index (Δ21d)</strong></td>
+        <td class="num">+14.2%</td>
+        <td><span class="badge amber">— Neutro</span></td>
+        <td>neutra</td>
+        <td style="font-size: 0.875rem;">Neutro</td>
+      </tr>
+    
+      
+        
+        
+      
+      <tr>
+        <td><strong>Brent (Δ21d)</strong></td>
+        <td class="num">+9.3%</td>
+        <td><span class="badge sage">✓ Positivo</span></td>
+        <td>fraca</td>
+        <td style="font-size: 0.875rem;">Reflação moderada — bom para commodities sem ameaçar inflação</td>
+      </tr>
+    
+      
+        
+        
+      
+      <tr>
+        <td><strong>Ibov (Δ21d, proxy earnings BR)</strong></td>
+        <td class="num">+1.7%</td>
+        <td><span class="badge amber">— Neutro</span></td>
+        <td>neutra</td>
+        <td style="font-size: 0.875rem;">Neutro</td>
+      </tr>
+    
+      
+        
+        
+      
+      <tr>
+        <td><strong>EMBI BR (Δ21d)</strong></td>
+        <td class="num">+0.7%</td>
+        <td><span class="badge amber">— Neutro</span></td>
+        <td>neutra</td>
+        <td style="font-size: 0.875rem;">Neutro</td>
+      </tr>
+    
+      
+        
+        
+      
+      <tr>
+        <td><strong>Breakeven 5Y US</strong></td>
+        <td class="num">2.28%</td>
+        <td><span class="badge sage">✓ Positivo</span></td>
+        <td>media</td>
+        <td style="font-size: 0.875rem;">Inflação implícita ancorada na meta — Fed pode pivotar</td>
+      </tr>
+    
+    </tbody>
+  </table>
+</section>
+
+
+<!-- =============================================== CICLO MACRO (Cresc × Infl) -->
+
+
+
+
+
+<section id="ciclo-macro">
+  <h2>Ciclo Macro · Crescimento × Inflação</h2>
+  <p>
+    Quadrante atual: <strong>Reflação</strong>
+    (Crescimento ↑ · Inflação ↑) · previsto em 6-10 semanas:
+    <strong>Reflação</strong>
+    · Confiança: <strong class="num">55.0%</strong>
+    · P(ciclo atual persiste): <strong class="num">55.0%</strong>
+  </p>
+  <div class="regime-strip" style="grid-template-columns: 1fr auto 1fr;">
+    <div class="step"><div class="label">Crescimento</div><div class="value">59.8</div>
+      <div class="footnote">↑ acima de 50</div></div>
+    <div class="arrow">×</div>
+    <div class="step"><div class="label">Inflação</div><div class="value">62.9</div>
+      <div class="footnote">↑ acima de 50</div></div>
+  </div>
+  <table class="institucional">
+    <thead>
+      <tr><th>Quadrante</th><th>Eixos</th><th class="num">Probabilidade</th><th></th></tr>
+    </thead>
+    <tbody>
+    
+      <tr>
+        <td><strong>Reflação</strong>
+          <span class="badge mono">atual</span>
+          <span class="badge sage">previsto</span>
+        </td>
+        <td style="font-size: 0.875rem;">Crescimento ↑ · Inflação ↑</td>
+        <td class="num">55.3%</td>
+        <td style="width: 30%;"><div class="score-bar"><div class="fill" style="width: 55.0%; background: var(--amber);"></div></div></td>
+      </tr>
+    
+      <tr>
+        <td><strong>Goldilocks</strong>
+          
+          
+        </td>
+        <td style="font-size: 0.875rem;">Crescimento ↑ · Inflação ↓</td>
+        <td class="num">17.6%</td>
+        <td style="width: 30%;"><div class="score-bar"><div class="fill" style="width: 18.0%; background: var(--sage);"></div></div></td>
+      </tr>
+    
+      <tr>
+        <td><strong>Estagflação</strong>
+          
+          
+        </td>
+        <td style="font-size: 0.875rem;">Crescimento ↓ · Inflação ↑</td>
+        <td class="num">20.6%</td>
+        <td style="width: 30%;"><div class="score-bar"><div class="fill" style="width: 21.0%; background: var(--red);"></div></div></td>
+      </tr>
+    
+      <tr>
+        <td><strong>Deflação</strong>
+          
+          
+        </td>
+        <td style="font-size: 0.875rem;">Crescimento ↓ · Inflação ↓</td>
+        <td class="num">6.6%</td>
+        <td style="width: 30%;"><div class="score-bar"><div class="fill" style="width: 7.0%; background: var(--amber);"></div></div></td>
+      </tr>
+    
+    </tbody>
+  </table>
+  <p class="footnote">
+    Modelo determinístico por regras sobre indicadores líderes (curva, crédito, DXY, breakeven, Brent).
+    Drivers: crescimento drift +1 · inflação drift +1.
+    O tilt setorial resultante pondera a adequação de cada setor por essas probabilidades
+    (peso de overlay w = 0.247); sob confiança alta, o ciclo passa a preponderar na seleção.
+  </p>
+</section>
+
+
+<!-- =============================================== CENÁRIOS -->
+<section id="cenarios">
+  <h2>Cenários · Próximos 3 a 6 meses</h2>
+  <div class="grid-3">
+  
+    <div class="card sage">
+      <h3>Base — Reflação persiste</h3>
+      <span class="badge mono">55%</span>
+
+      
+      <p style="margin-top: 16px;">Quadrante reflação se mantém (p=0,55): crescimento e inflação sobem juntos. Commodities (PETR4/VALE3/EUCA4) lideram. Governador segue no comando do sizing até Ibov recuperar a MA150.</p>
+
+      
+      
+      <p style="margin-top: 8px; font-size: 0.9rem;"><strong>Target Ibov:</strong> 175K</p>
+      
+
+      
+      
+      <p style="margin-top: 8px; font-size: 0.9rem;"><strong>Alocação:</strong> Book reflacionário, mas ações só 18% (freio de tendência ativo)</p>
+      
+
+      
+      
+
+      
+      
+    </div>
+  
+    <div class="card sage">
+      <h3>Bull — Reflação amadurece</h3>
+      <span class="badge mono">18%</span>
+
+      
+      <p style="margin-top: 16px;">Migra para Goldilocks (p=0,18): inflação cede sem matar crescimento, Ibov reconquista a MA150 e o governador libera exposição plena. Bancos/seguros e qualidade assumem liderança.</p>
+
+      
+      
+      <p style="margin-top: 8px; font-size: 0.9rem;"><strong>Target Ibov:</strong> 190K</p>
+      
+
+      
+      
+      <p style="margin-top: 8px; font-size: 0.9rem;"><strong>Alocação:</strong> Ações voltam a 45-49% quando Ibov > MA150</p>
+      
+
+      
+      
+
+      
+      
+    </div>
+  
+    <div class="card sage">
+      <h3>Bear — Estagflação</h3>
+      <span class="badge mono">27%</span>
+
+      
+      <p style="margin-top: 16px;">Estagflação+deflação (p=0,21+0,07): inflação sem crescimento. Governador aprofunda o corte rumo ao piso; utilities/defensivos e CDI/IPCA+/ouro protegem.</p>
+
+      
+      
+      <p style="margin-top: 8px; font-size: 0.9rem;"><strong>Target Ibov:</strong> 155K</p>
+      
+
+      
+      
+      <p style="margin-top: 8px; font-size: 0.9rem;"><strong>Alocação:</strong> Ações no piso de 30% da política; de-risking via tendência</p>
+      
+
+      
+      
+
+      
+      
+    </div>
+  
+  </div>
+</section>
+
+<!-- =============================================== SETORES -->
+<section id="setores">
+  <h2>Classificação Setorial · B3</h2>
+  <table class="institucional">
+    <thead><tr><th>Setor</th><th>Classificação</th><th>Comentário</th></tr></thead>
+    <tbody>
+    
+      <tr>
+        <td><strong>Petróleo & Materiais</strong></td>
+        <td>
+          
+          
+          <span class="badge sage">Overweight</span>
+        </td>
+        <td>Coração da reflação; PETR4 (FCF 15%) e VALE3 (earnings +155% a/a) com tilt de ciclo 1,09.</td>
+      </tr>
+    
+      <tr>
+        <td><strong>Madeira & Papel</strong></td>
+        <td>
+          
+          
+          <span class="badge sage">Overweight tático</span>
+        </td>
+        <td>EUCA4 earnings +82% a/a, P/L 5x; beneficiária cíclica de qualidade.</td>
+      </tr>
+    
+      <tr>
+        <td><strong>Bancos & Seguros</strong></td>
+        <td>
+          
+          
+          <span class="badge amber">Neutral</span>
+        </td>
+        <td>BBSE3/PINE4/CXSE3 no book por qualidade, mas perdem tilt relativo na reflação.</td>
+      </tr>
+    
+      <tr>
+        <td><strong>Varejo discricionário</strong></td>
+        <td>
+          
+          
+          <span class="badge red">Underweight tático</span>
+        </td>
+        <td>LREN3 entra só por Momentum 89; earnings −31% a/a e Selic alta são o alerta.</td>
+      </tr>
+    
+    </tbody>
+  </table>
+</section>
+
+<!-- =============================================== TOP 20 -->
+<section id="top20">
+  <h2>Top 20 · Universo Quantitativo</h2>
+  <p><em class="editorial">FINAL_SCORE = 60% score quantitativo (fundamental + dividendos + FCF — Best2) + 40% ajuste macro/setor para o regime atual.</em></p>
+
+  <table class="institucional">
+    <thead>
+      <tr>
+        <th>#</th><th>Ticker</th><th>Setor</th>
+        <th class="num">Preço</th>
+        <th class="num">P/L</th>
+        <th class="num">DY</th>
+        <th class="num">ROE</th>
+        <th class="num">FCF Yield</th>
+        <th class="num">Ret 22d</th>
+        <th>Razão</th>
+        <th class="num">Score Quant</th>
+        <th class="num">Aj. Macro</th>
+        <th class="num">Liq</th>
+        <th class="num">Final</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+      <tr>
+        <td class="num">1</td>
+        <td><strong>PETR4</strong></td>
+        <td style="font-size: 0.8125rem;">Petróleo e Gás</td>
+        <td class="num">R$ 41.66</td>
+        <td class="num">5.0</td>
+        <td class="num">7.1%</td>
+        <td class="num">24.2%</td>
+        <td class="num">14.9%</td>
+        <td class="num">—%</td>
+        <td style="font-size: 0.75rem; color: var(--graphite-60);">Liquidity 100 + Momentum 87</td>
+        <td class="num">88.9</td>
+        <td class="num">1.13×</td>
+        <td class="num">80</td>
+        <td class="num"><strong>73.5</strong></td>
+      </tr>
+    
+      <tr>
+        <td class="num">2</td>
+        <td><strong>MILS3</strong></td>
+        <td style="font-size: 0.8125rem;">Máquinas e Equipamentos</td>
+        <td class="num">R$ 15.35</td>
+        <td class="num">8.4</td>
+        <td class="num">6.9%</td>
+        <td class="num">24.2%</td>
+        <td class="num">10.8%</td>
+        <td class="num">—%</td>
+        <td style="font-size: 0.75rem; color: var(--graphite-60);">Quality 96 + Momentum 88</td>
+        <td class="num">97.6</td>
+        <td class="num">1.00×</td>
+        <td class="num">32</td>
+        <td class="num"><strong>69.6</strong></td>
+      </tr>
+    
+      <tr>
+        <td class="num">3</td>
+        <td><strong>LREN3</strong></td>
+        <td style="font-size: 0.8125rem;">Comércio Varejista</td>
+        <td class="num">R$ 13.27</td>
+        <td class="num">8.9</td>
+        <td class="num">6.9%</td>
+        <td class="num">14.4%</td>
+        <td class="num">17.1%</td>
+        <td class="num">—%</td>
+        <td style="font-size: 0.75rem; color: var(--graphite-60);">Momentum 89 + Quality 84</td>
+        <td class="num">91.8</td>
+        <td class="num">1.00×</td>
+        <td class="num">57</td>
+        <td class="num"><strong>69.5</strong></td>
+      </tr>
+    
+      <tr>
+        <td class="num">4</td>
+        <td><strong>VALE3</strong></td>
+        <td style="font-size: 0.8125rem;">Mineração</td>
+        <td class="num">R$ 72.24</td>
+        <td class="num">20.6</td>
+        <td class="num">7.8%</td>
+        <td class="num">8.2%</td>
+        <td class="num">1.0%</td>
+        <td class="num">—%</td>
+        <td style="font-size: 0.75rem; color: var(--graphite-60);">Liquidity 99 + Momentum 91</td>
+        <td class="num">80.4</td>
+        <td class="num">1.13×</td>
+        <td class="num">78</td>
+        <td class="num"><strong>69.5</strong></td>
+      </tr>
+    
+      <tr>
+        <td class="num">5</td>
+        <td><strong>FIQE3</strong></td>
+        <td style="font-size: 0.8125rem;">Telecomunicações</td>
+        <td class="num">R$ 5.60</td>
+        <td class="num">10.0</td>
+        <td class="num">12.6%</td>
+        <td class="num">19.1%</td>
+        <td class="num">23.3%</td>
+        <td class="num">—%</td>
+        <td style="font-size: 0.75rem; color: var(--graphite-60);">Value 100 + Quality 82</td>
+        <td class="num">100.0</td>
+        <td class="num">0.99×</td>
+        <td class="num">16</td>
+        <td class="num"><strong>68.8</strong></td>
+      </tr>
+    
+      <tr>
+        <td class="num">6</td>
+        <td><strong>PINE4</strong></td>
+        <td style="font-size: 0.8125rem;">Intermediários Financeiros</td>
+        <td class="num">R$ 11.61</td>
+        <td class="num">5.8</td>
+        <td class="num">8.0%</td>
+        <td class="num">30.0%</td>
+        <td class="num">75.9%</td>
+        <td class="num">—%</td>
+        <td style="font-size: 0.75rem; color: var(--graphite-60);">Momentum 86 + Quality 82</td>
+        <td class="num">95.1</td>
+        <td class="num">1.00×</td>
+        <td class="num">30</td>
+        <td class="num"><strong>68.4</strong></td>
+      </tr>
+    
+      <tr>
+        <td class="num">7</td>
+        <td><strong>EUCA4</strong></td>
+        <td style="font-size: 0.8125rem;">Madeira e Papel</td>
+        <td class="num">R$ 21.93</td>
+        <td class="num">5.0</td>
+        <td class="num">5.1%</td>
+        <td class="num">13.9%</td>
+        <td class="num">9.5%</td>
+        <td class="num">—%</td>
+        <td style="font-size: 0.75rem; color: var(--graphite-60);">Quality 100 + Momentum 89</td>
+        <td class="num">95.2</td>
+        <td class="num">1.02×</td>
+        <td class="num">9</td>
+        <td class="num"><strong>66.8</strong></td>
+      </tr>
+    
+      <tr>
+        <td class="num">8</td>
+        <td><strong>BBSE3</strong></td>
+        <td style="font-size: 0.8125rem;">Previdência e Seguros</td>
+        <td class="num">R$ 41.55</td>
+        <td class="num">8.8</td>
+        <td class="num">11.2%</td>
+        <td class="num">72.7%</td>
+        <td class="num">4.5%</td>
+        <td class="num">—%</td>
+        <td style="font-size: 0.75rem; color: var(--graphite-60);">Liquidity 86 + Value 85</td>
+        <td class="num">83.0</td>
+        <td class="num">1.04×</td>
+        <td class="num">60</td>
+        <td class="num"><strong>66.8</strong></td>
+      </tr>
+    
+      <tr>
+        <td class="num">9</td>
+        <td><strong>SMTO3</strong></td>
+        <td style="font-size: 0.8125rem;">Alimentos Processados</td>
+        <td class="num">R$ 15.58</td>
+        <td class="num">6.2</td>
+        <td class="num">4.3%</td>
+        <td class="num">11.3%</td>
+        <td class="num">14.1%</td>
+        <td class="num">—%</td>
+        <td style="font-size: 0.75rem; color: var(--graphite-60);">Momentum 88 + Quality 87</td>
+        <td class="num">86.6</td>
+        <td class="num">0.99×</td>
+        <td class="num">36</td>
+        <td class="num"><strong>64.9</strong></td>
+      </tr>
+    
+      <tr>
+        <td class="num">10</td>
+        <td><strong>CXSE3</strong></td>
+        <td style="font-size: 0.8125rem;">Previdência e Seguros</td>
+        <td class="num">R$ 22.33</td>
+        <td class="num">15.2</td>
+        <td class="num">5.9%</td>
+        <td class="num">31.9%</td>
+        <td class="num">5.0%</td>
+        <td class="num">—%</td>
+        <td style="font-size: 0.75rem; color: var(--graphite-60);">Momentum 89 + Liquidity 72</td>
+        <td class="num">80.2</td>
+        <td class="num">1.04×</td>
+        <td class="num">50</td>
+        <td class="num"><strong>64.6</strong></td>
+      </tr>
+    
+      <tr>
+        <td class="num">11</td>
+        <td><strong>SEER3</strong></td>
+        <td style="font-size: 0.8125rem;">Diversos</td>
+        <td class="num">R$ 11.65</td>
+        <td class="num">6.1</td>
+        <td class="num">4.1%</td>
+        <td class="num">17.4%</td>
+        <td class="num">21.7%</td>
+        <td class="num">—%</td>
+        <td style="font-size: 0.75rem; color: var(--graphite-60);">Momentum 88 + Safety 83</td>
+        <td class="num">88.0</td>
+        <td class="num">1.00×</td>
+        <td class="num">23</td>
+        <td class="num"><strong>64.4</strong></td>
+      </tr>
+    
+      <tr>
+        <td class="num">12</td>
+        <td><strong>MDNE3</strong></td>
+        <td style="font-size: 0.8125rem;">Construção Civil</td>
+        <td class="num">R$ 24.90</td>
+        <td class="num">5.1</td>
+        <td class="num">15.6%</td>
+        <td class="num">23.9%</td>
+        <td class="num">-8.3%</td>
+        <td class="num">—%</td>
+        <td style="font-size: 0.75rem; color: var(--graphite-60);">Quality 77 + Momentum 75</td>
+        <td class="num">81.0</td>
+        <td class="num">1.07×</td>
+        <td class="num">38</td>
+        <td class="num"><strong>64.3</strong></td>
+      </tr>
+    
+      <tr>
+        <td class="num">13</td>
+        <td><strong>USIM5</strong></td>
+        <td style="font-size: 0.8125rem;">Siderurgia e Metalurgia</td>
+        <td class="num">R$ 8.46</td>
+        <td class="num">-4.1</td>
+        <td class="num">0.0%</td>
+        <td class="num">-12.7%</td>
+        <td class="num">16.7%</td>
+        <td class="num">—%</td>
+        <td style="font-size: 0.75rem; color: var(--graphite-60);">Momentum 88 + Liquidity 78</td>
+        <td class="num">72.8</td>
+        <td class="num">1.13×</td>
+        <td class="num">53</td>
+        <td class="num"><strong>63.6</strong></td>
+      </tr>
+    
+      <tr>
+        <td class="num">14</td>
+        <td><strong>GOAU4</strong></td>
+        <td style="font-size: 0.8125rem;">Siderurgia e Metalurgia</td>
+        <td class="num">R$ 10.23</td>
+        <td class="num">23.6</td>
+        <td class="num">3.2%</td>
+        <td class="num">3.0%</td>
+        <td class="num">12.8%</td>
+        <td class="num">—%</td>
+        <td style="font-size: 0.75rem; color: var(--graphite-60);">Value 77 + Quality 72</td>
+        <td class="num">73.4</td>
+        <td class="num">1.13×</td>
+        <td class="num">48</td>
+        <td class="num"><strong>63.3</strong></td>
+      </tr>
+    
+      <tr>
+        <td class="num">15</td>
+        <td><strong>JHSF3</strong></td>
+        <td style="font-size: 0.8125rem;">Construção Civil</td>
+        <td class="num">R$ 11.03</td>
+        <td class="num">3.9</td>
+        <td class="num">5.8%</td>
+        <td class="num">27.1%</td>
+        <td class="num">35.3%</td>
+        <td class="num">—%</td>
+        <td style="font-size: 0.75rem; color: var(--graphite-60);">Momentum 86 + Liquidity 58</td>
+        <td class="num">77.6</td>
+        <td class="num">1.07×</td>
+        <td class="num">42</td>
+        <td class="num"><strong>63.2</strong></td>
+      </tr>
+    
+      <tr>
+        <td class="num">16</td>
+        <td><strong>VBBR3</strong></td>
+        <td style="font-size: 0.8125rem;">Comércio</td>
+        <td class="num">R$ 33.95</td>
+        <td class="num">13.5</td>
+        <td class="num">4.4%</td>
+        <td class="num">13.8%</td>
+        <td class="num">17.6%</td>
+        <td class="num">—%</td>
+        <td style="font-size: 0.75rem; color: var(--graphite-60);">Momentum 89 + Liquidity 87</td>
+        <td class="num">76.7</td>
+        <td class="num">1.00×</td>
+        <td class="num">61</td>
+        <td class="num"><strong>63.1</strong></td>
+      </tr>
+    
+      <tr>
+        <td class="num">17</td>
+        <td><strong>CURY3</strong></td>
+        <td style="font-size: 0.8125rem;">Construção Civil</td>
+        <td class="num">R$ 29.95</td>
+        <td class="num">8.7</td>
+        <td class="num">14.0%</td>
+        <td class="num">69.0%</td>
+        <td class="num">7.9%</td>
+        <td class="num">—%</td>
+        <td style="font-size: 0.75rem; color: var(--graphite-60);">Quality 83 + Liquidity 77</td>
+        <td class="num">74.8</td>
+        <td class="num">1.07×</td>
+        <td class="num">52</td>
+        <td class="num"><strong>63.0</strong></td>
+      </tr>
+    
+      <tr>
+        <td class="num">18</td>
+        <td><strong>CPLE3</strong></td>
+        <td style="font-size: 0.8125rem;">Energia Elétrica</td>
+        <td class="num">R$ 14.51</td>
+        <td class="num">15.9</td>
+        <td class="num">7.3%</td>
+        <td class="num">11.4%</td>
+        <td class="num">5.5%</td>
+        <td class="num">—%</td>
+        <td style="font-size: 0.75rem; color: var(--graphite-60);">Liquidity 88 + Momentum 79</td>
+        <td class="num">70.8</td>
+        <td class="num">1.11×</td>
+        <td class="num">61</td>
+        <td class="num"><strong>62.9</strong></td>
+      </tr>
+    
+      <tr>
+        <td class="num">19</td>
+        <td><strong>LOGG3</strong></td>
+        <td style="font-size: 0.8125rem;">Exploração de Imóveis</td>
+        <td class="num">R$ 25.89</td>
+        <td class="num">5.7</td>
+        <td class="num">26.9%</td>
+        <td class="num">10.8%</td>
+        <td class="num">0.6%</td>
+        <td class="num">—%</td>
+        <td style="font-size: 0.75rem; color: var(--graphite-60);">Value 81 + Quality 72</td>
+        <td class="num">81.7</td>
+        <td class="num">1.00×</td>
+        <td class="num">33</td>
+        <td class="num"><strong>62.6</strong></td>
+      </tr>
+    
+      <tr>
+        <td class="num">20</td>
+        <td><strong>KLBN11</strong></td>
+        <td style="font-size: 0.8125rem;">Madeira e Papel</td>
+        <td class="num">R$ 17.59</td>
+        <td class="num">29.4</td>
+        <td class="num">8.0%</td>
+        <td class="num">8.3%</td>
+        <td class="num">2.2%</td>
+        <td class="num">—%</td>
+        <td style="font-size: 0.75rem; color: var(--graphite-60);">Value 81 + Momentum 71</td>
+        <td class="num">76.3</td>
+        <td class="num">1.02×</td>
+        <td class="num">48</td>
+        <td class="num"><strong>62.0</strong></td>
+      </tr>
+    
+    </tbody>
+  </table>
+  <p style="font-size: 0.8125rem; color: var(--graphite-60); margin-top: 8px;">
+    <em>Score Quant: 60% do final, vem do Best2 (nativo Daniel se disponível, senão calculado pelo adapter). 
+    Razão: sub-scores dominantes (Quality/Value/Momentum/Safety/Liquidity) — apenas com Best2 nativo. 
+    Aj. Macro: ajuste por setor/regime. Liq: 0-100, log10 baseado em Liq.2meses. 
+    Final = 55% Quant + 35% Macro + 10% Liq.</em>
+  </p>
+</section>
+
+<!-- =============================================== TOP 5 -->
+<section id="top5">
+  <h2>Top 5 · Convicção</h2>
+  <div class="grid-2">
+  
+    <div class="card">
+      <h3>PETR4 <span class="badge mono">Petróleo e Gás</span></h3>
+
+      
+      
+      <p style="margin-top: 12px;"><em>Beneficiária direta da reflação (Brent +9,3%/21d) e âncora de liquidez e caixa do book.</em></p>
+      
+      
+      <p>Liquidity 100 + Momentum 87, com tilt de ciclo 1,09. P/L 4,99x, ROE 24%, ROIC 17% e FCF yield de 15% sustentam dividendos (DY 7%). Menor risco idiossincrático do book e alavancagem limpa à alta do petróleo.</p>
+      
+
+      
+      
+      <h4 style="margin-top: 24px;">Fundamentos</h4>
+      <table style="width: 100%; font-size: 0.875rem; margin-top: 8px;">
+        <tbody>
+        
+          <tr>
+            <td style="padding: 4px 8px 4px 0; color: var(--graphite-60); width: 30%;"><strong>P/L</strong></td>
+            <td class="num" style="padding: 4px 8px; width: 25%;">5,0x</td>
+            <td style="padding: 4px 0; color: var(--graphite-60);">barato historicamente</td>
+          </tr>
+        
+          <tr>
+            <td style="padding: 4px 8px 4px 0; color: var(--graphite-60); width: 30%;"><strong>ROE</strong></td>
+            <td class="num" style="padding: 4px 8px; width: 25%;">24,2%</td>
+            <td style="padding: 4px 0; color: var(--graphite-60);">forte</td>
+          </tr>
+        
+          <tr>
+            <td style="padding: 4px 8px 4px 0; color: var(--graphite-60); width: 30%;"><strong>ROIC</strong></td>
+            <td class="num" style="padding: 4px 8px; width: 25%;">16,8%</td>
+            <td style="padding: 4px 0; color: var(--graphite-60);">excelente</td>
+          </tr>
+        
+          <tr>
+            <td style="padding: 4px 8px 4px 0; color: var(--graphite-60); width: 30%;"><strong>FCF Yield</strong></td>
+            <td class="num" style="padding: 4px 8px; width: 25%;">14,9%</td>
+            <td style="padding: 4px 0; color: var(--graphite-60);">caixa robusto</td>
+          </tr>
+        
+        </tbody>
+      </table>
+      
+
+      
+      <h4 style="margin-top: 16px;">Valuation</h4>
+      <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem;">
+        Atual: R$ 41.66
+        · Fair Value: R$ 48.00
+        · Upside: 15.2%
+      </p>
+      
+
+      
+      <h4 style="margin-top: 16px;">Riscos Principais</h4>
+      <ul style="font-size: 0.9rem;">
+      <li>Interferência política em preços/dividendos</li><li>Reversão do Brent</li>
+      </ul>
+      
+
+      
+      <h4 style="margin-top: 16px;">Catalisadores</h4>
+      <ul style="font-size: 0.9rem;">
+      <li>Brent sustentado acima de US$ 80 na reflação</li><li>Dividendos extraordinários</li>
+      </ul>
+      
+
+      
+      <p style="margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem;">
+        Peso sugerido: <strong>2,3%</strong>
+         · Convexidade: <span class="badge sage">Alta</span>
+      </p>
+      
+    </div>
+  
+    <div class="card">
+      <h3>MILS3 <span class="badge mono">Máquinas e Equipamentos (Locação)</span></h3>
+
+      
+      
+      <p style="margin-top: 12px;"><em>Qualidade com alavancagem operacional; menos exposta ao freio de tendência por ser caso idiossincrático de crescimento.</em></p>
+      
+      
+      <p>Quality 96 + Momentum 88. ROE 24%, ROIC 21% (topo do book) e earnings +83% a/a. P/L 8,36x razoável para o crescimento entregue.</p>
+      
+
+      
+      
+      <h4 style="margin-top: 24px;">Fundamentos</h4>
+      <table style="width: 100%; font-size: 0.875rem; margin-top: 8px;">
+        <tbody>
+        
+          <tr>
+            <td style="padding: 4px 8px 4px 0; color: var(--graphite-60); width: 30%;"><strong>P/L</strong></td>
+            <td class="num" style="padding: 4px 8px; width: 25%;">8,4x</td>
+            <td style="padding: 4px 0; color: var(--graphite-60);">ok p/ crescimento</td>
+          </tr>
+        
+          <tr>
+            <td style="padding: 4px 8px 4px 0; color: var(--graphite-60); width: 30%;"><strong>ROE</strong></td>
+            <td class="num" style="padding: 4px 8px; width: 25%;">24,2%</td>
+            <td style="padding: 4px 0; color: var(--graphite-60);">forte</td>
+          </tr>
+        
+          <tr>
+            <td style="padding: 4px 8px 4px 0; color: var(--graphite-60); width: 30%;"><strong>ROIC</strong></td>
+            <td class="num" style="padding: 4px 8px; width: 25%;">20,6%</td>
+            <td style="padding: 4px 0; color: var(--graphite-60);">topo do book</td>
+          </tr>
+        
+          <tr>
+            <td style="padding: 4px 8px 4px 0; color: var(--graphite-60); width: 30%;"><strong>Earnings a/a</strong></td>
+            <td class="num" style="padding: 4px 8px; width: 25%;">+83%</td>
+            <td style="padding: 4px 0; color: var(--graphite-60);">aceleração</td>
+          </tr>
+        
+        </tbody>
+      </table>
+      
+
+      
+      <h4 style="margin-top: 16px;">Valuation</h4>
+      <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem;">
+        Atual: R$ 15.35
+        · Fair Value: R$ 18.00
+        · Upside: 17.3%
+      </p>
+      
+
+      
+      <h4 style="margin-top: 16px;">Riscos Principais</h4>
+      <ul style="font-size: 0.9rem;">
+      <li>Sensível a desaceleração de atividade</li><li>Ciclo de capex de frota</li>
+      </ul>
+      
+
+      
+      <h4 style="margin-top: 16px;">Catalisadores</h4>
+      <ul style="font-size: 0.9rem;">
+      <li>Continuidade da aceleração de lucro</li><li>Expansão de margem</li>
+      </ul>
+      
+
+      
+      <p style="margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem;">
+        Peso sugerido: <strong>2,1%</strong>
+         · Convexidade: <span class="badge sage">Alta</span>
+      </p>
+      
+    </div>
+  
+    <div class="card">
+      <h3>LREN3 <span class="badge mono">Comércio Varejista</span></h3>
+
+      
+      
+      <p style="margin-top: 12px;"><em>Entrada puramente por momentum; varejo discricionário é o elo mais fraco num regime de inflação subindo.</em></p>
+      
+      
+      <p>Momentum 89 + Quality 84, ROIC alto (23,8%) e P/L 8,94x. PORÉM earnings −31% a/a é um alerta sério — a tese é técnica (momentum), não de melhora de resultado. Peso contido e vigilância elevada.</p>
+      
+
+      
+      
+      <h4 style="margin-top: 24px;">Fundamentos</h4>
+      <table style="width: 100%; font-size: 0.875rem; margin-top: 8px;">
+        <tbody>
+        
+          <tr>
+            <td style="padding: 4px 8px 4px 0; color: var(--graphite-60); width: 30%;"><strong>P/L</strong></td>
+            <td class="num" style="padding: 4px 8px; width: 25%;">8,9x</td>
+            <td style="padding: 4px 0; color: var(--graphite-60);">médio</td>
+          </tr>
+        
+          <tr>
+            <td style="padding: 4px 8px 4px 0; color: var(--graphite-60); width: 30%;"><strong>ROE</strong></td>
+            <td class="num" style="padding: 4px 8px; width: 25%;">14,4%</td>
+            <td style="padding: 4px 0; color: var(--graphite-60);">moderado</td>
+          </tr>
+        
+          <tr>
+            <td style="padding: 4px 8px 4px 0; color: var(--graphite-60); width: 30%;"><strong>ROIC</strong></td>
+            <td class="num" style="padding: 4px 8px; width: 25%;">23,8%</td>
+            <td style="padding: 4px 0; color: var(--graphite-60);">alto</td>
+          </tr>
+        
+          <tr>
+            <td style="padding: 4px 8px 4px 0; color: var(--graphite-60); width: 30%;"><strong>Earnings a/a</strong></td>
+            <td class="num" style="padding: 4px 8px; width: 25%;">−31%</td>
+            <td style="padding: 4px 0; color: var(--graphite-60);">em contração — alerta</td>
+          </tr>
+        
+        </tbody>
+      </table>
+      
+
+      
+      <h4 style="margin-top: 16px;">Valuation</h4>
+      <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem;">
+        Atual: R$ 13.27
+        · Fair Value: R$ 15.00
+        · Upside: 13.0%
+      </p>
+      
+
+      
+      <h4 style="margin-top: 16px;">Riscos Principais</h4>
+      <ul style="font-size: 0.9rem;">
+      <li>Earnings em queda de 31%</li><li>Selic alta e inflação pressionam consumo discricionário</li>
+      </ul>
+      
+
+      
+      <h4 style="margin-top: 16px;">Catalisadores</h4>
+      <ul style="font-size: 0.9rem;">
+      <li>Estabilização de resultado</li><li>Início de ciclo de corte de Selic</li>
+      </ul>
+      
+
+      
+      <p style="margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem;">
+        Peso sugerido: <strong>1,9%</strong>
+         · Convexidade: <span class="badge sage">Média</span>
+      </p>
+      
+    </div>
+  
+    <div class="card">
+      <h3>VALE3 <span class="badge mono">Mineração</span></h3>
+
+      
+      
+      <p style="margin-top: 12px;"><em>Beneficiária clássica de reflação global; tilt de ciclo 1,09 e alta liquidez.</em></p>
+      
+      
+      <p>Liquidity 99 + Momentum 91. Earnings explodindo +155% a/a e ROIC 18%. O ponto de atenção é o P/L 20,5x (base de lucro ainda deprimida) e FCF yield baixo (1%) — a tese é de recuperação cíclica, não de valuation barato.</p>
+      
+
+      
+      
+      <h4 style="margin-top: 24px;">Fundamentos</h4>
+      <table style="width: 100%; font-size: 0.875rem; margin-top: 8px;">
+        <tbody>
+        
+          <tr>
+            <td style="padding: 4px 8px 4px 0; color: var(--graphite-60); width: 30%;"><strong>P/L</strong></td>
+            <td class="num" style="padding: 4px 8px; width: 25%;">20,5x</td>
+            <td style="padding: 4px 0; color: var(--graphite-60);">alto — base deprimida</td>
+          </tr>
+        
+          <tr>
+            <td style="padding: 4px 8px 4px 0; color: var(--graphite-60); width: 30%;"><strong>ROE</strong></td>
+            <td class="num" style="padding: 4px 8px; width: 25%;">8,2%</td>
+            <td style="padding: 4px 0; color: var(--graphite-60);">em recuperação</td>
+          </tr>
+        
+          <tr>
+            <td style="padding: 4px 8px 4px 0; color: var(--graphite-60); width: 30%;"><strong>ROIC</strong></td>
+            <td class="num" style="padding: 4px 8px; width: 25%;">17,9%</td>
+            <td style="padding: 4px 0; color: var(--graphite-60);">bom</td>
+          </tr>
+        
+          <tr>
+            <td style="padding: 4px 8px 4px 0; color: var(--graphite-60); width: 30%;"><strong>Earnings a/a</strong></td>
+            <td class="num" style="padding: 4px 8px; width: 25%;">+155%</td>
+            <td style="padding: 4px 0; color: var(--graphite-60);">forte aceleração</td>
+          </tr>
+        
+        </tbody>
+      </table>
+      
+
+      
+      <h4 style="margin-top: 16px;">Valuation</h4>
+      <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem;">
+        Atual: R$ 72.24
+        · Fair Value: R$ 80.00
+        · Upside: 10.7%
+      </p>
+      
+
+      
+      <h4 style="margin-top: 16px;">Riscos Principais</h4>
+      <ul style="font-size: 0.9rem;">
+      <li>Minério de ferro e demanda da China</li><li>P/L alto se lucro não sustentar</li>
+      </ul>
+      
+
+      
+      <h4 style="margin-top: 16px;">Catalisadores</h4>
+      <ul style="font-size: 0.9rem;">
+      <li>Estímulo chinês</li><li>Preço do minério firme na reflação</li>
+      </ul>
+      
+
+      
+      <p style="margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem;">
+        Peso sugerido: <strong>2,1%</strong>
+         · Convexidade: <span class="badge sage">Alta</span>
+      </p>
+      
+    </div>
+  
+    <div class="card">
+      <h3>FIQE3 <span class="badge mono">Telecomunicações</span></h3>
+
+      
+      
+      <p style="margin-top: 12px;"><em>Defensivo de FCF que reduz o beta do book no freio de tendência.</em></p>
+      
+      
+      <p>Value 100 + Quality 82. FCF yield 23,3% (o maior do book) e ROIC 14,8%, P/L 10x. Earnings levemente negativos (−9% a/a). Provento yield de 12,6%. Contrapeso de baixa vol às posições reflacionárias.</p>
+      
+
+      
+      
+      <h4 style="margin-top: 24px;">Fundamentos</h4>
+      <table style="width: 100%; font-size: 0.875rem; margin-top: 8px;">
+        <tbody>
+        
+          <tr>
+            <td style="padding: 4px 8px 4px 0; color: var(--graphite-60); width: 30%;"><strong>P/L</strong></td>
+            <td class="num" style="padding: 4px 8px; width: 25%;">10,0x</td>
+            <td style="padding: 4px 0; color: var(--graphite-60);">ok</td>
+          </tr>
+        
+          <tr>
+            <td style="padding: 4px 8px 4px 0; color: var(--graphite-60); width: 30%;"><strong>ROE</strong></td>
+            <td class="num" style="padding: 4px 8px; width: 25%;">19,1%</td>
+            <td style="padding: 4px 0; color: var(--graphite-60);">bom</td>
+          </tr>
+        
+          <tr>
+            <td style="padding: 4px 8px 4px 0; color: var(--graphite-60); width: 30%;"><strong>ROIC</strong></td>
+            <td class="num" style="padding: 4px 8px; width: 25%;">14,8%</td>
+            <td style="padding: 4px 0; color: var(--graphite-60);">sólido</td>
+          </tr>
+        
+          <tr>
+            <td style="padding: 4px 8px 4px 0; color: var(--graphite-60); width: 30%;"><strong>FCF Yield</strong></td>
+            <td class="num" style="padding: 4px 8px; width: 25%;">23,3%</td>
+            <td style="padding: 4px 0; color: var(--graphite-60);">excepcional</td>
+          </tr>
+        
+        </tbody>
+      </table>
+      
+
+      
+      <h4 style="margin-top: 16px;">Valuation</h4>
+      <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem;">
+        Atual: R$ 5.60
+        · Fair Value: R$ 6.70
+        · Upside: 19.6%
+      </p>
+      
+
+      
+      <h4 style="margin-top: 16px;">Riscos Principais</h4>
+      <ul style="font-size: 0.9rem;">
+      <li>Earnings em leve contração</li><li>Competição regional</li>
+      </ul>
+      
+
+      
+      <h4 style="margin-top: 16px;">Catalisadores</h4>
+      <ul style="font-size: 0.9rem;">
+      <li>Retomada de receita</li><li>Desalavancagem com FCF forte</li>
+      </ul>
+      
+
+      
+      <p style="margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem;">
+        Peso sugerido: <strong>2,0%</strong>
+         · Convexidade: <span class="badge sage">Média</span>
+      </p>
+      
+    </div>
+  
+  </div>
+
+  
+  
+  
+  <h3 style="margin-top: 32px;">Book · Nomes 6–10 <span class="badge mono">satélites de fator</span></h3>
+  <p style="color: var(--graphite-60); font-size: 0.9rem;">Complemento do book para diluir risco idiossincrático — sem tese profunda; selecionados pelo score quant + fit de regime.</p>
+  <table style="width: 100%; font-size: 0.875rem; margin-top: 12px;">
+    <thead><tr>
+      <th style="text-align:left;">Ticker</th><th style="text-align:left;">Setor</th>
+      <th style="text-align:left;">Razão topo</th><th class="num">Peso</th>
+      <th style="text-align:left;">Decisão</th><th style="text-align:left;">Nota</th>
+    </tr></thead>
+    <tbody>
+    
+      
+      
+      <tr>
+        <td><strong>PINE4</strong></td>
+        <td>Intermediários Financeiros</td>
+        <td>Momentum 86 + Quality 82</td>
+        <td class="num">1,7%</td>
+        <td>NEW</td>
+        <td style="color: var(--graphite-60);">ROE 30% e FCF yield alto; banco pequeno com momentum — satélite de fator.</td>
+      </tr>
+    
+      
+      
+      <tr>
+        <td><strong>EUCA4</strong></td>
+        <td>Madeira e Papel</td>
+        <td>Quality 100 + Momentum 89</td>
+        <td class="num">1,6%</td>
+        <td>NEW</td>
+        <td style="color: var(--graphite-60);">Earnings +82% a/a, P/L 5x, tilt de reflação 1,09 — cíclico de qualidade.</td>
+      </tr>
+    
+      
+      
+      <tr>
+        <td><strong>BBSE3</strong></td>
+        <td>Previdência e Seguros</td>
+        <td>Liquidity 86 + Value 85</td>
+        <td class="num">1,6%</td>
+        <td>NEW</td>
+        <td style="color: var(--graphite-60);">ROE 73% e DY 11%; defensivo de qualidade, contrapeso à reflação.</td>
+      </tr>
+    
+      
+      
+      <tr>
+        <td><strong>SMTO3</strong></td>
+        <td>Alimentos Processados (Açúcar/Etanol)</td>
+        <td>Momentum 88 + Quality 87</td>
+        <td class="num">1,4%</td>
+        <td>NEW</td>
+        <td style="color: var(--graphite-60);">FCF yield 14%; earnings −17% a/a é o ponto fraco — entra por momentum+qualidade.</td>
+      </tr>
+    
+      
+      
+      <tr>
+        <td><strong>CXSE3</strong></td>
+        <td>Previdência e Seguros</td>
+        <td>Momentum 89 + Liquidity 72</td>
+        <td class="num">1,5%</td>
+        <td>NEW</td>
+        <td style="color: var(--graphite-60);">Caixa Seguridade: ROE 32% e momentum forte; ROIC levemente negativo pede atenção.</td>
+      </tr>
+    
+    </tbody>
+  </table>
+  
+</section>
+
+<!-- =============================================== PORTFÓLIO -->
+<section id="portfolio">
+  <h2>Portfólio Multiativos</h2>
+
+  
+
+  <div class="stacked-bar">
+    <div class="seg seg-acoes" style="width: 18.3%">18.3%</div>
+    <div class="seg seg-ipca" style="width: 18.6%">18.6%</div>
+    <div class="seg seg-cdi" style="width: 37.5%">37.5%</div>
+    <div class="seg seg-exterior" style="width: 23.3%">23.3%</div>
+    <div class="seg seg-ouro" style="width: 2.3%">2.3%</div>
+  </div>
+
+  <table class="institucional">
+    <thead><tr><th>Classe</th><th class="num">Peso</th><th>Comentário</th></tr></thead>
+    <tbody>
+      <tr><td>Ações Brasil</td><td class="num">18.3%</td><td>18,3% — CORTADO de 48,8% pelo governador de tendência (Ibov −2,4% sob a MA150, corte mais profundo que em 13/jul). NÃO é visão macro negativa; o ciclo é reflacionário e o book tilta para commodities. É freio técnico de sizing. Excedente (~30pp) foi para CDI. Book de 10 nomes.</td></tr>
+      <tr><td>IPCA+ (Tesouro)</td><td class="num">18.6%</td><td>18,6% — carry real elevado; útil se a reflação pressionar a inflação implícita.</td></tr>
+      <tr><td>CDI / Selic / Pós</td><td class="num">37.5%</td><td>37,5% — inflado pelo corte profundo do governador; caixa remunerado aguardando Ibov reconquistar a MA150.</td></tr>
+      <tr><td>Exterior (IVVB11/BDRs)</td><td class="num">23.3%</td><td>23,3% — IVVB11 diversifica sem risco de tendência local.</td></tr>
+      <tr><td>Ouro (GOLD11)</td><td class="num">2.3%</td><td>2,3% — hedge de cauda; ganha relevância no cenário de estagflação.</td></tr>
+    </tbody>
+  </table>
+
+  
+</section>
+
+<!-- =============================================== RISCO -->
+<section id="risco">
+  <h2>Risco e Stress Tests</h2>
+  Meta-Score MODERADO. Beta de ações já muito reduzido pelo governador (18%), o que limita perdas num Ibov ainda em queda. Principais riscos idiossincráticos: VALE3 (P/L 20x depende de lucro sustentar) e LREN3 (earnings −31%). Sem stress sistêmico (Kill Switch 0/5). Reflação é faca de dois gumes: boa para commodities, ruim se virar estagflação (27% no Bear).
+
+  
+  <table class="institucional">
+    <thead>
+      <tr>
+        <th>Cenário</th>
+        
+        
+        
+        <th>Impacto na Carteira</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+    
+      <tr>
+        <td><strong>Ibov −8% em 1 mês</strong></td>
+        
+          <td>Carteira ~−1,5% (beta muito reduzido pelo governador em 18%).</td>
+        
+      </tr>
+    
+      <tr>
+        <td><strong>Brent −15% (reflação aborta)</strong></td>
+        
+          <td>PETR4/VALE3/EUCA4 sob pressão; ~−1,2% no book; tese reflacionária enfraquece.</td>
+        
+      </tr>
+    
+      <tr>
+        <td><strong>Estagflação (inflação sem crescimento)</strong></td>
+        
+          <td>Governador aprofunda corte; ouro e IPCA+ protegem; rotação para defensivos.</td>
+        
+      </tr>
+    
+    </tbody>
+  </table>
+  
+</section>
+
+<!-- =============================================== DECISÕES -->
+<section id="decisoes">
+  <h2>Decisões Operacionais da Semana</h2>
+  
+  <table class="institucional">
+    <thead>
+      <tr>
+        <th>Ação</th>
+        <th>Ativo / Classe</th>
+        <th>Peso</th>
+        <th>Racional</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+      
+        
+        
+        <tr>
+          <td><span class="badge red">REDUCE</span></td>
+          <td><strong>Exposição a ações</strong></td>
+          <td class="num">—</td>
+          <td>—</td>
+        </tr>
+      
+    
+      
+        
+        
+        <tr>
+          <td><span class="badge sage">NEW/KEEP</span></td>
+          <td><strong>PETR4/MILS3/LREN3/VALE3/FIQE3</strong></td>
+          <td class="num">—</td>
+          <td>—</td>
+        </tr>
+      
+    
+      
+        
+        
+        <tr>
+          <td><span class="badge sage">NEW</span></td>
+          <td><strong>PINE4/EUCA4/BBSE3/SMTO3/CXSE3</strong></td>
+          <td class="num">—</td>
+          <td>—</td>
+        </tr>
+      
+    
+    </tbody>
+  </table>
+  
+
+  <h3 style="margin-top: 48px;">Variáveis a Monitorar</h3>
+  <ul>
+  
+    
+    <li>Ibov vs MA150 — gatilho do governador para religar exposição (hoje −2,4%)</li>
+    
+  
+    
+    <li>Brent + Nowcast — precisam confirmar para validar a reflação (hoje AGUARDANDO 2/4)</li>
+    
+  
+    
+    <li>Risco de estagflação (27% no Bear) — inflação subindo sem crescimento vira o jogo para defensivos</li>
+    
+  
+  </ul>
+</section>
+
+</div>
+
+<footer class="executivo">
+  <div class="footer-grid">
+    <div>
+      <h4>Carta de Alocação</h4>
+      <p>Sistema institucional de decisão multi-ativos com foco Brasil. Híbrido Python + Claude Code.</p>
+      <p class="disclaimer">
+        Este documento é análise informativa, não recomendação personalizada de investimento.
+        Performance passada não garante resultados futuros. Leia o material institucional do
+        seu provedor antes de qualquer decisão.
+      </p>
+    </div>
+    <div>
+      <h4>Versão</h4>
+      <p class="mono">Híbrido v4.0 Multi-Agente</p>
+      <p class="mono">2026-07-22</p>
+    </div>
+    <div>
+      <h4>Metodologia</h4>
+      <p class="mono" style="font-size: 0.8125rem;">
+        Score Quantitativo: Best2<br>
+        (L/P^5 × DY^5 × py^5)<br>
+        <br>
+        Final = 60% Quant<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ 40% Ajuste Macro
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
